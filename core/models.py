@@ -63,6 +63,7 @@ class DocentePersonal(models.Model):
     Modelo para la nómina de docentes divididos en Jornada Matutina, Vespertina y DECE.
     """
     JORNADA_CHOICES = [
+        ('autoridades', 'Autoridades Institucionales'),
         ('matutina', 'Jornada Matutina'),
         ('vespertina', 'Jornada Vespertina'),
         ('dece', 'Departamento DECE'),

@@ -233,14 +233,6 @@
                     <span>Consultas Web</span>
                 </a>
             </li>
-            {% if user.is_staff or user.is_superuser %}
-            <li class="pt-2">
-                <a href="/admin/" target="_blank" class="sidebar-link" title="Consola de Administración Avanzada">
-                    <i class="bi bi-sliders"></i>
-                    <span>Administración del Sistema</span>
-                </a>
-            </li>
-            {% endif %}
             <li class="pt-3 border-top border-white-10 mt-3">
                 <a href="{% url 'core:home' %}" target="_blank" class="sidebar-link text-white-75">
                     <i class="bi bi-box-arrow-up-right"></i>

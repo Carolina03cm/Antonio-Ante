@@ -1,25 +1,30 @@
 {% extends 'core/dashboard/base_dashboard.html' %}
 
-{% block section_title %}Planta Docente{% endblock %}
+{% block section_title %}Planta Docente y Autoridades{% endblock %}
 
 {% block content %}
 <div class="container-fluid p-0">
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
         <div>
-            <h4 class="fw-bold text-dark mb-1">Planta Docente y Personal Institucional</h4>
-            <p class="text-muted small mb-0">Gestiona los educadores de la Jornada Matutina, Vespertina y el DECE.</p>
+            <h4 class="fw-bold text-dark mb-1">Planta Docente y Autoridades del Plantel</h4>
+            <p class="text-muted small mb-0">Gestiona las autoridades, educadores de Jornada Matutina, Vespertina y el DECE.</p>
         </div>
         <a href="{% url 'core:docente_create' %}" class="btn btn-primary fw-bold px-4">
-            <i class="bi bi-person-plus-fill me-2"></i> Registrar Docente
+            <i class="bi bi-person-plus-fill me-2"></i> Registrar Docente / Autoridad
         </a>
     </div>
 
     {% if docentes %}
-    <!-- Tabs por jornada -->
+    <!-- Tabs por rol / jornada -->
     <ul class="nav nav-tabs mb-4 border-bottom" id="jornadaTabs" role="tablist">
         <li class="nav-item" role="presentation">
             <button class="nav-link active fw-semibold" id="tab-todos-tab" data-bs-toggle="tab" data-bs-target="#tab-todos" type="button" role="tab">
                 <i class="bi bi-people me-1"></i> Todos <span class="badge bg-secondary ms-1">{{ docentes|length }}</span>
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link fw-semibold" id="tab-aut-tab" data-bs-toggle="tab" data-bs-target="#tab-aut" type="button" role="tab">
+                <i class="bi bi-award-fill me-1 text-danger"></i> Autoridades
             </button>
         </li>
         <li class="nav-item" role="presentation">
@@ -56,7 +61,7 @@
                                 </div>
                             {% endif %}
                             <div class="mt-2">
-                                <span class="badge {% if d.jornada == 'matutina' %}bg-primary{% elif d.jornada == 'vespertina' %}bg-warning text-dark{% else %}bg-success{% endif %} rounded-pill small">
+                                <span class="badge {% if d.jornada == 'autoridades' %}bg-danger{% elif d.jornada == 'matutina' %}bg-primary{% elif d.jornada == 'vespertina' %}bg-warning text-dark{% else %}bg-success{% endif %} rounded-pill small">
                                     {{ d.get_jornada_display }}
                                 </span>
                             </div>
@@ -82,6 +87,32 @@
                     </div>
                 </div>
                 {% endfor %}
+            </div>
+        </div>
+
+        <!-- Autoridades -->
+        <div class="tab-pane fade" id="tab-aut" role="tabpanel">
+            <div class="row g-3">
+                {% for d in docentes %}{% if d.jornada == 'autoridades' %}
+                <div class="col-sm-6 col-lg-4 col-xl-3">
+                    <div class="card border-0 shadow-sm h-100 rounded-3 overflow-hidden border-top border-3 border-danger">
+                        <div class="text-center pt-4 pb-2 px-3" style="background:linear-gradient(135deg,#fdf2f3,#fee2e2);">
+                            {% if d.foto %}<img src="{{ d.foto.url }}" alt="{{ d.nombre_completo }}" style="width:80px;height:80px;object-fit:cover;border-radius:50%;border:3px solid #D71926;">
+                            {% else %}<div style="width:80px;height:80px;border-radius:50%;background:#D71926;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-weight:bold;margin:0 auto;">{{ d.nombres|first|upper }}{{ d.apellidos|first|upper }}</div>{% endif %}
+                            <div class="mt-2"><span class="badge bg-danger rounded-pill small"><i class="bi bi-shield-check me-1"></i>Autoridad</span></div>
+                        </div>
+                        <div class="card-body text-center px-3 py-2">
+                            <h6 class="fw-bold text-dark mb-0 small">{{ d.nombre_completo }}</h6>
+                            <p class="text-danger fw-semibold mb-1" style="font-size:0.8rem;">{{ d.cargo }}</p>
+                            {% if d.area %}<p class="text-muted mb-0" style="font-size:0.72rem;"><i class="bi bi-bookmark me-1"></i>{{ d.area }}</p>{% endif %}
+                        </div>
+                        <div class="card-footer bg-white border-top-0 d-flex gap-2 justify-content-center pb-3 pt-0">
+                            <a href="{% url 'core:docente_edit' d.pk %}" class="btn btn-sm btn-outline-primary px-3"><i class="bi bi-pencil-square me-1"></i> Editar</a>
+                            <a href="{% url 'core:docente_delete' d.pk %}" class="btn btn-sm btn-outline-danger px-3"><i class="bi bi-trash"></i></a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}{% endfor %}
             </div>
         </div>
 

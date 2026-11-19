@@ -238,15 +238,20 @@
     <div class="container">
         <div class="text-center mb-5">
             <span class="section-eyebrow">Personal Educativo</span>
-            <h3 class="section-heading-clean">Planta Docente y Equipo Institucional</h3>
+            <h3 class="section-heading-clean">Autoridades y Planta Docente</h3>
             <div class="section-accent-bar"></div>
-            <p class="text-secondary">Distribuido en Jornada Matutina, Jornada Vespertina y el Departamento DECE.</p>
+            <p class="text-secondary">Equipo directivo, educadores de Jornada Matutina, Vespertina y Departamento DECE.</p>
         </div>
 
-        <!-- Pestañas de Turno -->
+        <!-- Pestañas de Autoridades y Turnos -->
         <ul class="nav nav-pills justify-content-center gap-2 mb-4" id="facultyTabs" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="pills-mat-tab" data-bs-toggle="pill" data-bs-target="#pills-mat" type="button" role="tab" aria-selected="true">
+                <button class="nav-link active" id="pills-aut-tab" data-bs-toggle="pill" data-bs-target="#pills-aut" type="button" role="tab" aria-selected="true">
+                    <i class="bi bi-award-fill me-1 text-warning"></i> Autoridades
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-mat-tab" data-bs-toggle="pill" data-bs-target="#pills-mat" type="button" role="tab" aria-selected="false">
                     <i class="bi bi-sun me-1"></i> Jornada Matutina
                 </button>
             </li>
@@ -263,8 +268,42 @@
         </ul>
 
         <div class="tab-content" id="facultyTabsContent">
+            <!-- Autoridades del Plantel -->
+            <div class="tab-pane fade show active" id="pills-aut" role="tabpanel">
+                <div class="row g-4 justify-content-center">
+                    {% for d in autoridades %}
+                    <div class="col-md-6 col-lg-4">
+                        <div class="docente-item-card p-4 text-center border-top border-3 border-danger shadow-sm h-100" style="background: #ffffff; border-radius: 12px;">
+                            <div class="mb-3 mx-auto" style="width: 90px; height: 90px; border-radius: 50%; overflow: hidden; border: 3px solid #18396D; box-shadow: 0 4px 12px rgba(24,57,109,0.15);">
+                                {% if d.foto %}
+                                    <img src="{{ d.foto.url }}" alt="{{ d.nombre_completo }}" style="width:100%;height:100%;object-fit:cover;">
+                                {% else %}
+                                    <div style="width:100%;height:100%;background:#18396D;color:#ffffff;display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-weight:bold;">
+                                        {{ d.nombres|first|upper }}{{ d.apellidos|first|upper }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <span class="badge bg-danger rounded-pill px-3 py-1 mb-2 text-uppercase" style="font-size: 0.7rem; letter-spacing: 0.5px;">
+                                <i class="bi bi-shield-check me-1"></i> Autoridad Institucional
+                            </span>
+                            <h5 class="fw-bold text-dark mb-1">{{ d.nombre_completo }}</h5>
+                            <p class="text-danger fw-semibold mb-2" style="font-size: 0.9rem;">{{ d.cargo }}</p>
+                            {% if d.area %}
+                                <span class="badge bg-light text-secondary border small">{{ d.area }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="col-12 text-center py-4 text-muted">
+                        <i class="bi bi-award fs-1 text-muted d-block mb-2"></i>
+                        Información directiva y de autoridades del plantel en actualización.
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
             <!-- Jornada Matutina -->
-            <div class="tab-pane fade show active" id="pills-mat" role="tabpanel">
+            <div class="tab-pane fade" id="pills-mat" role="tabpanel">
                 <div class="row g-3">
                     {% for d in docentes_matutina %}
                     <div class="col-md-6 col-lg-3">

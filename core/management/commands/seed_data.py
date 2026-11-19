@@ -10,6 +10,11 @@ class Command(BaseCommand):
 
         # 1. Semilla de Docentes por Jornada y DECE
         docentes_data = [
+            # Autoridades Institucionales
+            ('Mgs. Wilson', 'Andrade', 'Director Institucional / Líder Educativo', 'autoridades', 'Dirección General del Plantel', 1),
+            ('Lcda. Mariana', 'Espinoza', 'Subdirectora Institucional', 'autoridades', 'Gestión Técnico-Pedagógica', 2),
+            ('Prof. Héctor', 'Cevallos', 'Inspector General', 'autoridades', 'Convivencia y Disciplina Escolar', 3),
+
             # Jornada Matutina
             ('Lcda. María', 'Guamán', 'Docente Tutora Inicial 1 y 2', 'matutina', 'Educación Inicial', 1),
             ('Prof. Jorge', 'Mendoza', 'Docente Tutor 2° y 3° EGB', 'matutina', 'Básica Elemental', 2),

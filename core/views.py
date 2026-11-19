@@ -21,6 +21,7 @@ def home(request):
 
     noticias = NoticiaComunicado.objects.filter(destacado=True)[:6]
     galeria = FotoGaleria.objects.filter(activa=True)[:8]
+    autoridades = DocentePersonal.objects.filter(jornada='autoridades', activo=True)
     docentes_matutina = DocentePersonal.objects.filter(jornada='matutina', activo=True)
     docentes_vespertina = DocentePersonal.objects.filter(jornada='vespertina', activo=True)
     dece_personal = DocentePersonal.objects.filter(jornada='dece', activo=True)
@@ -29,6 +30,7 @@ def home(request):
         'titulo': 'Inicio | EEB Antonio Ante',
         'noticias': noticias,
         'galeria': galeria,
+        'autoridades': autoridades,
         'docentes_matutina': docentes_matutina,
         'docentes_vespertina': docentes_vespertina,
         'dece_personal': dece_personal,
