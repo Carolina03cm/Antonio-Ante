@@ -1,0 +1,220 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Iniciar Sesión | Portal Docente y Administrativo - EEB Antonio Ante{% endblock %}
+
+{% block extra_css %}
+<style>
+    .login-container-section {
+        min-height: calc(100vh - 280px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 4rem 1rem;
+        background: linear-gradient(135deg, #f8fafc 0%, #edf2f9 100%);
+    }
+
+    .login-card-master {
+        background-color: var(--color-white);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-hover);
+        width: 100%;
+        max-width: 440px;
+        overflow: hidden;
+        border-top: 5px solid var(--color-navy);
+    }
+
+    .login-card-header {
+        padding: 2.25rem 2rem 1.5rem 2rem;
+        text-align: center;
+        background-color: #fafbfd;
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .login-seal-img {
+        width: 74px;
+        height: 74px;
+        object-fit: contain;
+        border-radius: 50%;
+        border: 2px solid var(--color-border);
+        padding: 2px;
+        background-color: var(--color-white);
+        margin-bottom: 1rem;
+        box-shadow: var(--shadow-subtle);
+    }
+
+    .login-title {
+        font-family: var(--font-display);
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: var(--color-navy);
+        margin-bottom: 0.25rem;
+    }
+
+    .login-subtitle {
+        font-size: 0.82rem;
+        color: var(--color-text-muted);
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .login-card-body {
+        padding: 2rem;
+    }
+
+    .login-form-label {
+        font-size: 0.86rem;
+        font-weight: 700;
+        color: var(--color-navy);
+        margin-bottom: 0.4rem;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .login-input-group {
+        position: relative;
+    }
+
+    .login-input-group .form-control {
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--color-border);
+        padding: 0.75rem 0.95rem 0.75rem 2.6rem;
+        font-size: 0.92rem;
+        transition: var(--transition);
+    }
+
+    .login-input-group .form-control:focus {
+        border-color: var(--color-navy);
+        box-shadow: 0 0 0 3px rgba(24, 57, 109, 0.12);
+    }
+
+    .login-input-icon {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--color-text-muted);
+        font-size: 1.05rem;
+        pointer-events: none;
+    }
+
+    .btn-login-submit {
+        background-color: var(--color-navy);
+        color: var(--color-white);
+        border: none;
+        font-weight: 700;
+        font-size: 0.95rem;
+        padding: 0.8rem;
+        border-radius: var(--radius-sm);
+        width: 100%;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .btn-login-submit:hover {
+        background-color: var(--color-red);
+        color: var(--color-white);
+        box-shadow: var(--shadow-btn);
+    }
+
+    .login-security-notice {
+        background-color: var(--color-navy-subtle);
+        border: 1px solid rgba(24, 57, 109, 0.1);
+        border-radius: var(--radius-sm);
+        padding: 0.75rem;
+        font-size: 0.78rem;
+        color: var(--color-navy);
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        margin-top: 1.5rem;
+    }
+
+    .login-security-notice i {
+        font-size: 1rem;
+        color: var(--color-red);
+        margin-top: 1px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="login-container-section">
+    <div class="login-card-master">
+        <!-- Cabecera de la tarjeta con el Escudo Institucional -->
+        <div class="login-card-header">
+            <img src="{% static 'img/logo_antonio_ante.jpg' %}" alt="Escudo Oficial EEB Antonio Ante" class="login-seal-img">
+            <h2 class="login-title">EEB ANTONIO ANTE</h2>
+            <p class="login-subtitle">Portal Docente y Administrativo</p>
+        </div>
+
+        <!-- Formulario de Autenticación -->
+        <div class="login-card-body">
+            {% if form.errors %}
+                <div class="alert alert-danger py-2 px-3 mb-3 small" role="alert">
+                    <i class="bi bi-exclamation-triangle-fill me-1"></i>
+                    <strong>Error de acceso:</strong> El usuario o la contraseña ingresados son incorrectos. Por favor verifique sus credenciales.
+                </div>
+            {% endif %}
+
+            <form method="POST" action="{% url 'core:login' %}">
+                {% csrf_token %}
+                
+                {% if request.GET.next %}
+                    <input type="hidden" name="next" value="{{ request.GET.next }}">
+                {% else %}
+                    <input type="hidden" name="next" value="/admin/">
+                {% endif %}
+
+                <!-- Campo de Usuario -->
+                <div class="mb-3">
+                    <label for="id_username" class="login-form-label">
+                        <i class="bi bi-person-fill"></i> Usuario o Cédula
+                    </label>
+                    <div class="login-input-group">
+                        <i class="bi bi-person login-input-icon"></i>
+                        <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username" class="form-control" placeholder="Ingrese su usuario">
+                    </div>
+                </div>
+
+                <!-- Campo de Contraseña -->
+                <div class="mb-4">
+                    <label for="id_password" class="login-form-label">
+                        <i class="bi bi-key-fill"></i> Contraseña de Acceso
+                    </label>
+                    <div class="login-input-group">
+                        <i class="bi bi-lock login-input-icon"></i>
+                        <input type="password" name="password" autocomplete="current-password" required id="id_password" class="form-control" placeholder="••••••••">
+                    </div>
+                </div>
+
+                <!-- Botón de Inicio de Sesión -->
+                <button type="submit" class="btn-login-submit">
+                    <i class="bi bi-box-arrow-in-right"></i> Ingresar al Portal
+                </button>
+            </form>
+
+            <!-- Nota de Seguridad y Privacidad Institucional -->
+            <div class="login-security-notice">
+                <i class="bi bi-shield-lock-fill"></i>
+                <div>
+                    <strong>Acceso Restringido:</strong> Módulo exclusivo para docentes, directivos y personal del DECE de la institución.
+                </div>
+            </div>
+
+            <div class="text-center mt-3">
+                <a href="{% url 'core:home' %}" class="small text-muted text-decoration-none">
+                    <i class="bi bi-arrow-left me-1"></i> Volver a la página principal
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

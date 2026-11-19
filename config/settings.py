@@ -133,3 +133,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # Configuración de clave primaria por defecto
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Configuración de Autenticación y Redirecciones
+LOGIN_URL = 'core:login'
+LOGIN_REDIRECT_URL = '/admin/'
+LOGOUT_REDIRECT_URL = 'core:home'
+
