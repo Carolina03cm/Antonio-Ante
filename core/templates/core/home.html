@@ -541,8 +541,12 @@
                 </div>
             </div>
             {% empty %}
-            <div class="col-12 text-center py-4 text-muted">
-                No hay comunicados vigentes en este momento.
+            <div class="col-12 text-center py-5">
+                <div class="p-4 bg-white rounded-3 shadow-sm d-inline-block border" style="max-width: 500px;">
+                    <i class="bi bi-newspaper fs-1 text-secondary opacity-50 d-block mb-2"></i>
+                    <h6 class="fw-bold text-dark mb-1">Cartelera en Preparación</h6>
+                    <p class="small text-muted mb-0">Los comunicados oficiales, convocatorias y avisos del plantel serán publicados próximamente por secretaría.</p>
+                </div>
             </div>
             {% endfor %}
         </div>
@@ -579,7 +583,13 @@
                 </div>
             </div>
             {% empty %}
-            <div class="col-12 text-center py-4 text-muted">Galería en proceso de actualización.</div>
+            <div class="col-12 text-center py-5">
+                <div class="p-4 bg-white rounded-3 shadow-sm d-inline-block border" style="max-width: 500px;">
+                    <i class="bi bi-images fs-1 text-secondary opacity-50 d-block mb-2"></i>
+                    <h6 class="fw-bold text-dark mb-1">Galería en Actualización</h6>
+                    <p class="small text-muted mb-0">Próximamente se compartirán fotografías de los momentos cívicos, actividades deportivas y proyectos de la institución.</p>
+                </div>
+            </div>
             {% endfor %}
         </div>
     </div>
