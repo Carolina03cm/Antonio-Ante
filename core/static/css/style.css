@@ -1,5 +1,9 @@
 /* ==========================================================================
    EEB ANTONIO ANTE - SISTEMA DE DISEÑO INSTITUCIONAL DE ALTO NIVEL
+   Ubicación: Recinto El Deseo, Cantón Yaguachi, Provincia del Guayas, Ecuador
+   Fundación: 4 de Septiembre de 1965 (61 Años de Trayectoria)
+   Jornadas: Matutina, Vespertina y Departamento de Consejería Estudiantil (DECE)
+
    Colores Oficiales:
    - Azul Marino Institucional: #18396D
    - Rojo Institucional: #D71926
@@ -7,28 +11,28 @@
    - Beige Institucional: #D9D0BB
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap');
 
 :root {
   /* Paleta cromática oficial */
-  --navy-deep: #0b1a33;
+  --navy-deep: #0a172c;
   --navy-primary: #18396D;
-  --navy-light: #224c8d;
-  --navy-soft: #eaf0f9;
+  --navy-light: #204c8c;
+  --navy-soft: #edf3fc;
   
   --red-primary: #D71926;
   --red-hover: #b8121e;
   --red-soft: #fdf0f1;
 
   --beige-primary: #D9D0BB;
-  --beige-light: #f8f6f0;
-  --beige-dark: #b8ac92;
+  --beige-light: #f7f5ef;
+  --beige-dark: #b5a78c;
 
-  --gold-accent: #c49a45;
+  --gold-accent: #c99f4a;
   --white: #ffffff;
   
   --text-primary: #0f172a;
-  --text-secondary: #475569;
+  --text-secondary: #334155;
   --text-muted: #64748b;
   --bg-subtle: #f8fafc;
   --border-light: rgba(24, 57, 109, 0.08);
@@ -38,14 +42,14 @@
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-prestige: 'Cinzel', serif;
 
-  /* Sombras de diseño UI */
-  --shadow-subtle: 0 4px 20px -2px rgba(11, 26, 51, 0.05);
-  --shadow-card: 0 10px 30px -5px rgba(11, 26, 51, 0.08), 0 4px 6px -2px rgba(11, 26, 51, 0.03);
-  --shadow-hover: 0 20px 35px -5px rgba(11, 26, 51, 0.14), 0 8px 12px -3px rgba(11, 26, 51, 0.06);
-  --shadow-glow-red: 0 8px 24px rgba(215, 25, 38, 0.35);
-  --shadow-glow-navy: 0 8px 24px rgba(24, 57, 109, 0.35);
+  /* Sombras y elevaciones UI */
+  --shadow-subtle: 0 4px 20px -2px rgba(10, 23, 44, 0.06);
+  --shadow-card: 0 12px 32px -4px rgba(10, 23, 44, 0.09), 0 4px 8px -2px rgba(10, 23, 44, 0.04);
+  --shadow-hover: 0 22px 40px -6px rgba(10, 23, 44, 0.16), 0 8px 16px -4px rgba(10, 23, 44, 0.06);
+  --shadow-glow-red: 0 8px 25px rgba(215, 25, 38, 0.38);
+  --shadow-glow-navy: 0 8px 25px rgba(24, 57, 109, 0.35);
 
-  --transition-normal: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   --radius-card: 16px;
 }
 
@@ -58,14 +62,14 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 90px;
+  scroll-padding-top: 92px;
 }
 
 body {
   font-family: var(--font-sans);
   color: var(--text-primary);
   background-color: var(--white);
-  line-height: 1.65;
+  line-height: 1.68;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
@@ -77,13 +81,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
-   TOPBAR OFICIAL & BANNER DE COMUNICADOS
+   1. TOPBAR OFICIAL CON DATOS REALES DE YAGUACHI
    ========================================================================== */
 .topbar-institutional {
   background: var(--navy-deep);
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 0.84rem;
-  padding: 7px 0;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.82rem;
+  padding: 8px 0;
   border-bottom: 3px solid var(--red-primary);
   position: relative;
   z-index: 1030;
@@ -99,25 +103,18 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--beige-primary);
 }
 
-.badge-official-school {
-  background: rgba(217, 208, 187, 0.2);
-  border: 1px solid rgba(217, 208, 187, 0.35);
+.badge-official-anniversary {
+  background: linear-gradient(135deg, rgba(217, 208, 187, 0.25) 0%, rgba(201, 159, 74, 0.3) 100%);
+  border: 1px solid rgba(217, 208, 187, 0.5);
   color: var(--beige-primary);
   padding: 2px 10px;
   border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 0.74rem;
+  font-weight: 700;
   letter-spacing: 0.5px;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-}
-
-.topbar-ticker {
-  font-weight: 500;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
 }
 
 .pulse-dot {
@@ -137,12 +134,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
-   NAVBAR INSTITUCIONAL PREMIUM
+   2. NAVBAR INSTITUCIONAL DE ALTO PRESTIGIO
    ========================================================================== */
 .navbar-institutional {
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(24, 57, 109, 0.08);
   padding: 0.85rem 0;
   position: sticky;
@@ -164,22 +161,22 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .brand-seal-logo {
-  width: 62px;
-  height: 62px;
+  width: 64px;
+  height: 64px;
   object-fit: contain;
-  filter: drop-shadow(0 3px 6px rgba(11, 26, 51, 0.18));
+  filter: drop-shadow(0 4px 8px rgba(10, 23, 44, 0.22));
   border-radius: 50%;
   transition: transform 0.4s ease;
 }
 
 .brand-wrapper:hover .brand-seal-logo {
-  transform: rotate(4deg) scale(1.04);
+  transform: rotate(4deg) scale(1.05);
 }
 
 .brand-title-main {
   font-family: var(--font-prestige);
   font-weight: 800;
-  font-size: 1.28rem;
+  font-size: 1.3rem;
   color: var(--navy-primary);
   margin: 0;
   line-height: 1.15;
@@ -191,15 +188,15 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   color: var(--red-primary);
   margin: 0;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
 }
 
 .navbar-institutional .nav-link {
   font-weight: 600;
-  font-size: 0.94rem;
+  font-size: 0.93rem;
   color: var(--navy-primary) !important;
-  padding: 0.65rem 1rem !important;
+  padding: 0.65rem 0.95rem !important;
   transition: var(--transition-normal);
   position: relative;
   border-radius: 8px;
@@ -213,10 +210,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar-institutional .dropdown-menu {
   border: 1px solid rgba(24, 57, 109, 0.08);
-  border-radius: 12px;
-  box-shadow: var(--shadow-card);
+  border-radius: 14px;
+  box-shadow: var(--shadow-hover);
   padding: 0.75rem;
-  min-width: 250px;
+  min-width: 280px;
   animation: dropFade 0.25s ease-out;
 }
 
@@ -229,12 +226,12 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   font-size: 0.9rem;
   color: var(--text-primary);
-  padding: 0.6rem 0.9rem;
-  border-radius: 8px;
+  padding: 0.65rem 0.95rem;
+  border-radius: 10px;
   transition: var(--transition-normal);
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .dropdown-item:hover {
@@ -245,7 +242,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .dropdown-item i {
   color: var(--red-primary);
-  font-size: 1.05rem;
+  font-size: 1.1rem;
 }
 
 .btn-portal-admin {
@@ -253,7 +250,7 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--white) !important;
   font-weight: 700;
   font-size: 0.88rem;
-  padding: 0.6rem 1.35rem;
+  padding: 0.6rem 1.4rem;
   border-radius: 30px;
   border: none;
   box-shadow: var(--shadow-glow-red);
@@ -271,79 +268,97 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
-   HERO BANNER - ELEGANTE & MAJESTUOSO
+   3. PORTADA PRINCIPAL (HERO) FOTOGRÁFICA DE ALTO IMPACTO
    ========================================================================== */
 .hero-prestige {
   position: relative;
-  background: radial-gradient(circle at 80% 20%, #204c8c 0%, var(--navy-primary) 50%, var(--navy-deep) 100%);
+  background: linear-gradient(135deg, rgba(10, 23, 44, 0.93) 0%, rgba(24, 57, 109, 0.88) 50%, rgba(10, 23, 44, 0.96) 100%),
+              url('../img/hero_banner.jpg') center/cover no-repeat;
   color: var(--white);
-  padding: 5.5rem 0 6.5rem 0;
+  padding: 6rem 0 7rem 0;
   overflow: hidden;
 }
 
-.hero-prestige::after {
+.hero-prestige::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: 
-    radial-gradient(rgba(217, 208, 187, 0.12) 1px, transparent 1px),
-    radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 40px 40px;
-  background-position: 0 0, 20px 20px;
-  opacity: 0.6;
+  background: radial-gradient(circle at 80% 25%, rgba(217, 208, 187, 0.18) 0%, transparent 60%);
   pointer-events: none;
 }
 
-.hero-badge-pill {
+.hero-anniversary-badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(217, 208, 187, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(217, 208, 187, 0.45);
   color: var(--beige-primary);
-  padding: 6px 16px;
+  padding: 7px 18px;
   border-radius: 30px;
-  font-size: 0.86rem;
-  font-weight: 600;
+  font-size: 0.88rem;
+  font-weight: 700;
   margin-bottom: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
 }
 
 .hero-heading {
   font-family: var(--font-prestige);
-  font-size: 3.2rem;
+  font-size: 3.3rem;
   font-weight: 800;
   color: var(--white);
   line-height: 1.15;
   margin-bottom: 1.25rem;
-  text-shadow: 0 2px 10px rgba(11, 26, 51, 0.4);
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
 }
 
 .hero-heading .gold-text {
   color: var(--beige-primary);
-  font-style: normal;
   display: block;
 }
 
 .hero-lead-text {
-  font-size: 1.15rem;
-  color: rgba(255, 255, 255, 0.92);
+  font-size: 1.18rem;
+  color: rgba(255, 255, 255, 0.94);
   line-height: 1.8;
-  max-width: 620px;
+  max-width: 630px;
   margin-bottom: 2.25rem;
   font-weight: 400;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Badges de pilares institucionales en el Hero */
+.hero-features-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 2.5rem;
+}
+
+.hero-chip-item {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: var(--white);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
 }
 
 .hero-actions-group {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 2.5rem;
+  gap: 1.2rem;
 }
 
 .btn-hero-primary {
@@ -352,8 +367,8 @@ h1, h2, h3, h4, h5, h6 {
   border: 2px solid var(--red-primary);
   font-weight: 700;
   font-size: 1rem;
-  padding: 0.85rem 2rem;
-  border-radius: 10px;
+  padding: 0.9rem 2.2rem;
+  border-radius: 12px;
   text-decoration: none;
   box-shadow: var(--shadow-glow-red);
   transition: var(--transition-normal);
@@ -367,18 +382,18 @@ h1, h2, h3, h4, h5, h6 {
   border-color: var(--red-hover);
   color: var(--white);
   transform: translateY(-3px);
-  box-shadow: 0 12px 28px rgba(215, 25, 38, 0.5);
+  box-shadow: 0 12px 28px rgba(215, 25, 38, 0.55);
 }
 
 .btn-hero-secondary {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(8px);
   color: var(--white);
   border: 2px solid var(--beige-primary);
   font-weight: 700;
   font-size: 1rem;
-  padding: 0.85rem 2rem;
-  border-radius: 10px;
+  padding: 0.9rem 2.2rem;
+  border-radius: 12px;
   text-decoration: none;
   transition: var(--transition-normal);
   display: inline-flex;
@@ -392,7 +407,7 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(-3px);
 }
 
-/* Escudo central del Hero */
+/* Escudo central del Hero en 3D con Aura */
 .hero-seal-showcase {
   position: relative;
   display: flex;
@@ -402,10 +417,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .seal-aura-ring {
   position: absolute;
-  width: 380px;
-  height: 380px;
+  width: 400px;
+  height: 400px;
   border-radius: 50%;
-  border: 2px dashed rgba(217, 208, 187, 0.35);
+  border: 2px dashed rgba(217, 208, 187, 0.4);
   animation: rotateAura 60s linear infinite;
   pointer-events: none;
 }
@@ -416,12 +431,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .seal-image-card {
-  width: 290px;
-  height: 290px;
+  width: 300px;
+  height: 300px;
   background: var(--white);
   border-radius: 50%;
-  padding: 8px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.65), 0 0 0 10px rgba(255, 255, 255, 0.12);
+  padding: 10px;
+  box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.7), 0 0 0 12px rgba(255, 255, 255, 0.15);
   position: relative;
   z-index: 2;
   transition: var(--transition-normal);
@@ -438,32 +453,31 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 50%;
 }
 
-/* Badges flotantes en el Hero */
 .hero-floating-stat {
   position: absolute;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
   color: var(--navy-deep);
-  padding: 0.75rem 1.25rem;
-  border-radius: 12px;
+  padding: 0.85rem 1.4rem;
+  border-radius: 14px;
   box-shadow: var(--shadow-card);
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   font-weight: 700;
   z-index: 3;
-  border-left: 4px solid var(--red-primary);
+  border-left: 5px solid var(--red-primary);
   animation: floatStat 5s ease-in-out infinite;
 }
 
 .hero-floating-stat.stat-1 {
-  bottom: 20px;
-  left: -20px;
+  bottom: 15px;
+  left: -30px;
 }
 
 .hero-floating-stat.stat-2 {
-  top: 25px;
-  right: -15px;
+  top: 15px;
+  right: -25px;
   animation-delay: 2.5s;
   border-left-color: var(--navy-primary);
 }
@@ -474,10 +488,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
-   METRICS & CIFRAS INSTITUCIONALES
+   4. BARRA DE CIFRAS Y PILARES INSTITUCIONALES
    ========================================================================== */
 .stats-bar-container {
-  margin-top: -3.5rem;
+  margin-top: -3.8rem;
   position: relative;
   z-index: 15;
 }
@@ -487,14 +501,14 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
   border: 1px solid rgba(24, 57, 109, 0.08);
-  padding: 2rem 1.5rem;
+  padding: 2.2rem 1.8rem;
 }
 
 .stat-item-col {
   display: flex;
   align-items: center;
   gap: 18px;
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 1rem;
   border-right: 1px solid rgba(24, 57, 109, 0.08);
 }
 
@@ -503,15 +517,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .stat-icon-box {
-  width: 60px;
-  height: 60px;
-  border-radius: 14px;
+  width: 62px;
+  height: 62px;
+  border-radius: 16px;
   background: var(--navy-soft);
   color: var(--navy-primary);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.7rem;
+  font-size: 1.8rem;
   flex-shrink: 0;
   transition: var(--transition-normal);
 }
@@ -523,7 +537,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .stat-number {
-  font-size: 1.85rem;
+  font-size: 1.95rem;
   font-weight: 800;
   color: var(--navy-primary);
   line-height: 1.1;
@@ -538,7 +552,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
-   SECCIONES Y CABECERAS
+   5. SECCIONES Y CABECERAS
    ========================================================================== */
 .section-premium {
   padding: 5.5rem 0;
@@ -558,7 +572,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .section-main-title {
-  font-size: 2.35rem;
+  font-size: 2.4rem;
   font-weight: 800;
   color: var(--navy-primary);
   margin-bottom: 1rem;
@@ -566,7 +580,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .title-underline-center {
-  width: 75px;
+  width: 80px;
   height: 4px;
   background: linear-gradient(90deg, var(--red-primary) 0%, var(--beige-primary) 100%);
   margin: 0 auto 1.5rem auto;
@@ -574,7 +588,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .title-underline-left {
-  width: 75px;
+  width: 80px;
   height: 4px;
   background: linear-gradient(90deg, var(--red-primary) 0%, var(--beige-primary) 100%);
   margin: 0 0 1.5rem 0;
@@ -582,13 +596,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
-   BIENVENIDA DE LA DIRECCIÓN & RECTORADO
+   6. BIENVENIDA, IDENTIDAD HISTÓRICA (1965) Y CAMPUS
    ========================================================================== */
 .welcome-card-box {
   background: var(--white);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
-  border: 1px solid rgba(24, 57, 109, 0.06);
+  border: 1px solid rgba(24, 57, 109, 0.08);
   padding: 3rem;
   position: relative;
   overflow: hidden;
@@ -620,94 +634,137 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1.5rem;
 }
 
-.signature-badge {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(24, 57, 109, 0.08);
+.campus-photo-frame {
+  position: relative;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
 }
 
-.signature-avatar {
-  width: 55px;
-  height: 55px;
+.campus-photo-frame img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.campus-photo-frame:hover img {
+  transform: scale(1.05);
+}
+
+.campus-photo-badge {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  background: rgba(10, 23, 44, 0.9);
+  backdrop-filter: blur(8px);
+  color: var(--white);
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  border-left: 4px solid var(--red-primary);
+}
+
+/* ==========================================================================
+   7. SECCIÓN DE DOCENTES Y PERSONAL (MATUTINA, VESPERTINA Y DECE)
+   ========================================================================== */
+.faculty-nav-pills .nav-link {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--navy-primary);
+  background: var(--white);
+  border: 1px solid rgba(24, 57, 109, 0.12);
+  border-radius: 10px;
+  padding: 0.8rem 1.6rem;
+  transition: var(--transition-normal);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.faculty-nav-pills .nav-link:hover {
+  background: var(--navy-soft);
+  color: var(--navy-primary);
+}
+
+.faculty-nav-pills .nav-link.active {
+  background: var(--navy-primary);
+  color: var(--white);
+  border-color: var(--navy-primary);
+  box-shadow: var(--shadow-glow-navy);
+}
+
+.faculty-nav-pills .nav-link.active i {
+  color: var(--beige-primary);
+}
+
+.faculty-card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-subtle);
+  border: 1px solid rgba(24, 57, 109, 0.08);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: var(--transition-normal);
+  height: 100%;
+}
+
+.faculty-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+  border-color: rgba(215, 25, 38, 0.25);
+}
+
+.faculty-avatar-box {
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   background: var(--navy-soft);
   color: var(--navy-primary);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
-  border: 2px solid var(--beige-primary);
-}
-
-/* ==========================================================================
-   PILARES Y VALORES INSTITUCIONALES
-   ========================================================================== */
-.pillar-card {
-  background: var(--white);
-  border-radius: var(--radius-card);
-  box-shadow: var(--shadow-subtle);
-  border: 1px solid rgba(24, 57, 109, 0.08);
-  padding: 2.25rem 1.75rem;
-  height: 100%;
-  transition: var(--transition-normal);
-  position: relative;
-  overflow: hidden;
-}
-
-.pillar-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-hover);
-  border-color: rgba(215, 25, 38, 0.25);
-}
-
-.pillar-icon-badge {
-  width: 65px;
-  height: 65px;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
+  font-size: 2.2rem;
+  margin: 0 auto 1.25rem auto;
+  border: 3px solid var(--beige-primary);
   transition: var(--transition-normal);
 }
 
-.badge-navy {
-  background: var(--navy-soft);
-  color: var(--navy-primary);
+.faculty-card:hover .faculty-avatar-box {
+  background: var(--navy-primary);
+  color: var(--white);
+  transform: scale(1.08);
 }
 
-.badge-red {
-  background: var(--red-soft);
-  color: var(--red-primary);
-}
-
-.badge-beige {
-  background: var(--beige-light);
-  color: #8c7847;
-}
-
-.pillar-card:hover .pillar-icon-badge {
-  transform: scale(1.1) rotate(4deg);
-}
-
-.pillar-title {
-  font-size: 1.25rem;
+.faculty-name {
+  font-size: 1.12rem;
   font-weight: 700;
   color: var(--navy-primary);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.3rem;
 }
 
-.pillar-desc {
-  font-size: 0.94rem;
-  color: var(--text-secondary);
-  line-height: 1.65;
+.faculty-role {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--red-primary);
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.faculty-badge-shift {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+  border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 /* ==========================================================================
-   OFERTA ACADÉMICA - TABS Y TARJETAS INTERACTIVAS
+   8. OFERTA ACADÉMICA CON FOTOGRAFÍAS REALES
    ========================================================================== */
 .academic-level-card {
   background: var(--white);
@@ -722,52 +779,61 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .academic-level-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-8px);
   box-shadow: var(--shadow-hover);
 }
 
-.card-academic-header {
-  padding: 2rem 1.75rem 1.5rem 1.75rem;
+.academic-photo-header {
   position: relative;
+  height: 180px;
+  overflow: hidden;
+}
+
+.academic-photo-header img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.academic-level-card:hover .academic-photo-header img {
+  transform: scale(1.08);
+}
+
+.academic-photo-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(10, 23, 44, 0.2) 0%, rgba(10, 23, 44, 0.85) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.25rem;
   color: var(--white);
 }
 
-.card-header-inicial {
-  background: linear-gradient(135deg, #1f4f9c 0%, var(--navy-primary) 100%);
-}
-
-.card-header-elemental {
-  background: linear-gradient(135deg, #18396D 0%, var(--navy-deep) 100%);
-}
-
-.card-header-media {
-  background: linear-gradient(135deg, #2b3956 0%, #152238 100%);
-}
-
-.card-header-superior {
-  background: linear-gradient(135deg, var(--red-primary) 0%, var(--red-hover) 100%);
-}
-
 .academic-badge-age {
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(4px);
-  padding: 4px 12px;
+  background: rgba(215, 25, 38, 0.9);
+  padding: 3px 10px;
   border-radius: 20px;
-  font-size: 0.78rem;
-  font-weight: 600;
+  font-size: 0.75rem;
+  font-weight: 700;
   display: inline-block;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.4rem;
+  align-self: flex-start;
 }
 
 .academic-title {
   color: var(--white);
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: 700;
   margin: 0;
 }
 
 .card-academic-body {
-  padding: 1.75rem;
+  padding: 1.5rem;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -777,13 +843,13 @@ h1, h2, h3, h4, h5, h6 {
 .feature-check-list {
   list-style: none;
   padding: 0;
-  margin: 0 0 1.5rem 0;
+  margin: 0 0 1.25rem 0;
 }
 
 .feature-check-list li {
   font-size: 0.88rem;
   color: var(--text-secondary);
-  margin-bottom: 0.65rem;
+  margin-bottom: 0.6rem;
   display: flex;
   align-items: flex-start;
   gap: 10px;
@@ -796,121 +862,65 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
-   NOTICIAS Y COMUNICADOS INSTITUCIONALES (GRID EDITORIAL)
+   9. GALERÍA FOTOGRÁFICA REAL E INTERACTIVA
    ========================================================================== */
-.news-article-card {
-  background: var(--white);
+.gallery-photo-card {
+  position: relative;
   border-radius: var(--radius-card);
+  overflow: hidden;
   box-shadow: var(--shadow-card);
-  border: 1px solid rgba(24, 57, 109, 0.08);
-  overflow: hidden;
+  height: 260px;
+  cursor: pointer;
+  background: var(--navy-deep);
+}
+
+.gallery-photo-card img {
+  width: 100%;
   height: 100%;
-  transition: var(--transition-normal);
-  display: flex;
-  flex-direction: column;
+  object-fit: cover;
+  transition: transform 0.6s ease;
 }
 
-.news-article-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-hover);
+.gallery-photo-card:hover img {
+  transform: scale(1.1);
 }
 
-.news-banner-top {
-  height: 180px;
-  background: linear-gradient(135deg, var(--navy-primary) 0%, var(--navy-deep) 100%);
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  padding: 1.25rem;
-  overflow: hidden;
-}
-
-.news-banner-top.banner-urgent {
-  background: linear-gradient(135deg, var(--red-primary) 0%, var(--red-hover) 100%);
-}
-
-.news-banner-top.banner-event {
-  background: linear-gradient(135deg, #1b3d75 0%, #0d2348 100%);
-}
-
-.news-banner-watermark {
+.gallery-photo-overlay {
   position: absolute;
-  right: -15px;
-  bottom: -20px;
-  font-size: 8rem;
-  color: rgba(255, 255, 255, 0.07);
-  pointer-events: none;
-}
-
-.news-category-pill {
-  background: var(--white);
-  color: var(--navy-primary);
-  font-weight: 700;
-  font-size: 0.75rem;
-  padding: 4px 12px;
-  border-radius: 20px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  box-shadow: var(--shadow-subtle);
-  position: relative;
-  z-index: 2;
-}
-
-.news-article-body {
-  padding: 1.75rem;
-  flex-grow: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(10, 23, 44, 0.92) 100%);
   display: flex;
   flex-direction: column;
-}
-
-.news-meta-date {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 0.75rem;
-}
-
-.news-headline {
-  font-size: 1.18rem;
-  font-weight: 700;
-  color: var(--navy-primary);
-  line-height: 1.35;
-  margin-bottom: 0.75rem;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  color: var(--white);
   transition: var(--transition-normal);
 }
 
-.news-article-card:hover .news-headline {
-  color: var(--red-primary);
-}
-
-.news-excerpt {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 1.25rem;
-  flex-grow: 1;
-}
-
-.btn-read-more-link {
-  font-size: 0.88rem;
+.gallery-category-badge {
+  background: var(--red-primary);
+  color: var(--white);
+  font-size: 0.74rem;
   font-weight: 700;
-  color: var(--red-primary);
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: var(--transition-normal);
+  padding: 3px 10px;
+  border-radius: 12px;
+  align-self: flex-start;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
 }
 
-.btn-read-more-link:hover {
-  gap: 10px;
-  color: var(--red-hover);
+.gallery-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--white);
+  margin: 0;
 }
 
 /* ==========================================================================
-   BOTÓN FLOTANTE PROFESIONAL DE WHATSAPP (096 017 2899)
+   10. BOTÓN FLOTANTE PROFESIONAL DE WHATSAPP (096 017 2899)
    ========================================================================== */
 .whatsapp-widget-container {
   position: fixed;
@@ -924,11 +934,11 @@ h1, h2, h3, h4, h5, h6 {
 
 .whatsapp-notification-bubble {
   background: var(--white);
-  border-radius: 14px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.22);
   border: 1px solid rgba(0, 0, 0, 0.08);
   padding: 12px 16px;
-  max-width: 270px;
+  max-width: 280px;
   margin-bottom: 12px;
   animation: slideInBubble 0.8s ease-out;
   position: relative;
@@ -942,12 +952,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .whatsapp-notification-bubble:hover {
   transform: translateY(-3px);
-  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.26);
 }
 
 .whatsapp-bubble-avatar {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid #25D366;
@@ -955,7 +965,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .whatsapp-bubble-text h6 {
-  font-size: 0.85rem;
+  font-size: 0.86rem;
   font-weight: 700;
   color: var(--navy-primary);
   margin: 0;
@@ -1029,19 +1039,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
-   FOOTER INSTITUCIONAL COMPLETO
+   11. FOOTER INSTITUCIONAL COMPLETO
    ========================================================================== */
 .footer-institutional-full {
   background: var(--navy-deep);
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(255, 255, 255, 0.84);
   padding-top: 5rem;
   border-top: 4px solid var(--red-primary);
   position: relative;
 }
 
 .footer-seal-img {
-  width: 70px;
-  height: 70px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   background: var(--white);
   padding: 3px;
@@ -1079,7 +1089,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .footer-nav-list a {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.82);
   text-decoration: none;
   font-size: 0.9rem;
   display: inline-flex;
@@ -1099,29 +1109,27 @@ h1, h2, h3, h4, h5, h6 {
   gap: 12px;
   font-size: 0.88rem;
   margin-bottom: 1rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.84);
 }
 
 .footer-contact-item i {
   color: var(--red-primary);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   margin-top: 3px;
 }
 
 .footer-legal-bar {
-  background: #060e1c;
+  background: #060e1a;
   padding: 1.5rem 0;
   margin-top: 4rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   font-size: 0.84rem;
 }
 
-/* ==========================================================================
-   ADAPTABILIDAD RESPONSIVE
-   ========================================================================== */
+/* Responsive */
 @media (max-width: 991.98px) {
   .hero-heading {
-    font-size: 2.35rem;
+    font-size: 2.4rem;
   }
   .hero-seal-showcase {
     margin-top: 3rem;
@@ -1141,6 +1149,6 @@ h1, h2, h3, h4, h5, h6 {
     padding: 2rem 1.5rem;
   }
   .whatsapp-notification-bubble {
-    display: none; /* En pantallas pequeñas se prioriza el botón para no tapar pantalla */
+    display: none;
   }
 }

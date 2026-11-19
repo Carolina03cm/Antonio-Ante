@@ -1,32 +1,49 @@
 {% extends 'core/base.html' %}
 {% load static %}
 
-{% block title %}Inicio | Escuela de Educación Básica "Antonio Ante"{% endblock %}
+{% block title %}Inicio | Escuela de Educación Básica "Antonio Ante" • 61 Años Educando en Yaguachi{% endblock %}
 
 {% block content %}
 
 <!-- =======================================================
-     1. HERO SECTION MAJESTUOSO & INSTITUCIONAL
+     1. HERO SECTION MAJESTUOSO & FOTOGRÁFICO
      ======================================================= -->
 <section class="hero-prestige">
     <div class="container position-relative" style="z-index: 2;">
         <div class="row align-items-center g-5">
             <div class="col-lg-7">
-                <div class="hero-badge-pill">
+                <div class="hero-anniversary-badge">
                     <i class="bi bi-award-fill text-warning"></i>
-                    <span>Institución Educativa Fiscal • Cantón Antonio Ante</span>
+                    <span>Fundada el 4 de Septiembre de 1965 • 61 Años de Historia</span>
                 </div>
                 <h1 class="hero-heading">
-                    Escuela de Educación Básica <span class="gold-text">"ANTONIO ANTE"</span>
+                    61 Años Formando con Excelencia a la <span class="gold-text">Niñez de Yaguachi</span>
                 </h1>
                 <p class="hero-lead-text">
-                    Formamos a la niñez con vocación pedagógica, principios éticos inquebrantables e innovación académica. Forjamos el presente y futuro de ciudadanos comprometidos con el desarrollo de nuestra patria.
+                    La <strong>Escuela de Educación Básica "Antonio Ante"</strong>, ubicada en el <strong>Recinto El Deseo</strong>, educa con vocación, valores cívicos y calidez humana. Brindamos formación de calidad en <strong>Jornada Matutina</strong>, <strong>Jornada Vespertina</strong> y acompañamiento integral a través del <strong>Departamento de Consejería Estudiantil (DECE)</strong>.
                 </p>
+
+                <!-- Badges de pilares institucionales -->
+                <div class="hero-features-chips">
+                    <span class="hero-chip-item">
+                        <i class="bi bi-geo-alt-fill text-danger"></i> Rcto. El Deseo, Yaguachi
+                    </span>
+                    <span class="hero-chip-item">
+                        <i class="bi bi-sun-fill text-warning"></i> Jornada Matutina
+                    </span>
+                    <span class="hero-chip-item">
+                        <i class="bi bi-sunset-fill text-warning"></i> Jornada Vespertina
+                    </span>
+                    <span class="hero-chip-item">
+                        <i class="bi bi-heart-pulse-fill text-danger"></i> Atención DECE
+                    </span>
+                </div>
+
                 <div class="hero-actions-group">
                     <a href="#oferta-academica" class="btn-hero-primary">
-                        <i class="bi bi-mortarboard-fill"></i> Conoce Nuestra Oferta
+                        <i class="bi bi-mortarboard-fill"></i> Explorar Oferta Académica
                     </a>
-                    <a href="https://wa.me/593960172899?text=Hola,%20deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20EEB%20Antonio%20Ante" target="_blank" rel="noopener noreferrer" class="btn-hero-secondary">
+                    <a href="https://wa.me/593960172899?text=Hola,%20solicito%20informaci%C3%B3n%20sobre%20la%20EEB%20Antonio%20Ante%20(Rcto.%20El%20Deseo)" target="_blank" rel="noopener noreferrer" class="btn-hero-secondary">
                         <i class="bi bi-whatsapp text-success"></i> WhatsApp: 096 017 2899
                     </a>
                 </div>
@@ -39,10 +56,10 @@
                     
                     <!-- Badge Flotante 1 -->
                     <div class="hero-floating-stat stat-1 d-none d-sm-flex">
-                        <i class="bi bi-patch-check-fill text-danger fs-4"></i>
+                        <i class="bi bi-calendar-check-fill text-danger fs-4"></i>
                         <div class="text-start">
-                            <span class="d-block small text-muted">Educación Fiscal</span>
-                            <span class="fs-6 fw-bold text-dark">Calidad y Gratuidad</span>
+                            <span class="d-block small text-muted">Fundación Oficial</span>
+                            <span class="fs-6 fw-bold text-dark">4 de Septiembre de 1965</span>
                         </div>
                     </div>
 
@@ -55,8 +72,8 @@
                     <div class="hero-floating-stat stat-2 d-none d-sm-flex">
                         <i class="bi bi-mortarboard-fill text-primary fs-4"></i>
                         <div class="text-start">
-                            <span class="d-block small text-muted">Nivel Académico</span>
-                            <span class="fs-6 fw-bold text-dark">Inicial a 10° EGB</span>
+                            <span class="d-block small text-muted">Trayectoria</span>
+                            <span class="fs-6 fw-bold text-dark">61 Años al Servicio</span>
                         </div>
                     </div>
                 </div>
@@ -74,11 +91,11 @@
             <div class="col-md-6 col-lg-3">
                 <div class="stat-item-col">
                     <div class="stat-icon-box">
-                        <i class="bi bi-book-half"></i>
+                        <i class="bi bi-hourglass-split"></i>
                     </div>
                     <div>
-                        <h4 class="stat-number">4 Niveles</h4>
-                        <p class="stat-label">Inicial hasta Básica Superior</p>
+                        <h4 class="stat-number">61 Años</h4>
+                        <p class="stat-label">Desde el 4 de Septiembre de 1965</p>
                     </div>
                 </div>
             </div>
@@ -86,11 +103,11 @@
             <div class="col-md-6 col-lg-3">
                 <div class="stat-item-col">
                     <div class="stat-icon-box" style="background-color: var(--red-soft); color: var(--red-primary);">
-                        <i class="bi bi-people-fill"></i>
+                        <i class="bi bi-sun-fill"></i>
                     </div>
                     <div>
-                        <h4 class="stat-number">Docentes</h4>
-                        <p class="stat-label">100% Titulados y Comprometidos</p>
+                        <h4 class="stat-number">2 Jornadas</h4>
+                        <p class="stat-label">Matutina y Vespertina</p>
                     </div>
                 </div>
             </div>
@@ -98,11 +115,11 @@
             <div class="col-md-6 col-lg-3">
                 <div class="stat-item-col">
                     <div class="stat-icon-box" style="background-color: var(--beige-light); color: #8c7847;">
-                        <i class="bi bi-shield-lock-fill"></i>
+                        <i class="bi bi-heart-pulse-fill"></i>
                     </div>
                     <div>
-                        <h4 class="stat-number">Seguridad</h4>
-                        <p class="stat-label">Entorno Protegido e Inclusivo</p>
+                        <h4 class="stat-number">DECE</h4>
+                        <p class="stat-label">Consejería y Apoyo Integral</p>
                     </div>
                 </div>
             </div>
@@ -110,11 +127,11 @@
             <div class="col-md-6 col-lg-3">
                 <div class="stat-item-col">
                     <div class="stat-icon-box" style="background-color: #eafaf1; color: #22c55e;">
-                        <i class="bi bi-clock-history"></i>
+                        <i class="bi bi-geo-alt-fill"></i>
                     </div>
                     <div>
-                        <h4 class="stat-number">Jornada</h4>
-                        <p class="stat-label">Matutina: 07:00 a 13:00</p>
+                        <h4 class="stat-number">El Deseo</h4>
+                        <p class="stat-label">Cantón Yaguachi, Guayas</p>
                     </div>
                 </div>
             </div>
@@ -123,19 +140,17 @@
 </div>
 
 <!-- =======================================================
-     3. MENSAJE DE BIENVENIDA DE LA DIRECCIÓN
+     3. HISTORIA INSTITUCIONAL (1965) Y CAMPUS
      ======================================================= -->
-<section class="section-premium" id="bienvenida">
+<section class="section-premium" id="historia">
     <div class="container">
         <div class="row align-items-center g-5">
             <div class="col-lg-5">
-                <div class="position-relative">
-                    <div class="p-3 bg-white rounded-4 shadow-sm border" style="border-color: rgba(24, 57, 109, 0.1) !important;">
-                        <img src="{% static 'img/logo_antonio_ante.jpg' %}" alt="Identidad EEB Antonio Ante" class="img-fluid rounded-3 w-100 shadow-sm" style="max-height: 380px; object-fit: cover; background: #0c1f3d;">
-                    </div>
-                    <div class="position-absolute bottom-0 end-0 bg-primary text-white p-3 rounded-3 shadow d-none d-sm-block" style="transform: translate(15px, 20px);">
-                        <span class="d-block fw-bold fs-6">Compromiso Educativo</span>
-                        <small class="text-white-50">Por y para nuestra niñez</small>
+                <div class="campus-photo-frame">
+                    <img src="{% static 'img/about_campus.jpg' %}" alt="Campus y estudiantes de la EEB Antonio Ante en Yaguachi">
+                    <div class="campus-photo-badge">
+                        <span class="d-block fw-bold fs-6">Recinto El Deseo • Yaguachi</span>
+                        <small class="text-white-50">Comunidad educativa unida por el progreso de la niñez</small>
                     </div>
                 </div>
             </div>
@@ -144,21 +159,21 @@
                 <div class="welcome-card-box">
                     <div class="quote-decor">“</div>
                     <h3 class="welcome-quote-text">
-                        Nuestra misión es educar con el corazón y la razón, creando un ambiente donde cada niño y niña descubra su potencial y cultive valores que perdurarán para toda la vida.
+                        "61 años sembrando valores, disciplina y conocimiento en el corazón del Recinto El Deseo."
                     </h3>
                     <p class="text-secondary mb-3">
-                        La <strong>Escuela de Educación Básica "Antonio Ante"</strong> abre con orgullo sus puertas a las familias que confían la educación de sus hijos en nuestras aulas. Fomentamos el pensamiento crítico, la convivencia pacífica, el amor al estudio y la identidad cultural propia de nuestra tierra.
+                        Fundada el <strong>4 de septiembre de 1965</strong>, la <strong>Escuela de Educación Básica "Antonio Ante"</strong> ha sido el pilar formativo para generaciones de familias en el cantón San Jacinto de Yaguachi. Durante más de seis décadas, nuestro compromiso inquebrantable ha sido ofrecer una educación fiscal inclusiva, cálida y de excelencia académica.
                     </p>
-                    <p class="text-muted small mb-4">
-                        <em>*Nota institucional: Esta sección y los textos de autoridades podrán gestionarse y actualizarse con fotografías y firmas oficiales directamente desde el Sistema Administrativo de Django.</em>
+                    <p class="text-secondary mb-4">
+                        Contamos con oferta académica en <strong>Jornada Matutina</strong> y <strong>Jornada Vespertina</strong>, además de la atención personalizada del <strong>Departamento de Consejería Estudiantil (DECE)</strong> para garantizar el bienestar socioemocional de nuestros alumnos.
                     </p>
                     <div class="signature-badge">
                         <div class="signature-avatar">
-                            <i class="bi bi-person-fill"></i>
+                            <i class="bi bi-building"></i>
                         </div>
                         <div>
-                            <h6 class="mb-0 fw-bold text-dark">Dirección Institucional</h6>
-                            <small class="text-danger fw-semibold">EEB Antonio Ante • Gestión Educativa</small>
+                            <h6 class="mb-0 fw-bold text-dark">EEB ANTONIO ANTE</h6>
+                            <small class="text-danger fw-semibold">Fundada el 4 de Septiembre de 1965 • Rcto. El Deseo, Yaguachi</small>
                         </div>
                     </div>
                 </div>
@@ -168,22 +183,22 @@
 </section>
 
 <!-- =======================================================
-     4. NOSOTROS: HISTORIA, MISIÓN, VISIÓN Y VALORES
+     4. MISIÓN, VISIÓN Y VALORES
      ======================================================= -->
-<section class="section-premium bg-light" id="nosotros">
+<section class="section-premium bg-light" id="mision-vision">
     <div class="container">
         <div class="text-center mb-5">
             <span class="section-tagline">
-                <i class="bi bi-bookmark-star-fill"></i> Identidad Institucional
+                <i class="bi bi-bookmark-star-fill"></i> Principios Fundamentales
             </span>
-            <h2 class="section-main-title">Nuestra Esencia y Compromiso</h2>
+            <h2 class="section-main-title">Misión, Visión y Valores</h2>
             <div class="title-underline-center"></div>
-            <p class="text-secondary max-w-700 mx-auto" style="max-width: 680px;">
-                Conoce la base sobre la que construimos día a día el futuro académico, moral y cívico de la comunidad educativa anteña.
+            <p class="text-secondary" style="max-width: 680px; margin: 0 auto;">
+                Nuestra brújula pedagógica forjada a lo largo de 61 años de servicio educativo ininterrumpido.
             </p>
         </div>
 
-        <div class="row g-4 mb-5" id="mision-vision">
+        <div class="row g-4 mb-5">
             <!-- Misión -->
             <div class="col-lg-6">
                 <div class="pillar-card border-top border-4 border-primary">
@@ -192,11 +207,11 @@
                     </div>
                     <h3 class="pillar-title">Misión Institucional</h3>
                     <p class="pillar-desc">
-                        Brindar una educación integral, humanista, científica y de excelencia a los estudiantes de los niveles de Inicial y Educación General Básica, desarrollando capacidades críticas, creativas y valóricas en un marco de equidad, inclusión social y participación activa de la familia y la comunidad.
+                        Brindar una educación integral, humanista, científica y de calidad a los niños y niñas del Recinto El Deseo y zonas aledañas de Yaguachi, potenciando sus capacidades cognitivas, artísticas y éticas en un ambiente seguro, participativo e inclusivo.
                     </p>
                     <div class="mt-3">
                         <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2">
-                            <i class="bi bi-check-circle-fill me-1"></i> Formación Humanista y Científica
+                            <i class="bi bi-check-circle-fill me-1"></i> Formación Integral y Humanista
                         </span>
                     </div>
                 </div>
@@ -210,11 +225,11 @@
                     </div>
                     <h3 class="pillar-title">Visión Institucional</h3>
                     <p class="pillar-desc">
-                        Ser reconocidos a nivel cantonal y provincial como una escuela referente de excelencia pedagógica, formación ética y convivencia armónica; cuyos egresados destaquen por su sólida preparación académica, sus valores ciudadanos y su capacidad para liderar positivamente en el bachillerato y la sociedad.
+                        Consolidarnos como una institución educativa líder en el cantón Yaguachi y la provincia del Guayas, reconocida por la sólida formación en valores de sus graduados, el compromiso vocacional de su planta docente y el estrecho vínculo con la comunidad.
                     </p>
                     <div class="mt-3">
                         <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-3 py-2">
-                            <i class="bi bi-star-fill me-1"></i> Liderazgo e Impacto Social
+                            <i class="bi bi-star-fill me-1"></i> Liderazgo Pedagógico Comunitario
                         </span>
                     </div>
                 </div>
@@ -223,7 +238,7 @@
 
         <!-- 4 Valores Centrales -->
         <div id="valores">
-            <h4 class="text-center fw-bold text-dark mb-4">Valores que Guiamos en Nuestras Aulas</h4>
+            <h4 class="text-center fw-bold text-dark mb-4">Valores Institucionales</h4>
             <div class="row g-4">
                 <div class="col-md-6 col-lg-3">
                     <div class="pillar-card text-center">
@@ -231,7 +246,7 @@
                             <i class="bi bi-heart-fill"></i>
                         </div>
                         <h5 class="fw-bold mb-2 text-primary">Respeto</h5>
-                        <p class="small text-muted mb-0">Valoración de la diversidad, la dignidad individual y el trato cordial en la convivencia escolar.</p>
+                        <p class="small text-muted mb-0">Fomento de la sana convivencia escolar, la tolerancia y el cuidado mutuo entre compañeros y maestros.</p>
                     </div>
                 </div>
 
@@ -241,7 +256,7 @@
                             <i class="bi bi-shield-check"></i>
                         </div>
                         <h5 class="fw-bold mb-2 text-danger">Responsabilidad</h5>
-                        <p class="small text-muted mb-0">Cumplimiento diligente del deber académico y cuidado de nuestro entorno escolar y social.</p>
+                        <p class="small text-muted mb-0">Dedicación diaria en los deberes escolares, puntualidad y cumplimiento del compromiso formativo.</p>
                     </div>
                 </div>
 
@@ -251,7 +266,7 @@
                             <i class="bi bi-lightbulb-fill"></i>
                         </div>
                         <h5 class="fw-bold mb-2" style="color: #8c7847;">Honestidad</h5>
-                        <p class="small text-muted mb-0">Transparencia, verdad y rectitud en cada una de las acciones de nuestra comunidad educativa.</p>
+                        <p class="small text-muted mb-0">Transparencia, verdad y coherencia en cada acto de nuestra vida escolar y comunitaria.</p>
                     </div>
                 </div>
 
@@ -261,7 +276,7 @@
                             <i class="bi bi-people-fill"></i>
                         </div>
                         <h5 class="fw-bold mb-2 text-primary">Solidaridad</h5>
-                        <p class="small text-muted mb-0">Empatía, espíritu colaborativo y apoyo mutuo frente a las necesidades de los demás.</p>
+                        <p class="small text-muted mb-0">Espíritu de cooperación y apoyo fraternal con la comunidad del Recinto El Deseo.</p>
                     </div>
                 </div>
             </div>
@@ -270,18 +285,215 @@
 </section>
 
 <!-- =======================================================
-     5. OFERTA ACADÉMICA - TARJETAS DE ALTO NIVEL
+     5. PLANTA DOCENTE Y EQUIPO EDUCATIVO (MATUTINA, VESPERTINA, DECE)
      ======================================================= -->
-<section class="section-premium" id="oferta-academica">
+<section class="section-premium" id="docentes">
     <div class="container">
         <div class="text-center mb-5">
             <span class="section-tagline">
-                <i class="bi bi-mortarboard-fill"></i> Calidad Pedagógica
+                <i class="bi bi-people-fill"></i> Talento Pedagógico
             </span>
-            <h2 class="section-main-title">Oferta Académica Institucional</h2>
+            <h2 class="section-main-title">Planta Docente y Personal Educativo</h2>
             <div class="title-underline-center"></div>
             <p class="text-secondary" style="max-width: 680px; margin: 0 auto;">
-                Diseñamos cada nivel formativo conforme a los lineamientos curriculares del Ministerio de Educación, con metodologías activas y estimulantes.
+                Nuestro equipo de educadores profesionales se distribuye en Jornada Matutina, Jornada Vespertina y el Departamento de Consejería Estudiantil (DECE).
+            </p>
+        </div>
+
+        <!-- Pestañas de Navegación de Jornadas -->
+        <ul class="nav nav-pills faculty-nav-pills justify-content-center gap-3 mb-5" id="facultyTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="matutina-tab" data-bs-toggle="pill" data-bs-target="#matutina-pane" type="button" role="tab" aria-controls="matutina-pane" aria-selected="true">
+                    <i class="bi bi-sun-fill"></i> Jornada Matutina
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="vespertina-tab" data-bs-toggle="pill" data-bs-target="#vespertina-pane" type="button" role="tab" aria-controls="vespertina-pane" aria-selected="false">
+                    <i class="bi bi-sunset-fill"></i> Jornada Vespertina
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="dece-tab" data-bs-toggle="pill" data-bs-target="#dece-pane" type="button" role="tab" aria-controls="dece-pane" aria-selected="false">
+                    <i class="bi bi-heart-pulse-fill"></i> Departamento DECE
+                </button>
+            </li>
+        </ul>
+
+        <!-- Contenido de las Pestañas -->
+        <div class="tab-content" id="facultyTabsContent">
+            <!-- 1. Jornada Matutina -->
+            <div class="tab-pane fade show active" id="matutina-pane" role="tabpanel" aria-labelledby="matutina-tab" tabindex="0">
+                <div class="row g-4 align-items-center mb-4">
+                    <div class="col-lg-4">
+                        <div class="campus-photo-frame">
+                            <img src="{% static 'img/docentes_banner.jpg' %}" alt="Docentes Jornada Matutina EEB Antonio Ante" style="height: 320px;">
+                            <div class="campus-photo-badge">
+                                <span class="d-block fw-bold fs-6">Jornada Matutina</span>
+                                <small class="text-white-50">Horario: 07:00 a 12:30</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="faculty-card">
+                                    <div class="faculty-avatar-box">
+                                        <i class="bi bi-person-badge-fill"></i>
+                                    </div>
+                                    <h5 class="faculty-name">Docentes Tutores de Grado</h5>
+                                    <p class="faculty-role">Educación Inicial y Básica Elemental</p>
+                                    <span class="faculty-badge-shift"><i class="bi bi-clock me-1"></i> Turno Matutino</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="faculty-card">
+                                    <div class="faculty-avatar-box">
+                                        <i class="bi bi-book-half"></i>
+                                    </div>
+                                    <h5 class="faculty-name">Docentes de Básica Media y Superior</h5>
+                                    <p class="faculty-role">Áreas Científicas y Humanísticas</p>
+                                    <span class="faculty-badge-shift"><i class="bi bi-clock me-1"></i> Turno Matutino</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="faculty-card">
+                                    <div class="faculty-avatar-box">
+                                        <i class="bi bi-trophy-fill"></i>
+                                    </div>
+                                    <h5 class="faculty-name">Educación Física y Deportes</h5>
+                                    <p class="faculty-role">Desarrollo Motriz y Recreación</p>
+                                    <span class="faculty-badge-shift"><i class="bi bi-clock me-1"></i> Turno Matutino</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="faculty-card">
+                                    <div class="faculty-avatar-box">
+                                        <i class="bi bi-palette-fill"></i>
+                                    </div>
+                                    <h5 class="faculty-name">Educación Cultural y Artística</h5>
+                                    <p class="faculty-role">Expresión Creativa</p>
+                                    <span class="faculty-badge-shift"><i class="bi bi-clock me-1"></i> Turno Matutino</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Jornada Vespertina -->
+            <div class="tab-pane fade" id="vespertina-pane" role="tabpanel" aria-labelledby="vespertina-tab" tabindex="0">
+                <div class="row g-4 align-items-center mb-4">
+                    <div class="col-lg-4">
+                        <div class="campus-photo-frame">
+                            <img src="{% static 'img/about_campus.jpg' %}" alt="Docentes Jornada Vespertina EEB Antonio Ante" style="height: 320px;">
+                            <div class="campus-photo-badge">
+                                <span class="d-block fw-bold fs-6">Jornada Vespertina</span>
+                                <small class="text-white-50">Horario: 13:00 a 18:30</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="faculty-card">
+                                    <div class="faculty-avatar-box">
+                                        <i class="bi bi-mortarboard-fill"></i>
+                                    </div>
+                                    <h5 class="faculty-name">Docentes Tutores Vespertinos</h5>
+                                    <p class="faculty-role">Básica Elemental y Media</p>
+                                    <span class="faculty-badge-shift"><i class="bi bi-clock me-1"></i> Turno Vespertino</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="faculty-card">
+                                    <div class="faculty-avatar-box">
+                                        <i class="bi bi-journal-check"></i>
+                                    </div>
+                                    <h5 class="faculty-name">Docentes de Básica Superior</h5>
+                                    <p class="faculty-role">Preparación para Bachillerato</p>
+                                    <span class="faculty-badge-shift"><i class="bi bi-clock me-1"></i> Turno Vespertino</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="faculty-card">
+                                    <div class="faculty-avatar-box">
+                                        <i class="bi bi-laptop"></i>
+                                    </div>
+                                    <h5 class="faculty-name">Proyectos Escolares y TIC</h5>
+                                    <p class="faculty-role">Innovación y Tecnología</p>
+                                    <span class="faculty-badge-shift"><i class="bi bi-clock me-1"></i> Turno Vespertino</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="faculty-card">
+                                    <div class="faculty-avatar-box">
+                                        <i class="bi bi-translate"></i>
+                                    </div>
+                                    <h5 class="faculty-name">Lengua Extranjera (Inglés)</h5>
+                                    <p class="faculty-role">Destrezas Lingüísticas</p>
+                                    <span class="faculty-badge-shift"><i class="bi bi-clock me-1"></i> Turno Vespertino</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Departamento DECE -->
+            <div class="tab-pane fade" id="dece-pane" role="tabpanel" aria-labelledby="dece-tab" tabindex="0">
+                <div class="row g-4 align-items-center mb-4">
+                    <div class="col-lg-4">
+                        <div class="campus-photo-frame">
+                            <img src="{% static 'img/dece_orientacion.jpg' %}" alt="Departamento DECE EEB Antonio Ante" style="height: 320px;">
+                            <div class="campus-photo-badge" style="border-left-color: #22c55e;">
+                                <span class="d-block fw-bold fs-6">Equipo DECE</span>
+                                <small class="text-white-50">Bienestar y Orientación Psicosocial</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="welcome-card-box p-4" style="border-left-color: #22c55e;">
+                            <h4 class="fw-bold text-dark mb-3">
+                                <i class="bi bi-shield-heart-fill text-danger me-2"></i> Departamento de Consejería Estudiantil (DECE)
+                            </h4>
+                            <p class="text-secondary">
+                                El DECE es el organismo técnico multidisciplinario encargado de promover el desarrollo integral de los estudiantes, prevenir situaciones de riesgo, brindar apoyo psicoemocional y fortalecer el vínculo armónico entre la institución, los estudiantes y los padres de familia.
+                            </p>
+                            <div class="row g-3 mt-2">
+                                <div class="col-md-6">
+                                    <div class="p-3 bg-light rounded-3 border">
+                                        <h6 class="fw-bold mb-1 text-primary"><i class="bi bi-chat-heart text-danger me-1"></i> Acompañamiento Socioemocional</h6>
+                                        <p class="small text-muted mb-0">Atención personalizada y orientación frente a dificultades académicas o personales.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="p-3 bg-light rounded-3 border">
+                                        <h6 class="fw-bold mb-1 text-primary"><i class="bi bi-people text-danger me-1"></i> Escuela para Padres</h6>
+                                        <p class="small text-muted mb-0">Talleres formativos para fortalecer la crianza positiva y los valores en el hogar.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =======================================================
+     6. OFERTA ACADÉMICA CON FOTOGRAFÍAS REALES
+     ======================================================= -->
+<section class="section-premium bg-light" id="oferta-academica">
+    <div class="container">
+        <div class="text-center mb-5">
+            <span class="section-tagline">
+                <i class="bi bi-mortarboard-fill"></i> Niveles Educativos
+            </span>
+            <h2 class="section-main-title">Oferta Académica</h2>
+            <div class="title-underline-center"></div>
+            <p class="text-secondary" style="max-width: 680px; margin: 0 auto;">
+                Programas pedagógicos completos impartidos en Jornada Matutina y Vespertina, con docentes titulados y metodologías activas.
             </p>
         </div>
 
@@ -289,23 +501,26 @@
             <!-- Nivel 1: Inicial -->
             <div class="col-md-6 col-lg-3">
                 <div class="academic-level-card">
-                    <div class="card-academic-header card-header-inicial">
-                        <span class="academic-badge-age">3 a 4 Años de Edad</span>
-                        <h3 class="academic-title">Educación Inicial</h3>
+                    <div class="academic-photo-header">
+                        <img src="{% static 'img/inicial.jpg' %}" alt="Educación Inicial EEB Antonio Ante">
+                        <div class="academic-photo-overlay">
+                            <span class="academic-badge-age">3 a 4 Años</span>
+                            <h3 class="academic-title">Educación Inicial</h3>
+                        </div>
                     </div>
                     <div class="card-academic-body">
                         <div>
                             <p class="small text-muted mb-3">
-                                Espacio lúdico y afectivo diseñado para desarrollar la autonomía, psicomotricidad y destrezas comunicativas del infante.
+                                Estimulación temprana, desarrollo motriz y habilidades de lenguaje en un entorno cálido y protegido.
                             </p>
                             <ul class="feature-check-list">
-                                <li><i class="bi bi-check-circle-fill"></i> Estimulación temprana y motricidad</li>
-                                <li><i class="bi bi-check-circle-fill"></i> Lenguaje y expresión artística</li>
-                                <li><i class="bi bi-check-circle-fill"></i> Hábitos de convivencia y juego</li>
+                                <li><i class="bi bi-check-circle-fill"></i> Estimulación psicomotriz y juego</li>
+                                <li><i class="bi bi-check-circle-fill"></i> Socialización y hábitos afectivos</li>
+                                <li><i class="bi bi-check-circle-fill"></i> Expresión plástica y música</li>
                             </ul>
                         </div>
                         <div class="pt-3 border-top text-center">
-                            <span class="badge bg-light text-primary border w-100 py-2">Jornada Matutina</span>
+                            <span class="badge bg-light text-primary border w-100 py-2">Matutina y Vespertina</span>
                         </div>
                     </div>
                 </div>
@@ -314,23 +529,26 @@
             <!-- Nivel 2: Básica Elemental -->
             <div class="col-md-6 col-lg-3">
                 <div class="academic-level-card">
-                    <div class="card-academic-header card-header-elemental">
-                        <span class="academic-badge-age">2°, 3° y 4° EGB</span>
-                        <h3 class="academic-title">Básica Elemental</h3>
+                    <div class="academic-photo-header">
+                        <img src="{% static 'img/elemental.jpg' %}" alt="Básica Elemental EEB Antonio Ante">
+                        <div class="academic-photo-overlay">
+                            <span class="academic-badge-age">2°, 3° y 4° EGB</span>
+                            <h3 class="academic-title">Básica Elemental</h3>
+                        </div>
                     </div>
                     <div class="card-academic-body">
                         <div>
                             <p class="small text-muted mb-3">
-                                Consolidación del aprendizaje de la lectura, escritura y operaciones lógico-matemáticas fundamentales.
+                                Adquisición de la lectoescritura fluida, comprensión de textos y cálculo lógico-matemático.
                             </p>
                             <ul class="feature-check-list">
-                                <li><i class="bi bi-check-circle-fill"></i> Fluidez y comprensión lectora</li>
-                                <li><i class="bi bi-check-circle-fill"></i> Razonamiento numérico inicial</li>
-                                <li><i class="bi bi-check-circle-fill"></i> Exploración del entorno natural</li>
+                                <li><i class="bi bi-check-circle-fill"></i> Comprensión lectora y ortografía</li>
+                                <li><i class="bi bi-check-circle-fill"></i> Operaciones matemáticas básicas</li>
+                                <li><i class="bi bi-check-circle-fill"></i> Entorno natural y social</li>
                             </ul>
                         </div>
                         <div class="pt-3 border-top text-center">
-                            <span class="badge bg-light text-primary border w-100 py-2">Jornada Matutina</span>
+                            <span class="badge bg-light text-primary border w-100 py-2">Matutina y Vespertina</span>
                         </div>
                     </div>
                 </div>
@@ -339,23 +557,26 @@
             <!-- Nivel 3: Básica Media -->
             <div class="col-md-6 col-lg-3">
                 <div class="academic-level-card">
-                    <div class="card-academic-header card-header-media">
-                        <span class="academic-badge-age">5°, 6° y 7° EGB</span>
-                        <h3 class="academic-title">Básica Media</h3>
+                    <div class="academic-photo-header">
+                        <img src="{% static 'img/media.jpg' %}" alt="Básica Media EEB Antonio Ante">
+                        <div class="academic-photo-overlay">
+                            <span class="academic-badge-age">5°, 6° y 7° EGB</span>
+                            <h3 class="academic-title">Básica Media</h3>
+                        </div>
                     </div>
                     <div class="card-academic-body">
                         <div>
                             <p class="small text-muted mb-3">
-                                Fortalecimiento del pensamiento reflexivo, métodos de indagación científica y trabajo colaborativo en equipo.
+                                Fortalecimiento del razonamiento científico, el análisis crítico y el trabajo colaborativo.
                             </p>
                             <ul class="feature-check-list">
-                                <li><i class="bi bi-check-circle-fill"></i> Pensamiento crítico e investigación</li>
-                                <li><i class="bi bi-check-circle-fill"></i> Ciencias Naturales y Sociales</li>
-                                <li><i class="bi bi-check-circle-fill"></i> Desarrollo de proyectos escolares</li>
+                                <li><i class="bi bi-check-circle-fill"></i> Ciencias Naturales e investigación</li>
+                                <li><i class="bi bi-check-circle-fill"></i> Geografía e historia del Ecuador</li>
+                                <li><i class="bi bi-check-circle-fill"></i> Proyectos escolares interdisciplinarios</li>
                             </ul>
                         </div>
                         <div class="pt-3 border-top text-center">
-                            <span class="badge bg-light text-primary border w-100 py-2">Jornada Matutina</span>
+                            <span class="badge bg-light text-primary border w-100 py-2">Matutina y Vespertina</span>
                         </div>
                     </div>
                 </div>
@@ -364,23 +585,26 @@
             <!-- Nivel 4: Básica Superior -->
             <div class="col-md-6 col-lg-3">
                 <div class="academic-level-card">
-                    <div class="card-academic-header card-header-superior">
-                        <span class="academic-badge-age">8°, 9° y 10° EGB</span>
-                        <h3 class="academic-title">Básica Superior</h3>
+                    <div class="academic-photo-header">
+                        <img src="{% static 'img/superior.jpg' %}" alt="Básica Superior EEB Antonio Ante">
+                        <div class="academic-photo-overlay">
+                            <span class="academic-badge-age">8°, 9° y 10° EGB</span>
+                            <h3 class="academic-title">Básica Superior</h3>
+                        </div>
                     </div>
                     <div class="card-academic-body">
                         <div>
                             <p class="small text-muted mb-3">
-                                Preparación integral y rigurosa para el ingreso exitoso al Bachillerato General Unificado, con liderazgo y ética.
+                                Preparación integral para el ingreso con honores al Bachillerato General Unificado (BGU).
                             </p>
                             <ul class="feature-check-list">
-                                <li><i class="bi bi-check-circle-fill"></i> Álgebra y resolución de problemas</li>
-                                <li><i class="bi bi-check-circle-fill"></i> Expresión oral, escrita y debate</li>
+                                <li><i class="bi bi-check-circle-fill"></i> Álgebra y razonamiento analítico</li>
+                                <li><i class="bi bi-check-circle-fill"></i> Debate, oratoria y literatura</li>
                                 <li><i class="bi bi-check-circle-fill"></i> Orientación vocacional y liderazgo</li>
                             </ul>
                         </div>
                         <div class="pt-3 border-top text-center">
-                            <span class="badge bg-light text-danger border w-100 py-2">Jornada Matutina</span>
+                            <span class="badge bg-light text-danger border w-100 py-2">Matutina y Vespertina</span>
                         </div>
                     </div>
                 </div>
@@ -390,62 +614,66 @@
 </section>
 
 <!-- =======================================================
-     6. NOTICIAS Y COMUNICADOS INSTITUCIONALES (GRID EDITORIAL)
+     7. NOTICIAS Y COMUNICADOS INSTITUCIONALES
      ======================================================= -->
-<section class="section-premium bg-light" id="noticias">
+<section class="section-premium" id="noticias">
     <div class="container">
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-5">
             <div>
                 <span class="section-tagline">
-                    <i class="bi bi-newspaper"></i> Información Oficial
+                    <i class="bi bi-newspaper"></i> Actualidad Institucional
                 </span>
-                <h2 class="section-main-title mb-0">Noticias y Comunicados</h2>
+                <h2 class="section-main-title mb-0">Noticias y Comunicados Oficiales</h2>
                 <div class="title-underline-left"></div>
             </div>
             <a href="https://wa.me/593960172899" target="_blank" class="btn btn-outline-danger mt-3 mt-md-0 fw-bold">
-                <i class="bi bi-bell-fill me-1"></i> Consultar Novedades por WhatsApp
+                <i class="bi bi-whatsapp me-1"></i> Consultas a Secretaría: 096 017 2899
             </a>
         </div>
 
         <div class="row g-4">
-            <!-- Artículo 1: Comunicado Urgente -->
+            <!-- Comunicado 1 -->
             <div class="col-lg-4 col-md-6">
                 <article class="news-article-card">
-                    <div class="news-banner-top banner-urgent">
-                        <i class="bi bi-megaphone-fill news-banner-watermark"></i>
-                        <span class="news-category-pill">Comunicado Oficial</span>
+                    <div class="academic-photo-header" style="height: 160px;">
+                        <img src="{% static 'img/about_campus.jpg' %}" alt="Proceso de Matrículas">
+                        <div class="academic-photo-overlay">
+                            <span class="news-category-pill">Comunicado Oficial</span>
+                        </div>
                     </div>
                     <div class="news-article-body">
                         <div class="news-meta-date">
                             <i class="bi bi-calendar-event text-danger"></i>
-                            <span>Periodo Lectivo Vigente</span>
+                            <span>Periodo Lectivo • Secretaría</span>
                         </div>
-                        <h4 class="news-headline">Proceso Oficial de Matrículas y Requisitos de Admisión</h4>
+                        <h4 class="news-headline">Cronograma de Matrículas para Jornada Matutina y Vespertina</h4>
                         <p class="news-excerpt">
-                            Se pone en conocimiento de los padres de familia y representantes legales el cronograma del Ministerio de Educación y la documentación requerida para el ciclo escolar.
+                            Se informa a los padres de familia del Recinto El Deseo y sectores cercanos sobre los requisitos documentales y fechas de inscripción.
                         </p>
-                        <a href="https://wa.me/593960172899?text=Deseo%20informaci%C3%B3n%20sobre%20el%20cronograma%20de%20matr%C3%ADculas" target="_blank" class="btn-read-more-link">
+                        <a href="https://wa.me/593960172899?text=Deseo%20informaci%C3%B3n%20sobre%20matr%C3%ADculas%20en%20la%20EEB%20Antonio%20Ante" target="_blank" class="btn-read-more-link">
                             Consultar en Secretaría <i class="bi bi-arrow-right"></i>
                         </a>
                     </div>
                 </article>
             </div>
 
-            <!-- Artículo 2: Evento Cívico -->
+            <!-- Comunicado 2 -->
             <div class="col-lg-4 col-md-6">
                 <article class="news-article-card">
-                    <div class="news-banner-top banner-event">
-                        <i class="bi bi-flag-fill news-banner-watermark"></i>
-                        <span class="news-category-pill">Vida Institucional</span>
+                    <div class="academic-photo-header" style="height: 160px;">
+                        <img src="{% static 'img/galeria_civica.jpg' %}" alt="Acto Cívico y Juramento a la Bandera">
+                        <div class="academic-photo-overlay">
+                            <span class="news-category-pill">Vida Escolar</span>
+                        </div>
                     </div>
                     <div class="news-article-body">
                         <div class="news-meta-date">
-                            <i class="bi bi-calendar-check text-primary"></i>
+                            <i class="bi bi-flag-fill text-primary"></i>
                             <span>Actividad Cívica</span>
                         </div>
-                        <h4 class="news-headline">Solemne Ceremonia de Juramento a la Bandera Nacional</h4>
+                        <h4 class="news-headline">Juramento a la Bandera Nacional y Cuadro de Honor</h4>
                         <p class="news-excerpt">
-                            Nuestros abanderados y estudiantes de décimo año rindieron homenaje a los símbolos patrios en un acto solemne que congregó a la planta docente y familias.
+                            Solemne homenaje patrio de los estudiantes de décimo año y reconocimiento a los abanderados por su excelencia académica.
                         </p>
                         <a href="#galeria" class="btn-read-more-link">
                             Ver galería del evento <i class="bi bi-arrow-right"></i>
@@ -454,21 +682,23 @@
                 </article>
             </div>
 
-            <!-- Artículo 3: Convocatoria -->
+            <!-- Comunicado 3 -->
             <div class="col-lg-4 col-md-6">
                 <article class="news-article-card">
-                    <div class="news-banner-top">
-                        <i class="bi bi-people-fill news-banner-watermark"></i>
-                        <span class="news-category-pill">Comunidad Educativa</span>
+                    <div class="academic-photo-header" style="height: 160px;">
+                        <img src="{% static 'img/dece_orientacion.jpg' %}" alt="Taller del DECE">
+                        <div class="academic-photo-overlay">
+                            <span class="news-category-pill" style="background: #22c55e; color: white;">DECE</span>
+                        </div>
                     </div>
                     <div class="news-article-body">
                         <div class="news-meta-date">
-                            <i class="bi bi-clock-fill text-warning"></i>
-                            <span>Comité Central de Padres</span>
+                            <i class="bi bi-heart-pulse-fill text-success"></i>
+                            <span>Orientación Familiar</span>
                         </div>
-                        <h4 class="news-headline">Convocatoria a Asamblea General de Representantes</h4>
+                        <h4 class="news-headline">Talleres de Convivencia Armónica y Escuela para Padres</h4>
                         <p class="news-excerpt">
-                            Espacio de diálogo y coordinación para socializar los proyectos pedagógicos, obras de mantenimiento y cronogramas de actividades extracurriculares.
+                            El Departamento DECE convoca a los representantes para fortalecer pautas de crianza, hábitos de estudio y prevención socioemocional.
                         </p>
                         <a href="https://wa.me/593960172899" target="_blank" class="btn-read-more-link">
                             Más detalles vía WhatsApp <i class="bi bi-arrow-right"></i>
@@ -481,49 +711,63 @@
 </section>
 
 <!-- =======================================================
-     7. GALERÍA ESCOLAR Y ACTIVIDADES
+     8. GALERÍA FOTOGRÁFICA REAL
      ======================================================= -->
-<section class="section-premium" id="galeria">
+<section class="section-premium bg-light" id="galeria">
     <div class="container">
         <div class="text-center mb-5">
             <span class="section-tagline">
-                <i class="bi bi-images"></i> Nuestra Comunidad en Acción
+                <i class="bi bi-camera-fill"></i> Vida Escolar en Imágenes
             </span>
-            <h2 class="section-main-title">Galería de Actividades Institucionales</h2>
+            <h2 class="section-main-title">Galería Institucional</h2>
             <div class="title-underline-center"></div>
             <p class="text-secondary" style="max-width: 680px; margin: 0 auto;">
-                Reflejo de la alegría, disciplina, arte y civismo que viven nuestros estudiantes en su jornada diaria.
+                Evidencias fotográficas de las actividades cívicas, deportivas, científicas y culturales de la EEB Antonio Ante.
             </p>
         </div>
 
         <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card border-0 shadow-sm rounded-4 p-4 text-center bg-light h-100 justify-content-center">
-                    <div class="stat-icon-box mx-auto mb-3" style="background: var(--navy-soft); color: var(--navy-primary);">
-                        <i class="bi bi-palette-fill"></i>
+            <!-- Foto 1: Cívica -->
+            <div class="col-md-6 col-lg-3">
+                <div class="gallery-photo-card">
+                    <img src="{% static 'img/galeria_civica.jpg' %}" alt="Minuto Cívico y Juramento a la Bandera">
+                    <div class="gallery-photo-overlay">
+                        <span class="gallery-category-badge">Cívico</span>
+                        <h5 class="gallery-title">Minuto Cívico Institucional</h5>
                     </div>
-                    <h5 class="fw-bold text-dark">Feria de Ciencias y Arte</h5>
-                    <p class="text-muted small mb-0">Demostración de proyectos experimentales, creatividad plástica y habilidades oratorias de los estudiantes.</p>
                 </div>
             </div>
 
-            <div class="col-md-4">
-                <div class="card border-0 shadow-sm rounded-4 p-4 text-center bg-light h-100 justify-content-center">
-                    <div class="stat-icon-box mx-auto mb-3" style="background: var(--red-soft); color: var(--red-primary);">
-                        <i class="bi bi-trophy-fill"></i>
+            <!-- Foto 2: Deportes -->
+            <div class="col-md-6 col-lg-3">
+                <div class="gallery-photo-card">
+                    <img src="{% static 'img/galeria_deportes.jpg' %}" alt="Juegos Deportivos Escolares">
+                    <div class="gallery-photo-overlay">
+                        <span class="gallery-category-badge" style="background: #eab308; color: black;">Deportes</span>
+                        <h5 class="gallery-title">Jornadas Deportivas</h5>
                     </div>
-                    <h5 class="fw-bold text-dark">Jornadas Deportivas</h5>
-                    <p class="text-muted small mb-0">Campeonatos de fútbol, básquet y atletismo escolar fortaleciendo el compañerismo y la salud física.</p>
                 </div>
             </div>
 
-            <div class="col-md-4">
-                <div class="card border-0 shadow-sm rounded-4 p-4 text-center bg-light h-100 justify-content-center">
-                    <div class="stat-icon-box mx-auto mb-3" style="background: var(--beige-light); color: #8c7847;">
-                        <i class="bi bi-flag-fill"></i>
+            <!-- Foto 3: Ciencias -->
+            <div class="col-md-6 col-lg-3">
+                <div class="gallery-photo-card">
+                    <img src="{% static 'img/galeria_ciencias.jpg' %}" alt="Feria de Ciencias y Proyectos">
+                    <div class="gallery-photo-overlay">
+                        <span class="gallery-category-badge" style="background: #2563eb;">Ciencia</span>
+                        <h5 class="gallery-title">Feria de Ciencias y Arte</h5>
                     </div>
-                    <h5 class="fw-bold text-dark">Momentos Cívicos y Culturales</h5>
-                    <p class="text-muted small mb-0">Revalorización de nuestras tradiciones, desfiles cívicos e identidad del cantón Antonio Ante.</p>
+                </div>
+            </div>
+
+            <!-- Foto 4: Biblioteca / Lectura -->
+            <div class="col-md-6 col-lg-3">
+                <div class="gallery-photo-card">
+                    <img src="{% static 'img/galeria_lectura.jpg' %}" alt="Fomento a la Lectura">
+                    <div class="gallery-photo-overlay">
+                        <span class="gallery-category-badge" style="background: #16a34a;">Lectura</span>
+                        <h5 class="gallery-title">Club de Lectura y Biblioteca</h5>
+                    </div>
                 </div>
             </div>
         </div>
@@ -531,19 +775,19 @@
 </section>
 
 <!-- =======================================================
-     8. CONTACTO OFICIAL Y ATENCIÓN DIRECTA
+     9. CONTACTO OFICIAL, FORMULARIO Y UBICACIÓN EN YAGUACHI
      ======================================================= -->
-<section class="section-premium bg-light" id="contacto-seccion">
+<section class="section-premium" id="contacto-seccion">
     <div class="container">
         <div class="row g-5 align-items-center">
             <div class="col-lg-6">
                 <span class="section-tagline">
-                    <i class="bi bi-chat-heart-fill"></i> Atención a Representantes
+                    <i class="bi bi-geo-alt-fill"></i> Atención a Padres y Comunidad
                 </span>
-                <h2 class="section-main-title">Estamos para Servir a Nuestra Comunidad</h2>
+                <h2 class="section-main-title">Contáctanos en el Recinto El Deseo</h2>
                 <div class="title-underline-left"></div>
                 <p class="text-secondary mb-4">
-                    Si eres padre de familia, representante o deseas información sobre matrículas, requisitos o trámites académicos, puedes visitarnos o comunicarte mediante nuestros canales oficiales.
+                    La <strong>Escuela de Educación Básica "Antonio Ante"</strong> brinda atención personalizada a representantes y público en general durante ambas jornadas.
                 </p>
 
                 <div class="d-flex flex-column gap-3 mb-4">
@@ -552,7 +796,7 @@
                             <i class="bi bi-whatsapp"></i>
                         </div>
                         <div>
-                            <span class="d-block text-muted small">Línea Directa de WhatsApp</span>
+                            <span class="d-block text-muted small">Línea Oficial de WhatsApp</span>
                             <a href="https://wa.me/593960172899" target="_blank" class="fw-bold text-dark fs-5 text-decoration-none">
                                 096 017 2899
                             </a>
@@ -564,8 +808,8 @@
                             <i class="bi bi-geo-alt-fill"></i>
                         </div>
                         <div>
-                            <span class="d-block text-muted small">Ubicación Institucional</span>
-                            <strong class="text-dark">Cantón Antonio Ante, Provincia de Imbabura, Ecuador</strong>
+                            <span class="d-block text-muted small">Ubicación Geográfica</span>
+                            <strong class="text-dark">Recinto El Deseo, Cantón Yaguachi, Provincia del Guayas</strong>
                         </div>
                     </div>
 
@@ -574,34 +818,34 @@
                             <i class="bi bi-clock-fill"></i>
                         </div>
                         <div>
-                            <span class="d-block text-muted small">Horario de Secretaría</span>
-                            <strong class="text-dark">Lunes a Viernes de 07:00 a 13:00</strong>
+                            <span class="d-block text-muted small">Horarios de Secretaría y Atención</span>
+                            <strong class="text-dark">Matutina: 07:00 a 12:30 | Vespertina: 13:00 a 18:30</strong>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Formulario de Contacto / Consulta Escolar -->
+            <!-- Formulario de Contacto -->
             <div class="col-lg-6">
                 <div class="p-4 p-md-5 bg-white rounded-4 shadow-sm border">
                     <h4 class="fw-bold mb-2 text-primary">Envía tu Consulta a Secretaría</h4>
-                    <p class="text-muted small mb-4">Completa el formulario y responderemos a la brevedad posible.</p>
+                    <p class="text-muted small mb-4">Escribe tus datos y la consulta será dirigida de inmediato a nuestro canal de WhatsApp institucional.</p>
                     
-                    <form onsubmit="event.preventDefault(); window.open('https://wa.me/593960172899?text=Hola,%20mi%20nombre%20es%20' + encodeURIComponent(document.getElementById('inputNombre').value) + '.%20Consulta:%20' + encodeURIComponent(document.getElementById('inputMensaje').value));">
+                    <form onsubmit="event.preventDefault(); window.open('https://wa.me/593960172899?text=Hola,%20mi%20nombre%20es%20' + encodeURIComponent(document.getElementById('inputNombre').value) + '.%20Tel%C3%A9fono:%20' + encodeURIComponent(document.getElementById('inputTelefono').value) + '.%20Consulta:%20' + encodeURIComponent(document.getElementById('inputMensaje').value));">
                         <div class="mb-3">
                             <label for="inputNombre" class="form-label small fw-bold text-dark">Nombre y Apellido del Representante</label>
-                            <input type="text" class="form-control form-control-lg fs-6" id="inputNombre" placeholder="Ej. Juan Pérez" required>
+                            <input type="text" class="form-control form-control-lg fs-6" id="inputNombre" placeholder="Ej. Carlos Mendoza" required>
                         </div>
                         <div class="mb-3">
-                            <label for="inputTelefono" class="form-label small fw-bold text-dark">Teléfono o Celular de Contacto</label>
+                            <label for="inputTelefono" class="form-label small fw-bold text-dark">Teléfono o Celular</label>
                             <input type="tel" class="form-control form-control-lg fs-6" id="inputTelefono" placeholder="Ej. 096 017 2899" required>
                         </div>
                         <div class="mb-3">
-                            <label for="inputMensaje" class="form-label small fw-bold text-dark">Detalle de la Consulta o Trámite</label>
-                            <textarea class="form-control form-control-lg fs-6" id="inputMensaje" rows="3" placeholder="Escribe aquí tu consulta sobre matrículas, certificados o información general..." required></textarea>
+                            <label for="inputMensaje" class="form-label small fw-bold text-dark">Detalle de la Consulta (Matrículas, Certificados, etc.)</label>
+                            <textarea class="form-control form-control-lg fs-6" id="inputMensaje" rows="3" placeholder="Escribe aquí tu consulta para la secretaría de la EEB Antonio Ante..." required></textarea>
                         </div>
                         <button type="submit" class="btn btn-hero-primary w-100 py-3 justify-content-center">
-                            <i class="bi bi-send-fill me-2"></i> Enviar Mensaje a Secretaría
+                            <i class="bi bi-send-fill me-2"></i> Enviar Mensaje a Secretaría (096 017 2899)
                         </button>
                     </form>
                 </div>
