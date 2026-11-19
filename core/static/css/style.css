@@ -1,57 +1,52 @@
 /* ==========================================================================
-   EEB ANTONIO ANTE - SISTEMA DE DISEÑO INSTITUCIONAL LIMPIO Y ELEGANTE
-   Ubicación: Recinto El Deseo, Cantón Yaguachi, Provincia del Guayas, Ecuador
-   Fundación: 4 de Septiembre de 1965 (61 Años de Trayectoria)
-
-   Paleta Oficial:
+   EEB ANTONIO ANTE - SISTEMA DE DISEÑO INSTITUCIONAL DE ALTO PRESTIGIO
+   Identidad Oficial:
    - Azul Marino Institucional: #18396D
    - Rojo Institucional: #D71926
    - Blanco Puro: #FFFFFF
    - Beige Institucional: #D9D0BB
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cinzel:wght@600;700;800&display=swap');
 
 :root {
-  /* Colores Principales */
-  --navy-primary: #18396D;
-  --navy-dark: #0f2448;
-  --navy-light: #204c8c;
-  --navy-subtle: #f0f4fa;
+  /* Paleta cromática oficial */
+  --color-navy: #18396D;
+  --color-navy-dark: #0e2447;
+  --color-navy-light: #254d8f;
+  --color-navy-subtle: #f0f4fa;
 
-  --red-primary: #D71926;
-  --red-dark: #b3141f;
-  --red-subtle: #fdf2f2;
+  --color-red: #D71926;
+  --color-red-dark: #b5121e;
+  --color-red-subtle: #fdf2f3;
 
-  --beige-primary: #D9D0BB;
-  --beige-light: #fbfaf7;
-  --beige-dark: #b8ad96;
+  --color-beige: #D9D0BB;
+  --color-beige-light: #fbf9f5;
+  --color-beige-dark: #b8ad96;
 
-  --white: #ffffff;
-  --bg-page: #f8fafc;
-  --bg-card: #ffffff;
+  --color-white: #ffffff;
+  --color-bg-page: #f8fafc;
+  --color-bg-card: #ffffff;
+  --color-border: #e2e8f0;
 
-  --text-primary: #1e293b;
-  --text-secondary: #475569;
-  --text-muted: #64748b;
-  
-  --border-color: #e2e8f0;
-  --border-focus: #18396D;
+  --color-text-main: #0f172a;
+  --color-text-body: #334155;
+  --color-text-muted: #64748b;
 
   /* Tipografías */
-  --font-main: 'Plus Jakarta Sans', sans-serif;
-  --font-heading: 'Montserrat', sans-serif;
-  --font-serif: 'Merriweather', serif;
+  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Cinzel', serif;
 
-  /* Sombras sobrias y sutiles */
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-md: 0 4px 14px rgba(24, 57, 109, 0.08);
-  --shadow-lg: 0 12px 28px rgba(24, 57, 109, 0.12);
-  --shadow-hover: 0 14px 30px rgba(24, 57, 109, 0.15);
+  /* Sombras y elevaciones de diseño */
+  --shadow-subtle: 0 2px 10px rgba(24, 57, 109, 0.04);
+  --shadow-card: 0 8px 24px rgba(24, 57, 109, 0.07);
+  --shadow-hover: 0 16px 36px rgba(24, 57, 109, 0.12);
+  --shadow-btn: 0 4px 14px rgba(215, 25, 38, 0.3);
 
-  --radius-card: 12px;
-  --radius-btn: 8px;
-  --transition: all 0.25s ease-in-out;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Reset y Base */
@@ -63,69 +58,68 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 85px;
+  scroll-padding-top: 86px;
 }
 
 body {
   font-family: var(--font-main);
-  color: var(--text-primary);
-  background-color: var(--bg-page);
+  color: var(--color-text-body);
+  background-color: var(--color-bg-page);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
+  font-family: var(--font-main);
   font-weight: 700;
-  color: var(--navy-primary);
-  letter-spacing: -0.01em;
+  color: var(--color-navy);
+  letter-spacing: -0.02em;
 }
 
 /* ==========================================================================
-   1. TOPBAR SOBRIA Y PROFESIONAL
+   1. TOPBAR DE SERVICIO PÚBLICO
    ========================================================================== */
 .topbar-institutional {
-  background-color: var(--navy-dark);
+  background-color: var(--color-navy-dark);
   color: rgba(255, 255, 255, 0.9);
-  font-size: 0.82rem;
+  font-size: 0.81rem;
   padding: 8px 0;
-  border-bottom: 2px solid var(--red-primary);
+  border-bottom: 2px solid var(--color-red);
 }
 
-.topbar-badge {
-  background-color: rgba(217, 208, 187, 0.2);
-  color: var(--beige-primary);
-  border: 1px solid rgba(217, 208, 187, 0.35);
-  padding: 2px 10px;
-  border-radius: 4px;
-  font-weight: 600;
-  font-size: 0.76rem;
-}
-
-.topbar-admin-link {
+.topbar-institutional a {
   color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
-  font-weight: 600;
   transition: var(--transition);
 }
 
-.topbar-admin-link:hover {
-  color: var(--beige-primary);
+.topbar-institutional a:hover {
+  color: var(--color-beige);
+}
+
+.topbar-badge-pill {
+  background-color: rgba(217, 208, 187, 0.18);
+  border: 1px solid rgba(217, 208, 187, 0.35);
+  color: var(--color-beige);
+  padding: 2px 10px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.74rem;
 }
 
 /* ==========================================================================
-   2. NAVBAR INSTITUCIONAL
+   2. BARRA DE NAVEGACIÓN PRINCIPAL
    ========================================================================== */
 .header-sticky {
   position: sticky;
   top: 0;
-  z-index: 1020;
+  z-index: 1025;
 }
 
 .navbar-institutional {
-  background-color: var(--white);
-  border-bottom: 1px solid var(--border-color);
-  box-shadow: var(--shadow-sm);
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow-subtle);
   padding: 0.75rem 0;
   transition: var(--transition);
 }
@@ -142,56 +136,74 @@ h1, h2, h3, h4, h5, h6 {
   height: 58px;
   object-fit: contain;
   border-radius: 50%;
-  border: 1px solid var(--border-color);
+  border: 2px solid var(--color-border);
   padding: 2px;
-  background: var(--white);
+  background-color: var(--color-white);
+  transition: var(--transition);
+}
+
+.brand-wrapper:hover .brand-seal-logo {
+  border-color: var(--color-navy);
+  transform: scale(1.03);
+}
+
+.brand-title-top {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-red);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1;
 }
 
 .brand-title-main {
-  font-family: var(--font-heading);
+  font-family: var(--font-display);
+  font-size: 1.26rem;
   font-weight: 800;
-  font-size: 1.22rem;
-  color: var(--navy-primary);
+  color: var(--color-navy);
   margin: 0;
   line-height: 1.15;
+  letter-spacing: 0.5px;
 }
 
-.brand-subtitle-tag {
+.brand-title-sub {
   font-size: 0.74rem;
   font-weight: 600;
-  color: var(--red-primary);
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin: 0;
+  line-height: 1.2;
 }
 
 .navbar-institutional .nav-link {
   font-weight: 600;
   font-size: 0.92rem;
-  color: var(--text-primary) !important;
-  padding: 0.6rem 0.9rem !important;
+  color: var(--color-navy) !important;
+  padding: 0.65rem 0.95rem !important;
   transition: var(--transition);
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
+  position: relative;
 }
 
 .navbar-institutional .nav-link:hover,
 .navbar-institutional .nav-link.active {
-  color: var(--red-primary) !important;
+  color: var(--color-red) !important;
   background-color: rgba(215, 25, 38, 0.04);
 }
 
 .navbar-institutional .dropdown-menu {
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
   padding: 0.5rem;
 }
 
 .dropdown-item {
   font-weight: 600;
   font-size: 0.88rem;
-  color: var(--text-primary);
+  color: var(--color-text-main);
   padding: 0.6rem 0.9rem;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   transition: var(--transition);
   display: flex;
   align-items: center;
@@ -199,100 +211,126 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .dropdown-item:hover {
-  background-color: var(--navy-subtle);
-  color: var(--navy-primary);
+  background-color: var(--color-navy-subtle);
+  color: var(--color-navy);
 }
 
-.btn-institucional-nav {
-  background-color: var(--navy-primary);
-  color: var(--white) !important;
-  font-weight: 600;
-  font-size: 0.85rem;
-  padding: 0.5rem 1.1rem;
-  border-radius: 6px;
-  border: none;
+.dropdown-item i {
+  color: var(--color-red);
+}
+
+.btn-admin-nav {
+  background-color: var(--color-navy);
+  color: var(--color-white) !important;
+  font-weight: 700;
+  font-size: 0.86rem;
+  padding: 0.55rem 1.2rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-navy);
   transition: var(--transition);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.btn-institucional-nav:hover {
-  background-color: var(--red-primary);
-  color: var(--white) !important;
+.btn-admin-nav:hover {
+  background-color: var(--color-red);
+  border-color: var(--color-red);
+  box-shadow: var(--shadow-btn);
+  color: var(--color-white) !important;
 }
 
 /* ==========================================================================
-   3. HERO BANNER - ELEGANTE, LUMINOSO Y EQUILIBRADO
+   3. HERO PRINCIPAL - PRESTIGIO Y PROFESIONALISMO
    ========================================================================== */
-.hero-clean-section {
-  background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-primary) 70%, #1c4582 100%);
-  color: var(--white);
-  padding: 4.5rem 0 5rem 0;
+.hero-institution {
+  background: linear-gradient(135deg, var(--color-navy-dark) 0%, var(--color-navy) 65%, #1d4887 100%);
+  color: var(--color-white);
+  padding: 5rem 0 6rem 0;
   position: relative;
-  border-bottom: 4px solid var(--red-primary);
+  border-bottom: 4px solid var(--color-red);
+  overflow: hidden;
 }
 
-.hero-anniversary-tag {
+.hero-institution::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 85% 20%, rgba(217, 208, 187, 0.12) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+.hero-tag {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background-color: rgba(217, 208, 187, 0.15);
-  border: 1px solid rgba(217, 208, 187, 0.4);
-  color: var(--beige-primary);
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(217, 208, 187, 0.35);
+  color: var(--color-beige);
   padding: 5px 14px;
   border-radius: 20px;
   font-size: 0.82rem;
   font-weight: 600;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
 }
 
-.hero-main-title {
-  font-size: 2.75rem;
+.hero-title {
+  font-size: 2.9rem;
   font-weight: 800;
-  color: var(--white);
-  line-height: 1.2;
+  color: var(--color-white);
+  line-height: 1.18;
   margin-bottom: 1.25rem;
+  letter-spacing: -0.02em;
 }
 
-.hero-main-title span {
-  color: var(--beige-primary);
+.hero-title span {
+  color: var(--color-beige);
 }
 
-.hero-description-lead {
-  font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.9);
-  line-height: 1.7;
-  max-width: 600px;
-  margin-bottom: 2rem;
+.hero-lead {
+  font-size: 1.12rem;
+  color: rgba(255, 255, 255, 0.92);
+  line-height: 1.75;
+  max-width: 620px;
+  margin-bottom: 2.25rem;
+  font-weight: 400;
 }
 
-.hero-btn-primary {
-  background-color: var(--red-primary);
-  color: var(--white);
-  border: 2px solid var(--red-primary);
+.hero-btn-red {
+  background-color: var(--color-red);
+  color: var(--color-white);
+  border: 2px solid var(--color-red);
   font-weight: 700;
-  font-size: 0.95rem;
-  padding: 0.75rem 1.8rem;
-  border-radius: 8px;
+  font-size: 0.96rem;
+  padding: 0.8rem 2rem;
+  border-radius: var(--radius-sm);
   text-decoration: none;
+  box-shadow: var(--shadow-btn);
   transition: var(--transition);
   display: inline-flex;
   align-items: center;
   gap: 8px;
 }
 
-.hero-btn-primary:hover {
-  background-color: var(--red-dark);
-  border-color: var(--red-dark);
-  color: var(--white);
+.hero-btn-red:hover {
+  background-color: var(--color-red-dark);
+  border-color: var(--color-red-dark);
+  color: var(--color-white);
+  transform: translateY(-2px);
 }
 
-.hero-btn-secondary {
+.hero-btn-outline {
   background-color: transparent;
-  color: var(--white);
-  border: 2px solid var(--beige-primary);
+  color: var(--color-white);
+  border: 2px solid var(--color-beige);
   font-weight: 700;
-  font-size: 0.95rem;
-  padding: 0.75rem 1.8rem;
-  border-radius: 8px;
+  font-size: 0.96rem;
+  padding: 0.8rem 2rem;
+  border-radius: var(--radius-sm);
   text-decoration: none;
   transition: var(--transition);
   display: inline-flex;
@@ -300,217 +338,204 @@ h1, h2, h3, h4, h5, h6 {
   gap: 8px;
 }
 
-.hero-btn-secondary:hover {
-  background-color: var(--beige-primary);
-  color: var(--navy-dark);
+.hero-btn-outline:hover {
+  background-color: var(--color-beige);
+  color: var(--color-navy-dark);
+  transform: translateY(-2px);
 }
 
-/* Escudo limpio y solemne en el Hero */
-.hero-logo-card {
-  background: var(--white);
+/* Escudo Presentado con Gran Dignidad */
+.hero-visual-card {
+  position: relative;
+  text-align: center;
+}
+
+.hero-seal-frame {
+  width: 270px;
+  height: 270px;
+  background-color: var(--color-white);
   border-radius: 50%;
-  width: 250px;
-  height: 250px;
-  padding: 12px;
+  padding: 10px;
   margin: 0 auto;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4), 0 0 0 8px rgba(255, 255, 255, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.hero-logo-card img {
+.hero-seal-frame img {
   width: 100%;
   height: 100%;
   object-fit: contain;
   border-radius: 50%;
 }
 
-.hero-badge-footer {
+.hero-card-meta {
   margin-top: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
   display: inline-block;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 8px 18px;
-  border-radius: 20px;
-  color: var(--white);
-  font-size: 0.85rem;
-  font-weight: 600;
+  backdrop-filter: blur(6px);
 }
 
 /* ==========================================================================
-   4. CIFRAS Y DATOS HISTÓRICOS (MINIMALISTA)
+   4. TARJETAS DE ACCESO RÁPIDO (FLOATING HIGHLIGHTS)
    ========================================================================== */
-.stats-strip {
-  background: var(--white);
-  border-bottom: 1px solid var(--border-color);
-  padding: 2.2rem 0;
-  box-shadow: var(--shadow-sm);
+.quick-access-wrapper {
+  margin-top: -3rem;
+  position: relative;
+  z-index: 10;
 }
 
-.stat-box {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 0.5rem 1rem;
+.quick-feature-card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+  padding: 1.75rem 1.5rem;
+  height: 100%;
+  transition: var(--transition);
+  border-top: 4px solid var(--color-navy);
 }
 
-.stat-icon {
-  width: 50px;
-  height: 50px;
-  border-radius: 10px;
-  background-color: var(--navy-subtle);
-  color: var(--navy-primary);
+.quick-feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+  border-top-color: var(--color-red);
+}
+
+.quick-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-navy-subtle);
+  color: var(--color-navy);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
-  flex-shrink: 0;
+  font-size: 1.45rem;
+  margin-bottom: 1rem;
 }
 
-.stat-value {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--navy-primary);
-  line-height: 1.1;
-  margin: 0;
+.quick-feature-card:hover .quick-card-icon {
+  background-color: var(--color-red-subtle);
+  color: var(--color-red);
 }
 
-.stat-text {
-  font-size: 0.84rem;
-  color: var(--text-muted);
-  font-weight: 500;
-  margin: 0;
-}
-
-/* ==========================================================================
-   5. SECCIONES Y CONTENIDOS
-   ========================================================================== */
-.section-wrapper {
-  padding: 4.5rem 0;
-}
-
-.section-wrapper.bg-alt {
-  background-color: #f1f5f9;
-}
-
-.section-header-clean {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.section-pretitle {
-  color: var(--red-primary);
-  font-size: 0.82rem;
+.quick-card-title {
+  font-size: 1.1rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  display: block;
   margin-bottom: 0.4rem;
+  color: var(--color-navy);
 }
 
-.section-title-clean {
-  font-size: 2.1rem;
-  font-weight: 800;
-  color: var(--navy-primary);
+.quick-card-desc {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  line-height: 1.55;
   margin-bottom: 0.75rem;
 }
 
-.section-divider-line {
+/* ==========================================================================
+   5. SECCIONES Y CABECERAS EDITORIALES
+   ========================================================================== */
+.section-institutional {
+  padding: 5rem 0;
+}
+
+.section-institutional.bg-subtle {
+  background-color: #f1f5f9;
+}
+
+.section-eyebrow {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-red);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.section-heading-clean {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--color-navy);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+}
+
+.section-accent-bar {
   width: 60px;
   height: 3px;
-  background-color: var(--red-primary);
-  margin: 0 auto;
+  background-color: var(--color-red);
   border-radius: 2px;
+  margin: 0.75rem auto 1.5rem auto;
+}
+
+.section-accent-bar.bar-left {
+  margin: 0.75rem 0 1.5rem 0;
 }
 
 /* ==========================================================================
    6. HISTORIA Y CAMPUS
    ========================================================================== */
-.history-photo-card {
-  border-radius: var(--radius-card);
+.campus-showcase-frame {
+  border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--border-color);
-  background: var(--white);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-white);
 }
 
-.history-photo-card img {
+.campus-showcase-frame img {
   width: 100%;
-  height: 360px;
+  height: 380px;
   object-fit: cover;
   display: block;
 }
 
-.history-card-body {
-  background: var(--white);
-  border-radius: var(--radius-card);
-  padding: 2.5rem;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--border-color);
-  border-left: 5px solid var(--navy-primary);
-}
-
-/* Valores */
-.value-card-clean {
-  background: var(--white);
-  border-radius: var(--radius-card);
-  padding: 1.75rem 1.5rem;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--border-color);
-  height: 100%;
-  transition: var(--transition);
-}
-
-.value-card-clean:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--navy-primary);
-}
-
-.value-icon-circle {
-  width: 48px;
-  height: 48px;
-  border-radius: 8px;
-  background: var(--navy-subtle);
-  color: var(--navy-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.4rem;
-  margin-bottom: 1rem;
+.institutional-quote-card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-subtle);
+  padding: 2.75rem;
+  border-left: 5px solid var(--color-navy);
 }
 
 /* ==========================================================================
    7. PLANTA DOCENTE Y DECE (TABS ELEGANTES)
    ========================================================================== */
-.faculty-nav .nav-link {
+.faculty-tabs-container .nav-pills .nav-link {
   font-weight: 600;
   font-size: 0.92rem;
-  color: var(--text-secondary);
-  background: var(--white);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 0.7rem 1.5rem;
+  color: var(--color-text-body);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.7rem 1.6rem;
   transition: var(--transition);
 }
 
-.faculty-nav .nav-link:hover {
-  color: var(--navy-primary);
-  background-color: var(--navy-subtle);
+.faculty-tabs-container .nav-pills .nav-link:hover {
+  background-color: var(--color-navy-subtle);
+  color: var(--color-navy);
 }
 
-.faculty-nav .nav-link.active {
-  color: var(--white);
-  background-color: var(--navy-primary);
-  border-color: var(--navy-primary);
+.faculty-tabs-container .nav-pills .nav-link.active {
+  background-color: var(--color-navy);
+  border-color: var(--color-navy);
+  color: var(--color-white);
 }
 
-.teacher-card {
-  background: var(--white);
-  border-radius: var(--radius-card);
-  border: 1px solid var(--border-color);
-  box-shadow: var(--shadow-sm);
+.docente-item-card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-subtle);
   padding: 1.5rem;
   height: 100%;
   transition: var(--transition);
@@ -519,17 +544,17 @@ h1, h2, h3, h4, h5, h6 {
   gap: 16px;
 }
 
-.teacher-card:hover {
-  box-shadow: var(--shadow-md);
-  border-color: var(--navy-light);
+.docente-item-card:hover {
+  box-shadow: var(--shadow-card);
+  border-color: var(--color-navy-light);
 }
 
-.teacher-avatar-icon {
+.docente-avatar-round {
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  background-color: var(--navy-subtle);
-  color: var(--navy-primary);
+  background-color: var(--color-navy-subtle);
+  color: var(--color-navy);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -537,27 +562,14 @@ h1, h2, h3, h4, h5, h6 {
   flex-shrink: 0;
 }
 
-.teacher-info h6 {
-  font-size: 0.98rem;
-  font-weight: 700;
-  margin-bottom: 0.2rem;
-  color: var(--navy-primary);
-}
-
-.teacher-info p {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  margin-bottom: 0;
-}
-
 /* ==========================================================================
-   8. OFERTA ACADÉMICA CON FOTOS CLARAS Y LIMPIAS
+   8. OFERTA ACADÉMICA CON FOTOGRAFÍAS REALES
    ========================================================================== */
-.academic-card-clean {
-  background: var(--white);
-  border-radius: var(--radius-card);
-  border: 1px solid var(--border-color);
-  box-shadow: var(--shadow-sm);
+.academic-card-master {
+  background-color: var(--color-white);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-subtle);
   overflow: hidden;
   height: 100%;
   display: flex;
@@ -565,43 +577,43 @@ h1, h2, h3, h4, h5, h6 {
   transition: var(--transition);
 }
 
-.academic-card-clean:hover {
+.academic-card-master:hover {
   transform: translateY(-5px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--navy-primary);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--color-navy);
 }
 
-.academic-thumb-box {
-  height: 180px;
+.academic-img-wrapper {
+  height: 190px;
   overflow: hidden;
   position: relative;
-  background-color: #e2e8f0;
+  background-color: #cbd5e1;
 }
 
-.academic-thumb-box img {
+.academic-img-wrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.4s ease;
 }
 
-.academic-card-clean:hover .academic-thumb-box img {
+.academic-card-master:hover .academic-img-wrapper img {
   transform: scale(1.05);
 }
 
-.academic-level-badge {
+.academic-age-pill {
   position: absolute;
   top: 12px;
   left: 12px;
-  background-color: var(--navy-primary);
-  color: var(--white);
+  background-color: var(--color-navy);
+  color: var(--color-white);
   padding: 4px 10px;
   border-radius: 4px;
   font-size: 0.75rem;
   font-weight: 700;
 }
 
-.academic-card-content {
+.academic-body-master {
   padding: 1.5rem;
   flex-grow: 1;
   display: flex;
@@ -609,79 +621,77 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: space-between;
 }
 
-.academic-list-clean {
+.academic-bullets-list {
   list-style: none;
   padding: 0;
   margin: 1rem 0;
 }
 
-.academic-list-clean li {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
+.academic-bullets-list li {
+  font-size: 0.86rem;
+  color: var(--color-text-body);
   margin-bottom: 0.5rem;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.academic-list-clean li i {
-  color: var(--red-primary);
-  font-size: 0.95rem;
+.academic-bullets-list li i {
+  color: var(--color-red);
 }
 
 /* ==========================================================================
    9. GALERÍA FOTOGRÁFICA NATURAL
    ========================================================================== */
-.gallery-item-box {
-  background: var(--white);
-  border-radius: var(--radius-card);
+.gallery-photo-frame {
+  background-color: var(--color-white);
+  border-radius: var(--radius-md);
   overflow: hidden;
-  border: 1px solid var(--border-color);
-  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-subtle);
   transition: var(--transition);
 }
 
-.gallery-item-box:hover {
+.gallery-photo-frame:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-hover);
 }
 
-.gallery-img-container {
+.gallery-photo-container {
   height: 220px;
   overflow: hidden;
 }
 
-.gallery-img-container img {
+.gallery-photo-container img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.4s ease;
 }
 
-.gallery-item-box:hover .gallery-img-container img {
+.gallery-photo-frame:hover .gallery-photo-container img {
   transform: scale(1.06);
 }
 
-.gallery-caption {
+.gallery-photo-caption {
   padding: 1rem;
-  background: var(--white);
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid var(--color-border);
 }
 
-.gallery-caption h6 {
-  font-size: 0.92rem;
+.gallery-photo-caption h6 {
+  font-size: 0.94rem;
+  font-weight: 700;
   margin-bottom: 0.2rem;
-  color: var(--navy-primary);
+  color: var(--color-navy);
 }
 
-.gallery-caption span {
+.gallery-photo-caption span {
   font-size: 0.78rem;
-  color: var(--text-muted);
+  color: var(--color-text-muted);
 }
 
 /* ==========================================================================
-   10. BOTÓN FLOTANTE DE WHATSAPP DISCRETO Y ELEGANTE
-       (Sin mensajes molestos ni popups)
+   10. BOTÓN FLOTANTE DISCRETO DE WHATSAPP
    ========================================================================== */
 .floating-whatsapp-btn {
   position: fixed;
@@ -705,42 +715,72 @@ h1, h2, h3, h4, h5, h6 {
 .floating-whatsapp-btn:hover {
   transform: scale(1.08);
   box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
-  color: #ffffff !important;
 }
 
 /* ==========================================================================
    11. PIE DE PÁGINA INSTITUCIONAL SOBRIO
    ========================================================================== */
 .footer-institutional {
-  background-color: var(--navy-dark);
+  background-color: var(--color-navy-dark);
   color: rgba(255, 255, 255, 0.82);
-  padding-top: 4rem;
-  border-top: 3px solid var(--red-primary);
+  padding-top: 4.5rem;
+  border-top: 4px solid var(--color-red);
 }
 
 .footer-logo-img {
   width: 60px;
   height: 60px;
   object-fit: contain;
-  background: var(--white);
+  background-color: var(--color-white);
   border-radius: 50%;
   padding: 2px;
 }
 
-.text-danger-light {
-  color: #f87171;
+.footer-section-title {
+  color: var(--color-white);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  position: relative;
 }
 
-.text-white-75 {
+.footer-links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links-list li {
+  margin-bottom: 0.65rem;
+}
+
+.footer-links-list a {
   color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  font-size: 0.88rem;
+  transition: var(--transition);
 }
 
-.footer-social-icon {
+.footer-links-list a:hover {
+  color: var(--color-beige);
+  padding-left: 4px;
+}
+
+.footer-contact-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.88rem;
+  margin-bottom: 0.75rem;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.footer-social-btn {
   width: 36px;
   height: 36px;
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.08);
-  color: var(--white);
+  color: var(--color-white);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -748,68 +788,30 @@ h1, h2, h3, h4, h5, h6 {
   transition: var(--transition);
 }
 
-.footer-social-icon:hover {
-  background-color: var(--red-primary);
-  color: var(--white);
+.footer-social-btn:hover {
+  background-color: var(--color-red);
+  color: var(--color-white);
 }
 
-.footer-title {
-  color: var(--white);
-  font-size: 1.05rem;
-  font-weight: 700;
-  margin-bottom: 1.25rem;
-}
-
-.footer-links {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.footer-links li {
-  margin-bottom: 0.65rem;
-}
-
-.footer-links a {
-  color: rgba(255, 255, 255, 0.75);
-  text-decoration: none;
-  font-size: 0.88rem;
-  transition: var(--transition);
-}
-
-.footer-links a:hover {
-  color: var(--beige-primary);
-  padding-left: 4px;
-}
-
-.footer-info-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  font-size: 0.88rem;
-  margin-bottom: 0.75rem;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.footer-bottom {
-  background-color: #081427;
+.footer-legal-bar {
+  background-color: #071325;
   padding: 1.25rem 0;
   margin-top: 3.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.84rem;
 }
 
-/* Responsive */
+/* Adaptabilidad Responsive */
 @media (max-width: 991.98px) {
-  .hero-main-title {
-    font-size: 2.1rem;
+  .hero-title {
+    font-size: 2.2rem;
   }
-  .hero-logo-card {
-    width: 200px;
-    height: 200px;
+  .quick-access-wrapper {
     margin-top: 2rem;
   }
-  .stat-box {
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 1rem;
+  .hero-seal-frame {
+    width: 210px;
+    height: 210px;
+    margin-top: 2rem;
   }
 }

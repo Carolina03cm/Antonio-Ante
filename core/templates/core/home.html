@@ -6,39 +6,41 @@
 {% block content %}
 
 <!-- =======================================================
-     1. PORTADA PRINCIPAL (HERO) SOBRIA Y PROFESIONAL
+     1. HERO PRINCIPAL DE ALTO PRESTIGIO
      ======================================================= -->
-<section class="hero-clean-section">
-    <div class="container">
+<section class="hero-institution">
+    <div class="container position-relative" style="z-index: 2;">
         <div class="row align-items-center g-4 g-lg-5">
             <div class="col-lg-7">
-                <div class="hero-anniversary-tag">
+                <div class="hero-tag">
                     <i class="bi bi-shield-check"></i>
                     <span>Institución Educativa Fiscal • Cantón Yaguachi</span>
                 </div>
-                <h1 class="hero-main-title">
+                <h2 class="hero-title">
                     Educación con Valores y <span>Excelencia Académica</span>
-                </h1>
-                <p class="hero-description-lead">
-                    La <strong>Escuela de Educación Básica "Antonio Ante"</strong>, ubicada en el <strong>Recinto El Deseo</strong>, brinda una formación integral, inclusiva y de calidad para la niñez. Atendemos a nuestra comunidad en <strong>Jornada Matutina</strong>, <strong>Jornada Vespertina</strong> y con el apoyo del <strong>Departamento de Consejería Estudiantil (DECE)</strong>.
+                </h2>
+                <p class="hero-lead">
+                    La <strong>Escuela de Educación Básica "Antonio Ante"</strong>, ubicada en el <strong>Recinto El Deseo</strong>, forma a la niñez con vocación pedagógica, principios éticos y calidez humana. Brindamos educación de calidad en <strong>Jornada Matutina</strong>, <strong>Jornada Vespertina</strong> y con el apoyo del <strong>Departamento de Consejería Estudiantil (DECE)</strong>.
                 </p>
                 <div class="d-flex flex-wrap gap-3">
-                    <a href="#oferta-academica" class="hero-btn-primary">
-                        <i class="bi bi-book"></i> Oferta Académica
+                    <a href="#oferta-academica" class="hero-btn-red">
+                        <i class="bi bi-mortarboard-fill"></i> Oferta Académica
                     </a>
-                    <a href="https://wa.me/593960172899?text=Hola,%20deseo%20informaci%C3%B3n%20sobre%20la%20EEB%20Antonio%20Ante%20(Rcto.%20El%20Deseo)" target="_blank" rel="noopener noreferrer" class="hero-btn-secondary">
-                        <i class="bi bi-whatsapp"></i> WhatsApp: 096 017 2899
+                    <a href="https://wa.me/593960172899?text=Hola,%20deseo%20informaci%C3%B3n%20sobre%20la%20EEB%20Antonio%20Ante%20(Rcto.%20El%20Deseo)" target="_blank" rel="noopener noreferrer" class="hero-btn-outline">
+                        <i class="bi bi-whatsapp text-success"></i> WhatsApp: 096 017 2899
                     </a>
                 </div>
             </div>
 
-            <!-- Escudo Oficial Sobrio -->
+            <!-- Escudo Oficial con Gran Dignidad -->
             <div class="col-lg-5 text-center">
-                <div class="hero-logo-card">
-                    <img src="{% static 'img/logo_antonio_ante.jpg' %}" alt="Escudo Oficial EEB Antonio Ante">
-                </div>
-                <div class="hero-badge-footer">
-                    <i class="bi bi-geo-alt me-1 text-danger"></i> Recinto El Deseo • Cantón Yaguachi
+                <div class="hero-visual-card">
+                    <div class="hero-seal-frame">
+                        <img src="{% static 'img/logo_antonio_ante.jpg' %}" alt="Escudo Oficial EEB Antonio Ante">
+                    </div>
+                    <div class="hero-card-meta">
+                        <i class="bi bi-geo-alt-fill text-danger me-1"></i> Recinto El Deseo • Yaguachi, Guayas
+                    </div>
                 </div>
             </div>
         </div>
@@ -46,91 +48,100 @@
 </section>
 
 <!-- =======================================================
-     2. FRANJA DE PILARES Y SERVICIOS
+     2. TARJETAS DE SERVICIOS INSTITUCIONALES (QUICK ACCESS)
      ======================================================= -->
-<div class="stats-strip">
-    <div class="container">
-        <div class="row g-4">
-            <div class="col-6 col-lg-3">
-                <div class="stat-box">
-                    <div class="stat-icon">
-                        <i class="bi bi-mortarboard"></i>
-                    </div>
-                    <div>
-                        <h4 class="stat-value">Inicial a 10°</h4>
-                        <p class="stat-text">Niveles Educativos Completos</p>
-                    </div>
+<div class="container quick-access-wrapper">
+    <div class="row g-3 g-lg-4">
+        <div class="col-md-6 col-lg-3">
+            <div class="quick-feature-card">
+                <div class="quick-card-icon">
+                    <i class="bi bi-mortarboard"></i>
                 </div>
+                <h5 class="quick-card-title">Inicial a 10° EGB</h5>
+                <p class="quick-card-desc">
+                    Currículo nacional oficial fortalecido con metodologías activas y estimulantes.
+                </p>
+                <a href="#oferta-academica" class="small fw-bold text-danger text-decoration-none">
+                    Ver niveles <i class="bi bi-arrow-right"></i>
+                </a>
             </div>
+        </div>
 
-            <div class="col-6 col-lg-3">
-                <div class="stat-box">
-                    <div class="stat-icon">
-                        <i class="bi bi-sun"></i>
-                    </div>
-                    <div>
-                        <h4 class="stat-value">2 Turnos</h4>
-                        <p class="stat-text">Jornadas Matutina y Vespertina</p>
-                    </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="quick-feature-card">
+                <div class="quick-card-icon">
+                    <i class="bi bi-sun"></i>
                 </div>
+                <h5 class="quick-card-title">Doble Jornada</h5>
+                <p class="quick-card-desc">
+                    Turno Matutino (07:00 - 12:30) y Turno Vespertino (13:00 - 18:30) para las familias.
+                </p>
+                <a href="#docentes" class="small fw-bold text-danger text-decoration-none">
+                    Horarios y turnos <i class="bi bi-arrow-right"></i>
+                </a>
             </div>
+        </div>
 
-            <div class="col-6 col-lg-3">
-                <div class="stat-box">
-                    <div class="stat-icon">
-                        <i class="bi bi-heart-pulse"></i>
-                    </div>
-                    <div>
-                        <h4 class="stat-value">DECE</h4>
-                        <p class="stat-text">Consejería y Apoyo Integral</p>
-                    </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="quick-feature-card">
+                <div class="quick-card-icon">
+                    <i class="bi bi-heart-pulse"></i>
                 </div>
+                <h5 class="quick-card-title">Atención DECE</h5>
+                <p class="quick-card-desc">
+                    Consejería estudiantil, apoyo socioemocional y talleres de Escuela para Padres.
+                </p>
+                <a href="#docentes" class="small fw-bold text-danger text-decoration-none">
+                    Conocer el DECE <i class="bi bi-arrow-right"></i>
+                </a>
             </div>
+        </div>
 
-            <div class="col-6 col-lg-3">
-                <div class="stat-box">
-                    <div class="stat-icon">
-                        <i class="bi bi-building-check"></i>
-                    </div>
-                    <div>
-                        <h4 class="stat-value">Fiscal</h4>
-                        <p class="stat-text">Educación Gratuita e Inclusiva</p>
-                    </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="quick-feature-card">
+                <div class="quick-card-icon">
+                    <i class="bi bi-shield-check"></i>
                 </div>
+                <h5 class="quick-card-title">Educación Fiscal</h5>
+                <p class="quick-card-desc">
+                    Educación pública, gratuita e inclusiva con docentes comprometidos con el sector.
+                </p>
+                <a href="#contacto-seccion" class="small fw-bold text-danger text-decoration-none">
+                    Secretaría <i class="bi bi-arrow-right"></i>
+                </a>
             </div>
         </div>
     </div>
 </div>
 
 <!-- =======================================================
-     3. HISTORIA INSTITUCIONAL (Lugar oficial de la reseña)
+     3. HISTORIA INSTITUCIONAL Y CAMPUS
      ======================================================= -->
-<section class="section-wrapper" id="historia">
+<section class="section-institutional" id="historia">
     <div class="container">
         <div class="row align-items-center g-5">
             <div class="col-lg-5">
-                <div class="history-photo-card">
+                <div class="campus-showcase-frame">
                     <img src="{% static 'img/about_campus.jpg' %}" alt="Campus EEB Antonio Ante en Yaguachi">
                 </div>
             </div>
 
             <div class="col-lg-7">
-                <div class="history-card-body">
-                    <span class="section-pretitle">Historia y Legado</span>
-                    <h3 class="fw-bold mb-3" style="color: var(--navy-primary);">
-                        Nuestra Trayectoria en el Recinto El Deseo
-                    </h3>
+                <div class="institutional-quote-card">
+                    <span class="section-eyebrow">Historia y Legado</span>
+                    <h3 class="section-heading-clean">Nuestra Trayectoria en el Recinto El Deseo</h3>
+                    <div class="section-accent-bar bar-left"></div>
                     <p class="text-secondary mb-3">
-                        Fundada el <strong>4 de septiembre de 1965</strong>, la <strong>Escuela de Educación Básica "Antonio Ante"</strong> cuenta con <strong>61 años</strong> de trayectoria educativa al servicio de la niñez y las familias del cantón San Jacinto de Yaguachi.
+                        Fundada el <strong>4 de septiembre de 1965</strong>, la <strong>Escuela de Educación Básica "Antonio Ante"</strong> cuenta con <strong>61 años</strong> de trayectoria pedagógica al servicio de la niñez y las familias del cantón San Jacinto de Yaguachi.
                     </p>
                     <p class="text-secondary mb-4">
-                        A lo largo de su historia, nuestra institución ha forjado a múltiples generaciones en el sector, destacándose por su vocación docente, disciplina, amor patrio y una estrecha vinculación con la comunidad.
+                        A lo largo de seis décadas, nuestra institución ha educado a generaciones en el sector rural y agrícola, destacándose por su disciplina, amor cívico y una estrecha relación de confianza con la comunidad.
                     </p>
                     <div class="d-flex align-items-center gap-3 pt-3 border-top">
                         <i class="bi bi-check-circle-fill text-danger fs-4"></i>
                         <div>
-                            <span class="d-block fw-bold text-dark">Educación Fiscal de Calidad</span>
-                            <small class="text-muted">Jornada Matutina • Jornada Vespertina • Atención DECE</small>
+                            <span class="d-block fw-bold text-dark">Educación Integral y Participativa</span>
+                            <small class="text-muted">Jornada Matutina • Jornada Vespertina • Departamento DECE</small>
                         </div>
                     </div>
                 </div>
@@ -142,33 +153,33 @@
 <!-- =======================================================
      4. MISIÓN, VISIÓN Y VALORES
      ======================================================= -->
-<section class="section-wrapper bg-alt" id="mision-vision">
+<section class="section-institutional bg-subtle" id="mision-vision">
     <div class="container">
-        <div class="section-header-clean">
-            <span class="section-pretitle">Nuestra Identidad</span>
-            <h2 class="section-title-clean">Misión, Visión y Valores</h2>
-            <div class="section-divider-line"></div>
+        <div class="text-center mb-5">
+            <span class="section-eyebrow">Principios Institucionales</span>
+            <h3 class="section-heading-clean">Misión, Visión y Valores</h3>
+            <div class="section-accent-bar"></div>
         </div>
 
         <div class="row g-4 mb-5">
             <div class="col-md-6">
-                <div class="history-card-body h-100" style="border-left-color: var(--navy-primary);">
-                    <h4 class="fw-bold mb-3" style="color: var(--navy-primary);">
-                        <i class="bi bi-compass me-2 text-danger"></i> Misión Institucional
+                <div class="institutional-quote-card h-100" style="border-left-color: var(--color-navy);">
+                    <h4 class="fw-bold mb-3" style="color: var(--color-navy);">
+                        <i class="bi bi-compass text-danger me-2"></i> Misión Institucional
                     </h4>
                     <p class="text-secondary mb-0">
-                        Brindar una educación integral, humanista y de calidad a la niñez del Recinto El Deseo y sectores aledaños de Yaguachi, potenciando sus habilidades cognitivas, afectivas y sociales en un ambiente seguro, participativo y de sana convivencia.
+                        Brindar una educación integral, humanista y de calidad a los niños y niñas del Recinto El Deseo y áreas aledañas de Yaguachi, potenciando sus habilidades cognitivas, socioemocionales y éticas en un entorno seguro, participativo y solidario.
                     </p>
                 </div>
             </div>
 
             <div class="col-md-6">
-                <div class="history-card-body h-100" style="border-left-color: var(--red-primary);">
-                    <h4 class="fw-bold mb-3" style="color: var(--navy-primary);">
-                        <i class="bi bi-eye me-2 text-danger"></i> Visión Institucional
+                <div class="institutional-quote-card h-100" style="border-left-color: var(--color-red);">
+                    <h4 class="fw-bold mb-3" style="color: var(--color-navy);">
+                        <i class="bi bi-eye text-danger me-2"></i> Visión Institucional
                     </h4>
                     <p class="text-secondary mb-0">
-                        Consolidarse como una institución educativa referente en el cantón Yaguachi por su formación en valores cívicos y morales, la dedicación de su cuerpo docente y el egreso de estudiantes preparados sólidamente para continuar su educación en el bachillerato.
+                        Consolidarse como una institución educativa referente en el cantón Yaguachi por su formación en valores cívicos, el compromiso pedagógico de su cuerpo docente y el egreso de estudiantes preparados sólidamente para triunfar en el bachillerato.
                     </p>
                 </div>
             </div>
@@ -177,42 +188,42 @@
         <div id="valores">
             <div class="row g-4">
                 <div class="col-md-6 col-lg-3">
-                    <div class="value-card-clean text-center">
-                        <div class="value-icon-circle mx-auto">
+                    <div class="quick-feature-card text-center border-top-0">
+                        <div class="quick-card-icon mx-auto">
                             <i class="bi bi-heart"></i>
                         </div>
-                        <h5 class="fw-bold mb-2" style="color: var(--navy-primary);">Respeto</h5>
-                        <p class="small text-muted mb-0">Convivencia armónica, valoración de los demás y buen trato en la comunidad escolar.</p>
+                        <h5 class="quick-card-title">Respeto</h5>
+                        <p class="quick-card-desc mb-0">Convivencia escolar armónica, consideración mutua y buen trato.</p>
                     </div>
                 </div>
 
                 <div class="col-md-6 col-lg-3">
-                    <div class="value-card-clean text-center">
-                        <div class="value-icon-circle mx-auto">
+                    <div class="quick-feature-card text-center border-top-0">
+                        <div class="quick-card-icon mx-auto">
                             <i class="bi bi-shield-check"></i>
                         </div>
-                        <h5 class="fw-bold mb-2" style="color: var(--navy-primary);">Responsabilidad</h5>
-                        <p class="small text-muted mb-0">Compromiso con el estudio diario, puntualidad y cuidado de las instalaciones.</p>
+                        <h5 class="quick-card-title">Responsabilidad</h5>
+                        <p class="quick-card-desc mb-0">Dedicación académica diaria, puntualidad y cumplimiento del deber.</p>
                     </div>
                 </div>
 
                 <div class="col-md-6 col-lg-3">
-                    <div class="value-card-clean text-center">
-                        <div class="value-icon-circle mx-auto">
+                    <div class="quick-feature-card text-center border-top-0">
+                        <div class="quick-card-icon mx-auto">
                             <i class="bi bi-lightbulb"></i>
                         </div>
-                        <h5 class="fw-bold mb-2" style="color: var(--navy-primary);">Honestidad</h5>
-                        <p class="small text-muted mb-0">Actuar con rectitud, verdad y coherencia en cada actividad educativa.</p>
+                        <h5 class="quick-card-title">Honestidad</h5>
+                        <p class="quick-card-desc mb-0">Actuar con rectitud, transparencia y coherencia en cada actividad.</p>
                     </div>
                 </div>
 
                 <div class="col-md-6 col-lg-3">
-                    <div class="value-card-clean text-center">
-                        <div class="value-icon-circle mx-auto">
+                    <div class="quick-feature-card text-center border-top-0">
+                        <div class="quick-card-icon mx-auto">
                             <i class="bi bi-people"></i>
                         </div>
-                        <h5 class="fw-bold mb-2" style="color: var(--navy-primary);">Solidaridad</h5>
-                        <p class="small text-muted mb-0">Empatía y colaboración recíproca con las familias del Recinto El Deseo.</p>
+                        <h5 class="quick-card-title">Solidaridad</h5>
+                        <p class="quick-card-desc mb-0">Espíritu de apoyo fraternal y cooperación en el Recinto El Deseo.</p>
                     </div>
                 </div>
             </div>
@@ -221,87 +232,87 @@
 </section>
 
 <!-- =======================================================
-     5. PLANTA DOCENTE Y DECE
+     5. PLANTA DOCENTE Y DECE (TABS ELEGANTES)
      ======================================================= -->
-<section class="section-wrapper" id="docentes">
+<section class="section-institutional faculty-tabs-container" id="docentes">
     <div class="container">
-        <div class="section-header-clean">
-            <span class="section-pretitle">Equipo Educativo</span>
-            <h2 class="section-title-clean">Planta Docente y Personal</h2>
-            <div class="section-divider-line"></div>
-            <p class="text-secondary mt-2">Personal profesional distribuido en turnos matutino, vespertino y consejería estudiantil.</p>
+        <div class="text-center mb-5">
+            <span class="section-eyebrow">Personal Educativo</span>
+            <h3 class="section-heading-clean">Planta Docente y Equipo Institucional</h3>
+            <div class="section-accent-bar"></div>
+            <p class="text-secondary">Distribuido en Jornada Matutina, Jornada Vespertina y el Departamento DECE.</p>
         </div>
 
         <!-- Pestañas de Turno -->
-        <ul class="nav nav-pills faculty-nav justify-content-center gap-2 mb-4" id="facultyCleanTabs" role="tablist">
+        <ul class="nav nav-pills justify-content-center gap-2 mb-4" id="facultyTabs" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="mat-tab" data-bs-toggle="pill" data-bs-target="#mat-pane" type="button" role="tab" aria-selected="true">
+                <button class="nav-link active" id="pills-mat-tab" data-bs-toggle="pill" data-bs-target="#pills-mat" type="button" role="tab" aria-selected="true">
                     <i class="bi bi-sun me-1"></i> Jornada Matutina
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="vesp-tab" data-bs-toggle="pill" data-bs-target="#vesp-pane" type="button" role="tab" aria-selected="false">
+                <button class="nav-link" id="pills-vesp-tab" data-bs-toggle="pill" data-bs-target="#pills-vesp" type="button" role="tab" aria-selected="false">
                     <i class="bi bi-sunset me-1"></i> Jornada Vespertina
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="dece-clean-tab" data-bs-toggle="pill" data-bs-target="#dece-clean-pane" type="button" role="tab" aria-selected="false">
+                <button class="nav-link" id="pills-dece-tab" data-bs-toggle="pill" data-bs-target="#pills-dece" type="button" role="tab" aria-selected="false">
                     <i class="bi bi-heart-pulse me-1"></i> Departamento DECE
                 </button>
             </li>
         </ul>
 
-        <div class="tab-content" id="facultyCleanTabsContent">
-            <!-- Pestaña Matutina -->
-            <div class="tab-pane fade show active" id="mat-pane" role="tabpanel" tabindex="0">
+        <div class="tab-content" id="facultyTabsContent">
+            <!-- Jornada Matutina -->
+            <div class="tab-pane fade show active" id="pills-mat" role="tabpanel">
                 <div class="row g-3">
                     <div class="col-md-6 col-lg-3">
-                        <div class="teacher-card">
-                            <div class="teacher-avatar-icon">
+                        <div class="docente-item-card">
+                            <div class="docente-avatar-round">
                                 <i class="bi bi-person"></i>
                             </div>
-                            <div class="teacher-info">
-                                <h6>Educación Inicial</h6>
-                                <p>Docentes Tutores de 3 y 4 Años</p>
+                            <div>
+                                <h6 class="mb-1 fw-bold text-dark">Educación Inicial</h6>
+                                <p class="small text-muted mb-0">Docentes Tutores de 3 y 4 Años</p>
                                 <span class="badge bg-light text-dark border mt-1">Jornada Matutina</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-md-6 col-lg-3">
-                        <div class="teacher-card">
-                            <div class="teacher-avatar-icon">
+                        <div class="docente-item-card">
+                            <div class="docente-avatar-round">
                                 <i class="bi bi-person"></i>
                             </div>
-                            <div class="teacher-info">
-                                <h6>Básica Elemental</h6>
-                                <p>Tutores de 2°, 3° y 4° EGB</p>
+                            <div>
+                                <h6 class="mb-1 fw-bold text-dark">Básica Elemental</h6>
+                                <p class="small text-muted mb-0">Tutores de 2°, 3° y 4° EGB</p>
                                 <span class="badge bg-light text-dark border mt-1">Jornada Matutina</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-md-6 col-lg-3">
-                        <div class="teacher-card">
-                            <div class="teacher-avatar-icon">
+                        <div class="docente-item-card">
+                            <div class="docente-avatar-round">
                                 <i class="bi bi-person"></i>
                             </div>
-                            <div class="teacher-info">
-                                <h6>Básica Media</h6>
-                                <p>Tutores de 5°, 6° y 7° EGB</p>
+                            <div>
+                                <h6 class="mb-1 fw-bold text-dark">Básica Media</h6>
+                                <p class="small text-muted mb-0">Tutores de 5°, 6° y 7° EGB</p>
                                 <span class="badge bg-light text-dark border mt-1">Jornada Matutina</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-md-6 col-lg-3">
-                        <div class="teacher-card">
-                            <div class="teacher-avatar-icon">
+                        <div class="docente-item-card">
+                            <div class="docente-avatar-round">
                                 <i class="bi bi-person"></i>
                             </div>
-                            <div class="teacher-info">
-                                <h6>Básica Superior</h6>
-                                <p>Docentes de 8°, 9° y 10° EGB</p>
+                            <div>
+                                <h6 class="mb-1 fw-bold text-dark">Básica Superior</h6>
+                                <p class="small text-muted mb-0">Docentes de 8°, 9° y 10° EGB</p>
                                 <span class="badge bg-light text-dark border mt-1">Jornada Matutina</span>
                             </div>
                         </div>
@@ -309,43 +320,43 @@
                 </div>
             </div>
 
-            <!-- Pestaña Vespertina -->
-            <div class="tab-pane fade" id="vesp-pane" role="tabpanel" tabindex="0">
+            <!-- Jornada Vespertina -->
+            <div class="tab-pane fade" id="pills-vesp" role="tabpanel">
                 <div class="row g-3">
                     <div class="col-md-6 col-lg-4">
-                        <div class="teacher-card">
-                            <div class="teacher-avatar-icon">
+                        <div class="docente-item-card">
+                            <div class="docente-avatar-round">
                                 <i class="bi bi-person"></i>
                             </div>
-                            <div class="teacher-info">
-                                <h6>Docentes Tutores de Primaria</h6>
-                                <p>Básica Elemental y Media</p>
+                            <div>
+                                <h6 class="mb-1 fw-bold text-dark">Docentes Tutores de Primaria</h6>
+                                <p class="small text-muted mb-0">Básica Elemental y Media</p>
                                 <span class="badge bg-light text-dark border mt-1">Jornada Vespertina</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-md-6 col-lg-4">
-                        <div class="teacher-card">
-                            <div class="teacher-avatar-icon">
+                        <div class="docente-item-card">
+                            <div class="docente-avatar-round">
                                 <i class="bi bi-person"></i>
                             </div>
-                            <div class="teacher-info">
-                                <h6>Docentes de Básica Superior</h6>
-                                <p>Áreas de Ciencias y Letras</p>
+                            <div>
+                                <h6 class="mb-1 fw-bold text-dark">Docentes de Básica Superior</h6>
+                                <p class="small text-muted mb-0">Áreas de Ciencias y Letras</p>
                                 <span class="badge bg-light text-dark border mt-1">Jornada Vespertina</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-md-6 col-lg-4">
-                        <div class="teacher-card">
-                            <div class="teacher-avatar-icon">
+                        <div class="docente-item-card">
+                            <div class="docente-avatar-round">
                                 <i class="bi bi-person"></i>
                             </div>
-                            <div class="teacher-info">
-                                <h6>Áreas Complementarias</h6>
-                                <p>Educación Física, Arte e Inglés</p>
+                            <div>
+                                <h6 class="mb-1 fw-bold text-dark">Áreas Especiales</h6>
+                                <p class="small text-muted mb-0">Educación Física, Arte e Inglés</p>
                                 <span class="badge bg-light text-dark border mt-1">Jornada Vespertina</span>
                             </div>
                         </div>
@@ -353,38 +364,38 @@
                 </div>
             </div>
 
-            <!-- Pestaña DECE -->
-            <div class="tab-pane fade" id="dece-clean-pane" role="tabpanel" tabindex="0">
-                <div class="history-card-body" style="border-left-color: var(--navy-primary);">
+            <!-- Departamento DECE -->
+            <div class="tab-pane fade" id="pills-dece" role="tabpanel">
+                <div class="institutional-quote-card" style="border-left-color: var(--color-navy);">
                     <div class="d-flex align-items-center gap-3 mb-3">
-                        <div class="stat-icon" style="background-color: var(--navy-subtle); color: var(--navy-primary);">
+                        <div class="quick-card-icon mb-0" style="background-color: var(--color-navy-subtle); color: var(--color-navy);">
                             <i class="bi bi-heart-pulse"></i>
                         </div>
                         <div>
-                            <h5 class="fw-bold mb-0" style="color: var(--navy-primary);">Departamento de Consejería Estudiantil (DECE)</h5>
-                            <small class="text-muted">Acompañamiento integral, orientación familiar y bienestar estudiantil</small>
+                            <h5 class="fw-bold mb-0" style="color: var(--color-navy);">Departamento de Consejería Estudiantil (DECE)</h5>
+                            <small class="text-muted">Acompañamiento socioemocional, orientación psicopedagógica y bienestar escolar</small>
                         </div>
                     </div>
                     <p class="text-secondary mb-3">
-                        El equipo del DECE orienta y asiste a los estudiantes en su desarrollo emocional, conductual y pedagógico, garantizando un ambiente seguro, libre de violencia y con igualdad de oportunidades en el Recinto El Deseo.
+                        El equipo del DECE asiste a los estudiantes en su desarrollo emocional, conductual y formativo, garantizando un entorno escolar seguro, inclusivo y en permanente diálogo con los padres de familia del Recinto El Deseo.
                     </p>
                     <div class="row g-3">
                         <div class="col-md-4">
                             <div class="p-3 bg-light rounded border">
-                                <h6 class="fw-bold mb-1 text-dark"><i class="bi bi-check2 text-danger me-1"></i> Apoyo Psicoemocional</h6>
-                                <p class="small text-muted mb-0">Atención personalizada a estudiantes y familias.</p>
+                                <h6 class="fw-bold mb-1 text-dark"><i class="bi bi-check2 text-danger me-1"></i> Apoyo Socioemocional</h6>
+                                <p class="small text-muted mb-0">Orientación y acompañamiento personalizado a cada alumno.</p>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="p-3 bg-light rounded border">
                                 <h6 class="fw-bold mb-1 text-dark"><i class="bi bi-check2 text-danger me-1"></i> Escuela para Padres</h6>
-                                <p class="small text-muted mb-0">Talleres formativos de convivencia en el hogar.</p>
+                                <p class="small text-muted mb-0">Talleres formativos sobre crianza positiva y convivencia armónica.</p>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="p-3 bg-light rounded border">
                                 <h6 class="fw-bold mb-1 text-dark"><i class="bi bi-check2 text-danger me-1"></i> Prevención de Riesgos</h6>
-                                <p class="small text-muted mb-0">Programas de vida sana y resolución pacífica.</p>
+                                <p class="small text-muted mb-0">Programas de resolución pacífica y valores ciudadanos.</p>
                             </div>
                         </div>
                     </div>
@@ -395,33 +406,33 @@
 </section>
 
 <!-- =======================================================
-     6. OFERTA ACADÉMICA
+     6. OFERTA ACADÉMICA CON FOTOGRAFÍAS CLARAS
      ======================================================= -->
-<section class="section-wrapper bg-alt" id="oferta-academica">
+<section class="section-institutional bg-subtle" id="oferta-academica">
     <div class="container">
-        <div class="section-header-clean">
-            <span class="section-pretitle">Formación Académica</span>
-            <h2 class="section-title-clean">Oferta Educativa</h2>
-            <div class="section-divider-line"></div>
-            <p class="text-secondary mt-2">Niveles de estudio impartidos en Jornada Matutina y Jornada Vespertina.</p>
+        <div class="text-center mb-5">
+            <span class="section-eyebrow">Niveles de Estudio</span>
+            <h3 class="section-heading-clean">Oferta Académica</h3>
+            <div class="section-accent-bar"></div>
+            <p class="text-secondary">Programas curriculares impartidos en Jornada Matutina y Jornada Vespertina.</p>
         </div>
 
         <div class="row g-4">
             <!-- Inicial -->
             <div class="col-md-6 col-lg-3">
-                <div class="academic-card-clean">
-                    <div class="academic-thumb-box">
+                <div class="academic-card-master">
+                    <div class="academic-img-wrapper">
                         <img src="{% static 'img/inicial.jpg' %}" alt="Educación Inicial EEB Antonio Ante">
-                        <span class="academic-level-badge">3 a 4 Años</span>
+                        <span class="academic-age-pill">3 a 4 Años</span>
                     </div>
-                    <div class="academic-card-content">
+                    <div class="academic-body-master">
                         <div>
-                            <h5 class="fw-bold mb-2" style="color: var(--navy-primary);">Educación Inicial</h5>
+                            <h5 class="fw-bold mb-2" style="color: var(--color-navy);">Educación Inicial</h5>
                             <p class="small text-muted mb-2">Desarrollo de autonomía, estimulación psicomotriz y juego en un ambiente cálido.</p>
-                            <ul class="academic-list-clean">
-                                <li><i class="bi bi-check2"></i> Estimulación temprana</li>
-                                <li><i class="bi bi-check2"></i> Expresión corporal y arte</li>
-                                <li><i class="bi bi-check2"></i> Socialización y hábitos</li>
+                            <ul class="academic-bullets-list">
+                                <li><i class="bi bi-check2"></i> Estimulación psicomotriz</li>
+                                <li><i class="bi bi-check2"></i> Expresión artística y juego</li>
+                                <li><i class="bi bi-check2"></i> Socialización y lenguaje</li>
                             </ul>
                         </div>
                         <div class="pt-2 border-top text-center">
@@ -433,19 +444,19 @@
 
             <!-- Básica Elemental -->
             <div class="col-md-6 col-lg-3">
-                <div class="academic-card-clean">
-                    <div class="academic-thumb-box">
+                <div class="academic-card-master">
+                    <div class="academic-img-wrapper">
                         <img src="{% static 'img/elemental.jpg' %}" alt="Básica Elemental EEB Antonio Ante">
-                        <span class="academic-level-badge">2°, 3° y 4° EGB</span>
+                        <span class="academic-age-pill">2°, 3° y 4° EGB</span>
                     </div>
-                    <div class="academic-card-content">
+                    <div class="academic-body-master">
                         <div>
-                            <h5 class="fw-bold mb-2" style="color: var(--navy-primary);">Básica Elemental</h5>
-                            <p class="small text-muted mb-2">Consolidación de la lectura comprensiva, escritura y razonamiento matemático básico.</p>
-                            <ul class="academic-list-clean">
-                                <li><i class="bi bi-check2"></i> Lectoescritura fluida</li>
-                                <li><i class="bi bi-check2"></i> Operaciones numéricas</li>
-                                <li><i class="bi bi-check2"></i> Ciencias y entorno natural</li>
+                            <h5 class="fw-bold mb-2" style="color: var(--color-navy);">Básica Elemental</h5>
+                            <p class="small text-muted mb-2">Consolidación de la lectoescritura comprensiva y el cálculo lógico-matemático.</p>
+                            <ul class="academic-bullets-list">
+                                <li><i class="bi bi-check2"></i> Lectura comprensiva y fluida</li>
+                                <li><i class="bi bi-check2"></i> Operaciones numéricas básicas</li>
+                                <li><i class="bi bi-check2"></i> Ciencias y entorno social</li>
                             </ul>
                         </div>
                         <div class="pt-2 border-top text-center">
@@ -457,19 +468,19 @@
 
             <!-- Básica Media -->
             <div class="col-md-6 col-lg-3">
-                <div class="academic-card-clean">
-                    <div class="academic-thumb-box">
+                <div class="academic-card-master">
+                    <div class="academic-img-wrapper">
                         <img src="{% static 'img/media.jpg' %}" alt="Básica Media EEB Antonio Ante">
-                        <span class="academic-level-badge">5°, 6° y 7° EGB</span>
+                        <span class="academic-age-pill">5°, 6° y 7° EGB</span>
                     </div>
-                    <div class="academic-card-content">
+                    <div class="academic-body-master">
                         <div>
-                            <h5 class="fw-bold mb-2" style="color: var(--navy-primary);">Básica Media</h5>
-                            <p class="small text-muted mb-2">Desarrollo de pensamiento reflexivo, indagación científica y trabajo en equipo.</p>
-                            <ul class="academic-list-clean">
-                                <li><i class="bi bi-check2"></i> Investigación básica</li>
-                                <li><i class="bi bi-check2"></i> Ciencias Naturales y Sociales</li>
-                                <li><i class="bi bi-check2"></i> Proyectos escolares</li>
+                            <h5 class="fw-bold mb-2" style="color: var(--color-navy);">Básica Media</h5>
+                            <p class="small text-muted mb-2">Pensamiento reflexivo, investigación científica y trabajo colaborativo.</p>
+                            <ul class="academic-bullets-list">
+                                <li><i class="bi bi-check2"></i> Indagación y ciencias naturales</li>
+                                <li><i class="bi bi-check2"></i> Geografía e historia patria</li>
+                                <li><i class="bi bi-check2"></i> Proyectos escolares en equipo</li>
                             </ul>
                         </div>
                         <div class="pt-2 border-top text-center">
@@ -481,19 +492,19 @@
 
             <!-- Básica Superior -->
             <div class="col-md-6 col-lg-3">
-                <div class="academic-card-clean">
-                    <div class="academic-thumb-box">
+                <div class="academic-card-master">
+                    <div class="academic-img-wrapper">
                         <img src="{% static 'img/superior.jpg' %}" alt="Básica Superior EEB Antonio Ante">
-                        <span class="academic-level-badge">8°, 9° y 10° EGB</span>
+                        <span class="academic-age-pill">8°, 9° y 10° EGB</span>
                     </div>
-                    <div class="academic-card-content">
+                    <div class="academic-body-master">
                         <div>
-                            <h5 class="fw-bold mb-2" style="color: var(--navy-primary);">Básica Superior</h5>
-                            <p class="small text-muted mb-2">Preparación académica completa para el ingreso exitoso al Bachillerato General Unificado.</p>
-                            <ul class="academic-list-clean">
-                                <li><i class="bi bi-check2"></i> Álgebra y geometría</li>
-                                <li><i class="bi bi-check2"></i> Lengua y comunicación</li>
-                                <li><i class="bi bi-check2"></i> Orientación vocacional</li>
+                            <h5 class="fw-bold mb-2" style="color: var(--color-navy);">Básica Superior</h5>
+                            <p class="small text-muted mb-2">Preparación académica completa para el ingreso exitoso al Bachillerato General.</p>
+                            <ul class="academic-bullets-list">
+                                <li><i class="bi bi-check2"></i> Álgebra y razonamiento analítico</li>
+                                <li><i class="bi bi-check2"></i> Comunicación oral y debate</li>
+                                <li><i class="bi bi-check2"></i> Liderazgo y valores ciudadanos</li>
                             </ul>
                         </div>
                         <div class="pt-2 border-top text-center">
@@ -507,22 +518,22 @@
 </section>
 
 <!-- =======================================================
-     7. COMUNICADOS
+     7. COMUNICADOS INSTITUCIONALES
      ======================================================= -->
-<section class="section-wrapper" id="noticias">
+<section class="section-institutional" id="noticias">
     <div class="container">
-        <div class="section-header-clean">
-            <span class="section-pretitle">Información Oficial</span>
-            <h2 class="section-title-clean">Comunicados Institucionales</h2>
-            <div class="section-divider-line"></div>
+        <div class="text-center mb-5">
+            <span class="section-eyebrow">Información Oficial</span>
+            <h3 class="section-heading-clean">Comunicados a la Comunidad</h3>
+            <div class="section-accent-bar"></div>
         </div>
 
         <div class="row g-4">
             <div class="col-md-4">
-                <div class="history-card-body h-100">
+                <div class="institutional-quote-card h-100 border-start-0 border-top border-4 border-danger">
                     <span class="badge bg-danger mb-2">Secretaría</span>
-                    <h5 class="fw-bold mb-2" style="color: var(--navy-primary);">Proceso de Matrículas</h5>
-                    <p class="small text-muted mb-3">Información sobre cronogramas del Ministerio de Educación y requisitos de inscripción para el nuevo ciclo lectivo.</p>
+                    <h5 class="fw-bold mb-2" style="color: var(--color-navy);">Proceso de Matrículas</h5>
+                    <p class="small text-muted mb-3">Cronogramas de recepción de documentos del Ministerio de Educación para el nuevo año lectivo.</p>
                     <a href="https://wa.me/593960172899?text=Deseo%20informaci%C3%B3n%20sobre%20matr%C3%ADculas" target="_blank" class="small fw-bold text-danger text-decoration-none">
                         Consultar en Secretaría <i class="bi bi-arrow-right"></i>
                     </a>
@@ -530,23 +541,23 @@
             </div>
 
             <div class="col-md-4">
-                <div class="history-card-body h-100">
+                <div class="institutional-quote-card h-100 border-start-0 border-top border-4 border-primary">
                     <span class="badge bg-primary mb-2">Civismo</span>
-                    <h5 class="fw-bold mb-2" style="color: var(--navy-primary);">Acto de Juramento a la Bandera</h5>
+                    <h5 class="fw-bold mb-2" style="color: var(--color-navy);">Acto Cívico y Juramento</h5>
                     <p class="small text-muted mb-3">Ceremonia solemne de proclamación de abanderados y juramento patrio de los estudiantes de décimo año.</p>
                     <a href="#galeria" class="small fw-bold text-primary text-decoration-none">
-                        Ver fotos en galería <i class="bi bi-arrow-right"></i>
+                        Ver galería fotográfica <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
             </div>
 
             <div class="col-md-4">
-                <div class="history-card-body h-100">
+                <div class="institutional-quote-card h-100 border-start-0 border-top border-4 border-success">
                     <span class="badge bg-success mb-2">DECE</span>
-                    <h5 class="fw-bold mb-2" style="color: var(--navy-primary);">Talleres de Convivencia Familiar</h5>
-                    <p class="small text-muted mb-3">Convocatoria a padres de familia para los talleres formativos sobre acompañamiento escolar y valores.</p>
+                    <h5 class="fw-bold mb-2" style="color: var(--color-navy);">Talleres de Padres de Familia</h5>
+                    <p class="small text-muted mb-3">Convocatoria a representantes para los talleres de convivencia pacífica y pautas de crianza positiva.</p>
                     <a href="https://wa.me/593960172899" target="_blank" class="small fw-bold text-success text-decoration-none">
-                        Más información <i class="bi bi-arrow-right"></i>
+                        Consultar al DECE <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
             </div>
@@ -557,60 +568,60 @@
 <!-- =======================================================
      8. GALERÍA FOTOGRÁFICA NATURAL
      ======================================================= -->
-<section class="section-wrapper bg-alt" id="galeria">
+<section class="section-institutional bg-subtle" id="galeria">
     <div class="container">
-        <div class="section-header-clean">
-            <span class="section-pretitle">Vida Estudiantil</span>
-            <h2 class="section-title-clean">Galería de Actividades</h2>
-            <div class="section-divider-line"></div>
-            <p class="text-secondary mt-2">Fotografías de las actividades académicas, cívicas y deportivas en la EEB Antonio Ante.</p>
+        <div class="text-center mb-5">
+            <span class="section-eyebrow">Actividades Escolares</span>
+            <h3 class="section-heading-clean">Galería Institucional</h3>
+            <div class="section-accent-bar"></div>
+            <p class="text-secondary">Momentos cívicos, deportivos, científicos y de lectura de nuestros estudiantes.</p>
         </div>
 
         <div class="row g-4">
             <div class="col-6 col-lg-3">
-                <div class="gallery-item-box">
-                    <div class="gallery-img-container">
-                        <img src="{% static 'img/galeria_civica.jpg' %}" alt="Acto Cívico Institucional">
+                <div class="gallery-photo-frame">
+                    <div class="gallery-photo-container">
+                        <img src="{% static 'img/galeria_civica.jpg' %}" alt="Acto Cívico Escolar">
                     </div>
-                    <div class="gallery-caption">
-                        <h6>Minuto Cívico</h6>
-                        <span>Valores Patrios</span>
+                    <div class="gallery-photo-caption">
+                        <h6>Momento Cívico</h6>
+                        <span>Valores Patrios y Solemnidad</span>
                     </div>
                 </div>
             </div>
 
             <div class="col-6 col-lg-3">
-                <div class="gallery-item-box">
-                    <div class="gallery-img-container">
-                        <img src="{% static 'img/galeria_deportes.jpg' %}" alt="Juegos Deportivos">
+                <div class="gallery-photo-frame">
+                    <div class="gallery-photo-container">
+                        <img src="{% static 'img/galeria_deportes.jpg' %}" alt="Juegos Deportivos Escolares">
                     </div>
-                    <div class="gallery-caption">
+                    <div class="gallery-photo-caption">
                         <h6>Juegos Escolares</h6>
-                        <span>Deporte y Salud</span>
+                        <span>Deporte y Recreación Saludable</span>
                     </div>
                 </div>
             </div>
 
             <div class="col-6 col-lg-3">
-                <div class="gallery-item-box">
-                    <div class="gallery-img-container">
+                <div class="gallery-photo-frame">
+                    <div class="gallery-photo-container">
                         <img src="{% static 'img/galeria_ciencias.jpg' %}" alt="Feria de Ciencias">
                     </div>
-                    <div class="gallery-caption">
-                        <h6>Feria de Proyectos</h6>
-                        <span>Ciencia y Arte</span>
+                    <div class="gallery-photo-caption">
+                        <h6>Feria Científica</h6>
+                        <span>Proyectos y Creatividad</span>
                     </div>
                 </div>
             </div>
 
             <div class="col-6 col-lg-3">
-                <div class="gallery-item-box">
-                    <div class="gallery-img-container">
+                <div class="gallery-photo-frame">
+                    <div class="gallery-photo-container">
                         <img src="{% static 'img/galeria_lectura.jpg' %}" alt="Club de Lectura">
                     </div>
-                    <div class="gallery-caption">
-                        <h6>Club de Lectura</h6>
-                        <span>Hábito Lector</span>
+                    <div class="gallery-photo-caption">
+                        <h6>Hábito Lector</h6>
+                        <span>Biblioteca y Aprendizaje</span>
                     </div>
                 </div>
             </div>
@@ -621,58 +632,57 @@
 <!-- =======================================================
      9. CONTACTO OFICIAL
      ======================================================= -->
-<section class="section-wrapper" id="contacto-seccion">
+<section class="section-institutional" id="contacto-seccion">
     <div class="container">
         <div class="row g-5 align-items-center">
             <div class="col-lg-6">
-                <span class="section-pretitle">Atención al Público</span>
-                <h3 class="fw-bold mb-3" style="color: var(--navy-primary);">
-                    Canales de Contacto Oficial
-                </h3>
+                <span class="section-eyebrow">Atención Institucional</span>
+                <h3 class="section-heading-clean">Contáctanos en el Recinto El Deseo</h3>
+                <div class="section-accent-bar bar-left"></div>
                 <p class="text-secondary mb-4">
-                    La secretaría de la institución atiende a padres de familia y representantes en el Recinto El Deseo, cantón Yaguachi.
+                    La secretaría y dirección de la <strong>Escuela de Educación Básica "Antonio Ante"</strong> atienden a los representantes y a la comunidad durante ambas jornadas.
                 </p>
 
                 <div class="d-flex flex-column gap-3">
-                    <div class="p-3 bg-white rounded border d-flex align-items-center gap-3">
-                        <div class="stat-icon" style="background-color: #eafaf1; color: #22c55e;">
+                    <div class="p-3 bg-white rounded border d-flex align-items-center gap-3 shadow-sm">
+                        <div class="quick-card-icon mb-0" style="background-color: #eafaf1; color: #22c55e;">
                             <i class="bi bi-whatsapp"></i>
                         </div>
                         <div>
-                            <span class="d-block text-muted small">WhatsApp Institucional</span>
+                            <span class="d-block text-muted small">Línea Directa de WhatsApp</span>
                             <a href="https://wa.me/593960172899" target="_blank" class="fw-bold text-dark text-decoration-none">
                                 096 017 2899
                             </a>
                         </div>
                     </div>
 
-                    <div class="p-3 bg-white rounded border d-flex align-items-center gap-3">
-                        <div class="stat-icon">
+                    <div class="p-3 bg-white rounded border d-flex align-items-center gap-3 shadow-sm">
+                        <div class="quick-card-icon mb-0">
                             <i class="bi bi-geo-alt"></i>
                         </div>
                         <div>
-                            <span class="d-block text-muted small">Dirección</span>
+                            <span class="d-block text-muted small">Ubicación</span>
                             <strong class="text-dark">Recinto El Deseo, Cantón Yaguachi, Guayas</strong>
                         </div>
                     </div>
 
-                    <div class="p-3 bg-white rounded border d-flex align-items-center gap-3">
-                        <div class="stat-icon" style="background-color: var(--red-subtle); color: var(--red-primary);">
+                    <div class="p-3 bg-white rounded border d-flex align-items-center gap-3 shadow-sm">
+                        <div class="quick-card-icon mb-0" style="background-color: var(--color-red-subtle); color: var(--color-red);">
                             <i class="bi bi-clock"></i>
                         </div>
                         <div>
-                            <span class="d-block text-muted small">Horario de Atención</span>
+                            <span class="d-block text-muted small">Horarios de Atención</span>
                             <strong class="text-dark">Matutina: 07:00 a 12:30 | Vespertina: 13:00 a 18:30</strong>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Formulario de Consulta -->
+            <!-- Formulario de Consulta a Secretaría -->
             <div class="col-lg-6">
-                <div class="bg-white p-4 p-md-5 rounded-3 border shadow-sm">
-                    <h5 class="fw-bold mb-2" style="color: var(--navy-primary);">Envía tu Consulta a Secretaría</h5>
-                    <p class="text-muted small mb-4">Completa el formulario y se abrirá tu mensaje directamente en WhatsApp.</p>
+                <div class="bg-white p-4 p-md-5 rounded border shadow-sm">
+                    <h5 class="fw-bold mb-2" style="color: var(--color-navy);">Consulta a Secretaría</h5>
+                    <p class="text-muted small mb-4">Escribe tus datos y se abrirá tu mensaje directamente en el WhatsApp de la institución.</p>
                     
                     <form onsubmit="event.preventDefault(); window.open('https://wa.me/593960172899?text=Hola,%20mi%20nombre%20es%20' + encodeURIComponent(document.getElementById('inputNombre').value) + '.%20Tel%C3%A9fono:%20' + encodeURIComponent(document.getElementById('inputTelefono').value) + '.%20Consulta:%20' + encodeURIComponent(document.getElementById('inputMensaje').value));">
                         <div class="mb-3">
@@ -687,8 +697,8 @@
                             <label for="inputMensaje" class="form-label small fw-bold">Mensaje o Trámite</label>
                             <textarea class="form-control" id="inputMensaje" rows="3" placeholder="Escribe tu consulta sobre matrículas o certificados..." required></textarea>
                         </div>
-                        <button type="submit" class="hero-btn-primary w-100 justify-content-center border-0">
-                            <i class="bi bi-whatsapp me-2"></i> Enviar Mensaje al 096 017 2899
+                        <button type="submit" class="hero-btn-red w-100 justify-content-center border-0">
+                            <i class="bi bi-whatsapp me-2"></i> Enviar Mensaje a Secretaría (096 017 2899)
                         </button>
                     </form>
                 </div>
