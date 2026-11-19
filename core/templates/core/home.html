@@ -232,7 +232,7 @@
 </section>
 
 <!-- =======================================================
-     5. PLANTA DOCENTE Y DECE (TABS ELEGANTES)
+     5. PLANTA DOCENTE Y DECE (DINÁMICO DESDE LA BASE DE DATOS)
      ======================================================= -->
 <section class="section-institutional faculty-tabs-container" id="docentes">
     <div class="container">
@@ -266,101 +266,44 @@
             <!-- Jornada Matutina -->
             <div class="tab-pane fade show active" id="pills-mat" role="tabpanel">
                 <div class="row g-3">
+                    {% for d in docentes_matutina %}
                     <div class="col-md-6 col-lg-3">
                         <div class="docente-item-card">
                             <div class="docente-avatar-round">
                                 <i class="bi bi-person"></i>
                             </div>
                             <div>
-                                <h6 class="mb-1 fw-bold text-dark">Educación Inicial</h6>
-                                <p class="small text-muted mb-0">Docentes Tutores de 3 y 4 Años</p>
-                                <span class="badge bg-light text-dark border mt-1">Jornada Matutina</span>
+                                <h6 class="mb-1 fw-bold text-dark">{{ d.nombre_completo }}</h6>
+                                <p class="small text-muted mb-0">{{ d.cargo }}</p>
+                                <span class="badge bg-light text-dark border mt-1">{{ d.area|default:"Jornada Matutina" }}</span>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-md-6 col-lg-3">
-                        <div class="docente-item-card">
-                            <div class="docente-avatar-round">
-                                <i class="bi bi-person"></i>
-                            </div>
-                            <div>
-                                <h6 class="mb-1 fw-bold text-dark">Básica Elemental</h6>
-                                <p class="small text-muted mb-0">Tutores de 2°, 3° y 4° EGB</p>
-                                <span class="badge bg-light text-dark border mt-1">Jornada Matutina</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-3">
-                        <div class="docente-item-card">
-                            <div class="docente-avatar-round">
-                                <i class="bi bi-person"></i>
-                            </div>
-                            <div>
-                                <h6 class="mb-1 fw-bold text-dark">Básica Media</h6>
-                                <p class="small text-muted mb-0">Tutores de 5°, 6° y 7° EGB</p>
-                                <span class="badge bg-light text-dark border mt-1">Jornada Matutina</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-3">
-                        <div class="docente-item-card">
-                            <div class="docente-avatar-round">
-                                <i class="bi bi-person"></i>
-                            </div>
-                            <div>
-                                <h6 class="mb-1 fw-bold text-dark">Básica Superior</h6>
-                                <p class="small text-muted mb-0">Docentes de 8°, 9° y 10° EGB</p>
-                                <span class="badge bg-light text-dark border mt-1">Jornada Matutina</span>
-                            </div>
-                        </div>
-                    </div>
+                    {% empty %}
+                    <div class="col-12 text-center py-3 text-muted">Nómina matutina en actualización.</div>
+                    {% endfor %}
                 </div>
             </div>
 
             <!-- Jornada Vespertina -->
             <div class="tab-pane fade" id="pills-vesp" role="tabpanel">
                 <div class="row g-3">
+                    {% for d in docentes_vespertina %}
                     <div class="col-md-6 col-lg-4">
                         <div class="docente-item-card">
                             <div class="docente-avatar-round">
                                 <i class="bi bi-person"></i>
                             </div>
                             <div>
-                                <h6 class="mb-1 fw-bold text-dark">Docentes Tutores de Primaria</h6>
-                                <p class="small text-muted mb-0">Básica Elemental y Media</p>
-                                <span class="badge bg-light text-dark border mt-1">Jornada Vespertina</span>
+                                <h6 class="mb-1 fw-bold text-dark">{{ d.nombre_completo }}</h6>
+                                <p class="small text-muted mb-0">{{ d.cargo }}</p>
+                                <span class="badge bg-light text-dark border mt-1">{{ d.area|default:"Jornada Vespertina" }}</span>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-md-6 col-lg-4">
-                        <div class="docente-item-card">
-                            <div class="docente-avatar-round">
-                                <i class="bi bi-person"></i>
-                            </div>
-                            <div>
-                                <h6 class="mb-1 fw-bold text-dark">Docentes de Básica Superior</h6>
-                                <p class="small text-muted mb-0">Áreas de Ciencias y Letras</p>
-                                <span class="badge bg-light text-dark border mt-1">Jornada Vespertina</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-4">
-                        <div class="docente-item-card">
-                            <div class="docente-avatar-round">
-                                <i class="bi bi-person"></i>
-                            </div>
-                            <div>
-                                <h6 class="mb-1 fw-bold text-dark">Áreas Especiales</h6>
-                                <p class="small text-muted mb-0">Educación Física, Arte e Inglés</p>
-                                <span class="badge bg-light text-dark border mt-1">Jornada Vespertina</span>
-                            </div>
-                        </div>
-                    </div>
+                    {% empty %}
+                    <div class="col-12 text-center py-3 text-muted">Nómina vespertina en actualización.</div>
+                    {% endfor %}
                 </div>
             </div>
 
@@ -379,25 +322,26 @@
                     <p class="text-secondary mb-3">
                         El equipo del DECE asiste a los estudiantes en su desarrollo emocional, conductual y formativo, garantizando un entorno escolar seguro, inclusivo y en permanente diálogo con los padres de familia del Recinto El Deseo.
                     </p>
-                    <div class="row g-3">
+                    
+                    <div class="row g-3 mt-1">
+                        {% for d in dece_personal %}
+                        <div class="col-md-6">
+                            <div class="p-3 bg-light rounded border d-flex align-items-center gap-3">
+                                <i class="bi bi-person-badge-fill text-danger fs-3"></i>
+                                <div>
+                                    <h6 class="fw-bold mb-0 text-dark">{{ d.nombre_completo }}</h6>
+                                    <small class="text-muted">{{ d.cargo }}</small>
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
                         <div class="col-md-4">
                             <div class="p-3 bg-light rounded border">
                                 <h6 class="fw-bold mb-1 text-dark"><i class="bi bi-check2 text-danger me-1"></i> Apoyo Socioemocional</h6>
                                 <p class="small text-muted mb-0">Orientación y acompañamiento personalizado a cada alumno.</p>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="p-3 bg-light rounded border">
-                                <h6 class="fw-bold mb-1 text-dark"><i class="bi bi-check2 text-danger me-1"></i> Escuela para Padres</h6>
-                                <p class="small text-muted mb-0">Talleres formativos sobre crianza positiva y convivencia armónica.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="p-3 bg-light rounded border">
-                                <h6 class="fw-bold mb-1 text-dark"><i class="bi bi-check2 text-danger me-1"></i> Prevención de Riesgos</h6>
-                                <p class="small text-muted mb-0">Programas de resolución pacífica y valores ciudadanos.</p>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -406,7 +350,7 @@
 </section>
 
 <!-- =======================================================
-     6. OFERTA ACADÉMICA CON FOTOGRAFÍAS CLARAS
+     6. OFERTA ACADÉMICA
      ======================================================= -->
 <section class="section-institutional bg-subtle" id="oferta-academica">
     <div class="container">
@@ -518,7 +462,7 @@
 </section>
 
 <!-- =======================================================
-     7. COMUNICADOS INSTITUCIONALES
+     7. COMUNICADOS INSTITUCIONALES (DINÁMICO DESDE BASE DE DATOS)
      ======================================================= -->
 <section class="section-institutional" id="noticias">
     <div class="container">
@@ -529,44 +473,30 @@
         </div>
 
         <div class="row g-4">
+            {% for n in noticias %}
             <div class="col-md-4">
-                <div class="institutional-quote-card h-100 border-start-0 border-top border-4 border-danger">
-                    <span class="badge bg-danger mb-2">Secretaría</span>
-                    <h5 class="fw-bold mb-2" style="color: var(--color-navy);">Proceso de Matrículas</h5>
-                    <p class="small text-muted mb-3">Cronogramas de recepción de documentos del Ministerio de Educación para el nuevo año lectivo.</p>
-                    <a href="https://wa.me/593960172899?text=Deseo%20informaci%C3%B3n%20sobre%20matr%C3%ADculas" target="_blank" class="small fw-bold text-danger text-decoration-none">
-                        Consultar en Secretaría <i class="bi bi-arrow-right"></i>
+                <div class="institutional-quote-card h-100 border-start-0 border-top border-4 {% if n.tipo == 'urgente' %}border-danger{% elif n.tipo == 'dece' %}border-success{% else %}border-primary{% endif %}">
+                    <span class="badge {% if n.tipo == 'urgente' %}bg-danger{% elif n.tipo == 'dece' %}bg-success{% else %}bg-primary{% endif %} mb-2">
+                        {{ n.get_tipo_display }}
+                    </span>
+                    <h5 class="fw-bold mb-2" style="color: var(--color-navy);">{{ n.titulo }}</h5>
+                    <p class="small text-muted mb-3">{{ n.resumen }}</p>
+                    <a href="https://wa.me/593960172899?text={{ n.titulo|urlencode }}" target="_blank" class="small fw-bold text-danger text-decoration-none">
+                        Consultar detalles <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
             </div>
-
-            <div class="col-md-4">
-                <div class="institutional-quote-card h-100 border-start-0 border-top border-4 border-primary">
-                    <span class="badge bg-primary mb-2">Civismo</span>
-                    <h5 class="fw-bold mb-2" style="color: var(--color-navy);">Acto Cívico y Juramento</h5>
-                    <p class="small text-muted mb-3">Ceremonia solemne de proclamación de abanderados y juramento patrio de los estudiantes de décimo año.</p>
-                    <a href="#galeria" class="small fw-bold text-primary text-decoration-none">
-                        Ver galería fotográfica <i class="bi bi-arrow-right"></i>
-                    </a>
-                </div>
+            {% empty %}
+            <div class="col-12 text-center py-4 text-muted">
+                No hay comunicados vigentes en este momento.
             </div>
-
-            <div class="col-md-4">
-                <div class="institutional-quote-card h-100 border-start-0 border-top border-4 border-success">
-                    <span class="badge bg-success mb-2">DECE</span>
-                    <h5 class="fw-bold mb-2" style="color: var(--color-navy);">Talleres de Padres de Familia</h5>
-                    <p class="small text-muted mb-3">Convocatoria a representantes para los talleres de convivencia pacífica y pautas de crianza positiva.</p>
-                    <a href="https://wa.me/593960172899" target="_blank" class="small fw-bold text-success text-decoration-none">
-                        Consultar al DECE <i class="bi bi-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
 
 <!-- =======================================================
-     8. GALERÍA FOTOGRÁFICA NATURAL
+     8. GALERÍA FOTOGRÁFICA (DINÁMICO DESDE BASE DE DATOS)
      ======================================================= -->
 <section class="section-institutional bg-subtle" id="galeria">
     <div class="container">
@@ -578,53 +508,25 @@
         </div>
 
         <div class="row g-4">
+            {% for f in galeria %}
             <div class="col-6 col-lg-3">
                 <div class="gallery-photo-frame">
                     <div class="gallery-photo-container">
-                        <img src="{% static 'img/galeria_civica.jpg' %}" alt="Acto Cívico Escolar">
+                        {% if f.imagen %}
+                            <img src="{{ f.imagen.url }}" alt="{{ f.titulo }}">
+                        {% else %}
+                            <img src="{% static 'img/galeria_civica.jpg' %}" alt="{{ f.titulo }}">
+                        {% endif %}
                     </div>
                     <div class="gallery-photo-caption">
-                        <h6>Momento Cívico</h6>
-                        <span>Valores Patrios y Solemnidad</span>
+                        <h6>{{ f.titulo }}</h6>
+                        <span>{{ f.get_categoria_display }}</span>
                     </div>
                 </div>
             </div>
-
-            <div class="col-6 col-lg-3">
-                <div class="gallery-photo-frame">
-                    <div class="gallery-photo-container">
-                        <img src="{% static 'img/galeria_deportes.jpg' %}" alt="Juegos Deportivos Escolares">
-                    </div>
-                    <div class="gallery-photo-caption">
-                        <h6>Juegos Escolares</h6>
-                        <span>Deporte y Recreación Saludable</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-6 col-lg-3">
-                <div class="gallery-photo-frame">
-                    <div class="gallery-photo-container">
-                        <img src="{% static 'img/galeria_ciencias.jpg' %}" alt="Feria de Ciencias">
-                    </div>
-                    <div class="gallery-photo-caption">
-                        <h6>Feria Científica</h6>
-                        <span>Proyectos y Creatividad</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-6 col-lg-3">
-                <div class="gallery-photo-frame">
-                    <div class="gallery-photo-container">
-                        <img src="{% static 'img/galeria_lectura.jpg' %}" alt="Club de Lectura">
-                    </div>
-                    <div class="gallery-photo-caption">
-                        <h6>Hábito Lector</h6>
-                        <span>Biblioteca y Aprendizaje</span>
-                    </div>
-                </div>
-            </div>
+            {% empty %}
+            <div class="col-12 text-center py-4 text-muted">Galería en proceso de actualización.</div>
+            {% endfor %}
         </div>
     </div>
 </section>
@@ -682,20 +584,21 @@
             <div class="col-lg-6">
                 <div class="bg-white p-4 p-md-5 rounded border shadow-sm">
                     <h5 class="fw-bold mb-2" style="color: var(--color-navy);">Consulta a Secretaría</h5>
-                    <p class="text-muted small mb-4">Escribe tus datos y se abrirá tu mensaje directamente en el WhatsApp de la institución.</p>
+                    <p class="text-muted small mb-4">Escribe tus datos y se registrará tu mensaje en la secretaría y se abrirá directamente en WhatsApp.</p>
                     
-                    <form onsubmit="event.preventDefault(); window.open('https://wa.me/593960172899?text=Hola,%20mi%20nombre%20es%20' + encodeURIComponent(document.getElementById('inputNombre').value) + '.%20Tel%C3%A9fono:%20' + encodeURIComponent(document.getElementById('inputTelefono').value) + '.%20Consulta:%20' + encodeURIComponent(document.getElementById('inputMensaje').value));">
+                    <form method="POST" action="{% url 'core:home' %}" onsubmit="window.open('https://wa.me/593960172899?text=Hola,%20mi%20nombre%20es%20' + encodeURIComponent(document.getElementById('id_nombre').value) + '.%20Tel%C3%A9fono:%20' + encodeURIComponent(document.getElementById('id_telefono').value) + '.%20Consulta:%20' + encodeURIComponent(document.getElementById('id_mensaje').value));">
+                        {% csrf_token %}
                         <div class="mb-3">
-                            <label for="inputNombre" class="form-label small fw-bold">Nombre del Representante</label>
-                            <input type="text" class="form-control" id="inputNombre" placeholder="Ej. Carlos Mendoza" required>
+                            <label for="id_nombre" class="form-label small fw-bold">Nombre del Representante</label>
+                            {{ form_contacto.nombre }}
                         </div>
                         <div class="mb-3">
-                            <label for="inputTelefono" class="form-label small fw-bold">Número de Teléfono</label>
-                            <input type="tel" class="form-control" id="inputTelefono" placeholder="Ej. 096 017 2899" required>
+                            <label for="id_telefono" class="form-label small fw-bold">Número de Teléfono</label>
+                            {{ form_contacto.telefono }}
                         </div>
                         <div class="mb-3">
-                            <label for="inputMensaje" class="form-label small fw-bold">Mensaje o Trámite</label>
-                            <textarea class="form-control" id="inputMensaje" rows="3" placeholder="Escribe tu consulta sobre matrículas o certificados..." required></textarea>
+                            <label for="id_mensaje" class="form-label small fw-bold">Mensaje o Trámite</label>
+                            {{ form_contacto.mensaje }}
                         </div>
                         <button type="submit" class="hero-btn-red w-100 justify-content-center border-0">
                             <i class="bi bi-whatsapp me-2"></i> Enviar Mensaje a Secretaría (096 017 2899)

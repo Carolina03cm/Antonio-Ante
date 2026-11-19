@@ -80,7 +80,7 @@
     .login-input-group .form-control {
         border-radius: var(--radius-sm);
         border: 1px solid var(--color-border);
-        padding: 0.75rem 0.95rem 0.75rem 2.6rem;
+        padding: 0.75rem 2.8rem 0.75rem 2.6rem;
         font-size: 0.92rem;
         transition: var(--transition);
     }
@@ -98,6 +98,28 @@
         color: var(--color-text-muted);
         font-size: 1.05rem;
         pointer-events: none;
+        z-index: 2;
+    }
+
+    .btn-toggle-password {
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: transparent;
+        border: none;
+        color: var(--color-text-muted);
+        padding: 6px 10px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        z-index: 3;
+        border-radius: 4px;
+        transition: var(--transition);
+    }
+
+    .btn-toggle-password:hover {
+        color: var(--color-navy);
+        background-color: var(--color-navy-subtle);
     }
 
     .btn-login-submit {
@@ -169,7 +191,7 @@
                 {% if request.GET.next %}
                     <input type="hidden" name="next" value="{{ request.GET.next }}">
                 {% else %}
-                    <input type="hidden" name="next" value="/admin/">
+                    <input type="hidden" name="next" value="{% url 'core:dashboard' %}">
                 {% endif %}
 
                 <!-- Campo de Usuario -->
@@ -183,7 +205,7 @@
                     </div>
                 </div>
 
-                <!-- Campo de Contraseña -->
+                <!-- Campo de Contraseña con Botón de Mostrar/Ocultar -->
                 <div class="mb-4">
                     <label for="id_password" class="login-form-label">
                         <i class="bi bi-key-fill"></i> Contraseña de Acceso
@@ -191,6 +213,9 @@
                     <div class="login-input-group">
                         <i class="bi bi-lock login-input-icon"></i>
                         <input type="password" name="password" autocomplete="current-password" required id="id_password" class="form-control" placeholder="••••••••">
+                        <button type="button" class="btn-toggle-password" id="btnTogglePassword" title="Mostrar/Ocultar contraseña" aria-label="Mostrar u ocultar contraseña">
+                            <i class="bi bi-eye" id="passwordIcon"></i>
+                        </button>
                     </div>
                 </div>
 
@@ -217,4 +242,31 @@
     </div>
 </div>
 
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const toggleBtn = document.getElementById('btnTogglePassword');
+        const passwordInput = document.getElementById('id_password');
+        const passwordIcon = document.getElementById('passwordIcon');
+
+        if (toggleBtn && passwordInput && passwordIcon) {
+            toggleBtn.addEventListener('click', () => {
+                const isPassword = passwordInput.getAttribute('type') === 'password';
+                passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+                
+                if (isPassword) {
+                    passwordIcon.classList.remove('bi-eye');
+                    passwordIcon.classList.add('bi-eye-slash');
+                    toggleBtn.setAttribute('title', 'Ocultar contraseña');
+                } else {
+                    passwordIcon.classList.remove('bi-eye-slash');
+                    passwordIcon.classList.add('bi-eye');
+                    toggleBtn.setAttribute('title', 'Mostrar contraseña');
+                }
+            });
+        }
+    });
+</script>
 {% endblock %}

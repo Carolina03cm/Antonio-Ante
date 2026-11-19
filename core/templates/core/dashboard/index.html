@@ -1,0 +1,165 @@
+{% extends 'core/dashboard/base_dashboard.html' %}
+{% load static %}
+
+{% block section_title %}Resumen General del Portal Institucional{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-0">
+    <!-- Bienvenida al usuario -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+        <div>
+            <h3 class="fw-bold mb-1" style="color: var(--color-navy);">¡Bienvenido/a, {{ user.username }}!</h3>
+            <p class="text-muted mb-0">Panel de control de contenidos y servicios de la Escuela de Educación Básica "Antonio Ante".</p>
+        </div>
+        <div class="d-flex gap-2 mt-3 mt-md-0">
+            <a href="{% url 'core:noticia_create' %}" class="btn btn-danger btn-sm px-3 fw-bold">
+                <i class="bi bi-plus-circle me-1"></i> Publicar Comunicado
+            </a>
+            <a href="{% url 'core:galeria_create' %}" class="btn btn-primary btn-sm px-3 fw-bold">
+                <i class="bi bi-camera me-1"></i> Subir Foto
+            </a>
+        </div>
+    </div>
+
+    <!-- Tarjetas de Estadísticas Principales -->
+    <div class="row g-3 mb-4">
+        <div class="col-sm-6 col-xl-3">
+            <div class="card-stat-dash">
+                <div class="stat-dash-icon" style="background-color: #eaf0fb; color: #18396D;">
+                    <i class="bi bi-newspaper"></i>
+                </div>
+                <div>
+                    <h3 class="fw-bold mb-0 text-dark">{{ total_noticias }}</h3>
+                    <span class="text-muted small">Noticias y Comunicados</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+            <div class="card-stat-dash">
+                <div class="stat-dash-icon" style="background-color: #fdf2f3; color: #D71926;">
+                    <i class="bi bi-images"></i>
+                </div>
+                <div>
+                    <h3 class="fw-bold mb-0 text-dark">{{ total_fotos }}</h3>
+                    <span class="text-muted small">Fotografías en Galería</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+            <div class="card-stat-dash">
+                <div class="stat-dash-icon" style="background-color: #fef8ee; color: #b45309;">
+                    <i class="bi bi-people-fill"></i>
+                </div>
+                <div>
+                    <h3 class="fw-bold mb-0 text-dark">{{ total_docentes }}</h3>
+                    <span class="text-muted small">Docentes Registrados</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+            <div class="card-stat-dash">
+                <div class="stat-dash-icon" style="background-color: #ecfdf5; color: #059669;">
+                    <i class="bi bi-envelope-open-fill"></i>
+                </div>
+                <div>
+                    <h3 class="fw-bold mb-0 text-dark">{{ total_mensajes }}</h3>
+                    <span class="text-muted small">Consultas Pendientes</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Últimas Noticias y Comunicados -->
+        <div class="col-lg-7">
+            <div class="card border-0 shadow-sm rounded-3">
+                <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="mb-0 fw-bold text-dark"><i class="bi bi-megaphone me-2 text-danger"></i> Publicaciones Recientes</h6>
+                    <a href="{% url 'core:noticia_list' %}" class="small text-decoration-none">Ver todas <i class="bi bi-arrow-right"></i></a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light small">
+                            <tr>
+                                <th>Título</th>
+                                <th>Tipo</th>
+                                <th>Fecha</th>
+                                <th class="text-end">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for n in ultimas_noticias %}
+                            <tr>
+                                <td>
+                                    <strong class="d-block text-dark small">{{ n.titulo|truncatechars:45 }}</strong>
+                                </td>
+                                <td>
+                                    <span class="badge bg-light text-dark border">{{ n.get_tipo_display }}</span>
+                                </td>
+                                <td class="small text-muted">{{ n.fecha_publicacion|date:"d/m/Y" }}</td>
+                                <td class="text-end">
+                                    <a href="{% url 'core:noticia_edit' n.pk %}" class="btn btn-sm btn-outline-secondary py-0 px-2" title="Editar">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="4" class="text-center py-4 text-muted small">No hay publicaciones registradas aún.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Consultas de Padres y Accesos Directos -->
+        <div class="col-lg-5">
+            <div class="card border-0 shadow-sm rounded-3 mb-4">
+                <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="mb-0 fw-bold text-dark"><i class="bi bi-chat-dots me-2 text-primary"></i> Consultas de Padres</h6>
+                    <a href="{% url 'core:consultas_list' %}" class="small text-decoration-none">Ver todas</a>
+                </div>
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-flush">
+                        {% for c in ultimas_consultas %}
+                        <li class="list-group-item d-flex justify-content-between align-items-start p-3">
+                            <div class="me-auto">
+                                <div class="fw-bold small">{{ c.nombre }}</div>
+                                <span class="small text-muted d-block">{{ c.mensaje|truncatechars:50 }}</span>
+                                <small class="text-muted" style="font-size: 0.72rem;">{{ c.fecha_envio|date:"d/m/Y H:i" }} • Tel: {{ c.telefono }}</small>
+                            </div>
+                            <span class="badge {% if c.leido %}bg-success{% else %}bg-warning text-dark{% endif %} rounded-pill">
+                                {% if c.leido %}Atendido{% else %}Pendiente{% endif %}
+                            </span>
+                        </li>
+                        {% empty %}
+                        <li class="list-group-item text-center py-4 text-muted small">No hay consultas registradas.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Accesos Rápidos -->
+            <div class="card border-0 shadow-sm rounded-3 p-3 bg-light">
+                <h6 class="fw-bold text-dark mb-2">Acciones Rápidas</h6>
+                <div class="d-grid gap-2">
+                    <a href="{% url 'core:docente_create' %}" class="btn btn-outline-dark btn-sm text-start">
+                        <i class="bi bi-person-plus-fill me-2 text-primary"></i> Registrar Nuevo Docente en Nómina
+                    </a>
+                    <a href="{% url 'core:galeria_create' %}" class="btn btn-outline-dark btn-sm text-start">
+                        <i class="bi bi-upload me-2 text-success"></i> Subir Nueva Foto a la Galería
+                    </a>
+                    <a href="/admin/" target="_blank" class="btn btn-outline-dark btn-sm text-start">
+                        <i class="bi bi-database-fill me-2 text-danger"></i> Abrir Base de Datos en Django Admin
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

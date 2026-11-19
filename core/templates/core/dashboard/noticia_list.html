@@ -1,0 +1,71 @@
+{% extends 'core/dashboard/base_dashboard.html' %}
+
+{% block section_title %}Gestión de Noticias y Comunicados{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-0">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h4 class="fw-bold text-dark mb-1">Noticias y Comunicados Oficiales</h4>
+            <p class="text-muted small mb-0">Publica avisos de secretaría, novedades cívicas y actividades escolares.</p>
+        </div>
+        <a href="{% url 'core:noticia_create' %}" class="btn btn-danger btn-sm px-3 fw-bold">
+            <i class="bi bi-plus-circle me-1"></i> Publicar Nuevo
+        </a>
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-3">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light small">
+                    <tr>
+                        <th>Título</th>
+                        <th>Tipo</th>
+                        <th>Fecha de Publicación</th>
+                        <th>Destacado en Portada</th>
+                        <th class="text-end">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for n in noticias %}
+                    <tr>
+                        <td>
+                            <strong class="d-block text-dark small">{{ n.titulo }}</strong>
+                            <small class="text-muted">{{ n.resumen|truncatechars:65 }}</small>
+                        </td>
+                        <td>
+                            <span class="badge {% if n.tipo == 'urgente' %}bg-danger{% elif n.tipo == 'comunicado' %}bg-primary{% elif n.tipo == 'dece' %}bg-success{% else %}bg-secondary{% endif %}">
+                                {{ n.get_tipo_display }}
+                            </span>
+                        </td>
+                        <td class="small text-muted">{{ n.fecha_publicacion|date:"d/m/Y H:i" }}</td>
+                        <td>
+                            {% if n.destacado %}
+                                <span class="badge bg-success-subtle text-success border border-success-subtle">Visible</span>
+                            {% else %}
+                                <span class="badge bg-secondary-subtle text-secondary">Oculto</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-end">
+                            <a href="{% url 'core:noticia_edit' n.pk %}" class="btn btn-sm btn-outline-primary py-1 px-2" title="Editar">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                            <a href="{% url 'core:noticia_delete' n.pk %}" class="btn btn-sm btn-outline-danger py-1 px-2" title="Eliminar">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center py-5 text-muted">
+                            <i class="bi bi-newspaper fs-1 d-block mb-2 text-muted"></i>
+                            No hay publicaciones registradas. Haz clic en "Publicar Nuevo" para comenzar.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

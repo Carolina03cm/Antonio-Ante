@@ -1,0 +1,66 @@
+{% extends 'core/dashboard/base_dashboard.html' %}
+
+{% block section_title %}{{ titulo_accion }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-0">
+    <div class="mb-4">
+        <a href="{% url 'core:noticia_list' %}" class="btn btn-outline-secondary btn-sm">
+            <i class="bi bi-arrow-left me-1"></i> Volver al listado
+        </a>
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-3 p-4 bg-white" style="max-width: 800px;">
+        <h5 class="fw-bold text-dark mb-3">{{ titulo_accion }}</h5>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label class="form-label fw-bold small text-dark">Título de la publicación</label>
+                {{ form.titulo }}
+                {% if form.titulo.errors %}<div class="text-danger small">{{ form.titulo.errors }}</div>{% endif %}
+            </div>
+
+            <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                    <label class="form-label fw-bold small text-dark">Tipo de Publicación</label>
+                    {{ form.tipo }}
+                </div>
+                <div class="col-md-6 d-flex align-items-center mt-4">
+                    <div class="form-check">
+                        {{ form.destacado }}
+                        <label class="form-check-label fw-bold small text-dark" for="{{ form.destacado.id_for_label }}">
+                            Mostrar en la portada pública
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold small text-dark">Resumen breve (para la tarjeta de portada)</label>
+                {{ form.resumen }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold small text-dark">Contenido completo</label>
+                {{ form.contenido }}
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label fw-bold small text-dark">Fotografía adjunta (opcional)</label>
+                {{ form.imagen }}
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-danger btn-sm px-4 fw-bold">
+                    <i class="bi bi-check2-circle me-1"></i> Guardar Publicación
+                </button>
+                <a href="{% url 'core:noticia_list' %}" class="btn btn-outline-secondary btn-sm px-3">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

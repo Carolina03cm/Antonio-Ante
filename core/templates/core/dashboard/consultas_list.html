@@ -1,0 +1,68 @@
+{% extends 'core/dashboard/base_dashboard.html' %}
+
+{% block section_title %}Consultas de Padres de Familia{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-0">
+    <div class="mb-4">
+        <h4 class="fw-bold text-dark mb-1">Bandeja de Consultas de Secretaría</h4>
+        <p class="text-muted small mb-0">Mensajes y trámites solicitados por representantes a través del formulario de la web.</p>
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-3">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light small">
+                    <tr>
+                        <th>Representante</th>
+                        <th>Teléfono / WhatsApp</th>
+                        <th>Detalle de la Consulta</th>
+                        <th>Fecha y Hora</th>
+                        <th>Estado</th>
+                        <th class="text-end">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in consultas %}
+                    <tr class="{% if not c.leido %}table-warning-subtle{% endif %}">
+                        <td>
+                            <strong class="d-block text-dark small">{{ c.nombre }}</strong>
+                        </td>
+                        <td>
+                            <a href="https://wa.me/593{{ c.telefono }}" target="_blank" class="small text-success text-decoration-none fw-bold">
+                                <i class="bi bi-whatsapp me-1"></i> {{ c.telefono }}
+                            </a>
+                        </td>
+                        <td class="small">{{ c.mensaje }}</td>
+                        <td class="small text-muted">{{ c.fecha_envio|date:"d/m/Y H:i" }}</td>
+                        <td>
+                            {% if c.leido %}
+                                <span class="badge bg-success-subtle text-success">Atendido</span>
+                            {% else %}
+                                <span class="badge bg-warning text-dark">Pendiente</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-end">
+                            <a href="{% url 'core:consulta_toggle' c.pk %}" class="btn btn-sm btn-outline-secondary py-1 px-2" title="Cambiar estado">
+                                {% if c.leido %}
+                                    <i class="bi bi-arrow-counterclockwise" title="Marcar pendiente"></i>
+                                {% else %}
+                                    <i class="bi bi-check-lg text-success" title="Marcar atendido"></i>
+                                {% endif %}
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center py-5 text-muted">
+                            <i class="bi bi-chat-left-dots fs-1 d-block mb-2 text-muted"></i>
+                            No hay consultas registradas en este momento.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
