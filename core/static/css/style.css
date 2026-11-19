@@ -1,0 +1,551 @@
+/* ==========================================================================
+   EEB ANTONIO ANTE - HOJA DE ESTILOS PRINCIPAL
+   Identidad Visual Institucional:
+   - Azul Marino: #18396D
+   - Rojo Institucional: #D71926
+   - Blanco: #FFFFFF
+   - Beige: #D9D0BB
+   ========================================================================== */
+
+:root {
+  --color-primary: #18396D;       /* Azul marino institucional */
+  --color-primary-dark: #0f2549;  /* Azul marino profundo */
+  --color-primary-light: #255094; /* Azul marino claro */
+  --color-secondary: #D71926;     /* Rojo institucional */
+  --color-secondary-hover: #b5121f;
+  --color-beige: #D9D0BB;         /* Beige institucional */
+  --color-beige-light: #f5f2ea;
+  --color-white: #ffffff;
+  --color-dark: #1e293b;
+  --color-muted: #64748b;
+  --color-light-bg: #f8fafc;
+  --font-main: 'Montserrat', sans-serif;
+  --font-heading: 'Poppins', sans-serif;
+  --box-shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --box-shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+  --box-shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  font-family: var(--font-main);
+  color: var(--color-dark);
+  background-color: var(--color-white);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+/* --------------------------------------------------
+   BARRA SUPERIOR (TOPBAR INFORMATIVO)
+   -------------------------------------------------- */
+.topbar {
+  background-color: var(--color-primary-dark);
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.875rem;
+  padding: 0.45rem 0;
+  border-bottom: 2px solid var(--color-secondary);
+}
+
+.topbar a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+.topbar a:hover {
+  color: var(--color-beige);
+}
+
+/* --------------------------------------------------
+   BARRA DE NAVEGACIÓN INSTITUCIONAL
+   -------------------------------------------------- */
+.navbar-institucional {
+  background-color: var(--color-white);
+  box-shadow: var(--box-shadow-sm);
+  padding: 0.75rem 0;
+  transition: var(--transition-smooth);
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+}
+
+.navbar-brand-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.institutional-logo {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.12));
+}
+
+.brand-text-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  line-height: 1.2;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.brand-text-subtitle {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-secondary);
+  margin: 0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.nav-link {
+  font-weight: 600;
+  color: var(--color-primary) !important;
+  padding: 0.6rem 1rem !important;
+  font-size: 0.95rem;
+  position: relative;
+  transition: var(--transition-smooth);
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--color-secondary) !important;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 3px;
+  bottom: 0px;
+  left: 50%;
+  background-color: var(--color-secondary);
+  transition: var(--transition-smooth);
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+  width: 65%;
+}
+
+.btn-institucional-portal {
+  background-color: var(--color-secondary);
+  color: var(--color-white) !important;
+  border-radius: 50px;
+  padding: 0.5rem 1.25rem !important;
+  font-weight: 700;
+  font-size: 0.88rem;
+  border: 2px solid var(--color-secondary);
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 10px rgba(215, 25, 38, 0.25);
+}
+
+.btn-institucional-portal:hover {
+  background-color: var(--color-white);
+  color: var(--color-secondary) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(215, 25, 38, 0.35);
+}
+
+/* --------------------------------------------------
+   HERO / BANNER PRINCIPAL
+   -------------------------------------------------- */
+.hero-section {
+  position: relative;
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 60%, #1f498b 100%);
+  color: var(--color-white);
+  padding: 5.5rem 0 6rem 0;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: radial-gradient(circle at 85% 20%, rgba(217, 208, 187, 0.15) 0%, transparent 50%),
+              radial-gradient(circle at 10% 80%, rgba(215, 25, 38, 0.12) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(217, 208, 187, 0.18);
+  border: 1px solid rgba(217, 208, 187, 0.4);
+  color: var(--color-beige);
+  padding: 0.4rem 1rem;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  backdrop-filter: blur(4px);
+}
+
+.hero-title {
+  font-size: 2.85rem;
+  font-weight: 800;
+  color: var(--color-white);
+  line-height: 1.18;
+  margin-bottom: 1.25rem;
+}
+
+.hero-title span {
+  color: var(--color-beige);
+}
+
+.hero-description {
+  font-size: 1.15rem;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 600px;
+  margin-bottom: 2rem;
+  line-height: 1.7;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.btn-institucional-primary {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  border: 2px solid var(--color-secondary);
+  font-weight: 700;
+  padding: 0.75rem 1.8rem;
+  border-radius: 8px;
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 14px rgba(215, 25, 38, 0.4);
+}
+
+.btn-institucional-primary:hover {
+  background-color: var(--color-secondary-hover);
+  border-color: var(--color-secondary-hover);
+  color: var(--color-white);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(215, 25, 38, 0.5);
+}
+
+.btn-institucional-outline {
+  background-color: transparent;
+  color: var(--color-white);
+  border: 2px solid var(--color-beige);
+  font-weight: 700;
+  padding: 0.75rem 1.8rem;
+  border-radius: 8px;
+  transition: var(--transition-smooth);
+}
+
+.btn-institucional-outline:hover {
+  background-color: var(--color-beige);
+  color: var(--color-primary-dark);
+  transform: translateY(-2px);
+}
+
+.hero-logo-frame {
+  position: relative;
+  text-align: center;
+}
+
+.hero-logo-img {
+  width: 290px;
+  max-width: 100%;
+  border-radius: 50%;
+  border: 8px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+  transition: transform 0.5s ease;
+  background-color: var(--color-white);
+}
+
+.hero-logo-img:hover {
+  transform: scale(1.03) rotate(2deg);
+}
+
+/* --------------------------------------------------
+   TARJETAS Y ACCESOS RÁPIDOS
+   -------------------------------------------------- */
+.quick-access-section {
+  margin-top: -3.5rem;
+  position: relative;
+  z-index: 10;
+}
+
+.quick-card {
+  background: var(--color-white);
+  border-radius: 12px;
+  padding: 1.75rem 1.5rem;
+  box-shadow: var(--box-shadow-md);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-top: 4px solid var(--color-primary);
+  transition: var(--transition-smooth);
+  height: 100%;
+}
+
+.quick-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--box-shadow-lg);
+  border-top-color: var(--color-secondary);
+}
+
+.quick-icon-wrapper {
+  width: 54px;
+  height: 54px;
+  border-radius: 12px;
+  background: var(--color-beige-light);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  margin-bottom: 1.25rem;
+  transition: var(--transition-smooth);
+}
+
+.quick-card:hover .quick-icon-wrapper {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.quick-card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.quick-card-text {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  margin-bottom: 1rem;
+}
+
+.quick-card-link {
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--color-secondary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition-smooth);
+}
+
+.quick-card-link:hover {
+  gap: 10px;
+  color: var(--color-secondary-hover);
+}
+
+/* --------------------------------------------------
+   SECCIONES DE CONTENIDO
+   -------------------------------------------------- */
+.section-padding {
+  padding: 5rem 0;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.section-subtitle {
+  color: var(--color-secondary);
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.section-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 3px;
+  background-color: var(--color-secondary);
+  border-radius: 2px;
+}
+
+/* --------------------------------------------------
+   BOTÓN FLOTANTE DE WHATSAPP (096 017 2899)
+   -------------------------------------------------- */
+.floating-whatsapp {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 1050;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.whatsapp-btn {
+  width: 60px;
+  height: 60px;
+  background-color: #25D366;
+  color: #ffffff !important;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  box-shadow: 0 4px 18px rgba(37, 211, 102, 0.45);
+  position: relative;
+  transition: var(--transition-smooth);
+}
+
+.whatsapp-btn:hover {
+  transform: scale(1.1) translateY(-3px);
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.6);
+  color: #ffffff !important;
+}
+
+.whatsapp-pulse {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(37, 211, 102, 0.4);
+  animation: whatsappPulse 2s infinite ease-out;
+  z-index: -1;
+}
+
+@keyframes whatsappPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.whatsapp-tooltip {
+  position: absolute;
+  right: 72px;
+  background: var(--color-dark);
+  color: var(--color-white);
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: var(--box-shadow-md);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: var(--transition-smooth);
+}
+
+.floating-whatsapp:hover .whatsapp-tooltip {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* --------------------------------------------------
+   FOOTER INSTITUCIONAL
+   -------------------------------------------------- */
+.footer-institucional {
+  background-color: var(--color-primary-dark);
+  color: rgba(255, 255, 255, 0.85);
+  padding-top: 4.5rem;
+  border-top: 4px solid var(--color-secondary);
+}
+
+.footer-logo {
+  width: 65px;
+  height: 65px;
+  object-fit: contain;
+  background: var(--color-white);
+  border-radius: 50%;
+  padding: 2px;
+}
+
+.footer-heading {
+  color: var(--color-white);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.footer-heading::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 35px;
+  height: 2px;
+  background-color: var(--color-secondary);
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.75rem;
+}
+
+.footer-links a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-links a:hover {
+  color: var(--color-beige);
+  padding-left: 6px;
+}
+
+.footer-bottom {
+  background-color: #08162d;
+  padding: 1.25rem 0;
+  margin-top: 3.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.85rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+  .hero-title {
+    font-size: 2.25rem;
+  }
+  .hero-logo-frame {
+    margin-top: 2.5rem;
+  }
+  .quick-access-section {
+    margin-top: 2rem;
+  }
+}
