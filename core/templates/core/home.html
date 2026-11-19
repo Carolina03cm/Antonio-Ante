@@ -5,176 +5,160 @@
 
 {% block content %}
 
-<!-- ==========================================
-     HERO SECTION / BANNER PRINCIPAL
-     ========================================== -->
-<section class="hero-section">
-    <div class="container position-relative">
+<!-- =======================================================
+     1. HERO SECTION MAJESTUOSO & INSTITUCIONAL
+     ======================================================= -->
+<section class="hero-prestige">
+    <div class="container position-relative" style="z-index: 2;">
         <div class="row align-items-center g-5">
             <div class="col-lg-7">
-                <div class="hero-badge">
-                    <i class="bi bi-mortarboard-fill text-warning"></i>
-                    <span>Institución Educativa Oficial</span>
+                <div class="hero-badge-pill">
+                    <i class="bi bi-award-fill text-warning"></i>
+                    <span>Institución Educativa Fiscal • Cantón Antonio Ante</span>
                 </div>
-                <h1 class="hero-title">
-                    Bienvenidos a la <span>EEB ANTONIO ANTE</span>
+                <h1 class="hero-heading">
+                    Escuela de Educación Básica <span class="gold-text">"ANTONIO ANTE"</span>
                 </h1>
-                <p class="hero-description">
-                    Educamos con vocación, sólidos principios éticos y compromiso social. Guiamos a las nuevas generaciones hacia un futuro brillante a través del conocimiento y los valores.
+                <p class="hero-lead-text">
+                    Formamos a la niñez con vocación pedagógica, principios éticos inquebrantables e innovación académica. Forjamos el presente y futuro de ciudadanos comprometidos con el desarrollo de nuestra patria.
                 </p>
-                <div class="hero-buttons">
-                    <a href="#oferta-academica" class="btn btn-institucional-primary">
-                        <i class="bi bi-book-half me-2"></i> Oferta Académica
+                <div class="hero-actions-group">
+                    <a href="#oferta-academica" class="btn-hero-primary">
+                        <i class="bi bi-mortarboard-fill"></i> Conoce Nuestra Oferta
                     </a>
-                    <a href="https://wa.me/593960172899?text=Hola,%20deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20EEB%20Antonio%20Ante" target="_blank" class="btn btn-institucional-outline">
-                        <i class="bi bi-whatsapp me-2 text-success"></i> WhatsApp: 096 017 2899
+                    <a href="https://wa.me/593960172899?text=Hola,%20deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20EEB%20Antonio%20Ante" target="_blank" rel="noopener noreferrer" class="btn-hero-secondary">
+                        <i class="bi bi-whatsapp text-success"></i> WhatsApp: 096 017 2899
                     </a>
                 </div>
             </div>
+
+            <!-- Escudo Oficial en 3D con Aura y Cifras Flotantes -->
             <div class="col-lg-5 text-center">
-                <div class="hero-logo-frame">
-                    <img src="{% static 'img/logo_antonio_ante.jpg' %}" alt="Escudo Oficial EEB Antonio Ante" class="hero-logo-img">
+                <div class="hero-seal-showcase">
+                    <div class="seal-aura-ring"></div>
+                    
+                    <!-- Badge Flotante 1 -->
+                    <div class="hero-floating-stat stat-1 d-none d-sm-flex">
+                        <i class="bi bi-patch-check-fill text-danger fs-4"></i>
+                        <div class="text-start">
+                            <span class="d-block small text-muted">Educación Fiscal</span>
+                            <span class="fs-6 fw-bold text-dark">Calidad y Gratuidad</span>
+                        </div>
+                    </div>
+
+                    <!-- Escudo Central -->
+                    <div class="seal-image-card">
+                        <img src="{% static 'img/logo_antonio_ante.jpg' %}" alt="Escudo Oficial de la Escuela de Educación Básica Antonio Ante">
+                    </div>
+
+                    <!-- Badge Flotante 2 -->
+                    <div class="hero-floating-stat stat-2 d-none d-sm-flex">
+                        <i class="bi bi-mortarboard-fill text-primary fs-4"></i>
+                        <div class="text-start">
+                            <span class="d-block small text-muted">Nivel Académico</span>
+                            <span class="fs-6 fw-bold text-dark">Inicial a 10° EGB</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ==========================================
-     ACCESOS RÁPIDOS
-     ========================================== -->
-<section class="quick-access-section">
-    <div class="container">
-        <div class="row g-4">
+<!-- =======================================================
+     2. BARRA DE CIFRAS Y PILARES INSTITUCIONALES
+     ======================================================= -->
+<div class="container stats-bar-container">
+    <div class="stats-card-main">
+        <div class="row g-3">
             <div class="col-md-6 col-lg-3">
-                <div class="quick-card">
-                    <div class="quick-icon-wrapper">
-                        <i class="bi bi-mortarboard"></i>
-                    </div>
-                    <h3 class="quick-card-title">Oferta Académica</h3>
-                    <p class="quick-card-text">
-                        Conoce nuestros niveles desde Inicial hasta Básica Superior con docentes de excelencia.
-                    </p>
-                    <a href="#oferta-academica" class="quick-card-link">
-                        Ver niveles <i class="bi bi-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="quick-card">
-                    <div class="quick-icon-wrapper">
-                        <i class="bi bi-megaphone"></i>
-                    </div>
-                    <h3 class="quick-card-title">Comunicados</h3>
-                    <p class="quick-card-text">
-                        Mantente informado de las circulares, avisos institucionales y cronogramas.
-                    </p>
-                    <a href="#noticias" class="quick-card-link">
-                        Ver comunicados <i class="bi bi-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="quick-card">
-                    <div class="quick-icon-wrapper">
-                        <i class="bi bi-images"></i>
-                    </div>
-                    <h3 class="quick-card-title">Galería Escolar</h3>
-                    <p class="quick-card-text">
-                        Fotografías de las actividades cívicas, culturales, deportivas y académicas.
-                    </p>
-                    <a href="#galeria" class="quick-card-link">
-                        Ver galería <i class="bi bi-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="quick-card">
-                    <div class="quick-icon-wrapper">
-                        <i class="bi bi-chat-dots"></i>
-                    </div>
-                    <h3 class="quick-card-title">Atención Directa</h3>
-                    <p class="quick-card-text">
-                        Canal directo para representantes y padres de familia por vía telefónica o WhatsApp.
-                    </p>
-                    <a href="https://wa.me/593960172899" target="_blank" class="quick-card-link text-success">
-                        096 017 2899 <i class="bi bi-whatsapp"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ==========================================
-     PRESENTACIÓN INSTITUCIONAL Y VALORES
-     ========================================== -->
-<section class="section-padding" id="nosotros">
-    <div class="container">
-        <div class="section-header">
-            <span class="section-subtitle">Nuestra Identidad</span>
-            <h2 class="section-title">Escuela de Educación Básica "Antonio Ante"</h2>
-        </div>
-
-        <div class="row g-5 align-items-center mb-5">
-            <div class="col-lg-6">
-                <h3 class="fw-bold mb-3" style="color: var(--color-primary);">Formación Integral con Compromiso Social</h3>
-                <p class="text-secondary lead">
-                    Nuestra institución se dedica a potenciar las habilidades cognitivas, socioemocionales y éticas de cada estudiante, en un entorno seguro, inclusivo e innovador.
-                </p>
-                <p class="text-muted">
-                    <em>Nota: El contenido institucional detallado (Misión, Visión, Reseña Histórica y Nómina de Autoridades) será administrable directamente desde el panel de control para garantizar información 100% oficial y fidedigna.</em>
-                </p>
-                
-                <div class="row g-3 mt-4">
-                    <div class="col-sm-6">
-                        <div class="d-flex align-items-center gap-3 p-3 rounded bg-light border-start border-4 border-danger">
-                            <i class="bi bi-check-circle-fill text-danger fs-3"></i>
-                            <div>
-                                <h6 class="mb-0 fw-bold">Disciplina</h6>
-                                <small class="text-muted">Formación en valores</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="d-flex align-items-center gap-3 p-3 rounded bg-light border-start border-4 border-primary">
-                            <i class="bi bi-star-fill text-primary fs-3"></i>
-                            <div>
-                                <h6 class="mb-0 fw-bold">Excelencia</h6>
-                                <small class="text-muted">Calidad pedagógica</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-6">
-                <div class="p-4 p-md-5 rounded-4 shadow-sm" style="background-color: var(--color-beige-light); border-left: 6px solid var(--color-primary);">
-                    <h4 class="fw-bold mb-3" style="color: var(--color-primary);">
-                        <i class="bi bi-shield-check text-danger me-2"></i> Pilares Institucionales
-                    </h4>
-                    <div class="mb-4">
-                        <h5 class="fw-bold fs-6 text-primary"><i class="bi bi-compass text-danger me-1"></i> Misión (Provisional)</h5>
-                        <p class="small text-muted mb-0">
-                            Brindar una educación integral y humanista de calidad a niños y niñas, desarrollando competencias académicas, habilidades para la vida y valores cívicos en cooperación con la familia y la comunidad.
-                        </p>
-                    </div>
-                    <div class="mb-4">
-                        <h5 class="fw-bold fs-6 text-primary"><i class="bi bi-eye text-danger me-1"></i> Visión (Provisional)</h5>
-                        <p class="small text-muted mb-0">
-                            Consolidarse como una institución educativa líder en el cantón y la provincia, reconocida por la excelencia de sus graduados, la dedicación de su cuerpo docente y su activa vinculación con la comunidad.
-                        </p>
+                <div class="stat-item-col">
+                    <div class="stat-icon-box">
+                        <i class="bi bi-book-half"></i>
                     </div>
                     <div>
-                        <h5 class="fw-bold fs-6 text-primary"><i class="bi bi-heart text-danger me-1"></i> Valores</h5>
-                        <div class="d-flex flex-wrap gap-2 mt-2">
-                            <span class="badge bg-primary px-3 py-2">Respeto</span>
-                            <span class="badge bg-danger px-3 py-2">Responsabilidad</span>
-                            <span class="badge bg-dark px-3 py-2">Honestidad</span>
-                            <span class="badge bg-secondary px-3 py-2">Solidaridad</span>
+                        <h4 class="stat-number">4 Niveles</h4>
+                        <p class="stat-label">Inicial hasta Básica Superior</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="stat-item-col">
+                    <div class="stat-icon-box" style="background-color: var(--red-soft); color: var(--red-primary);">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                    <div>
+                        <h4 class="stat-number">Docentes</h4>
+                        <p class="stat-label">100% Titulados y Comprometidos</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="stat-item-col">
+                    <div class="stat-icon-box" style="background-color: var(--beige-light); color: #8c7847;">
+                        <i class="bi bi-shield-lock-fill"></i>
+                    </div>
+                    <div>
+                        <h4 class="stat-number">Seguridad</h4>
+                        <p class="stat-label">Entorno Protegido e Inclusivo</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="stat-item-col">
+                    <div class="stat-icon-box" style="background-color: #eafaf1; color: #22c55e;">
+                        <i class="bi bi-clock-history"></i>
+                    </div>
+                    <div>
+                        <h4 class="stat-number">Jornada</h4>
+                        <p class="stat-label">Matutina: 07:00 a 13:00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- =======================================================
+     3. MENSAJE DE BIENVENIDA DE LA DIRECCIÓN
+     ======================================================= -->
+<section class="section-premium" id="bienvenida">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-5">
+                <div class="position-relative">
+                    <div class="p-3 bg-white rounded-4 shadow-sm border" style="border-color: rgba(24, 57, 109, 0.1) !important;">
+                        <img src="{% static 'img/logo_antonio_ante.jpg' %}" alt="Identidad EEB Antonio Ante" class="img-fluid rounded-3 w-100 shadow-sm" style="max-height: 380px; object-fit: cover; background: #0c1f3d;">
+                    </div>
+                    <div class="position-absolute bottom-0 end-0 bg-primary text-white p-3 rounded-3 shadow d-none d-sm-block" style="transform: translate(15px, 20px);">
+                        <span class="d-block fw-bold fs-6">Compromiso Educativo</span>
+                        <small class="text-white-50">Por y para nuestra niñez</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-7">
+                <div class="welcome-card-box">
+                    <div class="quote-decor">“</div>
+                    <h3 class="welcome-quote-text">
+                        Nuestra misión es educar con el corazón y la razón, creando un ambiente donde cada niño y niña descubra su potencial y cultive valores que perdurarán para toda la vida.
+                    </h3>
+                    <p class="text-secondary mb-3">
+                        La <strong>Escuela de Educación Básica "Antonio Ante"</strong> abre con orgullo sus puertas a las familias que confían la educación de sus hijos en nuestras aulas. Fomentamos el pensamiento crítico, la convivencia pacífica, el amor al estudio y la identidad cultural propia de nuestra tierra.
+                    </p>
+                    <p class="text-muted small mb-4">
+                        <em>*Nota institucional: Esta sección y los textos de autoridades podrán gestionarse y actualizarse con fotografías y firmas oficiales directamente desde el Sistema Administrativo de Django.</em>
+                    </p>
+                    <div class="signature-badge">
+                        <div class="signature-avatar">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-0 fw-bold text-dark">Dirección Institucional</h6>
+                            <small class="text-danger fw-semibold">EEB Antonio Ante • Gestión Educativa</small>
                         </div>
                     </div>
                 </div>
@@ -183,85 +167,101 @@
     </div>
 </section>
 
-<!-- ==========================================
-     OFERTA ACADÉMICA
-     ========================================== -->
-<section class="section-padding bg-light" id="oferta-academica">
+<!-- =======================================================
+     4. NOSOTROS: HISTORIA, MISIÓN, VISIÓN Y VALORES
+     ======================================================= -->
+<section class="section-premium bg-light" id="nosotros">
     <div class="container">
-        <div class="section-header">
-            <span class="section-subtitle">Niveles de Estudio</span>
-            <h2 class="section-title">Oferta Académica</h2>
+        <div class="text-center mb-5">
+            <span class="section-tagline">
+                <i class="bi bi-bookmark-star-fill"></i> Identidad Institucional
+            </span>
+            <h2 class="section-main-title">Nuestra Esencia y Compromiso</h2>
+            <div class="title-underline-center"></div>
+            <p class="text-secondary max-w-700 mx-auto" style="max-width: 680px;">
+                Conoce la base sobre la que construimos día a día el futuro académico, moral y cívico de la comunidad educativa anteña.
+            </p>
         </div>
 
-        <div class="row g-4">
-            <div class="col-md-6 col-lg-3">
-                <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
-                    <div class="card-header text-white text-center py-4" style="background: linear-gradient(45deg, var(--color-primary), #295799);">
-                        <i class="bi bi-emoji-smile fs-1 mb-2 d-block"></i>
-                        <h4 class="fs-5 fw-bold mb-0">Educación Inicial</h4>
-                        <small class="text-white-50">3 a 4 años</small>
+        <div class="row g-4 mb-5" id="mision-vision">
+            <!-- Misión -->
+            <div class="col-lg-6">
+                <div class="pillar-card border-top border-4 border-primary">
+                    <div class="pillar-icon-badge badge-navy">
+                        <i class="bi bi-compass-fill"></i>
                     </div>
-                    <div class="card-body p-4 text-center">
-                        <p class="text-muted small">
-                            Estimulación temprana, juego-aprendizaje, desarrollo psicomotriz y socialización en un entorno cálido.
-                        </p>
-                    </div>
-                    <div class="card-footer bg-white border-0 text-center pb-4">
-                        <span class="badge bg-light text-primary border">Jornada Matutina</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3">
-                <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
-                    <div class="card-header text-white text-center py-4" style="background: linear-gradient(45deg, #1f498b, var(--color-primary));">
-                        <i class="bi bi-book fs-1 mb-2 d-block"></i>
-                        <h4 class="fs-5 fw-bold mb-0">Básica Elemental</h4>
-                        <small class="text-white-50">2°, 3° y 4° Grado</small>
-                    </div>
-                    <div class="card-body p-4 text-center">
-                        <p class="text-muted small">
-                            Desarrollo de lectoescritura, razonamiento lógico-matemático y primeros pasos en habilidades investigativas.
-                        </p>
-                    </div>
-                    <div class="card-footer bg-white border-0 text-center pb-4">
-                        <span class="badge bg-light text-primary border">Jornada Matutina</span>
+                    <h3 class="pillar-title">Misión Institucional</h3>
+                    <p class="pillar-desc">
+                        Brindar una educación integral, humanista, científica y de excelencia a los estudiantes de los niveles de Inicial y Educación General Básica, desarrollando capacidades críticas, creativas y valóricas en un marco de equidad, inclusión social y participación activa de la familia y la comunidad.
+                    </p>
+                    <div class="mt-3">
+                        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2">
+                            <i class="bi bi-check-circle-fill me-1"></i> Formación Humanista y Científica
+                        </span>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-6 col-lg-3">
-                <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
-                    <div class="card-header text-white text-center py-4" style="background: linear-gradient(45deg, #2b3956, var(--color-primary-dark));">
-                        <i class="bi bi-journal-text fs-1 mb-2 d-block"></i>
-                        <h4 class="fs-5 fw-bold mb-0">Básica Media</h4>
-                        <small class="text-white-50">5°, 6° y 7° Grado</small>
+            <!-- Visión -->
+            <div class="col-lg-6">
+                <div class="pillar-card border-top border-4 border-danger">
+                    <div class="pillar-icon-badge badge-red">
+                        <i class="bi bi-eye-fill"></i>
                     </div>
-                    <div class="card-body p-4 text-center">
-                        <p class="text-muted small">
-                            Consolidación de competencias científicas, comprensión lectora crítica, ciencias sociales y trabajo colaborativo.
-                        </p>
-                    </div>
-                    <div class="card-footer bg-white border-0 text-center pb-4">
-                        <span class="badge bg-light text-primary border">Jornada Matutina</span>
+                    <h3 class="pillar-title">Visión Institucional</h3>
+                    <p class="pillar-desc">
+                        Ser reconocidos a nivel cantonal y provincial como una escuela referente de excelencia pedagógica, formación ética y convivencia armónica; cuyos egresados destaquen por su sólida preparación académica, sus valores ciudadanos y su capacidad para liderar positivamente en el bachillerato y la sociedad.
+                    </p>
+                    <div class="mt-3">
+                        <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-3 py-2">
+                            <i class="bi bi-star-fill me-1"></i> Liderazgo e Impacto Social
+                        </span>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="col-md-6 col-lg-3">
-                <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
-                    <div class="card-header text-white text-center py-4" style="background: linear-gradient(45deg, var(--color-secondary), #b5121f);">
-                        <i class="bi bi-award fs-1 mb-2 d-block"></i>
-                        <h4 class="fs-5 fw-bold mb-0">Básica Superior</h4>
-                        <small class="text-white-50">8°, 9° y 10° Grado</small>
+        <!-- 4 Valores Centrales -->
+        <div id="valores">
+            <h4 class="text-center fw-bold text-dark mb-4">Valores que Guiamos en Nuestras Aulas</h4>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="pillar-card text-center">
+                        <div class="pillar-icon-badge badge-navy mx-auto">
+                            <i class="bi bi-heart-fill"></i>
+                        </div>
+                        <h5 class="fw-bold mb-2 text-primary">Respeto</h5>
+                        <p class="small text-muted mb-0">Valoración de la diversidad, la dignidad individual y el trato cordial en la convivencia escolar.</p>
                     </div>
-                    <div class="card-body p-4 text-center">
-                        <p class="text-muted small">
-                            Pensamiento analítico, preparación integral para el bachillerato, tecnología, valores y liderazgo estudiantil.
-                        </p>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="pillar-card text-center">
+                        <div class="pillar-icon-badge badge-red mx-auto">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h5 class="fw-bold mb-2 text-danger">Responsabilidad</h5>
+                        <p class="small text-muted mb-0">Cumplimiento diligente del deber académico y cuidado de nuestro entorno escolar y social.</p>
                     </div>
-                    <div class="card-footer bg-white border-0 text-center pb-4">
-                        <span class="badge bg-light text-danger border">Jornada Matutina</span>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="pillar-card text-center">
+                        <div class="pillar-icon-badge badge-beige mx-auto">
+                            <i class="bi bi-lightbulb-fill"></i>
+                        </div>
+                        <h5 class="fw-bold mb-2" style="color: #8c7847;">Honestidad</h5>
+                        <p class="small text-muted mb-0">Transparencia, verdad y rectitud en cada una de las acciones de nuestra comunidad educativa.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="pillar-card text-center">
+                        <div class="pillar-icon-badge badge-navy mx-auto">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                        <h5 class="fw-bold mb-2 text-primary">Solidaridad</h5>
+                        <p class="small text-muted mb-0">Empatía, espíritu colaborativo y apoyo mutuo frente a las necesidades de los demás.</p>
                     </div>
                 </div>
             </div>
@@ -269,61 +269,119 @@
     </div>
 </section>
 
-<!-- ==========================================
-     NOTICIAS Y COMUNICADOS (SECCIÓN DINÁMICA)
-     ========================================== -->
-<section class="section-padding" id="noticias">
+<!-- =======================================================
+     5. OFERTA ACADÉMICA - TARJETAS DE ALTO NIVEL
+     ======================================================= -->
+<section class="section-premium" id="oferta-academica">
     <div class="container">
-        <div class="section-header">
-            <span class="section-subtitle">Actualidad Escolar</span>
-            <h2 class="section-title">Noticias y Comunicados</h2>
+        <div class="text-center mb-5">
+            <span class="section-tagline">
+                <i class="bi bi-mortarboard-fill"></i> Calidad Pedagógica
+            </span>
+            <h2 class="section-main-title">Oferta Académica Institucional</h2>
+            <div class="title-underline-center"></div>
+            <p class="text-secondary" style="max-width: 680px; margin: 0 auto;">
+                Diseñamos cada nivel formativo conforme a los lineamientos curriculares del Ministerio de Educación, con metodologías activas y estimulantes.
+            </p>
         </div>
 
         <div class="row g-4">
-            <div class="col-lg-4 col-md-6">
-                <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden">
-                    <div class="p-4 bg-primary text-white">
-                        <span class="badge bg-danger mb-2">Comunicado Oficial</span>
-                        <h5 class="fw-bold mb-0">Inicio del Período de Matrículas</h5>
+            <!-- Nivel 1: Inicial -->
+            <div class="col-md-6 col-lg-3">
+                <div class="academic-level-card">
+                    <div class="card-academic-header card-header-inicial">
+                        <span class="academic-badge-age">3 a 4 Años de Edad</span>
+                        <h3 class="academic-title">Educación Inicial</h3>
                     </div>
-                    <div class="card-body p-4">
-                        <small class="text-muted d-block mb-2"><i class="bi bi-calendar3 me-1"></i> Período Académico Vigente</small>
-                        <p class="text-secondary small">
-                            Se informa a los señores padres de familia y representantes legales sobre el cronograma oficial de matrículas y requisitos documentales.
-                        </p>
-                        <a href="#" class="btn btn-sm btn-outline-primary">Leer más</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden">
-                    <div class="p-4" style="background-color: var(--color-primary-dark); color: white;">
-                        <span class="badge bg-warning text-dark mb-2">Actividad Institucional</span>
-                        <h5 class="fw-bold mb-0">Minuto Cívico y Juramento a la Bandera</h5>
-                    </div>
-                    <div class="card-body p-4">
-                        <small class="text-muted d-block mb-2"><i class="bi bi-calendar3 me-1"></i> Evento Cívico Escolar</small>
-                        <p class="text-secondary small">
-                            Nuestros estudiantes de décimo grado y abanderados destacaron en la solemne ceremonia cívica con la participación de la comunidad docente.
-                        </p>
-                        <a href="#" class="btn btn-sm btn-outline-primary">Leer más</a>
+                    <div class="card-academic-body">
+                        <div>
+                            <p class="small text-muted mb-3">
+                                Espacio lúdico y afectivo diseñado para desarrollar la autonomía, psicomotricidad y destrezas comunicativas del infante.
+                            </p>
+                            <ul class="feature-check-list">
+                                <li><i class="bi bi-check-circle-fill"></i> Estimulación temprana y motricidad</li>
+                                <li><i class="bi bi-check-circle-fill"></i> Lenguaje y expresión artística</li>
+                                <li><i class="bi bi-check-circle-fill"></i> Hábitos de convivencia y juego</li>
+                            </ul>
+                        </div>
+                        <div class="pt-3 border-top text-center">
+                            <span class="badge bg-light text-primary border w-100 py-2">Jornada Matutina</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6">
-                <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden">
-                    <div class="p-4" style="background-color: var(--color-secondary); color: white;">
-                        <span class="badge bg-white text-danger mb-2">Comunidad</span>
-                        <h5 class="fw-bold mb-0">Reuniones de Padres de Familia</h5>
+            <!-- Nivel 2: Básica Elemental -->
+            <div class="col-md-6 col-lg-3">
+                <div class="academic-level-card">
+                    <div class="card-academic-header card-header-elemental">
+                        <span class="academic-badge-age">2°, 3° y 4° EGB</span>
+                        <h3 class="academic-title">Básica Elemental</h3>
                     </div>
-                    <div class="card-body p-4">
-                        <small class="text-muted d-block mb-2"><i class="bi bi-calendar3 me-1"></i> Convocatoria General</small>
-                        <p class="text-secondary small">
-                            Espacio de coordinación para evaluar el avance pedagógico y los proyectos colaborativos del presente ciclo escolar.
-                        </p>
-                        <a href="#" class="btn btn-sm btn-outline-primary">Leer más</a>
+                    <div class="card-academic-body">
+                        <div>
+                            <p class="small text-muted mb-3">
+                                Consolidación del aprendizaje de la lectura, escritura y operaciones lógico-matemáticas fundamentales.
+                            </p>
+                            <ul class="feature-check-list">
+                                <li><i class="bi bi-check-circle-fill"></i> Fluidez y comprensión lectora</li>
+                                <li><i class="bi bi-check-circle-fill"></i> Razonamiento numérico inicial</li>
+                                <li><i class="bi bi-check-circle-fill"></i> Exploración del entorno natural</li>
+                            </ul>
+                        </div>
+                        <div class="pt-3 border-top text-center">
+                            <span class="badge bg-light text-primary border w-100 py-2">Jornada Matutina</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nivel 3: Básica Media -->
+            <div class="col-md-6 col-lg-3">
+                <div class="academic-level-card">
+                    <div class="card-academic-header card-header-media">
+                        <span class="academic-badge-age">5°, 6° y 7° EGB</span>
+                        <h3 class="academic-title">Básica Media</h3>
+                    </div>
+                    <div class="card-academic-body">
+                        <div>
+                            <p class="small text-muted mb-3">
+                                Fortalecimiento del pensamiento reflexivo, métodos de indagación científica y trabajo colaborativo en equipo.
+                            </p>
+                            <ul class="feature-check-list">
+                                <li><i class="bi bi-check-circle-fill"></i> Pensamiento crítico e investigación</li>
+                                <li><i class="bi bi-check-circle-fill"></i> Ciencias Naturales y Sociales</li>
+                                <li><i class="bi bi-check-circle-fill"></i> Desarrollo de proyectos escolares</li>
+                            </ul>
+                        </div>
+                        <div class="pt-3 border-top text-center">
+                            <span class="badge bg-light text-primary border w-100 py-2">Jornada Matutina</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nivel 4: Básica Superior -->
+            <div class="col-md-6 col-lg-3">
+                <div class="academic-level-card">
+                    <div class="card-academic-header card-header-superior">
+                        <span class="academic-badge-age">8°, 9° y 10° EGB</span>
+                        <h3 class="academic-title">Básica Superior</h3>
+                    </div>
+                    <div class="card-academic-body">
+                        <div>
+                            <p class="small text-muted mb-3">
+                                Preparación integral y rigurosa para el ingreso exitoso al Bachillerato General Unificado, con liderazgo y ética.
+                            </p>
+                            <ul class="feature-check-list">
+                                <li><i class="bi bi-check-circle-fill"></i> Álgebra y resolución de problemas</li>
+                                <li><i class="bi bi-check-circle-fill"></i> Expresión oral, escrita y debate</li>
+                                <li><i class="bi bi-check-circle-fill"></i> Orientación vocacional y liderazgo</li>
+                            </ul>
+                        </div>
+                        <div class="pt-3 border-top text-center">
+                            <span class="badge bg-light text-danger border w-100 py-2">Jornada Matutina</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -331,52 +389,224 @@
     </div>
 </section>
 
-<!-- ==========================================
-     GALERÍA INSTITUCIONAL
-     ========================================== -->
-<section class="section-padding bg-light" id="galeria">
+<!-- =======================================================
+     6. NOTICIAS Y COMUNICADOS INSTITUCIONALES (GRID EDITORIAL)
+     ======================================================= -->
+<section class="section-premium bg-light" id="noticias">
     <div class="container">
-        <div class="section-header">
-            <span class="section-subtitle">Nuestra Vida Escolar</span>
-            <h2 class="section-title">Galería de Actividades</h2>
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-5">
+            <div>
+                <span class="section-tagline">
+                    <i class="bi bi-newspaper"></i> Información Oficial
+                </span>
+                <h2 class="section-main-title mb-0">Noticias y Comunicados</h2>
+                <div class="title-underline-left"></div>
+            </div>
+            <a href="https://wa.me/593960172899" target="_blank" class="btn btn-outline-danger mt-3 mt-md-0 fw-bold">
+                <i class="bi bi-bell-fill me-1"></i> Consultar Novedades por WhatsApp
+            </a>
+        </div>
+
+        <div class="row g-4">
+            <!-- Artículo 1: Comunicado Urgente -->
+            <div class="col-lg-4 col-md-6">
+                <article class="news-article-card">
+                    <div class="news-banner-top banner-urgent">
+                        <i class="bi bi-megaphone-fill news-banner-watermark"></i>
+                        <span class="news-category-pill">Comunicado Oficial</span>
+                    </div>
+                    <div class="news-article-body">
+                        <div class="news-meta-date">
+                            <i class="bi bi-calendar-event text-danger"></i>
+                            <span>Periodo Lectivo Vigente</span>
+                        </div>
+                        <h4 class="news-headline">Proceso Oficial de Matrículas y Requisitos de Admisión</h4>
+                        <p class="news-excerpt">
+                            Se pone en conocimiento de los padres de familia y representantes legales el cronograma del Ministerio de Educación y la documentación requerida para el ciclo escolar.
+                        </p>
+                        <a href="https://wa.me/593960172899?text=Deseo%20informaci%C3%B3n%20sobre%20el%20cronograma%20de%20matr%C3%ADculas" target="_blank" class="btn-read-more-link">
+                            Consultar en Secretaría <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Artículo 2: Evento Cívico -->
+            <div class="col-lg-4 col-md-6">
+                <article class="news-article-card">
+                    <div class="news-banner-top banner-event">
+                        <i class="bi bi-flag-fill news-banner-watermark"></i>
+                        <span class="news-category-pill">Vida Institucional</span>
+                    </div>
+                    <div class="news-article-body">
+                        <div class="news-meta-date">
+                            <i class="bi bi-calendar-check text-primary"></i>
+                            <span>Actividad Cívica</span>
+                        </div>
+                        <h4 class="news-headline">Solemne Ceremonia de Juramento a la Bandera Nacional</h4>
+                        <p class="news-excerpt">
+                            Nuestros abanderados y estudiantes de décimo año rindieron homenaje a los símbolos patrios en un acto solemne que congregó a la planta docente y familias.
+                        </p>
+                        <a href="#galeria" class="btn-read-more-link">
+                            Ver galería del evento <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Artículo 3: Convocatoria -->
+            <div class="col-lg-4 col-md-6">
+                <article class="news-article-card">
+                    <div class="news-banner-top">
+                        <i class="bi bi-people-fill news-banner-watermark"></i>
+                        <span class="news-category-pill">Comunidad Educativa</span>
+                    </div>
+                    <div class="news-article-body">
+                        <div class="news-meta-date">
+                            <i class="bi bi-clock-fill text-warning"></i>
+                            <span>Comité Central de Padres</span>
+                        </div>
+                        <h4 class="news-headline">Convocatoria a Asamblea General de Representantes</h4>
+                        <p class="news-excerpt">
+                            Espacio de diálogo y coordinación para socializar los proyectos pedagógicos, obras de mantenimiento y cronogramas de actividades extracurriculares.
+                        </p>
+                        <a href="https://wa.me/593960172899" target="_blank" class="btn-read-more-link">
+                            Más detalles vía WhatsApp <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =======================================================
+     7. GALERÍA ESCOLAR Y ACTIVIDADES
+     ======================================================= -->
+<section class="section-premium" id="galeria">
+    <div class="container">
+        <div class="text-center mb-5">
+            <span class="section-tagline">
+                <i class="bi bi-images"></i> Nuestra Comunidad en Acción
+            </span>
+            <h2 class="section-main-title">Galería de Actividades Institucionales</h2>
+            <div class="title-underline-center"></div>
+            <p class="text-secondary" style="max-width: 680px; margin: 0 auto;">
+                Reflejo de la alegría, disciplina, arte y civismo que viven nuestros estudiantes en su jornada diaria.
+            </p>
         </div>
 
         <div class="row g-4">
             <div class="col-md-4">
-                <div class="card border-0 shadow-sm rounded-3 p-4 text-center bg-white h-100 justify-content-center">
-                    <i class="bi bi-camera-fill text-danger fs-1 mb-2"></i>
-                    <h5 class="fw-bold">Actividades Cívicas y Culturales</h5>
-                    <p class="text-muted small">Momentos cívicos, comparsas, danzas y celebraciones escolares.</p>
+                <div class="card border-0 shadow-sm rounded-4 p-4 text-center bg-light h-100 justify-content-center">
+                    <div class="stat-icon-box mx-auto mb-3" style="background: var(--navy-soft); color: var(--navy-primary);">
+                        <i class="bi bi-palette-fill"></i>
+                    </div>
+                    <h5 class="fw-bold text-dark">Feria de Ciencias y Arte</h5>
+                    <p class="text-muted small mb-0">Demostración de proyectos experimentales, creatividad plástica y habilidades oratorias de los estudiantes.</p>
                 </div>
             </div>
+
             <div class="col-md-4">
-                <div class="card border-0 shadow-sm rounded-3 p-4 text-center bg-white h-100 justify-content-center">
-                    <i class="bi bi-trophy-fill text-warning fs-1 mb-2"></i>
-                    <h5 class="fw-bold">Juegos Deportivos Internos</h5>
-                    <p class="text-muted small">Fomento de la sana competencia, trabajo en equipo y actividad física.</p>
+                <div class="card border-0 shadow-sm rounded-4 p-4 text-center bg-light h-100 justify-content-center">
+                    <div class="stat-icon-box mx-auto mb-3" style="background: var(--red-soft); color: var(--red-primary);">
+                        <i class="bi bi-trophy-fill"></i>
+                    </div>
+                    <h5 class="fw-bold text-dark">Jornadas Deportivas</h5>
+                    <p class="text-muted small mb-0">Campeonatos de fútbol, básquet y atletismo escolar fortaleciendo el compañerismo y la salud física.</p>
                 </div>
             </div>
+
             <div class="col-md-4">
-                <div class="card border-0 shadow-sm rounded-3 p-4 text-center bg-white h-100 justify-content-center">
-                    <i class="bi bi-palette-fill text-primary fs-1 mb-2"></i>
-                    <h5 class="fw-bold">Feria de Ciencias y Arte</h5>
-                    <p class="text-muted small">Exposición de proyectos, creatividad e innovación de los alumnos.</p>
+                <div class="card border-0 shadow-sm rounded-4 p-4 text-center bg-light h-100 justify-content-center">
+                    <div class="stat-icon-box mx-auto mb-3" style="background: var(--beige-light); color: #8c7847;">
+                        <i class="bi bi-flag-fill"></i>
+                    </div>
+                    <h5 class="fw-bold text-dark">Momentos Cívicos y Culturales</h5>
+                    <p class="text-muted small mb-0">Revalorización de nuestras tradiciones, desfiles cívicos e identidad del cantón Antonio Ante.</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ==========================================
-     LLAMADO A LA ACCIÓN (WHATSAPP FLOTANTE Y CONTACTO)
-     ========================================== -->
-<section class="py-5 text-white" style="background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);">
-    <div class="container text-center">
-        <h3 class="fw-bold mb-3 text-white">¿Tienes dudas sobre inscripciones o trámites?</h3>
-        <p class="lead mb-4 text-white-50">Comunícate directamente con la secretaría o administración institucional a través de nuestra línea de atención.</p>
-        <a href="https://wa.me/593960172899?text=Hola,%20deseo%20comunicarme%20con%20la%20EEB%20Antonio%20Ante" target="_blank" class="btn btn-success btn-lg px-4 py-3 fw-bold rounded-pill shadow">
-            <i class="bi bi-whatsapp me-2 fs-5"></i> Contactar al 096 017 2899
-        </a>
+<!-- =======================================================
+     8. CONTACTO OFICIAL Y ATENCIÓN DIRECTA
+     ======================================================= -->
+<section class="section-premium bg-light" id="contacto-seccion">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6">
+                <span class="section-tagline">
+                    <i class="bi bi-chat-heart-fill"></i> Atención a Representantes
+                </span>
+                <h2 class="section-main-title">Estamos para Servir a Nuestra Comunidad</h2>
+                <div class="title-underline-left"></div>
+                <p class="text-secondary mb-4">
+                    Si eres padre de familia, representante o deseas información sobre matrículas, requisitos o trámites académicos, puedes visitarnos o comunicarte mediante nuestros canales oficiales.
+                </p>
+
+                <div class="d-flex flex-column gap-3 mb-4">
+                    <div class="d-flex align-items-center gap-3 p-3 bg-white rounded-3 shadow-sm border">
+                        <div class="stat-icon-box" style="background: #eafaf1; color: #22c55e;">
+                            <i class="bi bi-whatsapp"></i>
+                        </div>
+                        <div>
+                            <span class="d-block text-muted small">Línea Directa de WhatsApp</span>
+                            <a href="https://wa.me/593960172899" target="_blank" class="fw-bold text-dark fs-5 text-decoration-none">
+                                096 017 2899
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-center gap-3 p-3 bg-white rounded-3 shadow-sm border">
+                        <div class="stat-icon-box" style="background: var(--navy-soft); color: var(--navy-primary);">
+                            <i class="bi bi-geo-alt-fill"></i>
+                        </div>
+                        <div>
+                            <span class="d-block text-muted small">Ubicación Institucional</span>
+                            <strong class="text-dark">Cantón Antonio Ante, Provincia de Imbabura, Ecuador</strong>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-center gap-3 p-3 bg-white rounded-3 shadow-sm border">
+                        <div class="stat-icon-box" style="background: var(--red-soft); color: var(--red-primary);">
+                            <i class="bi bi-clock-fill"></i>
+                        </div>
+                        <div>
+                            <span class="d-block text-muted small">Horario de Secretaría</span>
+                            <strong class="text-dark">Lunes a Viernes de 07:00 a 13:00</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formulario de Contacto / Consulta Escolar -->
+            <div class="col-lg-6">
+                <div class="p-4 p-md-5 bg-white rounded-4 shadow-sm border">
+                    <h4 class="fw-bold mb-2 text-primary">Envía tu Consulta a Secretaría</h4>
+                    <p class="text-muted small mb-4">Completa el formulario y responderemos a la brevedad posible.</p>
+                    
+                    <form onsubmit="event.preventDefault(); window.open('https://wa.me/593960172899?text=Hola,%20mi%20nombre%20es%20' + encodeURIComponent(document.getElementById('inputNombre').value) + '.%20Consulta:%20' + encodeURIComponent(document.getElementById('inputMensaje').value));">
+                        <div class="mb-3">
+                            <label for="inputNombre" class="form-label small fw-bold text-dark">Nombre y Apellido del Representante</label>
+                            <input type="text" class="form-control form-control-lg fs-6" id="inputNombre" placeholder="Ej. Juan Pérez" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputTelefono" class="form-label small fw-bold text-dark">Teléfono o Celular de Contacto</label>
+                            <input type="tel" class="form-control form-control-lg fs-6" id="inputTelefono" placeholder="Ej. 096 017 2899" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputMensaje" class="form-label small fw-bold text-dark">Detalle de la Consulta o Trámite</label>
+                            <textarea class="form-control form-control-lg fs-6" id="inputMensaje" rows="3" placeholder="Escribe aquí tu consulta sobre matrículas, certificados o información general..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-hero-primary w-100 py-3 justify-content-center">
+                            <i class="bi bi-send-fill me-2"></i> Enviar Mensaje a Secretaría
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 

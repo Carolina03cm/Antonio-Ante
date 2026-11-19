@@ -4,214 +4,319 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Escuela de Educación Básica "Antonio Ante"{% endblock %}</title>
+    <title>{% block title %}Escuela de Educación Básica "Antonio Ante" | Sitio Oficial{% endblock %}</title>
     
-    <!-- Meta tags SEO -->
-    <meta name="description" content="Sitio web oficial de la Escuela de Educación Básica Antonio Ante. Formando con valores, excelencia académica y compromiso comunitario.">
+    <!-- Meta tags Institucionales y SEO -->
+    <meta name="description" content="Plataforma oficial de la Escuela de Educación Básica Antonio Ante. Formación académica de excelencia con sólidos valores morales, cívicos y éticos.">
+    <meta name="keywords" content="EEB Antonio Ante, Escuela Antonio Ante, Educación Básica Imbabura, Educación Inicial, Oferta Académica">
+    <meta name="author" content="EEB Antonio Ante">
     
-    <!-- Favicon institucional -->
+    <!-- Favicon Oficial con el Escudo Institucional -->
     <link rel="icon" type="image/jpeg" href="{% static 'img/logo_antonio_ante.jpg' %}">
 
-    <!-- Google Fonts: Montserrat & Poppins -->
+    <!-- Tipografías de Prestigio: Plus Jakarta Sans, Cinzel, Playfair Display -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Bootstrap 5 CSS -->
+    <!-- Bootstrap 5.3 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <!-- Estilos personalizados del proyecto -->
+    <!-- Estilos de Alto Nivel del Proyecto -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     
     {% block extra_css %}{% endblock %}
 </head>
 <body>
 
-    <!-- 1. BARRA SUPERIOR INFORMATIVA -->
-    <header class="topbar d-none d-md-block">
+    <!-- =======================================================
+         1. TOPBAR INSTITUCIONAL OFICIAL
+         ======================================================= -->
+    <aside class="topbar-institutional d-none d-md-block" aria-label="Información institucional de cabecera">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-md-8">
-                    <span class="me-3"><i class="bi bi-geo-alt-fill text-danger me-1"></i> Imbabura, Ecuador</span>
-                    <span class="me-3"><i class="bi bi-clock-fill text-warning me-1"></i> Horario: Lunes a Viernes 07h00 - 13h00</span>
-                    <span><i class="bi bi-telephone-fill me-1"></i> Tel: 096 017 2899</span>
-                </div>
-                <div class="col-md-4 text-end">
-                    <a href="https://wa.me/593960172899" target="_blank" class="me-3" title="WhatsApp Institucional">
-                        <i class="bi bi-whatsapp text-success"></i> WhatsApp
-                    </a>
-                    <a href="/admin/" class="text-white fw-semibold" title="Acceso Administrativo">
-                        <i class="bi bi-shield-lock-fill me-1"></i> Acceso Docente
-                    </a>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- 2. BARRA DE NAVEGACIÓN INSTITUCIONAL -->
-    <nav class="navbar navbar-expand-lg navbar-institucional">
-        <div class="container">
-            <a class="navbar-brand-container" href="{% url 'core:home' %}">
-                <img src="{% static 'img/logo_antonio_ante.jpg' %}" alt="Logo EEB Antonio Ante" class="institutional-logo">
-                <div>
-                    <h1 class="brand-text-title">EEB ANTONIO ANTE</h1>
-                    <p class="brand-text-subtitle">Escuela de Educación Básica</p>
-                </div>
-            </a>
-
-            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarMain">
-                <ul class="navbar-nav ms-auto align-items-lg-center">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{% url 'core:home' %}"><i class="bi bi-house-door-fill me-1"></i> Inicio</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="nosotrosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Nosotros
-                        </a>
-                        <ul class="dropdown-menu border-0 shadow-sm" aria-labelledby="nosotrosDropdown">
-                            <li><a class="dropdown-item" href="#nosotros"><i class="bi bi-journal-bookmark me-2 text-primary"></i> Historia Institucional</a></li>
-                            <li><a class="dropdown-item" href="#nosotros"><i class="bi bi-compass me-2 text-primary"></i> Misión y Visión</a></li>
-                            <li><a class="dropdown-item" href="#nosotros"><i class="bi bi-award me-2 text-primary"></i> Valores Institucionales</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#autoridades"><i class="bi bi-people me-2 text-primary"></i> Autoridades y Docentes</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#oferta-academica">Oferta Académica</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#noticias">Noticias y Eventos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#galeria">Galería</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contacto">Contacto</a>
-                    </li>
-                    <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
-                        <a class="btn btn-institucional-portal" href="/admin/">
-                            <i class="bi bi-person-circle me-1"></i> Sistema Administrativo
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- 3. CONTENIDO PRINCIPAL -->
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
-
-    <!-- 4. BOTÓN FLOTANTE DE WHATSAPP (096 017 2899) -->
-    <a href="https://wa.me/593960172899?text=Hola,%20solicito%20informaci%C3%B3n%20institucional%20sobre%20la%20Escuela%20de%20Educaci%C3%B3n%20B%C3%A1sica%20Antonio%20Ante." 
-       target="_blank" 
-       rel="noopener noreferrer" 
-       class="floating-whatsapp" 
-       aria-label="Contactar por WhatsApp al 096 017 2899">
-        <div class="whatsapp-btn">
-            <div class="whatsapp-pulse"></div>
-            <i class="bi bi-whatsapp"></i>
-        </div>
-        <span class="whatsapp-tooltip">¿Deseas información? Escríbenos al 096 017 2899</span>
-    </a>
-
-    <!-- 5. PIE DE PÁGINA INSTITUCIONAL -->
-    <footer class="footer-institucional" id="contacto">
-        <div class="container">
-            <div class="row g-4">
-                <!-- Columna 1: Identidad -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="d-flex align-items-center gap-3 mb-3">
-                        <img src="{% static 'img/logo_antonio_ante.jpg' %}" alt="Logo EEB Antonio Ante" class="footer-logo">
-                        <div>
-                            <h4 class="text-white mb-0 fs-5">EEB ANTONIO ANTE</h4>
-                            <small class="text-danger fw-bold">Educación con Excelencia</small>
-                        </div>
-                    </div>
-                    <p class="small text-white-50">
-                        Institución educativa comprometida con la formación integral de la niñez, fomentando valores cívicos, éticos y académicos para el desarrollo de nuestra comunidad.
-                    </p>
-                    <div class="d-flex gap-2 mt-3">
-                        <a href="https://wa.me/593960172899" target="_blank" class="btn btn-outline-light btn-sm rounded-circle p-2" title="WhatsApp">
-                            <i class="bi bi-whatsapp"></i>
-                        </a>
-                        <a href="#" class="btn btn-outline-light btn-sm rounded-circle p-2" title="Facebook Institucional">
-                            <i class="bi bi-facebook"></i>
-                        </a>
-                        <a href="/admin/" class="btn btn-outline-light btn-sm rounded-circle p-2" title="Panel Administrativo">
-                            <i class="bi bi-shield-lock"></i>
-                        </a>
+                <div class="col-lg-7 col-md-8">
+                    <div class="d-flex align-items-center gap-3">
+                        <span class="badge-official-school">
+                            <i class="bi bi-shield-check text-warning"></i> Institución Educativa Fiscal
+                        </span>
+                        <span class="text-white-50">|</span>
+                        <span><i class="bi bi-geo-alt-fill text-danger me-1"></i> Imbabura, Ecuador</span>
+                        <span class="text-white-50">|</span>
+                        <span><i class="bi bi-clock-fill text-warning me-1"></i> Jornada: 07:00 - 13:00</span>
                     </div>
                 </div>
-
-                <!-- Columna 2: Enlaces Rápidos -->
-                <div class="col-lg-2 col-md-6">
-                    <h5 class="footer-heading">Secciones</h5>
-                    <ul class="footer-links">
-                        <li><a href="{% url 'core:home' %}"><i class="bi bi-chevron-right text-danger"></i> Inicio</a></li>
-                        <li><a href="#nosotros"><i class="bi bi-chevron-right text-danger"></i> Nosotros</a></li>
-                        <li><a href="#oferta-academica"><i class="bi bi-chevron-right text-danger"></i> Oferta Académica</a></li>
-                        <li><a href="#noticias"><i class="bi bi-chevron-right text-danger"></i> Noticias</a></li>
-                        <li><a href="#galeria"><i class="bi bi-chevron-right text-danger"></i> Galería</a></li>
-                    </ul>
-                </div>
-
-                <!-- Columna 3: Niveles Educativos -->
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="footer-heading">Niveles Educativos</h5>
-                    <ul class="footer-links">
-                        <li><a href="#oferta-academica"><i class="bi bi-check2 text-danger"></i> Educación Inicial</a></li>
-                        <li><a href="#oferta-academica"><i class="bi bi-check2 text-danger"></i> Básica Elemental (2°, 3°, 4°)</a></li>
-                        <li><a href="#oferta-academica"><i class="bi bi-check2 text-danger"></i> Básica Media (5°, 6°, 7°)</a></li>
-                        <li><a href="#oferta-academica"><i class="bi bi-check2 text-danger"></i> Básica Superior (8°, 9°, 10°)</a></li>
-                    </ul>
-                </div>
-
-                <!-- Columna 4: Contacto Oficial -->
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="footer-heading">Atención Oficial</h5>
-                    <ul class="footer-links">
-                        <li class="d-flex align-items-start gap-2 text-white-50">
-                            <i class="bi bi-geo-alt-fill text-danger mt-1"></i>
-                            <span>Imbabura, Ecuador</span>
-                        </li>
-                        <li class="d-flex align-items-center gap-2 text-white-50">
+                <div class="col-lg-5 col-md-4 text-end">
+                    <div class="d-flex align-items-center justify-content-end gap-3">
+                        <a href="https://wa.me/593960172899" target="_blank" rel="noopener noreferrer" class="d-inline-flex align-items-center gap-1" title="Atención Ciudadana por WhatsApp">
+                            <span class="pulse-dot me-1"></span>
                             <i class="bi bi-whatsapp text-success"></i>
-                            <a href="https://wa.me/593960172899" target="_blank" class="text-white">096 017 2899</a>
+                            <strong>096 017 2899</strong>
+                        </a>
+                        <span class="text-white-50">|</span>
+                        <a href="/admin/" class="btn-portal-mini text-white fw-bold d-inline-flex align-items-center gap-1" title="Acceso al Sistema Administrativo">
+                            <i class="bi bi-lock-fill text-warning"></i> Portal Administrativo
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- =======================================================
+         2. NAVEGACIÓN PRINCIPAL
+         ======================================================= -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-institutional" id="mainNavbar">
+            <div class="container">
+                <!-- Marca Institucional y Escudo Oficial -->
+                <a class="brand-wrapper" href="{% url 'core:home' %}">
+                    <img src="{% static 'img/logo_antonio_ante.jpg' %}" alt="Escudo Oficial EEB Antonio Ante" class="brand-seal-logo">
+                    <div>
+                        <span class="brand-title-main">EEB ANTONIO ANTE</span>
+                        <span class="brand-subtitle-tag d-block">Escuela de Educación Básica</span>
+                    </div>
+                </a>
+
+                <!-- Botón Hamburguesa Móvil -->
+                <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarInstitutionalContent" aria-controls="navbarInstitutionalContent" aria-expanded="false" aria-label="Abrir menú de navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Enlaces del Menú -->
+                <div class="collapse navbar-collapse" id="navbarInstitutionalContent">
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{% url 'core:home' %}"><i class="bi bi-house-door-fill me-1"></i> Inicio</a>
                         </li>
-                        <li class="d-flex align-items-center gap-2 text-white-50">
-                            <i class="bi bi-clock-fill text-warning"></i>
-                            <span>07:00 - 13:00 (Jornada matutina)</span>
+                        
+                        <!-- Menú Desplegable: Nosotros -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownNosotros" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Nosotros
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownNosotros">
+                                <li>
+                                    <a class="dropdown-item" href="#nosotros">
+                                        <i class="bi bi-building"></i>
+                                        <div>
+                                            <span>Historia Institucional</span>
+                                            <small class="text-muted d-block" style="font-size: 0.72rem;">Nuestra trayectoria y legado</small>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#mision-vision">
+                                        <i class="bi bi-compass"></i>
+                                        <div>
+                                            <span>Misión y Visión</span>
+                                            <small class="text-muted d-block" style="font-size: 0.72rem;">Nuestra razón de ser y futuro</small>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#valores">
+                                        <i class="bi bi-award"></i>
+                                        <div>
+                                            <span>Valores Institucionales</span>
+                                            <small class="text-muted d-block" style="font-size: 0.72rem;">Principios éticos y morales</small>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li><hr class="dropdown-divider my-1"></li>
+                                <li>
+                                    <a class="dropdown-item" href="#autoridades">
+                                        <i class="bi bi-people-fill"></i>
+                                        <div>
+                                            <span>Autoridades y Docentes</span>
+                                            <small class="text-muted d-block" style="font-size: 0.72rem;">Liderazgo pedagógico</small>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
-                        <li class="mt-3">
-                            <a href="/admin/" class="btn btn-sm btn-outline-warning w-100">
-                                <i class="bi bi-lock-fill me-1"></i> Ingreso al Administrador
+
+                        <!-- Oferta Académica -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="#oferta-academica">Oferta Académica</a>
+                        </li>
+
+                        <!-- Noticias y Comunicados -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="#noticias">Noticias y Eventos</a>
+                        </li>
+
+                        <!-- Galería Escolar -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="#galeria">Galería</a>
+                        </li>
+
+                        <!-- Contacto -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contacto">Contacto</a>
+                        </li>
+
+                        <!-- Acceso al Panel Administrativo de Django -->
+                        <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+                            <a class="btn-portal-admin" href="/admin/" target="_blank">
+                                <i class="bi bi-shield-lock-fill"></i>
+                                <span>Portal Admin</span>
                             </a>
                         </li>
                     </ul>
                 </div>
             </div>
+        </nav>
+    </header>
+
+    <!-- =======================================================
+         3. CONTENIDO DINÁMICO
+         ======================================================= -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- =======================================================
+         4. WIDGET FLOTANTE DE WHATSAPP (096 017 2899)
+         ======================================================= -->
+    <div class="whatsapp-widget-container" id="whatsappFloatingWidget">
+        <!-- Burbuja interactiva de mensaje institucional -->
+        <a href="https://wa.me/593960172899?text=Hola,%20me%20comunico%20desde%20el%20sitio%20web%20institucional.%20Deseo%20solicitar%20informaci%C3%B3n%20sobre%20la%20EEB%20Antonio%20Ante." 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="whatsapp-notification-bubble" 
+           title="Conversa con la EEB Antonio Ante">
+            <img src="{% static 'img/logo_antonio_ante.jpg' %}" alt="Secretaría" class="whatsapp-bubble-avatar">
+            <div class="whatsapp-bubble-text">
+                <div class="d-flex align-items-center justify-content-between mb-1">
+                    <h6>Secretaría EEB Antonio Ante</h6>
+                    <span class="badge bg-success" style="font-size: 0.65rem;">En línea</span>
+                </div>
+                <p>¿Deseas información o realizar un trámite? Escríbenos directamente al <strong>096 017 2899</strong>.</p>
+            </div>
+        </a>
+
+        <!-- Botón lanzador redondo con anillo de pulso -->
+        <a href="https://wa.me/593960172899?text=Hola,%20solicito%20informaci%C3%B3n%20institucional%20sobre%20la%20Escuela%20de%20Educaci%C3%B3n%20B%C3%A1sica%20Antonio%20Ante." 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="whatsapp-launcher-btn" 
+           aria-label="Abrir chat de WhatsApp con el número 096 017 2899">
+            <div class="whatsapp-ping-ring"></div>
+            <i class="bi bi-whatsapp"></i>
+            <span class="unread-badge-counter">1</span>
+        </a>
+    </div>
+
+    <!-- =======================================================
+         5. FOOTER INSTITUCIONAL COMPLETO & RESPONSIVO
+         ======================================================= -->
+    <footer class="footer-institutional-full" id="contacto">
+        <div class="container">
+            <div class="row g-4 g-lg-5">
+                <!-- Columna 1: Identidad y Misión -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <img src="{% static 'img/logo_antonio_ante.jpg' %}" alt="Escudo Oficial" class="footer-seal-img">
+                        <div>
+                            <h5 class="text-white fw-bold mb-0">EEB ANTONIO ANTE</h5>
+                            <span class="text-danger fw-bold small text-uppercase letter-spacing-1">Excelencia y Valores</span>
+                        </div>
+                    </div>
+                    <p class="small text-white-50 mb-3">
+                        Institución educativa fiscal comprometida con el desarrollo cognitivo, emocional y cívico de la niñez. Formamos con vocación, disciplina y calidez humana.
+                    </p>
+                    <div class="d-flex gap-2">
+                        <a href="https://wa.me/593960172899" target="_blank" class="btn btn-sm btn-outline-light rounded-circle" style="width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;" title="WhatsApp Oficial">
+                            <i class="bi bi-whatsapp"></i>
+                        </a>
+                        <a href="#" class="btn btn-sm btn-outline-light rounded-circle" style="width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;" title="Facebook Institucional">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+                        <a href="/admin/" class="btn btn-sm btn-outline-warning rounded-circle" style="width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;" title="Panel de Gestión">
+                            <i class="bi bi-shield-lock-fill"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Columna 2: Navegación Rápida -->
+                <div class="col-lg-2 col-md-6">
+                    <h6 class="footer-section-title">Navegación</h6>
+                    <ul class="footer-nav-list">
+                        <li><a href="{% url 'core:home' %}"><i class="bi bi-arrow-right text-danger"></i> Inicio</a></li>
+                        <li><a href="#nosotros"><i class="bi bi-arrow-right text-danger"></i> Historia Institucional</a></li>
+                        <li><a href="#mision-vision"><i class="bi bi-arrow-right text-danger"></i> Misión y Visión</a></li>
+                        <li><a href="#oferta-academica"><i class="bi bi-arrow-right text-danger"></i> Oferta Académica</a></li>
+                        <li><a href="#noticias"><i class="bi bi-arrow-right text-danger"></i> Noticias y Circulares</a></li>
+                        <li><a href="#galeria"><i class="bi bi-arrow-right text-danger"></i> Galería Fotográfica</a></li>
+                    </ul>
+                </div>
+
+                <!-- Columna 3: Niveles Educativos -->
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="footer-section-title">Niveles Educativos</h6>
+                    <ul class="footer-nav-list">
+                        <li><a href="#oferta-academica"><i class="bi bi-check2 text-danger"></i> Educación Inicial (3 a 4 años)</a></li>
+                        <li><a href="#oferta-academica"><i class="bi bi-check2 text-danger"></i> Básica Elemental (2°, 3°, 4° EGB)</a></li>
+                        <li><a href="#oferta-academica"><i class="bi bi-check2 text-danger"></i> Básica Media (5°, 6°, 7° EGB)</a></li>
+                        <li><a href="#oferta-academica"><i class="bi bi-check2 text-danger"></i> Básica Superior (8°, 9°, 10° EGB)</a></li>
+                        <li class="mt-2 pt-2 border-top border-white-10">
+                            <span class="badge bg-danger text-white py-1 px-2">Jornada Matutina Oficial</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Columna 4: Canales Oficiales y Atención -->
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="footer-section-title">Atención Ciudadana</h6>
+                    <div class="footer-contact-item">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <span>Cantón Antonio Ante / Imbabura, República del Ecuador</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="bi bi-whatsapp text-success"></i>
+                        <span>
+                            WhatsApp Oficial:<br>
+                            <a href="https://wa.me/593960172899" target="_blank" class="text-white fw-bold">096 017 2899</a>
+                        </span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="bi bi-clock-fill text-warning"></i>
+                        <span>Lunes a Viernes: 07:00 a 13:00</span>
+                    </div>
+                    <div class="mt-3">
+                        <a href="/admin/" class="btn btn-sm btn-outline-warning w-100 fw-semibold">
+                            <i class="bi bi-person-badge-fill me-1"></i> Acceso Administrativo
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="footer-bottom text-center">
+        <!-- Barra Legal Inferior y Protección de Datos -->
+        <div class="footer-legal-bar text-center">
             <div class="container">
-                <p class="mb-0 text-white-50">
-                    &copy; {% now "Y" %} <strong>Escuela de Educación Básica "Antonio Ante"</strong>. Todos los derechos reservados.
-                </p>
+                <div class="row align-items-center">
+                    <div class="col-md-7 text-md-start mb-2 mb-md-0">
+                        <p class="mb-0 text-white-50">
+                            &copy; {% now "Y" %} <strong>Escuela de Educación Básica "Antonio Ante"</strong>. Todos los derechos reservados.
+                        </p>
+                    </div>
+                    <div class="col-md-5 text-md-end">
+                        <span class="text-white-50 small">
+                            <i class="bi bi-shield-check text-success me-1"></i> Protección de Datos Personales de Estudiantes
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- Bootstrap 5 Bundle con Popper -->
+    <!-- Bootstrap 5.3 Bundle con Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <!-- JavaScript del Proyecto -->

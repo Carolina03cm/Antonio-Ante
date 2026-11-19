@@ -1,26 +1,44 @@
 /**
- * EEB ANTONIO ANTE - JavaScript Principal
+ * EEB ANTONIO ANTE - JavaScript Principal y Efectos Interactivos
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Sombra dinámica en la barra de navegación al hacer scroll
-  const navbar = document.querySelector('.navbar-institucional');
-  
-  if (navbar) {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 30) {
-        navbar.classList.add('shadow');
-      } else {
-        navbar.classList.remove('shadow');
-      }
+    // 1. Sombra y transición dinámica del Navbar al hacer scroll
+    const navbar = document.getElementById('mainNavbar');
+    
+    const handleScroll = () => {
+        if (window.scrollY > 40) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    // 2. Cerrar menú móvil automáticamente al hacer clic en un enlace
+    const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+    const navbarCollapse = document.getElementById('navbarInstitutionalContent');
+
+    if (navbarCollapse) {
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (navbarCollapse.classList.contains('show')) {
+                    const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+                    if (bsCollapse) {
+                        bsCollapse.hide();
+                    }
+                }
+            });
+        });
+    }
+
+    // 3. Inicializar Tooltips de Bootstrap
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
     });
-  }
 
-  // Inicializar tooltips de Bootstrap si están presentes
-  const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-  tooltipTriggerList.map(function (tooltipTriggerEl) {
-    return new bootstrap.Tooltip(tooltipTriggerEl);
-  });
-
-  console.log('EEB Antonio Ante - Sistema web institucional cargado correctamente.');
+    console.log('✅ EEB Antonio Ante - Sistema web institucional cargado.');
 });
