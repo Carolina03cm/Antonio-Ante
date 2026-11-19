@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Escuela de Educación Básica "Antonio Ante" | 61 Años Educando con Excelencia{% endblock %}</title>
+    <title>{% block title %}Escuela de Educación Básica "Antonio Ante" | Sitio Oficial{% endblock %}</title>
     
     <!-- Meta tags Institucionales y SEO -->
-    <meta name="description" content="Sitio web oficial de la Escuela de Educación Básica Antonio Ante, fundada el 4 de septiembre de 1965 en el Recinto El Deseo, cantón Yaguachi. Jornadas Matutina y Vespertina, Departamento de Consejería Estudiantil (DECE).">
+    <meta name="description" content="Sitio web oficial de la Escuela de Educación Básica Antonio Ante. Ubicada en el Recinto El Deseo, cantón Yaguachi. Jornadas Matutina y Vespertina, Departamento de Consejería Estudiantil (DECE).">
     <meta name="keywords" content="EEB Antonio Ante, Escuela Antonio Ante, Recinto El Deseo, Yaguachi, Educacion Basica Guayas, DECE, Jornada Matutina, Jornada Vespertina">
     <meta name="author" content="EEB Antonio Ante">
     
@@ -33,19 +33,17 @@
 <body>
 
     <!-- =======================================================
-         1. TOPBAR INSTITUCIONAL ELEGANTE
+         1. TOPBAR INSTITUCIONAL
          ======================================================= -->
     <div class="topbar-institutional d-none d-md-block">
         <div class="container">
             <div class="d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center gap-3">
-                    <span class="topbar-badge">
-                        <i class="bi bi-award me-1"></i> 61 Años (1965 - 2026)
-                    </span>
-                    <span class="text-white-50">|</span>
                     <span><i class="bi bi-geo-alt me-1 text-danger"></i> Recinto El Deseo, Yaguachi, Guayas</span>
                     <span class="text-white-50">|</span>
-                    <span><i class="bi bi-clock me-1"></i> Matutina &amp; Vespertina</span>
+                    <span><i class="bi bi-clock me-1"></i> Jornadas: Matutina y Vespertina</span>
+                    <span class="text-white-50">|</span>
+                    <span><i class="bi bi-shield-check me-1 text-warning"></i> Institución Educativa Fiscal</span>
                 </div>
                 <div class="d-flex align-items-center gap-3">
                     <a href="https://wa.me/593960172899" target="_blank" rel="noopener noreferrer" class="text-white text-decoration-none">
@@ -87,7 +85,7 @@
                             <a class="nav-link active" href="{% url 'core:home' %}">Inicio</a>
                         </li>
                         
-                        <!-- Menú Desplegable: Nosotros -->
+                        <!-- Menú Desplegable: Institución -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdownNosotros" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Institución
@@ -95,7 +93,7 @@
                             <ul class="dropdown-menu" aria-labelledby="dropdownNosotros">
                                 <li>
                                     <a class="dropdown-item" href="#historia">
-                                        <i class="bi bi-clock-history"></i> Historia (Fundada 1965)
+                                        <i class="bi bi-book"></i> Historia Institucional
                                     </a>
                                 </li>
                                 <li>
@@ -105,7 +103,7 @@
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="#valores">
-                                        <i class="bi bi-shield-check"></i> Valores Institucionales
+                                        <i class="bi bi-shield-check"></i> Valores
                                     </a>
                                 </li>
                             </ul>
@@ -121,7 +119,7 @@
                             <a class="nav-link" href="#oferta-academica">Oferta Académica</a>
                         </li>
 
-                        <!-- Noticias y Comunicados -->
+                        <!-- Comunicados -->
                         <li class="nav-item">
                             <a class="nav-link" href="#noticias">Comunicados</a>
                         </li>
@@ -136,7 +134,7 @@
                             <a class="nav-link" href="#contacto-seccion">Contacto</a>
                         </li>
 
-                        <!-- Botón Admin Sobrio -->
+                        <!-- Botón Admin -->
                         <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
                             <a class="btn btn-institucional-nav" href="/admin/" target="_blank">
                                 <i class="bi bi-person-lock me-1"></i> Admin
@@ -157,20 +155,19 @@
     </main>
 
     <!-- =======================================================
-         4. BOTÓN FLOTANTE DE WHATSAPP DISCRETO Y PROFESIONAL
-            (Sin mensajes molestos en pantalla)
+         4. BOTÓN FLOTANTE DE WHATSAPP DISCRETO
          ======================================================= -->
     <a href="https://wa.me/593960172899?text=Hola,%20solicito%20informaci%C3%B3n%20sobre%20la%20Escuela%20de%20Educaci%C3%B3n%20B%C3%A1sica%20Antonio%20Ante." 
        target="_blank" 
        rel="noopener noreferrer" 
        class="floating-whatsapp-btn" 
        aria-label="Contactar por WhatsApp al 096 017 2899"
-       title="Escríbenos al WhatsApp: 096 017 2899">
+       title="WhatsApp Secretaría">
         <i class="bi bi-whatsapp"></i>
     </a>
 
     <!-- =======================================================
-         5. PIE DE PÁGINA INSTITUCIONAL SOBRIO Y ELEGANTE
+         5. PIE DE PÁGINA INSTITUCIONAL SOBRIO
          ======================================================= -->
     <footer class="footer-institutional">
         <div class="container">
@@ -181,11 +178,11 @@
                         <img src="{% static 'img/logo_antonio_ante.jpg' %}" alt="Escudo Oficial EEB Antonio Ante" class="footer-logo-img">
                         <div>
                             <h5 class="text-white fw-bold mb-0">EEB ANTONIO ANTE</h5>
-                            <span class="text-danger-light small text-uppercase">Fundada el 4 de Septiembre de 1965</span>
+                            <span class="text-danger-light small text-uppercase">Educación Básica Fiscal</span>
                         </div>
                     </div>
                     <p class="small text-white-75 mb-3">
-                        Institución educativa fiscal al servicio de la niñez y las familias del <strong>Recinto El Deseo, Cantón Yaguachi, Provincia del Guayas</strong>. 61 años educando con valores y vocación.
+                        Institución educativa al servicio de la niñez y las familias del <strong>Recinto El Deseo, Cantón Yaguachi, Provincia del Guayas</strong>. Formación integral con vocación y valores.
                     </p>
                     <div class="d-flex gap-2">
                         <a href="https://wa.me/593960172899" target="_blank" class="footer-social-icon" title="WhatsApp 096 017 2899">
@@ -237,8 +234,8 @@
                         </a>
                     </div>
                     <div class="footer-info-row">
-                        <i class="bi bi-shield-check text-warning"></i>
-                        <span>Educación Fiscal Gratuita</span>
+                        <i class="bi bi-clock text-warning"></i>
+                        <span>Lunes a Viernes (Ambos turnos)</span>
                     </div>
                     <div class="mt-3">
                         <a href="/admin/" class="btn btn-sm btn-outline-light w-100 py-2">
@@ -252,7 +249,7 @@
         <div class="footer-bottom">
             <div class="container text-center">
                 <p class="mb-0 text-white-50 small">
-                    &copy; {% now "Y" %} <strong>Escuela de Educación Básica "Antonio Ante"</strong>. 61 Años de Trayectoria (1965 - 2026). Todos los derechos reservados.
+                    &copy; {% now "Y" %} <strong>Escuela de Educación Básica "Antonio Ante"</strong>. Recinto El Deseo, Yaguachi. Todos los derechos reservados.
                 </p>
             </div>
         </div>
