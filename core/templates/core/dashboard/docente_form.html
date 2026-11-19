@@ -10,48 +10,80 @@
         </a>
     </div>
 
-    <div class="card border-0 shadow-sm rounded-3 p-4 bg-white" style="max-width: 650px;">
-        <h5 class="fw-bold text-dark mb-3">{{ titulo_accion }}</h5>
+    <div class="card border-0 shadow-sm rounded-3 p-4 bg-white" style="max-width: 700px;">
+        <div class="d-flex align-items-center gap-3 mb-4">
+            {% if docente and docente.foto %}
+                <img src="{{ docente.foto.url }}" alt="Foto de {{ docente.nombre_completo }}"
+                     style="width:72px;height:72px;object-fit:cover;border-radius:50%;border:3px solid #18396D;">
+            {% else %}
+                <div style="width:72px;height:72px;border-radius:50%;background:#18396D;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.8rem;">
+                    <i class="bi bi-person-fill"></i>
+                </div>
+            {% endif %}
+            <div>
+                <h5 class="fw-bold text-dark mb-0">{{ titulo_accion }}</h5>
+                <small class="text-muted">Complete todos los campos. La foto es opcional.</small>
+            </div>
+        </div>
 
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
 
             <div class="row g-3 mb-3">
                 <div class="col-md-6">
-                    <label class="form-label fw-bold small text-dark">Nombres</label>
+                    <label class="form-label fw-semibold small text-dark">Nombres <span class="text-danger">*</span></label>
                     {{ form.nombres }}
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label fw-bold small text-dark">Apellidos</label>
+                    <label class="form-label fw-semibold small text-dark">Apellidos <span class="text-danger">*</span></label>
                     {{ form.apellidos }}
                 </div>
             </div>
 
             <div class="mb-3">
-                <label class="form-label fw-bold small text-dark">Cargo o Rol</label>
+                <label class="form-label fw-semibold small text-dark">Cargo o Rol <span class="text-danger">*</span></label>
                 {{ form.cargo }}
+                <div class="form-text">Ej: Director, Docente Tutora 3° EGB, Psicólogo Educativo</div>
             </div>
 
             <div class="row g-3 mb-3">
                 <div class="col-md-6">
-                    <label class="form-label fw-bold small text-dark">Jornada / Área</label>
+                    <label class="form-label fw-semibold small text-dark">Jornada / Área <span class="text-danger">*</span></label>
                     {{ form.jornada }}
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label fw-bold small text-dark">Especialidad o Asignatura</label>
+                    <label class="form-label fw-semibold small text-dark">Especialidad o Asignatura</label>
                     {{ form.area }}
+                    <div class="form-text">Opcional. Ej: Lengua y Literatura</div>
+                </div>
+            </div>
+
+            <!-- Sección de fotografía -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold small text-dark">
+                    <i class="bi bi-camera me-1 text-primary"></i> Fotografía del Docente
+                    <span class="badge bg-light text-muted border ms-1">Opcional</span>
+                </label>
+                <div class="border rounded-3 p-3 bg-light">
+                    {{ form.foto }}
+                    <div class="form-text mt-1">
+                        <i class="bi bi-info-circle me-1"></i>
+                        Si no sube una foto, se mostrará un avatar con las iniciales del docente.
+                        Formatos: JPG, PNG. Tamaño recomendado: 400×400 px.
+                    </div>
                 </div>
             </div>
 
             <div class="row g-3 mb-4 align-items-center">
                 <div class="col-md-6">
-                    <label class="form-label fw-bold small text-dark">Orden de prioridad</label>
+                    <label class="form-label fw-semibold small text-dark">Orden de prioridad</label>
                     {{ form.orden }}
+                    <div class="form-text">Número menor = aparece primero</div>
                 </div>
-                <div class="col-md-6 pt-3">
-                    <div class="form-check">
+                <div class="col-md-6 pt-2">
+                    <div class="form-check form-switch mt-2">
                         {{ form.activo }}
-                        <label class="form-check-label fw-bold small text-dark" for="{{ form.activo.id_for_label }}">
+                        <label class="form-check-label fw-semibold small text-dark" for="{{ form.activo.id_for_label }}">
                             Visible como activo en la nómina
                         </label>
                     </div>
@@ -59,10 +91,10 @@
             </div>
 
             <div class="d-flex gap-2">
-                <button type="submit" class="btn btn-primary btn-sm px-4 fw-bold">
+                <button type="submit" class="btn btn-primary px-4 fw-bold">
                     <i class="bi bi-check2-circle me-1"></i> Guardar Docente
                 </button>
-                <a href="{% url 'core:docente_list' %}" class="btn btn-outline-secondary btn-sm px-3">
+                <a href="{% url 'core:docente_list' %}" class="btn btn-outline-secondary px-3">
                     Cancelar
                 </a>
             </div>

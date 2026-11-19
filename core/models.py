@@ -73,6 +73,7 @@ class DocentePersonal(models.Model):
     cargo = models.CharField('Cargo o Rol', max_length=150, help_text='Ej: Docente Tutor 3° EGB, Psicólogo Educativo')
     jornada = models.CharField('Jornada / Área', max_length=20, choices=JORNADA_CHOICES, default='matutina')
     area = models.CharField('Especialidad o Asignatura', max_length=120, blank=True, help_text='Ej: Lengua y Literatura, Ciencias Naturales')
+    foto = models.ImageField('Fotografía del Docente', upload_to='docentes/', blank=True, null=True)
     orden = models.PositiveIntegerField('Orden de visualización', default=1)
     activo = models.BooleanField('Activo en nómina', default=True)
 

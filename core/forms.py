@@ -31,13 +31,14 @@ class FotoGaleriaForm(forms.ModelForm):
 class DocentePersonalForm(forms.ModelForm):
     class Meta:
         model = DocentePersonal
-        fields = ['nombres', 'apellidos', 'cargo', 'jornada', 'area', 'orden', 'activo']
+        fields = ['nombres', 'apellidos', 'cargo', 'jornada', 'area', 'foto', 'orden', 'activo']
         widgets = {
             'nombres': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ej. Lcda. María'}),
             'apellidos': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ej. Guamán'}),
             'cargo': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ej. Docente Tutora 3° EGB'}),
             'jornada': forms.Select(attrs={'class': 'form-select'}),
             'area': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ej. Educación Básica, Matemáticas'}),
+            'foto': forms.ClearableFileInput(attrs={'class': 'form-control'}),
             'orden': forms.NumberInput(attrs={'class': 'form-control', 'min': 1}),
             'activo': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }

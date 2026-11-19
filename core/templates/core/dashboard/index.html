@@ -1,84 +1,145 @@
 {% extends 'core/dashboard/base_dashboard.html' %}
 {% load static %}
 
-{% block section_title %}Resumen General del Portal Institucional{% endblock %}
+{% block section_title %}Panel Principal{% endblock %}
 
 {% block content %}
 <div class="container-fluid p-0">
-    <!-- Bienvenida al usuario -->
-    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+
+    <!-- Bienvenida -->
+    <div class="rounded-3 p-4 mb-4 d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3"
+         style="background: linear-gradient(135deg, #18396D 0%, #1e4d9b 100%); color: white;">
         <div>
-            <h3 class="fw-bold mb-1" style="color: var(--color-navy);">¡Bienvenido/a, {{ user.username }}!</h3>
-            <p class="text-muted mb-0">Panel de control de contenidos y servicios de la Escuela de Educación Básica "Antonio Ante".</p>
+            <div class="d-flex align-items-center gap-2 mb-1">
+                <i class="bi bi-stars fs-5 text-warning"></i>
+                <span class="small opacity-75 fw-semibold text-uppercase tracking-wide">Portal de Gestión Institucional</span>
+            </div>
+            <h3 class="fw-bold mb-1">¡Bienvenido/a, {{ user.get_full_name|default:user.username }}!</h3>
+            <p class="mb-0 opacity-75 small">Escuela de Educación Básica "Antonio Ante" • Recinto El Deseo, Yaguachi</p>
         </div>
-        <div class="d-flex gap-2 mt-3 mt-md-0">
-            <a href="{% url 'core:noticia_create' %}" class="btn btn-danger btn-sm px-3 fw-bold">
+        <div class="d-flex flex-wrap gap-2">
+            <a href="{% url 'core:noticia_create' %}" class="btn btn-danger fw-bold px-3">
                 <i class="bi bi-plus-circle me-1"></i> Publicar Comunicado
             </a>
-            <a href="{% url 'core:galeria_create' %}" class="btn btn-primary btn-sm px-3 fw-bold">
+            <a href="{% url 'core:galeria_create' %}" class="btn btn-light text-dark fw-bold px-3">
                 <i class="bi bi-camera me-1"></i> Subir Foto
             </a>
         </div>
     </div>
 
-    <!-- Tarjetas de Estadísticas Principales -->
+    <!-- Estadísticas -->
     <div class="row g-3 mb-4">
-        <div class="col-sm-6 col-xl-3">
-            <div class="card-stat-dash">
-                <div class="stat-dash-icon" style="background-color: #eaf0fb; color: #18396D;">
-                    <i class="bi bi-newspaper"></i>
+        <div class="col-6 col-xl-3">
+            <a href="{% url 'core:noticia_list' %}" class="text-decoration-none">
+                <div class="card border-0 shadow-sm rounded-3 p-3 h-100 card-hover-lift">
+                    <div class="d-flex align-items-center gap-3">
+                        <div style="width:52px;height:52px;border-radius:12px;background:#eaf0fb;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                            <i class="bi bi-newspaper fs-4" style="color:#18396D;"></i>
+                        </div>
+                        <div>
+                            <div class="fw-bold fs-4 text-dark mb-0">{{ total_noticias }}</div>
+                            <div class="text-muted small">Publicaciones</div>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <h3 class="fw-bold mb-0 text-dark">{{ total_noticias }}</h3>
-                    <span class="text-muted small">Noticias y Comunicados</span>
-                </div>
-            </div>
+            </a>
         </div>
-
-        <div class="col-sm-6 col-xl-3">
-            <div class="card-stat-dash">
-                <div class="stat-dash-icon" style="background-color: #fdf2f3; color: #D71926;">
-                    <i class="bi bi-images"></i>
+        <div class="col-6 col-xl-3">
+            <a href="{% url 'core:galeria_list' %}" class="text-decoration-none">
+                <div class="card border-0 shadow-sm rounded-3 p-3 h-100 card-hover-lift">
+                    <div class="d-flex align-items-center gap-3">
+                        <div style="width:52px;height:52px;border-radius:12px;background:#fdf2f3;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                            <i class="bi bi-images fs-4" style="color:#D71926;"></i>
+                        </div>
+                        <div>
+                            <div class="fw-bold fs-4 text-dark mb-0">{{ total_fotos }}</div>
+                            <div class="text-muted small">Fotos en Galería</div>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <h3 class="fw-bold mb-0 text-dark">{{ total_fotos }}</h3>
-                    <span class="text-muted small">Fotografías en Galería</span>
-                </div>
-            </div>
+            </a>
         </div>
-
-        <div class="col-sm-6 col-xl-3">
-            <div class="card-stat-dash">
-                <div class="stat-dash-icon" style="background-color: #fef8ee; color: #b45309;">
-                    <i class="bi bi-people-fill"></i>
+        <div class="col-6 col-xl-3">
+            <a href="{% url 'core:docente_list' %}" class="text-decoration-none">
+                <div class="card border-0 shadow-sm rounded-3 p-3 h-100 card-hover-lift">
+                    <div class="d-flex align-items-center gap-3">
+                        <div style="width:52px;height:52px;border-radius:12px;background:#fef8ee;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                            <i class="bi bi-people-fill fs-4" style="color:#b45309;"></i>
+                        </div>
+                        <div>
+                            <div class="fw-bold fs-4 text-dark mb-0">{{ total_docentes }}</div>
+                            <div class="text-muted small">Docentes</div>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <h3 class="fw-bold mb-0 text-dark">{{ total_docentes }}</h3>
-                    <span class="text-muted small">Docentes Registrados</span>
-                </div>
-            </div>
+            </a>
         </div>
-
-        <div class="col-sm-6 col-xl-3">
-            <div class="card-stat-dash">
-                <div class="stat-dash-icon" style="background-color: #ecfdf5; color: #059669;">
-                    <i class="bi bi-envelope-open-fill"></i>
+        <div class="col-6 col-xl-3">
+            <a href="{% url 'core:consultas_list' %}" class="text-decoration-none">
+                <div class="card border-0 shadow-sm rounded-3 p-3 h-100 card-hover-lift">
+                    <div class="d-flex align-items-center gap-3">
+                        <div style="width:52px;height:52px;border-radius:12px;background:#ecfdf5;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                            <i class="bi bi-envelope-open-fill fs-4" style="color:#059669;"></i>
+                        </div>
+                        <div>
+                            <div class="fw-bold fs-4 text-dark mb-0">{{ total_mensajes }}</div>
+                            <div class="text-muted small">Consultas Pendientes</div>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <h3 class="fw-bold mb-0 text-dark">{{ total_mensajes }}</h3>
-                    <span class="text-muted small">Consultas Pendientes</span>
-                </div>
-            </div>
+            </a>
         </div>
     </div>
 
+    <!-- Acciones Rápidas -->
+    <div class="row g-3 mb-4">
+        <div class="col-12">
+            <h6 class="fw-bold text-muted text-uppercase small mb-3" style="letter-spacing:0.08em;">
+                <i class="bi bi-lightning-charge me-1 text-warning"></i> Acciones Rápidas
+            </h6>
+        </div>
+        <div class="col-6 col-md-3">
+            <a href="{% url 'core:noticia_create' %}" class="card border-0 shadow-sm rounded-3 p-3 text-center text-decoration-none d-block card-hover-lift h-100">
+                <div style="width:48px;height:48px;border-radius:12px;background:#fdf2f3;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;">
+                    <i class="bi bi-megaphone-fill fs-5 text-danger"></i>
+                </div>
+                <div class="fw-semibold text-dark small">Nuevo Comunicado</div>
+            </a>
+        </div>
+        <div class="col-6 col-md-3">
+            <a href="{% url 'core:galeria_create' %}" class="card border-0 shadow-sm rounded-3 p-3 text-center text-decoration-none d-block card-hover-lift h-100">
+                <div style="width:48px;height:48px;border-radius:12px;background:#eaf0fb;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;">
+                    <i class="bi bi-image-fill fs-5" style="color:#18396D;"></i>
+                </div>
+                <div class="fw-semibold text-dark small">Subir Foto a Galería</div>
+            </a>
+        </div>
+        <div class="col-6 col-md-3">
+            <a href="{% url 'core:docente_create' %}" class="card border-0 shadow-sm rounded-3 p-3 text-center text-decoration-none d-block card-hover-lift h-100">
+                <div style="width:48px;height:48px;border-radius:12px;background:#fef8ee;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;">
+                    <i class="bi bi-person-plus-fill fs-5" style="color:#b45309;"></i>
+                </div>
+                <div class="fw-semibold text-dark small">Registrar Docente</div>
+            </a>
+        </div>
+        <div class="col-6 col-md-3">
+            <a href="{% url 'core:consultas_list' %}" class="card border-0 shadow-sm rounded-3 p-3 text-center text-decoration-none d-block card-hover-lift h-100">
+                <div style="width:48px;height:48px;border-radius:12px;background:#ecfdf5;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;">
+                    <i class="bi bi-chat-dots-fill fs-5 text-success"></i>
+                </div>
+                <div class="fw-semibold text-dark small">Ver Consultas</div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Tablas inferiores -->
     <div class="row g-4">
-        <!-- Últimas Noticias y Comunicados -->
+        <!-- Publicaciones recientes -->
         <div class="col-lg-7">
             <div class="card border-0 shadow-sm rounded-3">
-                <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center border-bottom">
                     <h6 class="mb-0 fw-bold text-dark"><i class="bi bi-megaphone me-2 text-danger"></i> Publicaciones Recientes</h6>
-                    <a href="{% url 'core:noticia_list' %}" class="small text-decoration-none">Ver todas <i class="bi bi-arrow-right"></i></a>
+                    <a href="{% url 'core:noticia_list' %}" class="small text-decoration-none text-primary">Ver todas <i class="bi bi-arrow-right"></i></a>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-hover align-middle mb-0">
@@ -87,18 +148,14 @@
                                 <th>Título</th>
                                 <th>Tipo</th>
                                 <th>Fecha</th>
-                                <th class="text-end">Acciones</th>
+                                <th class="text-end">Acción</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for n in ultimas_noticias %}
                             <tr>
-                                <td>
-                                    <strong class="d-block text-dark small">{{ n.titulo|truncatechars:45 }}</strong>
-                                </td>
-                                <td>
-                                    <span class="badge bg-light text-dark border">{{ n.get_tipo_display }}</span>
-                                </td>
+                                <td><strong class="d-block text-dark small">{{ n.titulo|truncatechars:40 }}</strong></td>
+                                <td><span class="badge bg-light text-dark border small">{{ n.get_tipo_display }}</span></td>
                                 <td class="small text-muted">{{ n.fecha_publicacion|date:"d/m/Y" }}</td>
                                 <td class="text-end">
                                     <a href="{% url 'core:noticia_edit' n.pk %}" class="btn btn-sm btn-outline-secondary py-0 px-2" title="Editar">
@@ -107,9 +164,7 @@
                                 </td>
                             </tr>
                             {% empty %}
-                            <tr>
-                                <td colspan="4" class="text-center py-4 text-muted small">No hay publicaciones registradas aún.</td>
-                            </tr>
+                            <tr><td colspan="4" class="text-center py-4 text-muted small">No hay publicaciones aún.</td></tr>
                             {% endfor %}
                         </tbody>
                     </table>
@@ -117,49 +172,42 @@
             </div>
         </div>
 
-        <!-- Consultas de Padres y Accesos Directos -->
+        <!-- Consultas recientes -->
         <div class="col-lg-5">
-            <div class="card border-0 shadow-sm rounded-3 mb-4">
-                <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
-                    <h6 class="mb-0 fw-bold text-dark"><i class="bi bi-chat-dots me-2 text-primary"></i> Consultas de Padres</h6>
-                    <a href="{% url 'core:consultas_list' %}" class="small text-decoration-none">Ver todas</a>
+            <div class="card border-0 shadow-sm rounded-3">
+                <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center border-bottom">
+                    <h6 class="mb-0 fw-bold text-dark"><i class="bi bi-chat-dots me-2 text-primary"></i> Consultas Recientes</h6>
+                    <a href="{% url 'core:consultas_list' %}" class="small text-decoration-none text-primary">Ver todas</a>
                 </div>
-                <div class="card-body p-0">
-                    <ul class="list-group list-group-flush">
-                        {% for c in ultimas_consultas %}
-                        <li class="list-group-item d-flex justify-content-between align-items-start p-3">
-                            <div class="me-auto">
-                                <div class="fw-bold small">{{ c.nombre }}</div>
-                                <span class="small text-muted d-block">{{ c.mensaje|truncatechars:50 }}</span>
-                                <small class="text-muted" style="font-size: 0.72rem;">{{ c.fecha_envio|date:"d/m/Y H:i" }} • Tel: {{ c.telefono }}</small>
+                <ul class="list-group list-group-flush">
+                    {% for c in ultimas_consultas %}
+                    <li class="list-group-item p-3">
+                        <div class="d-flex justify-content-between align-items-start gap-2">
+                            <div class="flex-grow-1">
+                                <div class="fw-bold small text-dark">{{ c.nombre }}</div>
+                                <div class="text-muted small">{{ c.mensaje|truncatechars:55 }}</div>
+                                <small class="text-muted" style="font-size:0.7rem;">{{ c.fecha_envio|date:"d/m/Y H:i" }} · {{ c.telefono }}</small>
                             </div>
-                            <span class="badge {% if c.leido %}bg-success{% else %}bg-warning text-dark{% endif %} rounded-pill">
+                            <span class="badge {% if c.leido %}bg-success-subtle text-success{% else %}bg-warning-subtle text-warning{% endif %} rounded-pill flex-shrink-0">
                                 {% if c.leido %}Atendido{% else %}Pendiente{% endif %}
                             </span>
-                        </li>
-                        {% empty %}
-                        <li class="list-group-item text-center py-4 text-muted small">No hay consultas registradas.</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Accesos Rápidos -->
-            <div class="card border-0 shadow-sm rounded-3 p-3 bg-light">
-                <h6 class="fw-bold text-dark mb-2">Acciones Rápidas</h6>
-                <div class="d-grid gap-2">
-                    <a href="{% url 'core:docente_create' %}" class="btn btn-outline-dark btn-sm text-start">
-                        <i class="bi bi-person-plus-fill me-2 text-primary"></i> Registrar Nuevo Docente en Nómina
-                    </a>
-                    <a href="{% url 'core:galeria_create' %}" class="btn btn-outline-dark btn-sm text-start">
-                        <i class="bi bi-upload me-2 text-success"></i> Subir Nueva Foto a la Galería
-                    </a>
-                    <a href="/admin/" target="_blank" class="btn btn-outline-dark btn-sm text-start">
-                        <i class="bi bi-database-fill me-2 text-danger"></i> Abrir Base de Datos en Django Admin
-                    </a>
-                </div>
+                        </div>
+                    </li>
+                    {% empty %}
+                    <li class="list-group-item text-center py-4 text-muted small">
+                        <i class="bi bi-inbox fs-4 d-block mb-2 opacity-25"></i>No hay consultas aún.
+                    </li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.card-hover-lift { transition: transform 0.18s ease, box-shadow 0.18s ease; cursor: pointer; }
+.card-hover-lift:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(24,57,109,0.12) !important; }
+</style>
 {% endblock %}

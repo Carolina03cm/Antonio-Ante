@@ -156,7 +156,7 @@ def docente_list(request):
 @login_required
 def docente_create(request):
     if request.method == 'POST':
-        form = DocentePersonalForm(request.POST)
+        form = DocentePersonalForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             messages.success(request, 'Docente o funcionario añadido a la nómina institucional.')
@@ -169,7 +169,7 @@ def docente_create(request):
 def docente_edit(request, pk):
     docente = get_object_or_404(DocentePersonal, pk=pk)
     if request.method == 'POST':
-        form = DocentePersonalForm(request.POST, instance=docente)
+        form = DocentePersonalForm(request.POST, request.FILES, instance=docente)
         if form.is_valid():
             form.save()
             messages.success(request, 'Datos del docente actualizados correctamente.')

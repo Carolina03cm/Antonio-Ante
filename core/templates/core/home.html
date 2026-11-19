@@ -269,8 +269,12 @@
                     {% for d in docentes_matutina %}
                     <div class="col-md-6 col-lg-3">
                         <div class="docente-item-card">
-                            <div class="docente-avatar-round">
-                                <i class="bi bi-person"></i>
+                            <div class="docente-avatar-round overflow-hidden">
+                                {% if d.foto %}
+                                    <img src="{{ d.foto.url }}" alt="{{ d.nombre_completo }}" style="width:100%;height:100%;object-fit:cover;">
+                                {% else %}
+                                    <span class="fw-bold" style="font-size:0.95rem;">{{ d.nombres|first|upper }}{{ d.apellidos|first|upper }}</span>
+                                {% endif %}
                             </div>
                             <div>
                                 <h6 class="mb-1 fw-bold text-dark">{{ d.nombre_completo }}</h6>
@@ -291,8 +295,12 @@
                     {% for d in docentes_vespertina %}
                     <div class="col-md-6 col-lg-4">
                         <div class="docente-item-card">
-                            <div class="docente-avatar-round">
-                                <i class="bi bi-person"></i>
+                            <div class="docente-avatar-round overflow-hidden">
+                                {% if d.foto %}
+                                    <img src="{{ d.foto.url }}" alt="{{ d.nombre_completo }}" style="width:100%;height:100%;object-fit:cover;">
+                                {% else %}
+                                    <span class="fw-bold" style="font-size:0.95rem;">{{ d.nombres|first|upper }}{{ d.apellidos|first|upper }}</span>
+                                {% endif %}
                             </div>
                             <div>
                                 <h6 class="mb-1 fw-bold text-dark">{{ d.nombre_completo }}</h6>
@@ -327,10 +335,17 @@
                         {% for d in dece_personal %}
                         <div class="col-md-6">
                             <div class="p-3 bg-light rounded border d-flex align-items-center gap-3">
-                                <i class="bi bi-person-badge-fill text-danger fs-3"></i>
+                                {% if d.foto %}
+                                    <img src="{{ d.foto.url }}" alt="{{ d.nombre_completo }}" style="width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--color-navy);flex-shrink:0;">
+                                {% else %}
+                                    <div style="width:48px;height:48px;border-radius:50%;background:var(--color-navy);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:0.9rem;flex-shrink:0;">
+                                        {{ d.nombres|first|upper }}{{ d.apellidos|first|upper }}
+                                    </div>
+                                {% endif %}
                                 <div>
                                     <h6 class="fw-bold mb-0 text-dark">{{ d.nombre_completo }}</h6>
                                     <small class="text-muted">{{ d.cargo }}</small>
+                                    {% if d.area %}<span class="badge bg-white text-dark border ms-1" style="font-size:0.7rem;">{{ d.area }}</span>{% endif %}
                                 </div>
                             </div>
                         </div>
