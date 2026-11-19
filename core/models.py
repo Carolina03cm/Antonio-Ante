@@ -108,3 +108,48 @@ class MensajeContacto(models.Model):
 
     def __str__(self):
         return f"Consulta de {self.nombre} ({self.telefono})"
+
+
+class PerfilUsuario(models.Model):
+    """
+    Extensión del usuario institucional con Cédula, Nombres, Apellidos, Rol Escolar y Foto.
+    """
+    ROLES_CHOICES = [
+        ('administrador', 'Administrador General'),
+        ('noticias', 'Editor de Noticias y Comunicados'),
+        ('galeria', 'Gestor de Galería Fotográfica'),
+        ('docente', 'Docente / Personal Institucional'),
+        ('dece', 'Consejero DECE'),
+    ]
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='perfil')
+    cedula = models.CharField('Número de Cédula', max_length=15, blank=True)
+    nombres = models.CharField('Nombres', max_length=100, blank=True)
+    apellidos = models.CharField('Apellidos', max_length=100, blank=True)
+    rol = models.CharField('Rol Asignado', max_length=30, choices=ROLES_CHOICES, default='docente')
+    foto = models.ImageField('Foto de Perfil', upload_to='perfiles/', blank=True, null=True)
+    debe_cambiar_password = models.BooleanField('Debe cambiar contraseña al iniciar', default=False)
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Perfil de Usuario'
+        verbose_name_plural = 'Perfiles de Usuarios'
+
+    def __str__(self):
+        return f"{self.nombre_completo} ({self.get_rol_display()})"
+
+    @property
+    def nombre_completo(self):
+        if self.nombres or self.apellidos:
+            return f"{self.nombres} {self.apellidos}".strip()
+        full = self.user.get_full_name()
+        return full if full else self.user.username
+
+    @property
+    def iniciales(self):
+        n = self.nombres or self.user.first_name or self.user.username
+        a = self.apellidos or self.user.last_name or ''
+        ini_n = n[0] if n else ''
+        ini_a = a[0] if a else (self.user.username[1] if len(self.user.username) > 1 else '')
+        return f"{ini_n}{ini_a}".upper()
+

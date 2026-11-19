@@ -240,6 +240,20 @@
                     <span>Consultas Web</span>
                 </a>
             </li>
+            {% if user.is_superuser or user.perfil.rol == 'administrador' %}
+            <li>
+                <a href="{% url 'core:usuario_list' %}" class="sidebar-link {% if 'usuario' in request.resolver_match.url_name %}active{% endif %}">
+                    <i class="bi bi-person-gear"></i>
+                    <span>Usuarios y Roles</span>
+                </a>
+            </li>
+            {% endif %}
+            <li>
+                <a href="{% url 'core:perfil_editar' %}" class="sidebar-link {% if 'perfil' in request.resolver_match.url_name %}active{% endif %}">
+                    <i class="bi bi-person-bounding-box"></i>
+                    <span>Mi Perfil</span>
+                </a>
+            </li>
             <li class="pt-3 border-top border-white-10 mt-3">
                 <a href="{% url 'core:home' %}" target="_blank" class="sidebar-link text-white-75">
                     <i class="bi bi-box-arrow-up-right"></i>
@@ -274,20 +288,25 @@
             </div>
 
             <div class="d-flex align-items-center gap-3">
-                <!-- Perfil de Usuario -->
-                <div class="d-flex align-items-center gap-2">
-                    <div style="width: 38px; height: 38px; border-radius: 50%; background: #18396D; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.95rem; box-shadow: 0 2px 6px rgba(24,57,109,0.2);">
-                        {{ user.username|make_list|first|upper }}
-                    </div>
+                <!-- Perfil de Usuario con enlace directo a editar datos/foto -->
+                <a href="{% url 'core:perfil_editar' %}" class="d-flex align-items-center gap-2 text-decoration-none" title="Ver y editar mis datos de perfil">
+                    {% if user.perfil.foto %}
+                        <img src="{{ user.perfil.foto.url }}" alt="{{ user.perfil.nombre_completo }}"
+                             style="width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 2px solid #18396D; box-shadow: 0 2px 6px rgba(24,57,109,0.2);">
+                    {% else %}
+                        <div style="width: 38px; height: 38px; border-radius: 50%; background: #18396D; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.95rem; box-shadow: 0 2px 6px rgba(24,57,109,0.2);">
+                            {{ user.perfil.iniciales|default:user.username|make_list|first|upper }}
+                        </div>
+                    {% endif %}
                     <div class="d-none d-sm-block text-start" style="line-height: 1.15;">
-                        <span class="d-block fw-bold text-dark small">{{ user.get_full_name|default:user.username }}</span>
-                        <span class="badge {% if user.is_superuser %}bg-danger{% else %}bg-primary{% endif %}" style="font-size: 0.68rem; font-weight: 600;">
-                            {% if user.is_superuser %}Administrador{% else %}Docente{% endif %}
+                        <span class="d-block fw-bold text-dark small">{{ user.perfil.nombre_completo }}</span>
+                        <span class="badge {% if user.is_superuser or user.perfil.rol == 'administrador' %}bg-danger{% elif user.perfil.rol == 'noticias' %}bg-primary{% elif user.perfil.rol == 'galeria' %}bg-warning text-dark{% else %}bg-secondary{% endif %}" style="font-size: 0.68rem; font-weight: 600;">
+                            {{ user.perfil.get_rol_display|default:"Docente" }}
                         </span>
                     </div>
-                </div>
+                </a>
 
-                <a href="{% url 'core:logout' %}" class="btn btn-sm btn-outline-danger" title="Cerrar Sesión">
+                <a href="{% url 'core:logout' %}" class="btn btn-sm btn-outline-danger ms-2" title="Cerrar Sesión">
                     <i class="bi bi-box-arrow-right"></i>
                     <span class="d-none d-md-inline ms-1">Salir</span>
                 </a>
@@ -337,6 +356,21 @@
             if (toggleBtn) toggleBtn.addEventListener('click', toggleSidebar);
             if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
             if (backdrop) backdrop.addEventListener('click', closeSidebar);
+
+            // Desvanecer alertas tras 2 segundos (2000 ms)
+            const alerts = document.querySelectorAll('.alert-dismissible');
+            alerts.forEach(alert => {
+                setTimeout(() => {
+                    alert.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                    alert.style.opacity = '0';
+                    alert.style.transform = 'translateY(-10px)';
+                    setTimeout(() => {
+                        const bsAlert = bootstrap.Alert.getInstance(alert) || new bootstrap.Alert(alert);
+                        if (bsAlert) bsAlert.close();
+                        else alert.remove();
+                    }, 400);
+                }, 2000);
+            });
         });
     </script>
     {% block extra_js %}{% endblock %}

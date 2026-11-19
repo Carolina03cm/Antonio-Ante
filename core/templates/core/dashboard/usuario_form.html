@@ -1,0 +1,155 @@
+{% extends 'core/dashboard/base_dashboard.html' %}
+
+{% block title %}{{ titulo_accion }} | EEB Antonio Ante{% endblock %}
+{% block section_title %}{{ titulo_accion }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-0">
+    <div class="mb-4">
+        <a href="{% url 'core:usuario_list' %}" class="btn btn-outline-secondary btn-sm">
+            <i class="bi bi-arrow-left me-1"></i> Volver a Usuarios
+        </a>
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white" style="max-width: 750px;">
+        <div class="d-flex align-items-center gap-3 mb-4 pb-3 border-bottom">
+            <div style="width: 56px; height: 56px; border-radius: 14px; background: #eaf0fb; color: #18396D; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; flex-shrink: 0;">
+                <i class="bi bi-person-gear"></i>
+            </div>
+            <div>
+                <h5 class="fw-bold text-dark mb-0">{{ titulo_accion }}</h5>
+                <small class="text-muted">El nombre de usuario y la contraseña temporal se generan automáticamente.</small>
+            </div>
+        </div>
+
+        {% if form.errors %}
+            <div class="alert alert-danger py-2 px-3 small rounded-3 mb-3">
+                <i class="bi bi-exclamation-triangle-fill me-1"></i>
+                Por favor revise los campos con error:
+                <ul class="mb-0 mt-1">
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li><strong>{{ field.label }}:</strong> {{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold small text-dark">Nombres <span class="text-danger">*</span></label>
+                    {{ form.nombres }}
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold small text-dark">Apellidos <span class="text-danger">*</span></label>
+                    {{ form.apellidos }}
+                </div>
+            </div>
+
+            <!-- Vista previa del usuario generado en tiempo real -->
+            <div class="alert alert-light border rounded-3 p-3 mb-3 d-flex align-items-center gap-2">
+                <i class="bi bi-magic fs-5 text-primary"></i>
+                <div class="small">
+                    Usuario asignado automáticamente: <strong class="text-primary fs-6" id="previewUsername">amorans</strong>
+                    <div class="text-muted" style="font-size: 0.72rem;">(Regla: Inicial 1er nombre + 1er apellido + inicial 2do apellido)</div>
+                </div>
+            </div>
+
+            <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold small text-dark">Número de Cédula <span class="text-danger">*</span></label>
+                    {{ form.cedula }}
+                    <div class="form-text">Se usará como su contraseña temporal inicial.</div>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold small text-dark">Rol Asignado <span class="text-danger">*</span></label>
+                    {{ form.rol }}
+                    <div class="form-text">Define los permisos en el portal.</div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold small text-dark">Correo Electrónico (Opcional)</label>
+                {{ form.email }}
+            </div>
+
+            <!-- Foto de perfil -->
+            <div class="mb-4">
+                <label class="form-label fw-semibold small text-dark">
+                    <i class="bi bi-camera me-1 text-primary"></i> Fotografía de Perfil (Opcional)
+                </label>
+                <div class="p-3 bg-light rounded-3 border">
+                    {{ form.foto }}
+                    <div class="form-text mt-1">
+                        Si no se sube foto, se generará un avatar con las iniciales del usuario.
+                    </div>
+                    {% if perfil and perfil.foto %}
+                        <div class="form-check mt-2">
+                            <input class="form-check-input" type="checkbox" name="eliminar_foto" value="1" id="id_eliminar_foto">
+                            <label class="form-check-label small text-danger" for="id_eliminar_foto">
+                                Eliminar foto actual y usar avatar con iniciales
+                            </label>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if form.activo %}
+            <div class="mb-4">
+                <div class="form-check form-switch">
+                    {{ form.activo }}
+                    <label class="form-check-label fw-semibold small text-dark" for="{{ form.activo.id_for_label }}">
+                        Cuenta activa y autorizada para acceder al sistema
+                    </label>
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary px-4 fw-bold shadow-sm">
+                    <i class="bi bi-check2-circle me-1"></i> Guardar Usuario
+                </button>
+                <a href="{% url 'core:usuario_list' %}" class="btn btn-outline-secondary px-3">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function limpiarTexto(texto) {
+    if (!texto) return '';
+    return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
+}
+
+function actualizarPreview() {
+    const inputNom = document.getElementById('id_nombres');
+    const inputApe = document.getElementById('id_apellidos');
+    const preview = document.getElementById('previewUsername');
+
+    if (!inputNom || !inputApe || !preview) return;
+
+    const nomParts = inputNom.value.trim().split(/\s+/).filter(Boolean).map(limpiarTexto);
+    const apeParts = inputApe.value.trim().split(/\s+/).filter(Boolean).map(limpiarTexto);
+
+    const letNom = nomParts[0] ? nomParts[0][0] : 'a';
+    const primApe = apeParts[0] ? apeParts[0] : 'moran';
+    const segApe = apeParts[1] ? apeParts[1][0] : 's';
+
+    preview.textContent = `${letNom}${primApe}${segApe}`;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const inputNom = document.getElementById('id_nombres');
+    const inputApe = document.getElementById('id_apellidos');
+    if (inputNom) inputNom.addEventListener('input', actualizarPreview);
+    if (inputApe) inputApe.addEventListener('input', actualizarPreview);
+    actualizarPreview();
+});
+</script>
+{% endblock %}

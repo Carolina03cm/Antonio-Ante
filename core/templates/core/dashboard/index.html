@@ -14,7 +14,7 @@
                 <i class="bi bi-stars fs-5 text-warning"></i>
                 <span class="small opacity-75 fw-semibold text-uppercase tracking-wide">Portal de Gestión Institucional</span>
             </div>
-            <h3 class="fw-bold mb-1">¡Bienvenido/a, {{ user.get_full_name|default:user.username }}!</h3>
+            <h3 class="fw-bold mb-1">¡Bienvenido/a, {{ user.perfil.nombre_completo|default:user.username }}!</h3>
             <p class="mb-0 opacity-75 small">Escuela de Educación Básica "Antonio Ante" • Recinto El Deseo, Yaguachi</p>
         </div>
         <div class="d-flex flex-wrap gap-2">

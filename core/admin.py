@@ -1,11 +1,17 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import NoticiaComunicado, FotoGaleria, DocentePersonal, MensajeContacto
+from .models import NoticiaComunicado, FotoGaleria, DocentePersonal, MensajeContacto, PerfilUsuario
 
 # Personalización del Panel Administrativo Oficial de Django
 admin.site.site_header = "EEB Antonio Ante • Administración"
 admin.site.site_title = "EEB Antonio Ante"
 admin.site.index_title = "Panel de Administración Institucional"
+
+@admin.register(PerfilUsuario)
+class PerfilUsuarioAdmin(admin.ModelAdmin):
+    list_display = ('user', 'nombres', 'apellidos', 'cedula', 'rol', 'debe_cambiar_password')
+    list_filter = ('rol', 'debe_cambiar_password')
+    search_fields = ('user__username', 'nombres', 'apellidos', 'cedula')
 
 @admin.register(NoticiaComunicado)
 class NoticiaComunicadoAdmin(admin.ModelAdmin):

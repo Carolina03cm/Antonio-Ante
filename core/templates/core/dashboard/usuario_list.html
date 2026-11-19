@@ -1,0 +1,107 @@
+{% extends 'core/dashboard/base_dashboard.html' %}
+
+{% block title %}Usuarios y Roles | EEB Antonio Ante{% endblock %}
+{% block section_title %}Gestión de Usuarios y Roles Institucionales{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-0">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+        <div>
+            <h4 class="fw-bold text-dark mb-1">Usuarios del Sistema y Asignación de Roles</h4>
+            <p class="text-muted small mb-0">Crea cuentas para docentes o editores. El usuario y clave temporal se asignan automáticamente.</p>
+        </div>
+        <a href="{% url 'core:usuario_create' %}" class="btn btn-primary fw-bold px-4 shadow-sm">
+            <i class="bi bi-person-plus-fill me-2"></i> Crear Nuevo Usuario
+        </a>
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4 overflow-hidden bg-white">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light small">
+                    <tr>
+                        <th class="ps-4">Usuario / Nombre</th>
+                        <th>Cédula (Clave Inicial)</th>
+                        <th>Rol Asignado</th>
+                        <th>Estado Clave</th>
+                        <th>Cuenta</th>
+                        <th class="text-end pe-4">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for u in usuarios %}
+                    <tr>
+                        <td class="ps-4">
+                            <div class="d-flex align-items-center gap-3 py-1">
+                                {% if u.perfil.foto %}
+                                    <img src="{{ u.perfil.foto.url }}" alt="{{ u.perfil.nombre_completo }}"
+                                         style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid #18396D;">
+                                {% else %}
+                                    <div style="width: 44px; height: 44px; border-radius: 50%; background: #18396D; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.95rem;">
+                                        {{ u.perfil.iniciales|default:u.username|make_list|first|upper }}
+                                    </div>
+                                {% endif %}
+                                <div>
+                                    <strong class="d-block text-dark small">{{ u.perfil.nombre_completo }}</strong>
+                                    <span class="text-primary small fw-semibold">@{{ u.username }}</span>
+                                    {% if u.email %}<small class="text-muted d-block" style="font-size: 0.72rem;">{{ u.email }}</small>{% endif %}
+                                </div>
+                            </div>
+                        </td>
+                        <td class="small">
+                            {% if u.perfil.cedula %}
+                                <code>{{ u.perfil.cedula }}</code>
+                            {% else %}
+                                <span class="text-muted">—</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <span class="badge {% if u.perfil.rol == 'administrador' or u.is_superuser %}bg-danger{% elif u.perfil.rol == 'noticias' %}bg-primary{% elif u.perfil.rol == 'galeria' %}bg-warning text-dark{% else %}bg-secondary{% endif %} rounded-pill small">
+                                {{ u.perfil.get_rol_display|default:"Docente" }}
+                            </span>
+                        </td>
+                        <td>
+                            {% if u.perfil.debe_cambiar_password %}
+                                <span class="badge bg-warning text-dark border small" title="El usuario debe cambiar su clave en su próximo ingreso">
+                                    <i class="bi bi-clock-history me-1"></i> Clave Provisional
+                                </span>
+                            {% else %}
+                                <span class="badge bg-success-subtle text-success small">
+                                    <i class="bi bi-check-circle me-1"></i> Clave Personal
+                                </span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if u.is_active %}
+                                <span class="badge bg-success-subtle text-success">Activo</span>
+                            {% else %}
+                                <span class="badge bg-danger-subtle text-danger">Inactivo</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-end pe-4">
+                            <div class="btn-group btn-group-sm">
+                                <a href="{% url 'core:usuario_edit' u.pk %}" class="btn btn-outline-primary" title="Editar datos y rol">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                <a href="{% url 'core:usuario_reset_password' u.pk %}" class="btn btn-outline-warning" title="Restablecer clave a su cédula" onclick="return confirm('¿Restablecer la contraseña de @{{ u.username }} a su número de cédula?');">
+                                    <i class="bi bi-key"></i>
+                                </a>
+                                {% if u != request.user %}
+                                <a href="{% url 'core:usuario_delete' u.pk %}" class="btn btn-outline-danger" title="Eliminar cuenta">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                                {% endif %}
+                            </div>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center py-5 text-muted">No hay usuarios registrados adicionales.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
