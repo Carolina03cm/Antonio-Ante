@@ -5,6 +5,7 @@ Django settings for EEB ANTONIO ANTE project.
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -13,13 +14,56 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / '.env')
 
 # Clave secreta (gestionada mediante variables de entorno)
-SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-fallback-key-local-only')
+SECRET_KEY = os.getenv('SECRET_KEY', '').strip()
 
 # Modo depuración (True en desarrollo, False en producción)
-DEBUG = os.getenv('DEBUG', 'True').lower() in ('true', '1', 't', 'yes')
+def env_bool(name, default=False):
+    """Lee variables booleanas del entorno con valores habituales."""
+    value = os.getenv(name)
+    if value is None:
+        return default
+    return value.strip().lower() in ('true', '1', 't', 'yes', 'on')
+
+
+DEBUG = env_bool('DEBUG', default=False)
+
+if not SECRET_KEY:
+    if DEBUG:
+        SECRET_KEY = 'django-insecure-local-development-key-only'
+    else:
+        raise ImproperlyConfigured('Define SECRET_KEY con una clave aleatoria antes de iniciar en producción.')
+
+if not DEBUG and (
+    len(SECRET_KEY) < 50
+    or len(set(SECRET_KEY)) < 5
+    or SECRET_KEY.startswith('django-insecure-')
+):
+    raise ImproperlyConfigured(
+        'SECRET_KEY no es segura para producción. Genera una clave nueva y aleatoria.'
+    )
 
 # Hosts permitidos
 ALLOWED_HOSTS = [host.strip() for host in os.getenv('ALLOWED_HOSTS', '127.0.0.1,localhost').split(',') if host.strip()]
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip()
+    for origin in os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',')
+    if origin.strip()
+]
+
+# HTTPS y cookies seguras se activan por defecto al apagar DEBUG. HSTS queda
+# explícito porque debe activarse después de confirmar HTTPS en todo el dominio.
+SECURE_SSL_REDIRECT = env_bool('SECURE_SSL_REDIRECT', default=not DEBUG)
+SESSION_COOKIE_SECURE = env_bool('SESSION_COOKIE_SECURE', default=not DEBUG)
+CSRF_COOKIE_SECURE = env_bool('CSRF_COOKIE_SECURE', default=not DEBUG)
+SECURE_HSTS_SECONDS = int(os.getenv('SECURE_HSTS_SECONDS', '0'))
+if SECURE_HSTS_SECONDS < 0:
+    raise ImproperlyConfigured('SECURE_HSTS_SECONDS debe ser cero o un número positivo.')
+SECURE_HSTS_INCLUDE_SUBDOMAINS = env_bool('SECURE_HSTS_INCLUDE_SUBDOMAINS', default=False)
+SECURE_HSTS_PRELOAD = env_bool('SECURE_HSTS_PRELOAD', default=False)
+
+# Activar solo detrás de un proxy confiable que gestione esta cabecera.
+if env_bool('SECURE_PROXY_SSL_HEADER_ENABLED', default=False):
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # Definición de aplicaciones instaladas

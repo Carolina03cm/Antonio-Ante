@@ -1,0 +1,90 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Galería institucional | EEB Antonio Ante{% endblock %}
+
+{% block content %}
+<main class="public-gallery-page">
+    <section class="section-institutional bg-subtle">
+        <div class="container">
+            <header class="text-center mb-4 mb-md-5">
+                <span class="section-eyebrow">Actividades escolares</span>
+                <h1 class="section-heading-clean">Galería institucional</h1>
+                <div class="section-accent-bar"></div>
+                <p class="text-secondary mb-0">
+                    Recuerdos de las actividades y la vida escolar de la comunidad Antonio Ante.
+                </p>
+            </header>
+
+            <nav class="gallery-category-filters" aria-label="Filtrar fotografías por categoría">
+                <a class="btn {% if not categoria_activa %}btn-primary{% else %}btn-outline-primary{% endif %}"
+                   href="{% url 'core:galeria_publica' %}" {% if not categoria_activa %}aria-current="page"{% endif %}>
+                    Todas
+                </a>
+                {% for valor, nombre in categorias %}
+                <a class="btn {% if categoria_activa == valor %}btn-primary{% else %}btn-outline-primary{% endif %}"
+                   href="{% url 'core:galeria_publica' %}?categoria={{ valor|urlencode }}"
+                   {% if categoria_activa == valor %}aria-current="page"{% endif %}>
+                    {{ nombre }}
+                </a>
+                {% endfor %}
+            </nav>
+
+            {% if fotos %}
+            <p class="gallery-result-count text-muted small mb-3">
+                {{ total_fotos }} {% if total_fotos == 1 %}fotografía{% else %}fotografías{% endif %}
+                {% if categoria_activa %}en esta categoría{% endif %}
+            </p>
+
+            <div class="row g-3 g-md-4">
+                {% for foto in fotos %}
+                <div class="col-6 col-lg-4 col-xl-3">
+                    <article class="gallery-photo-frame h-100">
+                        <a class="gallery-photo-container d-block" href="{{ foto.imagen.url }}"
+                           target="_blank" rel="noopener noreferrer"
+                           aria-label="Abrir fotografía: {{ foto.titulo }}">
+                            <img src="{{ foto.imagen.url }}" alt="{{ foto.titulo }}" loading="lazy">
+                        </a>
+                        <div class="gallery-photo-caption">
+                            <h2 class="gallery-photo-title">{{ foto.titulo }}</h2>
+                            <span>{{ foto.get_categoria_display }}</span>
+                            {% if foto.descripcion %}
+                            <p class="small text-secondary mb-0 mt-2">{{ foto.descripcion }}</p>
+                            {% endif %}
+                        </div>
+                    </article>
+                </div>
+                {% endfor %}
+            </div>
+
+            {% if page_obj.has_other_pages %}
+            <nav class="gallery-pagination mt-4" aria-label="Paginación de la galería">
+                {% if page_obj.has_previous %}
+                <a class="btn btn-outline-primary" href="?page={{ page_obj.previous_page_number }}{% if categoria_activa %}&amp;categoria={{ categoria_activa|urlencode }}{% endif %}">
+                    <i class="bi bi-arrow-left me-1"></i> Anterior
+                </a>
+                {% else %}
+                <span></span>
+                {% endif %}
+
+                <span class="small text-muted">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+
+                {% if page_obj.has_next %}
+                <a class="btn btn-outline-primary" href="?page={{ page_obj.next_page_number }}{% if categoria_activa %}&amp;categoria={{ categoria_activa|urlencode }}{% endif %}">
+                    Siguiente <i class="bi bi-arrow-right ms-1"></i>
+                </a>
+                {% else %}
+                <span></span>
+                {% endif %}
+            </nav>
+            {% endif %}
+            {% else %}
+            <div class="gallery-empty-state text-center bg-white rounded-3 border shadow-sm">
+                <i class="bi bi-images" aria-hidden="true"></i>
+                <h2>Pronto habrá nuevas fotografías</h2>
+                <p class="text-secondary mb-0">Estamos preparando imágenes de nuestras actividades escolares.</p>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+</main>
+{% endblock %}

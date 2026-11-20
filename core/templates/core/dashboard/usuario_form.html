@@ -41,12 +41,14 @@
 
             <div class="row g-3 mb-3">
                 <div class="col-md-6">
-                    <label class="form-label fw-semibold small text-dark">Nombres <span class="text-danger">*</span></label>
+                    <label class="form-label fw-semibold small text-dark">Nombres completos <span class="text-danger">*</span></label>
                     {{ form.nombres }}
+                    <div class="form-text">Escribe los nombres tal como aparecen en el documento de identidad.</div>
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label fw-semibold small text-dark">Apellidos <span class="text-danger">*</span></label>
+                    <label class="form-label fw-semibold small text-dark">Dos apellidos <span class="text-danger">*</span></label>
                     {{ form.apellidos }}
+                    <div class="form-text">Ingresa el apellido paterno y el materno.</div>
                 </div>
             </div>
 
@@ -54,8 +56,8 @@
             <div class="alert alert-light border rounded-3 p-3 mb-3 d-flex align-items-center gap-2">
                 <i class="bi bi-magic fs-5 text-primary"></i>
                 <div class="small">
-                    Usuario asignado automáticamente: <strong class="text-primary fs-6" id="previewUsername">amorans</strong>
-                    <div class="text-muted" style="font-size: 0.72rem;">(Regla: Inicial 1er nombre + 1er apellido + inicial 2do apellido)</div>
+                    Usuario asignado automáticamente: <strong class="text-primary fs-6" id="previewUsername">Completa los dos apellidos</strong>
+                    <div class="text-muted" style="font-size: 0.72rem;">Se forma con la inicial del primer nombre, el primer apellido y la inicial del segundo apellido.</div>
                 </div>
             </div>
 
@@ -63,7 +65,7 @@
                 <div class="col-md-6">
                     <label class="form-label fw-semibold small text-dark">Número de Cédula <span class="text-danger">*</span></label>
                     {{ form.cedula }}
-                    <div class="form-text">Se usará como su contraseña temporal inicial.</div>
+                    <div class="form-text">Será la contraseña temporal. Al ingresar, la persona deberá cambiarla.</div>
                 </div>
                 <div class="col-md-6">
                     <label class="form-label fw-semibold small text-dark">Rol Asignado <span class="text-danger">*</span></label>
@@ -137,9 +139,14 @@ function actualizarPreview() {
     const nomParts = inputNom.value.trim().split(/\s+/).filter(Boolean).map(limpiarTexto);
     const apeParts = inputApe.value.trim().split(/\s+/).filter(Boolean).map(limpiarTexto);
 
-    const letNom = nomParts[0] ? nomParts[0][0] : 'a';
-    const primApe = apeParts[0] ? apeParts[0] : 'moran';
-    const segApe = apeParts[1] ? apeParts[1][0] : 's';
+    if (!nomParts[0] || apeParts.length < 2) {
+        preview.textContent = 'Completa los dos apellidos';
+        return;
+    }
+
+    const letNom = nomParts[0][0];
+    const primApe = apeParts[0];
+    const segApe = apeParts[1][0];
 
     preview.textContent = `${letNom}${primApe}${segApe}`;
 }

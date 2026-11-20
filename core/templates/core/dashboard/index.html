@@ -15,20 +15,57 @@
                 <span class="small opacity-75 fw-semibold text-uppercase tracking-wide">Portal de Gestión Institucional</span>
             </div>
             <h3 class="fw-bold mb-1">¡Bienvenido/a, {{ user.perfil.nombre_completo|default:user.username }}!</h3>
-            <p class="mb-0 opacity-75 small">Escuela de Educación Básica "Antonio Ante" • Recinto El Deseo, Yaguachi</p>
+            <p class="mb-0 opacity-75 small">Herramientas disponibles para tu función: <strong>{{ rol_panel }}</strong>.</p>
         </div>
         <div class="d-flex flex-wrap gap-2">
+            {% if puede_gestionar_noticias %}
             <a href="{% url 'core:noticia_create' %}" class="btn btn-danger fw-bold px-3">
-                <i class="bi bi-plus-circle me-1"></i> Publicar Comunicado
+                <i class="bi bi-plus-circle me-1"></i>
+                {% if user.perfil.rol == 'dece' and not user.is_superuser %}Crear aviso DECE{% else %}Crear noticia o aviso{% endif %}
             </a>
+            {% endif %}
+            {% if puede_gestionar_galeria %}
             <a href="{% url 'core:galeria_create' %}" class="btn btn-light text-dark fw-bold px-3">
-                <i class="bi bi-camera me-1"></i> Subir Foto
+                <i class="bi bi-camera me-1"></i> Agregar foto
             </a>
+            {% endif %}
+            {% if not puede_gestionar_noticias and not puede_gestionar_galeria %}
+            <a href="{% url 'core:perfil_editar' %}" class="btn btn-light text-dark fw-bold px-3">
+                <i class="bi bi-person-lines-fill me-1"></i> Revisar mis datos
+            </a>
+            {% endif %}
         </div>
     </div>
 
+    {% if puede_atender_consultas %}
+    {% if total_mensajes %}
+    <section class="dashboard-pending-banner mb-4" aria-labelledby="pendingMessagesTitle" role="status">
+        <div class="dashboard-pending-icon" aria-hidden="true">
+            <i class="bi bi-envelope-exclamation-fill"></i>
+        </div>
+        <div class="flex-grow-1">
+            <span class="dashboard-pending-label">Requiere atención</span>
+            <h4 id="pendingMessagesTitle" class="mb-1 fw-bold">
+                {{ total_mensajes }} mensaje{% if total_mensajes != 1 %}s{% endif %} pendiente{% if total_mensajes != 1 %}s{% endif %}
+            </h4>
+            <p class="mb-0 text-secondary">Familias esperan respuesta. Abre la bandeja para revisar y marcar los mensajes atendidos.</p>
+        </div>
+        <a href="{% url 'core:consultas_list' %}?estado=pendiente" class="btn btn-warning fw-bold dashboard-pending-action">
+            Revisar pendientes <i class="bi bi-arrow-right ms-1"></i>
+        </a>
+    </section>
+    {% else %}
+    <div class="dashboard-all-clear mb-4" role="status">
+        <i class="bi bi-check-circle-fill me-2" aria-hidden="true"></i>
+        No tienes mensajes pendientes de atención.
+        <a href="{% url 'core:consultas_list' %}" class="ms-2 fw-semibold">Abrir bandeja</a>
+    </div>
+    {% endif %}
+    {% endif %}
+
     <!-- Estadísticas -->
     <div class="row g-3 mb-4">
+        {% if puede_gestionar_noticias %}
         <div class="col-6 col-xl-3">
             <a href="{% url 'core:noticia_list' %}" class="text-decoration-none">
                 <div class="card border-0 shadow-sm rounded-3 p-3 h-100 card-hover-lift">
@@ -38,12 +75,15 @@
                         </div>
                         <div>
                             <div class="fw-bold fs-4 text-dark mb-0">{{ total_noticias }}</div>
-                            <div class="text-muted small">Publicaciones</div>
+                            <div class="text-muted small">Noticias y comunicados</div>
+                            <small class="d-block mt-1 text-secondary">Avisos que se muestran en la web</small>
                         </div>
                     </div>
                 </div>
             </a>
         </div>
+        {% endif %}
+        {% if puede_gestionar_galeria %}
         <div class="col-6 col-xl-3">
             <a href="{% url 'core:galeria_list' %}" class="text-decoration-none">
                 <div class="card border-0 shadow-sm rounded-3 p-3 h-100 card-hover-lift">
@@ -53,12 +93,15 @@
                         </div>
                         <div>
                             <div class="fw-bold fs-4 text-dark mb-0">{{ total_fotos }}</div>
-                            <div class="text-muted small">Fotos en Galería</div>
+                            <div class="text-muted small">Fotos registradas</div>
+                            <small class="d-block mt-1 text-secondary">Imágenes guardadas en la galería</small>
                         </div>
                     </div>
                 </div>
             </a>
         </div>
+        {% endif %}
+        {% if puede_gestionar_personal %}
         <div class="col-6 col-xl-3">
             <a href="{% url 'core:docente_list' %}" class="text-decoration-none">
                 <div class="card border-0 shadow-sm rounded-3 p-3 h-100 card-hover-lift">
@@ -68,14 +111,17 @@
                         </div>
                         <div>
                             <div class="fw-bold fs-4 text-dark mb-0">{{ total_docentes }}</div>
-                            <div class="text-muted small">Docentes</div>
+                            <div class="text-muted small">Personal registrado</div>
+                            <small class="d-block mt-1 text-secondary">Docentes, autoridades y orientación</small>
                         </div>
                     </div>
                 </div>
             </a>
         </div>
+        {% endif %}
+        {% if puede_atender_consultas %}
         <div class="col-6 col-xl-3">
-            <a href="{% url 'core:consultas_list' %}" class="text-decoration-none">
+            <a href="{% url 'core:consultas_list' %}{% if total_mensajes %}?estado=pendiente{% endif %}" class="text-decoration-none">
                 <div class="card border-0 shadow-sm rounded-3 p-3 h-100 card-hover-lift">
                     <div class="d-flex align-items-center gap-3">
                         <div style="width:52px;height:52px;border-radius:12px;background:#ecfdf5;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
@@ -83,62 +129,99 @@
                         </div>
                         <div>
                             <div class="fw-bold fs-4 text-dark mb-0">{{ total_mensajes }}</div>
-                            <div class="text-muted small">Consultas Pendientes</div>
+                            <div class="text-muted small">Mensajes sin atender</div>
+                            <small class="d-block mt-1 text-secondary">Consultas enviadas por las familias</small>
                         </div>
                     </div>
                 </div>
             </a>
         </div>
+        {% endif %}
     </div>
 
     <!-- Acciones Rápidas -->
     <div class="row g-3 mb-4">
         <div class="col-12">
             <h6 class="fw-bold text-muted text-uppercase small mb-3" style="letter-spacing:0.08em;">
-                <i class="bi bi-lightning-charge me-1 text-warning"></i> Acciones Rápidas
+                <i class="bi bi-lightning-charge me-1 text-warning"></i> Accesos directos
             </h6>
+            <p class="text-muted small mb-0">Elige una tarea para agregar o revisar información del sitio.</p>
         </div>
+        {% if puede_gestionar_noticias %}
         <div class="col-6 col-md-3">
             <a href="{% url 'core:noticia_create' %}" class="card border-0 shadow-sm rounded-3 p-3 text-center text-decoration-none d-block card-hover-lift h-100">
                 <div style="width:48px;height:48px;border-radius:12px;background:#fdf2f3;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;">
                     <i class="bi bi-megaphone-fill fs-5 text-danger"></i>
                 </div>
-                <div class="fw-semibold text-dark small">Nuevo Comunicado</div>
+                <div class="fw-semibold text-dark small">{% if user.perfil.rol == 'dece' and not user.is_superuser %}Crear aviso DECE{% else %}Crear noticia o aviso{% endif %}</div>
+                <small class="d-block mt-1 text-muted">Publicar información para las familias</small>
             </a>
         </div>
+        {% endif %}
+        {% if puede_gestionar_galeria %}
         <div class="col-6 col-md-3">
             <a href="{% url 'core:galeria_create' %}" class="card border-0 shadow-sm rounded-3 p-3 text-center text-decoration-none d-block card-hover-lift h-100">
                 <div style="width:48px;height:48px;border-radius:12px;background:#eaf0fb;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;">
                     <i class="bi bi-image-fill fs-5" style="color:#18396D;"></i>
                 </div>
-                <div class="fw-semibold text-dark small">Subir Foto a Galería</div>
+                <div class="fw-semibold text-dark small">Agregar foto al álbum</div>
+                <small class="d-block mt-1 text-muted">La foto aparecerá en la galería pública</small>
             </a>
         </div>
+        {% endif %}
+        {% if puede_gestionar_personal %}
         <div class="col-6 col-md-3">
             <a href="{% url 'core:docente_create' %}" class="card border-0 shadow-sm rounded-3 p-3 text-center text-decoration-none d-block card-hover-lift h-100">
                 <div style="width:48px;height:48px;border-radius:12px;background:#fef8ee;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;">
                     <i class="bi bi-person-plus-fill fs-5" style="color:#b45309;"></i>
                 </div>
-                <div class="fw-semibold text-dark small">Registrar Docente</div>
+                <div class="fw-semibold text-dark small">Agregar personal</div>
+                <small class="d-block mt-1 text-muted">Docente, autoridad u orientación escolar</small>
             </a>
         </div>
+        {% endif %}
+        {% if puede_atender_consultas %}
         <div class="col-6 col-md-3">
-            <a href="{% url 'core:consultas_list' %}" class="card border-0 shadow-sm rounded-3 p-3 text-center text-decoration-none d-block card-hover-lift h-100">
+            <a href="{% url 'core:consultas_list' %}{% if total_mensajes %}?estado=pendiente{% endif %}" class="card border-0 shadow-sm rounded-3 p-3 text-center text-decoration-none d-block card-hover-lift h-100">
                 <div style="width:48px;height:48px;border-radius:12px;background:#ecfdf5;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;">
                     <i class="bi bi-chat-dots-fill fs-5 text-success"></i>
                 </div>
-                <div class="fw-semibold text-dark small">Ver Consultas</div>
+                <div class="fw-semibold text-dark small">Revisar mensajes</div>
+                <small class="d-block mt-1 text-muted">Leer y marcar consultas atendidas</small>
+            </a>
+        </div>
+        {% endif %}
+        {% if puede_gestionar_usuarios %}
+        <div class="col-6 col-md-3">
+            <a href="{% url 'core:usuario_create' %}" class="card border-0 shadow-sm rounded-3 p-3 text-center text-decoration-none d-block card-hover-lift h-100">
+                <div style="width:48px;height:48px;border-radius:12px;background:#eaf0fb;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;">
+                    <i class="bi bi-person-gear fs-5" style="color:#18396D;"></i>
+                </div>
+                <div class="fw-semibold text-dark small">Crear cuenta de acceso</div>
+                <small class="d-block mt-1 text-muted">Elegir usuario y permisos</small>
+            </a>
+        </div>
+        {% endif %}
+        <div class="col-6 col-md-3">
+            <a href="{% url 'core:perfil_editar' %}" class="card border-0 shadow-sm rounded-3 p-3 text-center text-decoration-none d-block card-hover-lift h-100">
+                <div style="width:48px;height:48px;border-radius:12px;background:#f1f5f9;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;">
+                    <i class="bi bi-person-circle fs-5" style="color:#475569;"></i>
+                </div>
+                <div class="fw-semibold text-dark small">Actualizar mi perfil</div>
+                <small class="d-block mt-1 text-muted">Cambiar mis datos o foto</small>
             </a>
         </div>
     </div>
 
-    <!-- Tablas inferiores -->
+    {% if puede_gestionar_noticias or puede_gestionar_galeria or puede_atender_consultas %}
+    <!-- Información reciente disponible para el rol -->
     <div class="row g-4">
         <!-- Publicaciones recientes -->
-        <div class="col-lg-7">
+        {% if puede_gestionar_noticias %}
+        <div class="{% if puede_atender_consultas %}col-lg-7{% else %}col-lg-12{% endif %}">
             <div class="card border-0 shadow-sm rounded-3">
                 <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center border-bottom">
-                    <h6 class="mb-0 fw-bold text-dark"><i class="bi bi-megaphone me-2 text-danger"></i> Publicaciones Recientes</h6>
+                    <h6 class="mb-0 fw-bold text-dark"><i class="bi bi-megaphone me-2 text-danger"></i> {% if user.perfil.rol == 'dece' and not user.is_superuser %}Avisos DECE recientes{% else %}Noticias y comunicados recientes{% endif %}</h6>
                     <a href="{% url 'core:noticia_list' %}" class="small text-decoration-none text-primary">Ver todas <i class="bi bi-arrow-right"></i></a>
                 </div>
                 <div class="table-responsive">
@@ -171,12 +254,45 @@
                 </div>
             </div>
         </div>
+        {% endif %}
+
+        {% if puede_gestionar_galeria and not puede_gestionar_noticias %}
+        <div class="col-lg-12">
+            <div class="card border-0 shadow-sm rounded-3">
+                <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center border-bottom">
+                    <h6 class="mb-0 fw-bold text-dark"><i class="bi bi-images me-2 text-primary"></i> Fotos agregadas recientemente</h6>
+                    <a href="{% url 'core:galeria_list' %}" class="small text-decoration-none text-primary">Ver álbum completo</a>
+                </div>
+                <div class="list-group list-group-flush">
+                    {% for foto in ultimas_fotos %}
+                    <div class="list-group-item d-flex align-items-center gap-3">
+                        {% if foto.imagen %}
+                        <img src="{{ foto.imagen.url }}" alt="" class="dashboard-recent-photo">
+                        {% else %}
+                        <span class="dashboard-recent-photo-placeholder"><i class="bi bi-image"></i></span>
+                        {% endif %}
+                        <div class="flex-grow-1">
+                            <strong class="d-block text-dark">{{ foto.titulo }}</strong>
+                            <small class="text-muted">{{ foto.get_categoria_display }} · {{ foto.fecha_subida|date:"d/m/Y" }}</small>
+                        </div>
+                        <span class="badge {% if foto.activa %}bg-success-subtle text-success{% else %}bg-secondary-subtle text-secondary{% endif %}">
+                            {% if foto.activa %}Visible en la web{% else %}Oculta de la web{% endif %}
+                        </span>
+                    </div>
+                    {% empty %}
+                    <div class="text-center text-muted small py-4">Todavía no has agregado fotos. Usa “Agregar foto al álbum” para comenzar.</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
 
         <!-- Consultas recientes -->
+        {% if puede_atender_consultas %}
         <div class="col-lg-5">
             <div class="card border-0 shadow-sm rounded-3">
                 <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center border-bottom">
-                    <h6 class="mb-0 fw-bold text-dark"><i class="bi bi-chat-dots me-2 text-primary"></i> Consultas Recientes</h6>
+                    <h6 class="mb-0 fw-bold text-dark"><i class="bi bi-chat-dots me-2 text-primary"></i> Mensajes recientes de las familias</h6>
                     <a href="{% url 'core:consultas_list' %}" class="small text-decoration-none text-primary">Ver todas</a>
                 </div>
                 <ul class="list-group list-group-flush">
@@ -201,7 +317,9 @@
                 </ul>
             </div>
         </div>
+        {% endif %}
     </div>
+    {% endif %}
 </div>
 {% endblock %}
 
@@ -209,5 +327,16 @@
 <style>
 .card-hover-lift { transition: transform 0.18s ease, box-shadow 0.18s ease; cursor: pointer; }
 .card-hover-lift:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(24,57,109,0.12) !important; }
+.dashboard-pending-banner { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; border: 1px solid #fcd34d; border-left: 5px solid #f59e0b; border-radius: 12px; background: #fffbeb; }
+.dashboard-pending-icon { width: 48px; height: 48px; flex: 0 0 48px; display: grid; place-items: center; border-radius: 12px; background: #fef3c7; color: #b45309; font-size: 1.35rem; }
+.dashboard-pending-label { display: block; margin-bottom: 0.15rem; color: #92400e; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; }
+.dashboard-pending-action { min-height: 44px; white-space: nowrap; }
+.dashboard-all-clear { padding: 0.8rem 1rem; border: 1px solid #bbf7d0; border-radius: 10px; background: #f0fdf4; color: #166534; }
+.dashboard-recent-photo, .dashboard-recent-photo-placeholder { width: 52px; height: 52px; flex: 0 0 52px; border-radius: 10px; object-fit: cover; background: #eaf0fb; color: #18396D; display: grid; place-items: center; }
+@media (max-width: 575.98px) {
+    .dashboard-pending-banner { align-items: flex-start; flex-wrap: wrap; padding: 1rem; }
+    .dashboard-pending-banner > div:nth-child(2) { flex-basis: calc(100% - 64px); }
+    .dashboard-pending-action { width: 100%; }
+}
 </style>
 {% endblock %}

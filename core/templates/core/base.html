@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <!-- Estilos de Alto Nivel del Proyecto -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=3">
     
     {% block extra_css %}{% endblock %}
 </head>
@@ -39,11 +39,8 @@
         <div class="container">
             <div class="d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center gap-3">
-                    <span class="topbar-badge-pill">
-                        <i class="bi bi-shield-check me-1"></i> Educación Fiscal
-                    </span>
                     <span class="text-white-50">|</span>
-                    <span><i class="bi bi-geo-alt me-1 text-danger"></i> Recinto El Deseo, Yaguachi, Guayas</span>
+                    <span><i class="bi bi-geo-alt me-1 text-danger"></i> Rcto El Deseo</span>
                     <span class="text-white-50">|</span>
                     <span><i class="bi bi-clock me-1"></i> Jornadas: Matutina y Vespertina</span>
                 </div>
@@ -67,9 +64,9 @@
                 <a class="brand-wrapper" href="{% url 'core:home' %}">
                     <img src="{% static 'img/logo_antonio_ante.jpg' %}" alt="Escudo Oficial EEB Antonio Ante" class="brand-seal-logo">
                     <div>
-                        <span class="brand-title-top">Escuela de Educación Básica</span>
+                        <span class="brand-title-top">EEB</span>
                         <span class="brand-title-main">ANTONIO ANTE</span>
-                        <span class="brand-title-sub">Recinto El Deseo • Yaguachi, Guayas</span>
+                        <span class="brand-title-sub">Rcto El Deseo</span>
                     </div>
                 </a>
 
@@ -126,7 +123,7 @@
 
                         <!-- Galería Escolar -->
                         <li class="nav-item">
-                            <a class="nav-link" href="#galeria">Galería</a>
+                            <a class="nav-link" href="{% url 'core:galeria_publica' %}">Galería</a>
                         </li>
 
                         <!-- Contacto -->
@@ -221,6 +218,9 @@
                         <a href="https://wa.me/593960172899" target="_blank" class="footer-social-btn" title="WhatsApp 096 017 2899">
                             <i class="bi bi-whatsapp"></i>
                         </a>
+                        <a href="https://www.facebook.com/profile.php?id=100064042299499&amp;locale=es_LA" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Facebook EEB Antonio Ante" aria-label="Visitar la página de Facebook de la EEB Antonio Ante">
+                            <i class="bi bi-facebook"></i>
+                        </a>
                         <a href="#contacto-seccion" class="footer-social-btn" title="Ubicación">
                             <i class="bi bi-geo-alt"></i>
                         </a>
@@ -244,7 +244,7 @@
                     <h6 class="footer-section-title">Jornadas y Niveles</h6>
                     <ul class="footer-links-list">
                         <li><span class="text-white-50"><i class="bi bi-check2 text-danger me-2"></i> Jornada Matutina: 07:00 a 12:30</span></li>
-                        <li><span class="text-white-50"><i class="bi bi-check2 text-danger me-2"></i> Jornada Vespertina: 13:00 a 18:30</span></li>
+                        <li><span class="text-white-50"><i class="bi bi-check2 text-danger me-2"></i> Jornada Vespertina: 13:00 a 17:30</span></li>
                         <li><span class="text-white-50"><i class="bi bi-check2 text-danger me-2"></i> Departamento DECE</span></li>
                         <li><span class="text-white-50"><i class="bi bi-check2 text-danger me-2"></i> Inicial a 10° Año de EGB</span></li>
                     </ul>
@@ -255,7 +255,7 @@
                     <h6 class="footer-section-title">Atención Oficial</h6>
                     <div class="footer-contact-row">
                         <i class="bi bi-geo-alt text-danger"></i>
-                        <span>Recinto El Deseo, Yaguachi, Guayas</span>
+                        <span>Rcto El Deseo</span>
                     </div>
                     <div class="footer-contact-row">
                         <i class="bi bi-whatsapp text-success"></i>

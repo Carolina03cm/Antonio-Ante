@@ -3,6 +3,8 @@ from django.contrib.auth import logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.core.paginator import Paginator
+from django.urls import reverse
 from .models import NoticiaComunicado, FotoGaleria, DocentePersonal, MensajeContacto, PerfilUsuario
 from .forms import (
     NoticiaComunicadoForm, FotoGaleriaForm, DocentePersonalForm, MensajeContactoForm,
@@ -15,6 +17,31 @@ def es_administrador(user):
     if user.is_superuser:
         return True
     return hasattr(user, 'perfil') and user.perfil.rol == 'administrador'
+
+
+def rol_usuario(user):
+    if not user.is_authenticated:
+        return ''
+    try:
+        return user.perfil.rol
+    except PerfilUsuario.DoesNotExist:
+        return ''
+
+
+def puede_gestionar_noticias(user):
+    return es_administrador(user) or rol_usuario(user) in ('noticias', 'dece')
+
+
+def puede_gestionar_galeria(user):
+    return es_administrador(user) or rol_usuario(user) == 'galeria'
+
+
+def puede_gestionar_personal(user):
+    return es_administrador(user)
+
+
+def puede_atender_consultas(user):
+    return es_administrador(user)
 
 
 def verificar_primer_cambio_clave(view_func):
@@ -60,6 +87,37 @@ def home(request):
         'form_contacto': form_contacto,
     }
     return render(request, 'core/home.html', context)
+
+
+def galeria_publica(request):
+    """Muestra a los visitantes las fotografías activas de la institución."""
+    categorias = FotoGaleria.CATEGORIA_CHOICES
+    categoria = request.GET.get('categoria', '').strip()
+    categorias_validas = {valor for valor, _ in categorias}
+    if categoria not in categorias_validas:
+        categoria = ''
+
+    fotos = FotoGaleria.objects.filter(activa=True)
+    if categoria:
+        fotos = fotos.filter(categoria=categoria)
+
+    page_obj = Paginator(fotos, 12).get_page(request.GET.get('page'))
+    return render(request, 'core/galeria_publica.html', {
+        'fotos': page_obj.object_list,
+        'page_obj': page_obj,
+        'categorias': categorias,
+        'categoria_activa': categoria,
+        'total_fotos': page_obj.paginator.count,
+    })
+
+
+def noticia_publica(request, pk):
+    """Muestra el comunicado completo que la persona seleccionó en la portada."""
+    noticia = NoticiaComunicado.objects.filter(pk=pk, destacado=True).first()
+    if noticia is None:
+        messages.info(request, 'Este comunicado ya no está disponible. Aquí puedes ver los comunicados vigentes.')
+        return redirect(f"{reverse('core:home')}#noticias")
+    return render(request, 'core/noticia_publica.html', {'noticia': noticia})
 
 
 def user_logout(request):
@@ -160,17 +218,34 @@ def dashboard(request):
     """
     Panel de control principal post-login para docentes y administradores.
     """
-    total_noticias = NoticiaComunicado.objects.count()
-    total_fotos = FotoGaleria.objects.count()
-    total_docentes = DocentePersonal.objects.count()
-    total_mensajes = MensajeContacto.objects.filter(leido=False).count()
-    total_usuarios = User.objects.count()
+    rol = rol_usuario(request.user)
+    es_admin = es_administrador(request.user)
+    puede_noticias = es_admin or rol in ('noticias', 'dece')
+    puede_galeria = es_admin or rol == 'galeria'
+    puede_personal = es_admin
+    puede_consultas = es_admin
 
-    ultimas_noticias = NoticiaComunicado.objects.all()[:5]
-    ultimas_fotos = FotoGaleria.objects.all()[:4]
-    ultimas_consultas = MensajeContacto.objects.all()[:5]
+    noticias = NoticiaComunicado.objects.all()
+    if rol == 'dece' and not es_admin:
+        noticias = noticias.filter(tipo='dece')
+
+    total_noticias = noticias.count() if puede_noticias else 0
+    total_fotos = FotoGaleria.objects.count() if puede_galeria else 0
+    total_docentes = DocentePersonal.objects.count() if puede_personal else 0
+    total_mensajes = MensajeContacto.objects.filter(leido=False).count() if puede_consultas else 0
+    total_usuarios = User.objects.count() if es_admin else 0
+
+    ultimas_noticias = noticias[:5] if puede_noticias else NoticiaComunicado.objects.none()
+    ultimas_fotos = FotoGaleria.objects.all()[:4] if puede_galeria else FotoGaleria.objects.none()
+    ultimas_consultas = MensajeContacto.objects.all()[:5] if puede_consultas else MensajeContacto.objects.none()
 
     context = {
+        'rol_panel': 'Administrador' if es_admin else dict(PerfilUsuario.ROLES_CHOICES).get(rol, 'Personal'),
+        'puede_gestionar_noticias': puede_noticias,
+        'puede_gestionar_galeria': puede_galeria,
+        'puede_gestionar_personal': puede_personal,
+        'puede_atender_consultas': puede_consultas,
+        'puede_gestionar_usuarios': es_admin,
         'total_noticias': total_noticias,
         'total_fotos': total_fotos,
         'total_docentes': total_docentes,
@@ -185,44 +260,69 @@ def dashboard(request):
 
 # --- Gestión de Noticias y Comunicados ---
 @login_required
+@user_passes_test(puede_gestionar_noticias)
 @verificar_primer_cambio_clave
 def noticia_list(request):
     noticias = NoticiaComunicado.objects.all()
+    if rol_usuario(request.user) == 'dece' and not es_administrador(request.user):
+        noticias = noticias.filter(tipo='dece')
     return render(request, 'core/dashboard/noticia_list.html', {'noticias': noticias})
 
 @login_required
+@user_passes_test(puede_gestionar_noticias)
 @verificar_primer_cambio_clave
 def noticia_create(request):
+    solo_dece = rol_usuario(request.user) == 'dece' and not es_administrador(request.user)
     if request.method == 'POST':
         form = NoticiaComunicadoForm(request.POST, request.FILES)
+        if solo_dece:
+            form.fields['tipo'].choices = [('dece', 'Aviso DECE')]
         if form.is_valid():
             noticia = form.save(commit=False)
+            if solo_dece:
+                noticia.tipo = 'dece'
             noticia.autor = request.user
             noticia.save()
             messages.success(request, 'Noticia o comunicado publicado exitosamente.')
             return redirect('core:noticia_list')
     else:
         form = NoticiaComunicadoForm()
+        if solo_dece:
+            form.fields['tipo'].choices = [('dece', 'Aviso DECE')]
     return render(request, 'core/dashboard/noticia_form.html', {'form': form, 'titulo_accion': 'Publicar Nuevo Comunicado'})
 
 @login_required
+@user_passes_test(puede_gestionar_noticias)
 @verificar_primer_cambio_clave
 def noticia_edit(request, pk):
-    noticia = get_object_or_404(NoticiaComunicado, pk=pk)
+    noticias = NoticiaComunicado.objects.all()
+    solo_dece = rol_usuario(request.user) == 'dece' and not es_administrador(request.user)
+    if solo_dece:
+        noticias = noticias.filter(tipo='dece')
+    noticia = get_object_or_404(noticias, pk=pk)
     if request.method == 'POST':
         form = NoticiaComunicadoForm(request.POST, request.FILES, instance=noticia)
+        if solo_dece:
+            form.fields['tipo'].choices = [('dece', 'Aviso DECE')]
         if form.is_valid():
+            form.instance.tipo = 'dece' if solo_dece else form.instance.tipo
             form.save()
             messages.success(request, 'Publicación actualizada correctamente.')
             return redirect('core:noticia_list')
     else:
         form = NoticiaComunicadoForm(instance=noticia)
+        if solo_dece:
+            form.fields['tipo'].choices = [('dece', 'Aviso DECE')]
     return render(request, 'core/dashboard/noticia_form.html', {'form': form, 'titulo_accion': 'Editar Publicación', 'noticia': noticia})
 
 @login_required
+@user_passes_test(puede_gestionar_noticias)
 @verificar_primer_cambio_clave
 def noticia_delete(request, pk):
-    noticia = get_object_or_404(NoticiaComunicado, pk=pk)
+    noticias = NoticiaComunicado.objects.all()
+    if rol_usuario(request.user) == 'dece' and not es_administrador(request.user):
+        noticias = noticias.filter(tipo='dece')
+    noticia = get_object_or_404(noticias, pk=pk)
     if request.method == 'POST':
         noticia.delete()
         messages.success(request, 'Publicación eliminada correctamente.')
@@ -232,12 +332,14 @@ def noticia_delete(request, pk):
 
 # --- Gestión de Galería Fotográfica ---
 @login_required
+@user_passes_test(puede_gestionar_galeria)
 @verificar_primer_cambio_clave
 def galeria_list(request):
     fotos = FotoGaleria.objects.all()
     return render(request, 'core/dashboard/galeria_list.html', {'fotos': fotos})
 
 @login_required
+@user_passes_test(puede_gestionar_galeria)
 @verificar_primer_cambio_clave
 def galeria_create(request):
     if request.method == 'POST':
@@ -251,6 +353,7 @@ def galeria_create(request):
     return render(request, 'core/dashboard/galeria_form.html', {'form': form, 'titulo_accion': 'Subir Fotografías'})
 
 @login_required
+@user_passes_test(puede_gestionar_galeria)
 @verificar_primer_cambio_clave
 def galeria_delete(request, pk):
     foto = get_object_or_404(FotoGaleria, pk=pk)
@@ -263,12 +366,14 @@ def galeria_delete(request, pk):
 
 # --- Gestión de Docentes y Autoridades ---
 @login_required
+@user_passes_test(puede_gestionar_personal)
 @verificar_primer_cambio_clave
 def docente_list(request):
     docentes = DocentePersonal.objects.all()
     return render(request, 'core/dashboard/docente_list.html', {'docentes': docentes})
 
 @login_required
+@user_passes_test(puede_gestionar_personal)
 @verificar_primer_cambio_clave
 def docente_create(request):
     if request.method == 'POST':
@@ -282,6 +387,7 @@ def docente_create(request):
     return render(request, 'core/dashboard/docente_form.html', {'form': form, 'titulo_accion': 'Registrar Docente / Autoridad'})
 
 @login_required
+@user_passes_test(puede_gestionar_personal)
 @verificar_primer_cambio_clave
 def docente_edit(request, pk):
     docente = get_object_or_404(DocentePersonal, pk=pk)
@@ -296,6 +402,7 @@ def docente_edit(request, pk):
     return render(request, 'core/dashboard/docente_form.html', {'form': form, 'titulo_accion': 'Editar Docente / Autoridad', 'docente': docente})
 
 @login_required
+@user_passes_test(puede_gestionar_personal)
 @verificar_primer_cambio_clave
 def docente_delete(request, pk):
     docente = get_object_or_404(DocentePersonal, pk=pk)
@@ -308,12 +415,29 @@ def docente_delete(request, pk):
 
 # --- Consultas Recibidas ---
 @login_required
+@user_passes_test(puede_atender_consultas)
 @verificar_primer_cambio_clave
 def consultas_list(request):
+    estado = request.GET.get('estado', '').strip()
     consultas = MensajeContacto.objects.all()
-    return render(request, 'core/dashboard/consultas_list.html', {'consultas': consultas})
+    if estado == 'pendiente':
+        consultas = consultas.filter(leido=False)
+    elif estado == 'atendido':
+        consultas = consultas.filter(leido=True)
+    else:
+        estado = ''
+
+    context = {
+        'consultas': consultas,
+        'estado_activo': estado,
+        'total_pendientes': MensajeContacto.objects.filter(leido=False).count(),
+        'total_atendidas': MensajeContacto.objects.filter(leido=True).count(),
+        'total_consultas': MensajeContacto.objects.count(),
+    }
+    return render(request, 'core/dashboard/consultas_list.html', context)
 
 @login_required
+@user_passes_test(puede_atender_consultas)
 @verificar_primer_cambio_clave
 def consulta_toggle(request, pk):
     consulta = get_object_or_404(MensajeContacto, pk=pk)
@@ -335,7 +459,11 @@ def usuario_list(request):
     Lista todos los usuarios del sistema institucional y sus roles asignados.
     """
     usuarios = User.objects.all().select_related('perfil').order_by('-is_superuser', 'username')
-    return render(request, 'core/dashboard/usuario_list.html', {'usuarios': usuarios})
+    credenciales_creadas = request.session.pop('usuario_credenciales_creadas', None)
+    return render(request, 'core/dashboard/usuario_list.html', {
+        'usuarios': usuarios,
+        'credenciales_creadas': credenciales_creadas,
+    })
 
 
 @login_required
@@ -350,7 +478,12 @@ def usuario_create(request):
         form = UsuarioCrearForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save()
-            messages.success(request, f'Usuario institucional "@{user.username}" creado con éxito. Su clave inicial es la cédula.')
+            request.session['usuario_credenciales_creadas'] = {
+                'username': user.username,
+                'password': form.cleaned_data['cedula'],
+                'nombre': f"{form.cleaned_data['nombres']} {form.cleaned_data['apellidos']}",
+            }
+            messages.success(request, f'La cuenta de @{user.username} fue creada.')
             return redirect('core:usuario_list')
     else:
         form = UsuarioCrearForm()

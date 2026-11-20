@@ -15,13 +15,55 @@
         </a>
     </div>
 
+    {% if credenciales_creadas %}
+    <section class="card border-0 border-start border-4 border-success shadow-sm rounded-3 mb-4" aria-labelledby="createdCredentialsTitle">
+        <div class="card-body p-4">
+            <div class="d-flex align-items-start gap-3 mb-3">
+                <span class="d-inline-flex align-items-center justify-content-center rounded-circle bg-success-subtle text-success" style="width:44px;height:44px;flex:0 0 44px;">
+                    <i class="bi bi-person-check-fill fs-5" aria-hidden="true"></i>
+                </span>
+                <div>
+                    <h5 id="createdCredentialsTitle" class="fw-bold text-dark mb-1">Cuenta creada para {{ credenciales_creadas.nombre }}</h5>
+                    <p class="text-muted small mb-0">Entrega estos datos a la persona. La contraseña es temporal y deberá cambiarla al ingresar. Esta información se mostrará una sola vez.</p>
+                </div>
+            </div>
+
+            <div class="row g-3 align-items-end">
+                <div class="col-md-5">
+                    <label class="form-label small fw-semibold" for="createdUsername">Usuario</label>
+                    <div class="input-group">
+                        <input id="createdUsername" class="form-control" type="text" value="{{ credenciales_creadas.username }}" readonly>
+                        <button class="btn btn-outline-primary" type="button" data-copy-target="createdUsername">
+                            <i class="bi bi-clipboard me-1" aria-hidden="true"></i> Copiar
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <label class="form-label small fw-semibold" for="createdPassword">Contraseña temporal</label>
+                    <div class="input-group">
+                        <input id="createdPassword" class="form-control" type="text" value="{{ credenciales_creadas.password }}" readonly>
+                        <button class="btn btn-outline-primary" type="button" data-copy-target="createdPassword">
+                            <i class="bi bi-clipboard me-1" aria-hidden="true"></i> Copiar
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-success w-100" type="button" id="copyBothCredentials">
+                        Copiar ambos
+                    </button>
+                </div>
+            </div>
+            <small id="credentialCopyStatus" class="d-block mt-2 text-success" aria-live="polite"></small>
+        </div>
+    </section>
+    {% endif %}
+
     <div class="card border-0 shadow-sm rounded-4 overflow-hidden bg-white">
         <div class="table-responsive">
             <table class="table table-hover align-middle mb-0">
                 <thead class="table-light small">
                     <tr>
                         <th class="ps-4">Usuario / Nombre</th>
-                        <th>Cédula (Clave Inicial)</th>
                         <th>Rol Asignado</th>
                         <th>Estado Clave</th>
                         <th>Cuenta</th>
@@ -47,13 +89,6 @@
                                     {% if u.email %}<small class="text-muted d-block" style="font-size: 0.72rem;">{{ u.email }}</small>{% endif %}
                                 </div>
                             </div>
-                        </td>
-                        <td class="small">
-                            {% if u.perfil.cedula %}
-                                <code>{{ u.perfil.cedula }}</code>
-                            {% else %}
-                                <span class="text-muted">—</span>
-                            {% endif %}
                         </td>
                         <td>
                             <span class="badge {% if u.perfil.rol == 'administrador' or u.is_superuser %}bg-danger{% elif u.perfil.rol == 'noticias' %}bg-primary{% elif u.perfil.rol == 'galeria' %}bg-warning text-dark{% else %}bg-secondary{% endif %} rounded-pill small">
@@ -96,7 +131,7 @@
                     </tr>
                     {% empty %}
                     <tr>
-                        <td colspan="6" class="text-center py-5 text-muted">No hay usuarios registrados adicionales.</td>
+                        <td colspan="5" class="text-center py-5 text-muted">No hay usuarios registrados adicionales.</td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -104,4 +139,46 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const status = document.getElementById('credentialCopyStatus');
+    const username = document.getElementById('createdUsername');
+    const password = document.getElementById('createdPassword');
+    if (!status || !username || !password) return;
+
+    async function copyCredential(text) {
+        try {
+            if (navigator.clipboard && window.isSecureContext) {
+                await navigator.clipboard.writeText(text);
+            } else {
+                const temporaryInput = document.createElement('textarea');
+                temporaryInput.value = text;
+                temporaryInput.style.position = 'fixed';
+                temporaryInput.style.opacity = '0';
+                document.body.appendChild(temporaryInput);
+                temporaryInput.select();
+                document.execCommand('copy');
+                temporaryInput.remove();
+            }
+            status.textContent = 'Copiado al portapapeles.';
+        } catch (error) {
+            status.textContent = 'No se pudo copiar. Selecciona el dato y cópialo manualmente.';
+        }
+    }
+
+    document.querySelectorAll('[data-copy-target]').forEach(button => {
+        button.addEventListener('click', () => {
+            const input = document.getElementById(button.dataset.copyTarget);
+            if (input) copyCredential(input.value);
+        });
+    });
+
+    document.getElementById('copyBothCredentials')?.addEventListener('click', () => {
+        copyCredential(`Usuario: ${username.value}\nContraseña temporal: ${password.value}`);
+    });
+});
+</script>
 {% endblock %}

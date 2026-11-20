@@ -74,7 +74,7 @@
                 </div>
                 <h5 class="quick-card-title">Doble Jornada</h5>
                 <p class="quick-card-desc">
-                    Turno Matutino (07:00 - 12:30) y Turno Vespertino (13:00 - 18:30) para las familias.
+                    Turno Matutino (07:00 - 12:30) y Turno Vespertino (13:00 - 17:30) para las familias.
                 </p>
                 <a href="#docentes" class="small fw-bold text-danger text-decoration-none">
                     Horarios y turnos <i class="bi bi-arrow-right"></i>
@@ -129,7 +129,7 @@
             <div class="col-lg-7">
                 <div class="institutional-quote-card">
                     <span class="section-eyebrow">Historia y Legado</span>
-                    <h3 class="section-heading-clean">Nuestra Trayectoria en el Recinto El Deseo</h3>
+                    <h3 class="section-heading-clean">Nuestra Trayectoria</h3>
                     <div class="section-accent-bar bar-left"></div>
                     <p class="text-secondary mb-3">
                         Fundada el <strong>4 de septiembre de 1965</strong>, la <strong>Escuela de Educación Básica "Antonio Ante"</strong> cuenta con <strong>61 años</strong> de trayectoria pedagógica al servicio de la niñez y las familias del cantón San Jacinto de Yaguachi.
@@ -535,7 +535,7 @@
                     </span>
                     <h5 class="fw-bold mb-2" style="color: var(--color-navy);">{{ n.titulo }}</h5>
                     <p class="small text-muted mb-3">{{ n.resumen }}</p>
-                    <a href="https://wa.me/593960172899?text={{ n.titulo|urlencode }}" target="_blank" class="small fw-bold text-danger text-decoration-none">
+                    <a href="{% url 'core:noticia_publica' n.pk %}" class="small fw-bold text-danger text-decoration-none">
                         Consultar detalles <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
@@ -592,6 +592,11 @@
             </div>
             {% endfor %}
         </div>
+        <div class="text-center mt-4">
+            <a class="btn btn-outline-primary gallery-view-all" href="{% url 'core:galeria_publica' %}">
+                Ver toda la galería <i class="bi bi-arrow-right ms-1"></i>
+            </a>
+        </div>
     </div>
 </section>
 
@@ -638,7 +643,7 @@
                         </div>
                         <div>
                             <span class="d-block text-muted small">Horarios de Atención</span>
-                            <strong class="text-dark">Matutina: 07:00 a 12:30 | Vespertina: 13:00 a 18:30</strong>
+                            <strong class="text-dark">Matutina: 07:00 a 12:30 | Vespertina: 13:00 a 17:30</strong>
                         </div>
                     </div>
                 </div>

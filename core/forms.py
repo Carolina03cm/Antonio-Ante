@@ -87,10 +87,10 @@ class MensajeContactoForm(forms.ModelForm):
 
 
 class UsuarioCrearForm(forms.Form):
-    nombres = forms.CharField(label='Nombres', max_length=100, widget=forms.TextInput(attrs={
+    nombres = forms.CharField(label='Nombres completos', max_length=100, widget=forms.TextInput(attrs={
         'class': 'form-control', 'placeholder': 'Ej. Aura Carolina', 'id': 'id_nombres'
     }))
-    apellidos = forms.CharField(label='Apellidos', max_length=100, widget=forms.TextInput(attrs={
+    apellidos = forms.CharField(label='Dos apellidos', max_length=100, widget=forms.TextInput(attrs={
         'class': 'form-control', 'placeholder': 'Ej. Morán Sarate', 'id': 'id_apellidos'
     }))
     cedula = forms.CharField(label='Número de Cédula (Contraseña temporal)', max_length=15, widget=forms.TextInput(attrs={
@@ -105,6 +105,15 @@ class UsuarioCrearForm(forms.Form):
     foto = forms.ImageField(label='Fotografía de Perfil (Opcional)', required=False, widget=forms.ClearableFileInput(attrs={
         'class': 'form-control'
     }))
+
+    def clean_nombres(self):
+        return ' '.join(self.cleaned_data['nombres'].split())
+
+    def clean_apellidos(self):
+        apellidos = ' '.join(self.cleaned_data['apellidos'].split())
+        if len(apellidos.split()) < 2:
+            raise forms.ValidationError('Escribe los dos apellidos: paterno y materno.')
+        return apellidos
 
     def clean_cedula(self):
         cedula = self.cleaned_data.get('cedula', '').strip()

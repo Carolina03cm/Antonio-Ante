@@ -5,9 +5,24 @@
 {% block content %}
 <div class="container-fluid p-0">
     <div class="mb-4">
-        <h4 class="fw-bold text-dark mb-1">Bandeja de Consultas de Secretaría</h4>
-        <p class="text-muted small mb-0">Mensajes y trámites solicitados por representantes a través del formulario de la web.</p>
+        <h4 class="fw-bold text-dark mb-1">Mensajes de las familias</h4>
+        <p class="text-muted small mb-0">Revisa las consultas recibidas desde la página pública y marca cada una cuando haya sido atendida.</p>
     </div>
+
+    <nav class="consultas-filters d-flex flex-wrap gap-2 mb-3" aria-label="Filtrar mensajes por estado">
+        <a class="btn {% if not estado_activo %}btn-primary{% else %}btn-outline-primary{% endif %}"
+           href="{% url 'core:consultas_list' %}" {% if not estado_activo %}aria-current="page"{% endif %}>
+            Todos <span class="badge bg-light text-dark ms-1">{{ total_consultas }}</span>
+        </a>
+        <a class="btn {% if estado_activo == 'pendiente' %}btn-warning{% else %}btn-outline-warning{% endif %}"
+           href="{% url 'core:consultas_list' %}?estado=pendiente" {% if estado_activo == 'pendiente' %}aria-current="page"{% endif %}>
+            Pendientes de atención <span class="badge bg-white text-dark ms-1">{{ total_pendientes }}</span>
+        </a>
+        <a class="btn {% if estado_activo == 'atendido' %}btn-success{% else %}btn-outline-success{% endif %}"
+           href="{% url 'core:consultas_list' %}?estado=atendido" {% if estado_activo == 'atendido' %}aria-current="page"{% endif %}>
+            Atendidas <span class="badge bg-light text-dark ms-1">{{ total_atendidas }}</span>
+        </a>
+    </nav>
 
     <div class="card border-0 shadow-sm rounded-3">
         <div class="table-responsive">
@@ -29,7 +44,7 @@
                             <strong class="d-block text-dark small">{{ c.nombre }}</strong>
                         </td>
                         <td>
-                            <a href="https://wa.me/593{{ c.telefono }}" target="_blank" class="small text-success text-decoration-none fw-bold">
+                            <a href="https://wa.me/593{{ c.telefono }}" target="_blank" rel="noopener noreferrer" class="small text-success text-decoration-none fw-bold">
                                 <i class="bi bi-whatsapp me-1"></i> {{ c.telefono }}
                             </a>
                         </td>
@@ -43,7 +58,7 @@
                             {% endif %}
                         </td>
                         <td class="text-end">
-                            <a href="{% url 'core:consulta_toggle' c.pk %}" class="btn btn-sm btn-outline-secondary py-1 px-2" title="Cambiar estado">
+                            <a href="{% url 'core:consulta_toggle' c.pk %}" class="btn btn-sm btn-outline-secondary py-1 px-2" title="{% if c.leido %}Volver a marcar pendiente{% else %}Marcar como atendida{% endif %}" aria-label="{% if c.leido %}Volver a marcar pendiente{% else %}Marcar como atendida{% endif %}">
                                 {% if c.leido %}
                                     <i class="bi bi-arrow-counterclockwise" title="Marcar pendiente"></i>
                                 {% else %}
@@ -56,7 +71,13 @@
                     <tr>
                         <td colspan="6" class="text-center py-5 text-muted">
                             <i class="bi bi-chat-left-dots fs-1 d-block mb-2 text-muted"></i>
-                            No hay consultas registradas en este momento.
+                            {% if estado_activo == 'pendiente' %}
+                                No hay mensajes pendientes de atención.
+                            {% elif estado_activo == 'atendido' %}
+                                Todavía no hay mensajes marcados como atendidos.
+                            {% else %}
+                                No hay mensajes registrados todavía.
+                            {% endif %}
                         </td>
                     </tr>
                     {% endfor %}
@@ -65,4 +86,13 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .consultas-filters .btn { min-height: 44px; display: inline-flex; align-items: center; }
+    @media (max-width: 575.98px) {
+        .consultas-filters .btn { flex: 1 1 145px; justify-content: center; }
+    }
+</style>
 {% endblock %}

@@ -92,6 +92,12 @@
             margin: 0;
             flex-grow: 1;
             overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .sidebar-menu::-webkit-scrollbar {
+            display: none;
         }
 
         .sidebar-menu li {
@@ -216,48 +222,54 @@
                     <span>Panel Principal</span>
                 </a>
             </li>
+            {% if user.is_superuser or user.perfil.rol == 'administrador' or user.perfil.rol == 'noticias' or user.perfil.rol == 'dece' %}
             <li>
                 <a href="{% url 'core:noticia_list' %}" class="sidebar-link {% if 'noticia' in request.resolver_match.url_name %}active{% endif %}">
                     <i class="bi bi-newspaper"></i>
-                    <span>Noticias y Avisos</span>
+                    <span>{% if user.perfil.rol == 'dece' and not user.is_superuser %}Avisos DECE{% else %}Noticias y comunicados{% endif %}</span>
                 </a>
             </li>
+            {% endif %}
+            {% if user.is_superuser or user.perfil.rol == 'administrador' or user.perfil.rol == 'galeria' %}
             <li>
                 <a href="{% url 'core:galeria_list' %}" class="sidebar-link {% if 'galeria' in request.resolver_match.url_name %}active{% endif %}">
                     <i class="bi bi-images"></i>
-                    <span>Galería Escolar</span>
+                    <span>Fotos de la escuela</span>
                 </a>
             </li>
+            {% endif %}
+            {% if user.is_superuser or user.perfil.rol == 'administrador' %}
             <li>
                 <a href="{% url 'core:docente_list' %}" class="sidebar-link {% if 'docente' in request.resolver_match.url_name %}active{% endif %}">
                     <i class="bi bi-people-fill"></i>
-                    <span>Planta Docente</span>
+                    <span>Docentes y autoridades</span>
                 </a>
             </li>
             <li>
                 <a href="{% url 'core:consultas_list' %}" class="sidebar-link {% if 'consulta' in request.resolver_match.url_name %}active{% endif %}">
                     <i class="bi bi-chat-dots"></i>
-                    <span>Consultas Web</span>
+                    <span>Mensajes de las familias</span>
                 </a>
             </li>
+            {% endif %}
             {% if user.is_superuser or user.perfil.rol == 'administrador' %}
             <li>
                 <a href="{% url 'core:usuario_list' %}" class="sidebar-link {% if 'usuario' in request.resolver_match.url_name %}active{% endif %}">
                     <i class="bi bi-person-gear"></i>
-                    <span>Usuarios y Roles</span>
+                    <span>Usuarios y permisos</span>
                 </a>
             </li>
             {% endif %}
             <li>
                 <a href="{% url 'core:perfil_editar' %}" class="sidebar-link {% if 'perfil' in request.resolver_match.url_name %}active{% endif %}">
                     <i class="bi bi-person-bounding-box"></i>
-                    <span>Mi Perfil</span>
+                    <span>Mis datos y perfil</span>
                 </a>
             </li>
             <li class="pt-3 border-top border-white-10 mt-3">
                 <a href="{% url 'core:home' %}" target="_blank" class="sidebar-link text-white-75">
                     <i class="bi bi-box-arrow-up-right"></i>
-                    <span>Ver Sitio Web</span>
+                    <span>Abrir página pública</span>
                 </a>
             </li>
             <li>

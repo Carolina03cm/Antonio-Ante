@@ -20,7 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 2. Cerrar menú móvil al hacer clic en un enlace
-    const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+    const navLinks = document.querySelectorAll(
+        '.navbar-nav .nav-link:not(.dropdown-toggle), .navbar-nav .dropdown-item'
+    );
     const navbarCollapse = document.getElementById('navbarInstitutionalContent');
 
     if (navbarCollapse) {

@@ -69,6 +69,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+:focus-visible {
+  outline: 3px solid var(--color-red);
+  outline-offset: 3px;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-main);
   font-weight: 700;
@@ -690,6 +695,215 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-text-muted);
 }
 
+.gallery-photo-caption .gallery-photo-title {
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin-bottom: 0.2rem;
+  overflow-wrap: anywhere;
+}
+
+.gallery-category-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.gallery-category-filters .btn {
+  min-height: 44px;
+  border-radius: 999px;
+  padding: 0.55rem 1rem;
+  border-color: var(--color-navy);
+  color: var(--color-navy);
+}
+
+.gallery-category-filters .btn:hover,
+.gallery-category-filters .btn:focus-visible {
+  background-color: var(--color-navy-subtle);
+  color: var(--color-navy-dark);
+}
+
+.gallery-category-filters .btn.btn-primary {
+  background-color: var(--color-navy);
+  color: var(--color-white);
+}
+
+.gallery-category-filters .btn.btn-primary:hover {
+  background-color: var(--color-navy-dark);
+  color: var(--color-white);
+}
+
+.gallery-photo-container {
+  cursor: zoom-in;
+}
+
+.gallery-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.gallery-pagination .btn {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.gallery-empty-state {
+  padding: 3rem 1.5rem;
+}
+
+.gallery-empty-state > i {
+  display: block;
+  color: var(--color-navy);
+  font-size: 2.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.gallery-empty-state h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.gallery-view-all {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-color: var(--color-navy);
+  color: var(--color-navy);
+}
+
+.gallery-view-all:hover {
+  background-color: var(--color-navy);
+  border-color: var(--color-navy);
+  color: var(--color-white);
+}
+
+.public-news-backlink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-bottom: 1rem;
+  color: var(--color-navy);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.public-news-backlink:hover,
+.public-news-contact:hover {
+  color: var(--color-red-dark);
+}
+
+.public-news-article {
+  max-width: 900px;
+  margin: 0 auto;
+  overflow: hidden;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.public-news-header {
+  padding: clamp(1.5rem, 5vw, 3rem);
+  padding-bottom: 1.5rem;
+}
+
+.public-news-type {
+  margin-bottom: 0.9rem;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+}
+
+.public-news-type-noticia,
+.public-news-type-comunicado {
+  background: var(--color-navy-subtle);
+  color: var(--color-navy);
+}
+
+.public-news-type-urgente {
+  background: var(--color-red-subtle);
+  color: var(--color-red-dark);
+}
+
+.public-news-type-dece {
+  background: #eafaf1;
+  color: #137547;
+}
+
+.public-news-title {
+  margin: 0 0 0.8rem;
+  color: var(--color-navy);
+  font-size: clamp(1.8rem, 5vw, 2.75rem);
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.public-news-date {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.public-news-image {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 360px;
+  margin: 0 auto;
+  object-fit: contain;
+  background: var(--color-navy-subtle);
+}
+
+.public-news-body {
+  padding: clamp(1.5rem, 5vw, 3rem);
+}
+
+.public-news-summary {
+  margin-bottom: 1.5rem;
+  color: var(--color-navy-dark);
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.public-news-content {
+  color: var(--color-text-body);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.public-news-content p:last-child {
+  margin-bottom: 0;
+}
+
+.public-news-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem clamp(1.5rem, 5vw, 3rem);
+  border-top: 1px solid var(--color-border);
+  background: #fbfcfe;
+}
+
+.public-news-footer .btn {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.public-news-contact {
+  color: var(--color-navy);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
 /* ==========================================================================
    10. BOTÓN FLOTANTE DISCRETO DE WHATSAPP
    ========================================================================== */
@@ -825,5 +1039,292 @@ h1, h2, h3, h4, h5, h6 {
     width: 210px;
     height: 210px;
     margin-top: 2rem;
+  }
+}
+
+/* Ajustes táctiles para tabletas y teléfonos */
+@media (max-width: 767.98px) {
+  html {
+    scroll-padding-top: 76px;
+  }
+
+  .navbar-institutional {
+    padding: 0.55rem 0;
+  }
+
+  .navbar-institutional > .container {
+    flex-wrap: wrap;
+  }
+
+  .brand-wrapper {
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .brand-seal-logo {
+    width: 46px;
+    height: 46px;
+  }
+
+  .brand-title-top {
+    font-size: 0.62rem;
+    letter-spacing: 1px;
+  }
+
+  .brand-title-main {
+    font-size: 1.05rem;
+  }
+
+  .brand-title-sub {
+    font-size: 0.68rem;
+  }
+
+  .navbar-toggler {
+    width: 46px;
+    height: 46px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+  }
+
+  .navbar-collapse {
+    flex-basis: 100%;
+    max-height: calc(100vh - 76px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0.75rem;
+  }
+
+  .navbar-institutional .nav-link,
+  .navbar-collapse .dropdown-item {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar-collapse .dropdown-menu {
+    margin: 0.25rem 0 0.5rem;
+    padding: 0.25rem;
+  }
+
+  .navbar-collapse .btn-admin-nav {
+    min-height: 46px;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .hero-institution {
+    padding: 3rem 0 3.5rem;
+  }
+
+  .hero-tag {
+    max-width: 100%;
+    font-size: 0.76rem;
+    line-height: 1.4;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 8vw, 2.6rem);
+    line-height: 1.12;
+  }
+
+  .hero-lead {
+    font-size: 1rem;
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-institution .d-flex.flex-wrap.gap-3 {
+    display: grid !important;
+    grid-template-columns: 1fr;
+    gap: 0.75rem !important;
+  }
+
+  .hero-btn-red,
+  .hero-btn-outline {
+    min-height: 48px;
+    width: 100%;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+    text-align: center;
+  }
+
+  .hero-seal-frame {
+    width: 170px;
+    height: 170px;
+    margin-top: 1.25rem;
+  }
+
+  .hero-card-meta {
+    max-width: 100%;
+    padding: 0.65rem 0.9rem;
+    font-size: 0.88rem;
+  }
+
+  .quick-access-wrapper {
+    margin-top: 1.25rem;
+  }
+
+  .quick-feature-card {
+    padding: 1.25rem;
+  }
+
+  .section-institutional {
+    padding: 3.25rem 0;
+  }
+
+  .section-heading-clean {
+    font-size: clamp(1.65rem, 6vw, 2rem);
+    line-height: 1.2;
+  }
+
+  .institutional-quote-card {
+    padding: 1.5rem;
+  }
+
+  .campus-showcase-frame img {
+    height: 260px;
+  }
+
+  .faculty-tabs-container .nav-pills {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem !important;
+  }
+
+  .faculty-tabs-container .nav-pills .nav-item {
+    min-width: 0;
+  }
+
+  .faculty-tabs-container .nav-pills .nav-link {
+    width: 100%;
+    height: 100%;
+    min-height: 48px;
+    padding: 0.55rem 0.4rem;
+    font-size: 0.8rem;
+    line-height: 1.25;
+  }
+
+  .academic-img-wrapper {
+    height: 175px;
+  }
+
+  .academic-body-master {
+    padding: 1.15rem;
+  }
+
+  .gallery-photo-container {
+    height: 200px;
+  }
+
+  .gallery-category-filters {
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.15rem 0.1rem 0.6rem;
+    margin-right: -0.25rem;
+  }
+
+  .gallery-category-filters .btn {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  .gallery-pagination {
+    flex-wrap: wrap;
+  }
+
+  .public-news-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .public-news-image {
+    max-height: 250px;
+  }
+
+  .public-news-footer .btn {
+    justify-content: center;
+  }
+
+  #contacto-seccion .row {
+    --bs-gutter-y: 2rem;
+  }
+
+  #contacto-seccion .bg-white.p-4 {
+    padding: 1.25rem !important;
+  }
+
+  #contacto-seccion .d-flex.align-items-center {
+    min-width: 0;
+  }
+
+  #contacto-seccion .d-flex.align-items-center > div:last-child {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  #contacto-seccion .form-control {
+    min-height: 48px;
+    font-size: 16px;
+  }
+
+  #contacto-seccion textarea.form-control {
+    min-height: 120px;
+  }
+
+  .floating-whatsapp-btn {
+    width: 50px;
+    height: 50px;
+    right: 14px;
+    bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+    font-size: 26px;
+  }
+
+  .footer-institutional {
+    padding-top: 3rem;
+  }
+
+  .footer-legal-bar {
+    margin-top: 2rem;
+    padding: 1rem 0 calc(1rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (max-width: 380px) {
+  .navbar-institutional > .container,
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .brand-title-main {
+    font-size: 0.94rem;
+  }
+
+  .brand-title-sub {
+    font-size: 0.62rem;
+  }
+
+  .hero-title {
+    font-size: 1.9rem;
+  }
+
+  .faculty-tabs-container .nav-pills .nav-link {
+    font-size: 0.74rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

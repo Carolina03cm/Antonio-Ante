@@ -7,6 +7,8 @@ app_name = 'core'
 urlpatterns = [
     # Vista pública principal
     path('', views.home, name='home'),
+    path('galeria/', views.galeria_publica, name='galeria_publica'),
+    path('noticias/<int:pk>/', views.noticia_publica, name='noticia_publica'),
 
     # Autenticación
     path('login/', auth_views.LoginView.as_view(
