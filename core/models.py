@@ -22,7 +22,7 @@ class NoticiaComunicado(models.Model):
     tipo = models.CharField('Tipo de Publicación', max_length=20, choices=TIPO_CHOICES, default='noticia')
     resumen = models.CharField('Resumen breve', max_length=300, help_text='Texto descriptivo para la portada.')
     contenido = models.TextField('Contenido completo')
-    imagen = models.ImageField('Fotografía adjunta', upload_to='noticias/', blank=True, null=True)
+    imagen = models.ImageField('Fotografía adjunta', upload_to='noticias/', blank=True, null=True, max_length=500)
     destacado = models.BooleanField('Mostrar en portada', default=True)
     fecha_publicacion = models.DateTimeField('Fecha de publicación', auto_now_add=True)
     autor = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Autor')
@@ -50,7 +50,7 @@ class FotoGaleria(models.Model):
 
     titulo = models.CharField('Título de la actividad', max_length=150)
     categoria = models.CharField('Categoría', max_length=30, choices=CATEGORIA_CHOICES, default='institucional')
-    imagen = models.ImageField('Fotografía', upload_to='galeria/')
+    imagen = models.ImageField('Fotografía', upload_to='galeria/', max_length=500)
     descripcion = models.CharField('Subtítulo o descripción', max_length=250, blank=True)
     fecha_subida = models.DateTimeField('Fecha de subida', auto_now_add=True)
     activa = models.BooleanField('Visible en la web', default=True)
@@ -101,7 +101,7 @@ class DocentePersonal(models.Model):
     funciones = models.JSONField('Funciones y cargos', default=list, blank=True)
     jornadas = models.JSONField('Jornadas asignadas', default=list, blank=True)
     asignaturas = models.JSONField('Materias o asignaturas', default=list, blank=True)
-    foto = models.ImageField('Fotografía del Docente', upload_to='docentes/', blank=True, null=True)
+    foto = models.ImageField('Fotografía del Docente', upload_to='docentes/', blank=True, null=True, max_length=500)
     orden = models.PositiveIntegerField('Orden de visualización', default=1)
     activo = models.BooleanField('Activo en nómina', default=True)
 
@@ -254,7 +254,7 @@ class PerfilUsuario(models.Model):
     nombres = models.CharField('Nombres', max_length=100, blank=True)
     apellidos = models.CharField('Apellidos', max_length=100, blank=True)
     rol = models.CharField('Rol Asignado', max_length=30, choices=ROLES_CHOICES, default='docente')
-    foto = models.ImageField('Foto de Perfil', upload_to='perfiles/', blank=True, null=True)
+    foto = models.ImageField('Foto de Perfil', upload_to='perfiles/', blank=True, null=True, max_length=500)
     debe_cambiar_password = models.BooleanField('Debe cambiar contraseña al iniciar', default=False)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
 
@@ -309,7 +309,7 @@ class OfertaAcademica(models.Model):
         ('superior', 'Basica Superior'),
     ]
     nivel = models.CharField('Nivel', max_length=20, choices=NIVELES, unique=True)
-    imagen = models.ImageField('Fotografia', upload_to='oferta_academica/')
+    imagen = models.ImageField('Fotografia', upload_to='oferta_academica/', max_length=500)
     actualizada = models.DateTimeField('Ultima actualizacion', auto_now=True)
 
     class Meta:

@@ -363,14 +363,17 @@ STATICFILES_DIRS = (
 )
 
 
-# WhiteNoise para producción
+# Almacenamiento de archivos:
+# - Producción en Vercel: Vercel Blob (store público conectado al proyecto).
+# - Desarrollo local: sistema de archivos local de Django.
 STORAGES = {
     "default": {
         "BACKEND": (
-            "django.core.files.storage.FileSystemStorage"
+            "core.storage.VercelBlobStorage"
+            if IS_VERCEL
+            else "django.core.files.storage.FileSystemStorage"
         ),
     },
-
     "staticfiles": {
         "BACKEND": (
             "whitenoise.storage.CompressedManifestStaticFilesStorage"
