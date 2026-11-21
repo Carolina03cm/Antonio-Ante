@@ -30,6 +30,15 @@ DEBUG = env_bool(
     default=not bool(os.getenv('VERCEL'))
 )
 
+ALLOWED_HOSTS = [
+    '.vercel.app',
+    'localhost',
+    '127.0.0.1',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.vercel.app',
+]
 # Hosts permitidos
 ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1'
 ]
@@ -102,6 +111,7 @@ WSGI_APPLICATION = 'config.wsgi.app'
 # Configuración de Base de Datos
 # Soporta tanto SQLite (desarrollo local rápido) como PostgreSQL (producción / staging)
 
+import os
 import dj_database_url
 
 if os.getenv('VERCEL'):
@@ -126,7 +136,6 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-
 
 # Validadores de contraseñas
 AUTH_PASSWORD_VALIDATORS = [
