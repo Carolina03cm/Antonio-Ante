@@ -550,29 +550,19 @@ def docente_delete(request, pk):
 @user_passes_test(puede_atender_consultas)
 @verificar_primer_cambio_clave
 def consultas_list(request):
-    estado = request.GET.get('estado', 'pendiente').strip()
-    if estado not in ('pendiente', 'atendido'):
-        estado = 'pendiente'
-
-    consultas = MensajeContacto.objects.filter(leido=(estado == 'atendido'))
-    if estado == 'pendiente':
-        consultas = consultas.order_by('prioridad', 'fecha_seguimiento', 'fecha_envio')
-        for consulta in consultas:
-            consulta.seguimiento_form = ConsultaSeguimientoForm(
-                instance=consulta, prefix=f'ticket-{consulta.pk}'
-            )
-    else:
-        consultas = consultas.order_by('-fecha_envio')
-
+    # Los tickets atendidos se eliminan; limpia los que quedaron en el historial anterior.
+    MensajeContacto.objects.filter(leido=True).delete()
     pendientes = MensajeContacto.objects.filter(leido=False)
+    consultas = pendientes.order_by('prioridad', 'fecha_seguimiento', 'fecha_envio')
+    for consulta in consultas:
+        consulta.seguimiento_form = ConsultaSeguimientoForm(
+            instance=consulta, prefix=f'ticket-{consulta.pk}'
+        )
 
     context = {
         'consultas': consultas,
-        'estado_activo': estado,
         'total_pendientes': pendientes.count(),
         'total_vencidas': pendientes.filter(fecha_seguimiento__lte=timezone.now()).count(),
-        'total_atendidas': MensajeContacto.objects.filter(leido=True).count(),
-        'total_consultas': MensajeContacto.objects.count(),
         'prioridad_choices': MensajeContacto.PRIORIDAD_CHOICES,
     }
     return render(request, 'core/dashboard/consultas_list.html', context)
@@ -582,14 +572,11 @@ def consultas_list(request):
 @verificar_primer_cambio_clave
 @require_POST
 def consulta_toggle(request, pk):
-    consulta = get_object_or_404(MensajeContacto, pk=pk)
-    consulta.leido = not consulta.leido
-    consulta.save(update_fields=['leido'])
-    if consulta.leido:
-        messages.success(request, f'El ticket #{consulta.pk} fue archivado como atendido.')
-    else:
-        messages.info(request, f'El ticket #{consulta.pk} volvió a la bandeja de pendientes.')
-    return redirect(f"{reverse('core:consultas_list')}?estado=pendiente")
+    consulta = get_object_or_404(MensajeContacto, pk=pk, leido=False)
+    ticket_id = consulta.pk
+    consulta.delete()
+    messages.success(request, f'El ticket #{ticket_id} fue eliminado al marcarlo como atendido.')
+    return redirect('core:consultas_list')
 
 
 @login_required
@@ -604,7 +591,7 @@ def consulta_actualizar(request, pk):
         messages.success(request, f'Seguimiento del ticket #{consulta.pk} actualizado.')
     else:
         messages.error(request, 'No se pudo guardar. Revisa la prioridad y la fecha del recordatorio.')
-    return redirect(f"{reverse('core:consultas_list')}?estado=pendiente")
+    return redirect('core:consultas_list')
 
 
 # ==============================================================================
