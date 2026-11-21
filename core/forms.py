@@ -2,7 +2,10 @@ import unicodedata
 import re
 from django import forms
 from django.contrib.auth.models import User
-from .models import NoticiaComunicado, FotoGaleria, DocentePersonal, MensajeContacto, PerfilUsuario
+from .models import (
+    NoticiaComunicado, FotoGaleria, DocentePersonal, MensajeContacto,
+    PerfilUsuario, CifrasInstitucionales,
+)
 
 def limpiar_texto(texto):
     if not texto:
@@ -60,30 +63,155 @@ class FotoGaleriaForm(forms.ModelForm):
 
 
 class DocentePersonalForm(forms.ModelForm):
+    funciones = forms.MultipleChoiceField(
+        label='Funciones y cargos',
+        choices=DocentePersonal.FUNCION_CHOICES,
+        widget=forms.CheckboxSelectMultiple(),
+        help_text='Puedes seleccionar varias opciones, por ejemplo Docente, Tutor/a y Rector/a.',
+    )
+    jornadas = forms.MultipleChoiceField(
+        label='Jornadas o secciones',
+        choices=DocentePersonal.JORNADA_CHOICES,
+        widget=forms.CheckboxSelectMultiple(),
+        help_text='Selecciona todos los turnos o secciones donde trabaja.',
+    )
+    asignaturas = forms.CharField(
+        label='Materias o asignaturas',
+        required=False,
+        max_length=1000,
+        widget=forms.Textarea(attrs={
+            'class': 'form-control',
+            'rows': 2,
+            'placeholder': 'Ej. Lengua y Literatura, Matemática, Ciencias Naturales',
+        }),
+        help_text='Si imparte varias, sepáralas con comas.',
+    )
+
     class Meta:
         model = DocentePersonal
-        fields = ['nombres', 'apellidos', 'cargo', 'jornada', 'area', 'foto', 'orden', 'activo']
+        fields = ['nombres', 'apellidos', 'cargo', 'foto', 'orden', 'activo']
+        labels = {'cargo': 'Detalle del cargo o curso (opcional)'}
+        help_texts = {'cargo': 'Indica el curso de tutoría u otra responsabilidad si hace falta.'}
         widgets = {
             'nombres': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ej. Lcda. María'}),
             'apellidos': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ej. Guamán'}),
-            'cargo': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ej. Docente Tutora 3° EGB'}),
-            'jornada': forms.Select(attrs={'class': 'form-select'}),
-            'area': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ej. Educación Básica, Matemáticas'}),
+            'cargo': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ej. Tutor de 4to EGB'}),
             'foto': forms.ClearableFileInput(attrs={'class': 'form-control'}),
             'orden': forms.NumberInput(attrs={'class': 'form-control', 'min': 1}),
             'activo': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance and self.instance.pk:
+            self.fields['funciones'].initial = self.instance.funciones_asignadas
+            self.fields['jornadas'].initial = self.instance.jornadas_asignadas
+            self.fields['asignaturas'].initial = ', '.join(self.instance.asignaturas_display)
+        else:
+            self.fields['funciones'].initial = ['docente']
+            self.fields['jornadas'].initial = ['matutina']
+
+    def clean_asignaturas(self):
+        texto = self.cleaned_data.get('asignaturas', '')
+        materias = []
+        vistas = set()
+        for materia in re.split(r'[,;\n]+', texto):
+            materia = ' '.join(materia.split())
+            clave = materia.casefold()
+            if materia and clave not in vistas:
+                materias.append(materia)
+                vistas.add(clave)
+        return materias
+
+    def save(self, commit=True):
+        docente = super().save(commit=False)
+        docente.funciones = self.cleaned_data['funciones']
+        docente.jornadas = self.cleaned_data['jornadas']
+        docente.asignaturas = self.cleaned_data['asignaturas']
+        docente.jornada = next(
+            (jornada for jornada, _ in DocentePersonal.JORNADA_CHOICES if jornada in docente.jornadas),
+            'matutina',
+        )
+        docente.area = ', '.join(docente.asignaturas)[:120]
+        if commit:
+            docente.save()
+        return docente
+
 
 class MensajeContactoForm(forms.ModelForm):
+    email = forms.EmailField(
+        label='Correo electrónico',
+        required=True,
+        widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'tu@correo.com', 'autocomplete': 'email'}),
+    )
+    nivel_interes = forms.ChoiceField(
+        label='Nivel educativo de interés',
+        choices=[('', 'Seleccione un nivel...'), *MensajeContacto.NIVEL_INTERES_CHOICES],
+        required=True,
+        widget=forms.Select(attrs={'class': 'form-select'}),
+    )
+    mensaje = forms.CharField(
+        label='Mensaje',
+        required=False,
+        widget=forms.Textarea(attrs={
+            'class': 'form-control',
+            'rows': 4,
+            'placeholder': 'Cuéntanos qué información necesitas...',
+        }),
+    )
+    acepta_privacidad = forms.BooleanField(
+        label='Acepto que la institución use mis datos para responder esta solicitud.',
+        required=True,
+        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+    )
+
     class Meta:
         model = MensajeContacto
-        fields = ['nombre', 'telefono', 'mensaje']
+        fields = ['nombre', 'telefono', 'email', 'nivel_interes', 'mensaje', 'acepta_privacidad']
         widgets = {
-            'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Su nombre y apellido'}),
-            'telefono': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ej. 096 017 2899'}),
+            'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ej. María García', 'autocomplete': 'name'}),
+            'telefono': forms.TextInput(attrs={'class': 'form-control', 'type': 'tel', 'inputmode': 'tel', 'autocomplete': 'tel', 'placeholder': 'Ej. 096 017 2899'}),
             'mensaje': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Detalle de su consulta sobre matrículas o certificados...'}),
         }
+
+
+    def clean_nombre(self):
+        return ' '.join(self.cleaned_data['nombre'].split())
+
+
+class CifrasInstitucionalesForm(forms.ModelForm):
+    class Meta:
+        model = CifrasInstitucionales
+        fields = ['total_estudiantes']
+        widgets = {
+            'total_estudiantes': forms.NumberInput(attrs={
+                'class': 'form-control form-control-lg',
+                'min': 0,
+                'step': 1,
+                'placeholder': 'Ej. 350',
+            }),
+        }
+
+
+class ConsultaSeguimientoForm(forms.ModelForm):
+    prioridad = forms.TypedChoiceField(
+        label='Prioridad',
+        choices=MensajeContacto.PRIORIDAD_CHOICES,
+        coerce=int,
+        widget=forms.Select(attrs={'class': 'form-select form-select-sm'}),
+    )
+    fecha_seguimiento = forms.DateTimeField(
+        label='Recordarme el',
+        input_formats=['%Y-%m-%dT%H:%M'],
+        widget=forms.DateTimeInput(
+            format='%Y-%m-%dT%H:%M',
+            attrs={'class': 'form-control form-control-sm', 'type': 'datetime-local'},
+        ),
+    )
+
+    class Meta:
+        model = MensajeContacto
+        fields = ['prioridad', 'fecha_seguimiento']
 
 
 class UsuarioCrearForm(forms.Form):

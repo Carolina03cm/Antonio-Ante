@@ -1,4 +1,142 @@
 {% extends 'core/base.html' %}
+
+{% block extra_css %}
+<style>
+    .important-notice-modal .modal-dialog { max-width: 530px; padding-inline: .75rem; }
+    .important-notice-modal .modal-header { position: relative; min-height: 3.5rem; padding-right: 4rem !important; }
+    .important-notice-modal .modal-content {
+        overflow: hidden;
+        border: 0;
+        border-radius: 1.2rem;
+        box-shadow: 0 1.5rem 5rem rgba(6, 18, 36, .32);
+    }
+    .important-notice-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: .45rem;
+        padding: .4rem .9rem;
+        border-radius: 999px;
+        background: #fff1cc;
+        color: #875300;
+        font-size: .72rem;
+        font-weight: 800;
+        letter-spacing: .07em;
+        text-transform: uppercase;
+    }
+    .important-notice-icon { display: block; flex: 0 0 auto; width: 1rem; height: 1rem; }
+    .important-notice-action .important-notice-icon { width: 1.1rem; height: 1.1rem; }
+    .important-notice-close .important-notice-icon { width: .9rem; height: .9rem; }
+    .important-notice-title {
+        color: var(--color-navy, #18396d);
+        font-size: clamp(1.45rem, 4vw, 2rem);
+        font-weight: 800;
+        line-height: 1.15;
+        text-align: center;
+        overflow-wrap: anywhere;
+    }
+    .important-notice-summary {
+        padding: 1rem 1.1rem;
+        border-radius: .9rem;
+        background: #f5f7fa;
+        color: #334155;
+        line-height: 1.65;
+        overflow-wrap: anywhere;
+    }
+    .important-notice-content { color: #475569; line-height: 1.6; overflow-wrap: anywhere; }
+    .important-notice-image {
+        width: 100%;
+        max-height: 210px;
+        object-fit: cover;
+        border-radius: .85rem;
+    }
+    .important-notice-close {
+        display: inline-flex;
+        width: 2.25rem;
+        height: 2.25rem;
+        align-items: center;
+        justify-content: center;
+        border: 0;
+        border-radius: 50%;
+        background: #eef1f5;
+        color: #475569;
+        font-size: 1.4rem;
+        line-height: 1;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 1;
+    }
+    .important-notice-close:hover { background: #dfe5ec; color: #172b4d; }
+    .important-notice-action {
+        border: 0;
+        border-radius: 999px;
+        background: var(--color-navy, #18396d);
+        color: #fff;
+        font-weight: 700;
+        padding: .8rem 1.35rem;
+    }
+    .important-notice-action:hover { background: #10294f; color: #fff; }
+    .modal-backdrop.show { opacity: .72; backdrop-filter: blur(4px); }
+    .contact-request-card { border-color: #e4e8ef !important; }
+    .contact-request-card .form-control,
+    .contact-request-card .form-select {
+        min-height: 44px;
+        border-color: #d9e0e9;
+        border-radius: .6rem;
+        background-color: #faf9f7;
+    }
+    .contact-request-card textarea.form-control { min-height: 112px; }
+    .contact-request-card .form-control:focus,
+    .contact-request-card .form-select:focus {
+        border-color: var(--color-navy, #18396d);
+        background-color: #fff;
+        box-shadow: 0 0 0 .2rem rgba(24, 57, 109, .12);
+    }
+    .privacy-consent { display: flex; align-items: flex-start; gap: .55rem; }
+    .privacy-consent .form-check-input { flex: 0 0 auto; margin: .2rem 0 0; }
+    .privacy-consent .form-check-label { line-height: 1.45; }
+    .institution-stats-section {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg, #f4f6fa 0%, #fff 52%, #f8f4ec 100%);
+    }
+    .institution-stat-card {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        gap: 1.1rem;
+        padding: 1.5rem;
+        border: 1px solid #e7eaf0;
+        border-top: 3px solid #d71926;
+        border-radius: 1rem;
+        background: rgba(255,255,255,.94);
+        box-shadow: 0 12px 34px rgba(15,36,72,.07);
+        transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .institution-stat-card:hover { transform: translateY(-4px); box-shadow: 0 16px 38px rgba(15,36,72,.12); }
+    .institution-stat-icon {
+        width: 3.5rem;
+        height: 3.5rem;
+        flex: 0 0 3.5rem;
+        display: grid;
+        place-items: center;
+        border-radius: 1rem;
+        background: #fff4d8;
+        color: #bd7a00;
+        font-size: 1.55rem;
+    }
+    .institution-stat-number { color: var(--color-navy, #18396d); font-size: clamp(1.8rem, 4vw, 2.35rem); font-weight: 800; line-height: 1; }
+    .institution-stat-label { margin-top: .45rem; color: #64748b; font-size: .94rem; font-weight: 600; }
+    @media (max-width: 575.98px) {
+        .institution-stat-card { padding: 1.1rem; gap: .85rem; }
+        .institution-stat-icon { width: 3rem; height: 3rem; flex-basis: 3rem; font-size: 1.3rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .institution-stat-card { transition: none; }
+        .institution-stat-card:hover { transform: none; }
+    }
+</style>
+{% endblock %}
 {% load static %}
 
 {% block title %}Inicio | Escuela de Educación Básica "Antonio Ante"{% endblock %}
@@ -115,6 +253,53 @@
 </div>
 
 <!-- =======================================================
+     CIFRAS INSTITUCIONALES
+     ======================================================= -->
+<section class="section-institutional institution-stats-section py-5" id="cifras-institucionales" aria-labelledby="institutionStatsTitle">
+    <div class="container">
+        <div class="text-center mb-4 mb-lg-5">
+            <span class="section-eyebrow">Nuestra comunidad educativa</span>
+            <h3 class="section-heading-clean" id="institutionStatsTitle">La institución en cifras</h3>
+            <div class="section-accent-bar"></div>
+        </div>
+        <div class="row g-3 g-lg-4">
+            <div class="col-md-4">
+                <div class="institution-stat-card">
+                    <div class="institution-stat-icon" aria-hidden="true"><i class="bi bi-mortarboard-fill"></i></div>
+                    <div>
+                        {% if tiene_total_estudiantes %}
+                        <div class="institution-stat-number js-institution-counter" data-count="{{ total_estudiantes }}">0</div>
+                        <div class="institution-stat-label">Estudiantes matriculados</div>
+                        {% else %}
+                        <div class="institution-stat-number">—</div>
+                        <div class="institution-stat-label">Matrícula por actualizar</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="institution-stat-card">
+                    <div class="institution-stat-icon" aria-hidden="true"><i class="bi bi-calendar-heart-fill"></i></div>
+                    <div>
+                        <div class="institution-stat-number js-institution-counter" data-count="{{ anos_institucion }}">0</div>
+                        <div class="institution-stat-label">Años de trayectoria</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="institution-stat-card">
+                    <div class="institution-stat-icon" aria-hidden="true"><i class="bi bi-person-workspace"></i></div>
+                    <div>
+                        <div class="institution-stat-number js-institution-counter" data-count="{{ total_docentes_publico }}">0</div>
+                        <div class="institution-stat-label">Docentes activos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =======================================================
      3. HISTORIA INSTITUCIONAL Y CAMPUS
      ======================================================= -->
 <section class="section-institutional" id="historia">
@@ -122,7 +307,7 @@
         <div class="row align-items-center g-5">
             <div class="col-lg-5">
                 <div class="campus-showcase-frame">
-                    <img src="{% static 'img/about_campus.jpg' %}" alt="Campus EEB Antonio Ante en Yaguachi">
+                    <img src="{% static 'img/about_campus.jpg' %}?v={{ versiones_imagenes.about_campus }}" alt="Campus EEB Antonio Ante en Yaguachi">
                 </div>
             </div>
 
@@ -132,7 +317,7 @@
                     <h3 class="section-heading-clean">Nuestra Trayectoria</h3>
                     <div class="section-accent-bar bar-left"></div>
                     <p class="text-secondary mb-3">
-                        Fundada el <strong>4 de septiembre de 1965</strong>, la <strong>Escuela de Educación Básica "Antonio Ante"</strong> cuenta con <strong>61 años</strong> de trayectoria pedagógica al servicio de la niñez y las familias del cantón San Jacinto de Yaguachi.
+                        Fundada el <strong>4 de septiembre de 1965</strong>, la <strong>Escuela de Educación Básica "Antonio Ante"</strong> cuenta con <strong>{{ anos_institucion }} años</strong> de trayectoria pedagógica al servicio de la niñez y las familias del cantón San Jacinto de Yaguachi.
                     </p>
                     <p class="text-secondary mb-4">
                         A lo largo de seis décadas, nuestra institución ha educado a generaciones en el sector rural y agrícola, destacándose por su disciplina, amor cívico y una estrecha relación de confianza con la comunidad.
@@ -273,7 +458,7 @@
                 <div class="row g-4 justify-content-center">
                     {% for d in autoridades %}
                     <div class="col-md-6 col-lg-4">
-                        <div class="docente-item-card p-4 text-center border-top border-3 border-danger shadow-sm h-100" style="background: #ffffff; border-radius: 12px;">
+                        <div class="docente-item-card flex-column align-items-center p-4 text-center border-top border-3 border-danger shadow-sm h-100 w-100" style="background: #ffffff; border-radius: 12px;">
                             <div class="mb-3 mx-auto" style="width: 90px; height: 90px; border-radius: 50%; overflow: hidden; border: 3px solid #18396D; box-shadow: 0 4px 12px rgba(24,57,109,0.15);">
                                 {% if d.foto %}
                                     <img src="{{ d.foto.url }}" alt="{{ d.nombre_completo }}" style="width:100%;height:100%;object-fit:cover;">
@@ -287,10 +472,9 @@
                                 <i class="bi bi-shield-check me-1"></i> Autoridad Institucional
                             </span>
                             <h5 class="fw-bold text-dark mb-1">{{ d.nombre_completo }}</h5>
-                            <p class="text-danger fw-semibold mb-2" style="font-size: 0.9rem;">{{ d.cargo }}</p>
-                            {% if d.area %}
-                                <span class="badge bg-light text-secondary border small">{{ d.area }}</span>
-                            {% endif %}
+                            {% if d.cargo %}<p class="text-danger fw-semibold mb-2">{{ d.cargo }}</p>{% endif %}
+                            <div class="d-flex flex-wrap gap-1 justify-content-center mb-2">{% for funcion in d.funciones_display %}<span class="badge bg-light text-primary border small">{{ funcion }}</span>{% endfor %}</div>
+                            {% if d.asignaturas_display %}<span class="badge bg-light text-secondary border small">{{ d.asignaturas_display|join:", " }}</span>{% endif %}
                         </div>
                     </div>
                     {% empty %}
@@ -318,7 +502,8 @@
                             <div>
                                 <h6 class="mb-1 fw-bold text-dark">{{ d.nombre_completo }}</h6>
                                 <p class="small text-muted mb-0">{{ d.cargo }}</p>
-                                <span class="badge bg-light text-dark border mt-1">{{ d.area|default:"Jornada Matutina" }}</span>
+                                <div class="d-flex flex-wrap gap-1 mt-1">{% for funcion in d.funciones_display %}<span class="badge bg-light text-primary border">{{ funcion }}</span>{% endfor %}</div>
+                                {% if d.asignaturas_display %}<span class="badge bg-light text-dark border mt-1">{{ d.asignaturas_display|join:", " }}</span>{% endif %}
                             </div>
                         </div>
                     </div>
@@ -344,7 +529,8 @@
                             <div>
                                 <h6 class="mb-1 fw-bold text-dark">{{ d.nombre_completo }}</h6>
                                 <p class="small text-muted mb-0">{{ d.cargo }}</p>
-                                <span class="badge bg-light text-dark border mt-1">{{ d.area|default:"Jornada Vespertina" }}</span>
+                                <div class="d-flex flex-wrap gap-1 mt-1">{% for funcion in d.funciones_display %}<span class="badge bg-light text-primary border">{{ funcion }}</span>{% endfor %}</div>
+                                {% if d.asignaturas_display %}<span class="badge bg-light text-dark border mt-1">{{ d.asignaturas_display|join:", " }}</span>{% endif %}
                             </div>
                         </div>
                     </div>
@@ -384,7 +570,8 @@
                                 <div>
                                     <h6 class="fw-bold mb-0 text-dark">{{ d.nombre_completo }}</h6>
                                     <small class="text-muted">{{ d.cargo }}</small>
-                                    {% if d.area %}<span class="badge bg-white text-dark border ms-1" style="font-size:0.7rem;">{{ d.area }}</span>{% endif %}
+                                    <div class="d-flex flex-wrap gap-1 mt-1">{% for funcion in d.funciones_display %}<span class="badge bg-white text-primary border">{{ funcion }}</span>{% endfor %}</div>
+                                    {% if d.asignaturas_display %}<span class="badge bg-white text-dark border ms-1" style="font-size:0.7rem;">{{ d.asignaturas_display|join:", " }}</span>{% endif %}
                                 </div>
                             </div>
                         </div>
@@ -412,7 +599,7 @@
             <span class="section-eyebrow">Niveles de Estudio</span>
             <h3 class="section-heading-clean">Oferta Académica</h3>
             <div class="section-accent-bar"></div>
-            <p class="text-secondary">Programas curriculares impartidos en Jornada Matutina y Jornada Vespertina.</p>
+            <p class="text-secondary">Inicial a 7.º de EGB en jornada matutina; 8.º a 10.º en jornada vespertina.</p>
         </div>
 
         <div class="row g-4">
@@ -420,7 +607,7 @@
             <div class="col-md-6 col-lg-3">
                 <div class="academic-card-master">
                     <div class="academic-img-wrapper">
-                        <img src="{% static 'img/inicial.jpg' %}" alt="Educación Inicial EEB Antonio Ante">
+                        {% if ofertas_imagenes.inicial %}<img src="{{ ofertas_imagenes.inicial.imagen.url }}?v={{ ofertas_imagenes.inicial.actualizada|date:'U' }}"{% else %}<img src="{% static 'img/inicial.jpg' %}?v={{ versiones_imagenes.inicial }}"{% endif %} alt="Educación Inicial EEB Antonio Ante">
                         <span class="academic-age-pill">3 a 4 Años</span>
                     </div>
                     <div class="academic-body-master">
@@ -434,7 +621,7 @@
                             </ul>
                         </div>
                         <div class="pt-2 border-top text-center">
-                            <small class="text-muted fw-semibold">Turnos: Matutino y Vespertino</small>
+                            <small class="text-muted fw-semibold">Jornada Matutina · Inicial</small>
                         </div>
                     </div>
                 </div>
@@ -444,8 +631,8 @@
             <div class="col-md-6 col-lg-3">
                 <div class="academic-card-master">
                     <div class="academic-img-wrapper">
-                        <img src="{% static 'img/elemental.jpg' %}" alt="Básica Elemental EEB Antonio Ante">
-                        <span class="academic-age-pill">2°, 3° y 4° EGB</span>
+                        {% if ofertas_imagenes.elemental %}<img src="{{ ofertas_imagenes.elemental.imagen.url }}?v={{ ofertas_imagenes.elemental.actualizada|date:'U' }}"{% else %}<img src="{% static 'img/elemental.jpg' %}?v={{ versiones_imagenes.elemental }}"{% endif %} alt="Básica Elemental EEB Antonio Ante">
+                        <span class="academic-age-pill">1.º a 4.º EGB</span>
                     </div>
                     <div class="academic-body-master">
                         <div>
@@ -458,7 +645,7 @@
                             </ul>
                         </div>
                         <div class="pt-2 border-top text-center">
-                            <small class="text-muted fw-semibold">Turnos: Matutino y Vespertino</small>
+                            <small class="text-muted fw-semibold">Jornada Matutina · 1.º a 4.º EGB</small>
                         </div>
                     </div>
                 </div>
@@ -468,7 +655,7 @@
             <div class="col-md-6 col-lg-3">
                 <div class="academic-card-master">
                     <div class="academic-img-wrapper">
-                        <img src="{% static 'img/media.jpg' %}" alt="Básica Media EEB Antonio Ante">
+                        {% if ofertas_imagenes.media %}<img src="{{ ofertas_imagenes.media.imagen.url }}?v={{ ofertas_imagenes.media.actualizada|date:'U' }}"{% else %}<img src="{% static 'img/media.jpg' %}?v={{ versiones_imagenes.media }}"{% endif %} alt="Básica Media EEB Antonio Ante">
                         <span class="academic-age-pill">5°, 6° y 7° EGB</span>
                     </div>
                     <div class="academic-body-master">
@@ -482,7 +669,7 @@
                             </ul>
                         </div>
                         <div class="pt-2 border-top text-center">
-                            <small class="text-muted fw-semibold">Turnos: Matutino y Vespertino</small>
+                            <small class="text-muted fw-semibold">Jornada Matutina · 5.º a 7.º EGB</small>
                         </div>
                     </div>
                 </div>
@@ -492,7 +679,7 @@
             <div class="col-md-6 col-lg-3">
                 <div class="academic-card-master">
                     <div class="academic-img-wrapper">
-                        <img src="{% static 'img/superior.jpg' %}" alt="Básica Superior EEB Antonio Ante">
+                        {% if ofertas_imagenes.superior %}<img src="{{ ofertas_imagenes.superior.imagen.url }}?v={{ ofertas_imagenes.superior.actualizada|date:'U' }}"{% else %}<img src="{% static 'img/superior.jpg' %}?v={{ versiones_imagenes.superior }}"{% endif %} alt="Básica Superior EEB Antonio Ante">
                         <span class="academic-age-pill">8°, 9° y 10° EGB</span>
                     </div>
                     <div class="academic-body-master">
@@ -506,7 +693,7 @@
                             </ul>
                         </div>
                         <div class="pt-2 border-top text-center">
-                            <small class="text-muted fw-semibold">Turnos: Matutino y Vespertino</small>
+                            <small class="text-muted fw-semibold">Jornada Vespertina · 8.º a 10.º EGB</small>
                         </div>
                     </div>
                 </div>
@@ -649,29 +836,63 @@
                 </div>
             </div>
 
-            <!-- Formulario de Consulta a Secretaría -->
             <div class="col-lg-6">
-                <div class="bg-white p-4 p-md-5 rounded border shadow-sm">
-                    <h5 class="fw-bold mb-2" style="color: var(--color-navy);">Consulta a Secretaría</h5>
-                    <p class="text-muted small mb-4">Escribe tus datos y se registrará tu mensaje en la secretaría y se abrirá directamente en WhatsApp.</p>
-                    
-                    <form method="POST" action="{% url 'core:home' %}" onsubmit="window.open('https://wa.me/593960172899?text=Hola,%20mi%20nombre%20es%20' + encodeURIComponent(document.getElementById('id_nombre').value) + '.%20Tel%C3%A9fono:%20' + encodeURIComponent(document.getElementById('id_telefono').value) + '.%20Consulta:%20' + encodeURIComponent(document.getElementById('id_mensaje').value));">
+                <div class="contact-request-card bg-white p-4 p-md-5 rounded-4 border shadow-sm">
+                    <div class="mb-4">
+                        <span class="section-eyebrow">Estamos para ayudarte</span>
+                        <h5 class="fw-bold mb-2" style="color: var(--color-navy);">Solicitud de información</h5>
+                        <p class="text-muted small mb-0">Completa tus datos y la Secretaría recibirá tu consulta. También podrás continuar por WhatsApp.</p>
+                    </div>
+
+                    {% if form_contacto.errors %}
+                    <div class="alert alert-danger py-2 small" role="alert">Revisa los campos marcados antes de enviar.</div>
+                    {% endif %}
+
+                    <form id="contactRequestForm" method="POST" action="{% url 'core:home' %}">
                         {% csrf_token %}
-                        <div class="mb-3">
-                            <label for="id_nombre" class="form-label small fw-bold">Nombre del Representante</label>
-                            {{ form_contacto.nombre }}
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="id_nombre" class="form-label small fw-bold">Nombre completo <span class="text-danger">*</span></label>
+                                {{ form_contacto.nombre }}
+                                {% if form_contacto.nombre.errors %}<div class="text-danger small mt-1">{{ form_contacto.nombre.errors }}</div>{% endif %}
+                            </div>
+                            <div class="col-md-6">
+                                <label for="id_telefono" class="form-label small fw-bold">Teléfono <span class="text-danger">*</span></label>
+                                {{ form_contacto.telefono }}
+                                {% if form_contacto.telefono.errors %}<div class="text-danger small mt-1">{{ form_contacto.telefono.errors }}</div>{% endif %}
+                            </div>
+                            <div class="col-12">
+                                <label for="id_email" class="form-label small fw-bold">Correo electrónico <span class="text-danger">*</span></label>
+                                {{ form_contacto.email }}
+                                {% if form_contacto.email.errors %}<div class="text-danger small mt-1">{{ form_contacto.email.errors }}</div>{% endif %}
+                            </div>
+                            <div class="col-12">
+                                <label for="id_nivel_interes" class="form-label small fw-bold">Nivel educativo de interés <span class="text-danger">*</span></label>
+                                {{ form_contacto.nivel_interes }}
+                                {% if form_contacto.nivel_interes.errors %}<div class="text-danger small mt-1">{{ form_contacto.nivel_interes.errors }}</div>{% endif %}
+                            </div>
+                            <div class="col-12">
+                                <label for="id_mensaje" class="form-label small fw-bold">Mensaje <span class="text-muted fw-normal">(opcional)</span></label>
+                                {{ form_contacto.mensaje }}
+                                {% if form_contacto.mensaje.errors %}<div class="text-danger small mt-1">{{ form_contacto.mensaje.errors }}</div>{% endif %}
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check privacy-consent">
+                                    {{ form_contacto.acepta_privacidad }}
+                                    <label class="form-check-label small fw-semibold" for="{{ form_contacto.acepta_privacidad.id_for_label }}">
+                                        Acepto que la institución use mis datos para responder esta solicitud. <span class="text-danger">*</span>
+                                    </label>
+                                </div>
+                                {% if form_contacto.acepta_privacidad.errors %}<div class="text-danger small mt-1">{{ form_contacto.acepta_privacidad.errors }}</div>{% endif %}
+                                <small class="form-text d-block mt-2">Usaremos tus datos para responder y dar seguimiento a esta consulta.</small>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="hero-btn-red w-100 justify-content-center border-0 contact-submit-button">
+                                    <i class="bi bi-whatsapp me-2" aria-hidden="true"></i> Enviar solicitud de información
+                                </button>
+                                <small class="text-muted d-block text-center mt-2">Los campos con * son obligatorios.</small>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="id_telefono" class="form-label small fw-bold">Número de Teléfono</label>
-                            {{ form_contacto.telefono }}
-                        </div>
-                        <div class="mb-3">
-                            <label for="id_mensaje" class="form-label small fw-bold">Mensaje o Trámite</label>
-                            {{ form_contacto.mensaje }}
-                        </div>
-                        <button type="submit" class="hero-btn-red w-100 justify-content-center border-0">
-                            <i class="bi bi-whatsapp me-2"></i> Enviar Mensaje a Secretaría (096 017 2899)
-                        </button>
                     </form>
                 </div>
             </div>
@@ -679,4 +900,125 @@
     </div>
 </section>
 
+
+{% if aviso_importante %}
+<div class="modal fade important-notice-modal" id="importantNoticeModal" tabindex="-1" aria-labelledby="importantNoticeTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0 px-4 px-md-5 pt-4 pb-0">
+                <span class="important-notice-kicker">
+                    <svg class="important-notice-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="m12 2.6 2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3.1-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9L12 2.6Z"/></svg>
+                    Aviso importante
+                </span>
+                <button type="button" class="important-notice-close" data-bs-dismiss="modal" aria-label="Cerrar aviso">
+                    <svg class="important-notice-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.2"/></svg>
+                </button>
+            </div>
+            <div class="modal-body px-4 px-md-5 pt-3 pb-4 pb-md-5">
+                <h2 class="important-notice-title mb-2" id="importantNoticeTitle">{{ aviso_importante.titulo }}</h2>
+                <p class="text-muted text-center small mb-3">Publicado el {{ aviso_importante.fecha_publicacion|date:"d/m/Y" }}</p>
+                <div class="important-notice-summary mb-3">{{ aviso_importante.resumen }}</div>
+                {% if aviso_importante.imagen %}
+                    <img class="important-notice-image mb-3" src="{{ aviso_importante.imagen.url }}" alt="Imagen del aviso: {{ aviso_importante.titulo }}">
+                {% endif %}
+                <div class="important-notice-content">{{ aviso_importante.contenido|truncatechars:500|linebreaksbr }}</div>
+                <div class="d-flex justify-content-center mt-4">
+                    <a href="{% url 'core:noticia_publica' aviso_importante.pk %}" class="btn important-notice-action" data-important-notice-link>
+                        <svg class="important-notice-icon me-2" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 3.5h8l4 4v13H6zM14 3.5v4h4M9 12h6M9 15.5h6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"/></svg>
+                        Leer aviso completo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(() => {
+    const contadores = document.querySelectorAll('.js-institution-counter');
+    if (!contadores.length) return;
+
+    const formato = new Intl.NumberFormat('es-EC');
+    const animarContador = (elemento) => {
+        const total = Number.parseInt(elemento.dataset.count, 10);
+        if (!Number.isFinite(total)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            elemento.textContent = formato.format(total);
+            return;
+        }
+        const inicio = performance.now();
+        const duracion = 1100;
+        const avanzar = (ahora) => {
+            const progreso = Math.min((ahora - inicio) / duracion, 1);
+            const suavizado = 1 - Math.pow(1 - progreso, 3);
+            elemento.textContent = formato.format(Math.round(total * suavizado));
+            if (progreso < 1) window.requestAnimationFrame(avanzar);
+        };
+        window.requestAnimationFrame(avanzar);
+    };
+
+    if (!('IntersectionObserver' in window)) {
+        contadores.forEach(animarContador);
+        return;
+    }
+    const observador = new IntersectionObserver((entradas) => {
+        entradas.forEach((entrada) => {
+            if (!entrada.isIntersecting) return;
+            animarContador(entrada.target);
+            observador.unobserve(entrada.target);
+        });
+    }, { threshold: 0.35 });
+    contadores.forEach((contador) => observador.observe(contador));
+})();
+
+(() => {
+    const modalElement = document.getElementById('importantNoticeModal');
+    if (!modalElement || !window.bootstrap || !window.bootstrap.Modal) return;
+
+    // Recuerda el cierre durante toda la sesión de esta pestaña, aunque cambie el aviso.
+    const storageKey = 'eeb-aviso-importante-cerrado';
+    let yaFueCerrado = false;
+    try {
+        yaFueCerrado = window.sessionStorage.getItem(storageKey) === 'cerrado';
+    } catch (error) {
+        // El aviso sigue disponible si el navegador bloquea el almacenamiento.
+    }
+    if (yaFueCerrado) return;
+
+    const recordarCierre = () => {
+        try {
+            window.sessionStorage.setItem(storageKey, 'cerrado');
+        } catch (error) {
+            // El cierre no depende del almacenamiento del navegador.
+        }
+    };
+    modalElement.addEventListener('hide.bs.modal', recordarCierre, { once: true });
+    const enlaceAviso = modalElement.querySelector('[data-important-notice-link]');
+    if (enlaceAviso) enlaceAviso.addEventListener('click', recordarCierre);
+    window.bootstrap.Modal.getOrCreateInstance(modalElement).show();
+})();
+
+(() => {
+    const form = document.getElementById('contactRequestForm');
+    if (!form) return;
+
+    form.addEventListener('submit', () => {
+        const datos = new FormData(form);
+        const nivel = form.querySelector('[name="nivel_interes"]');
+        const textoNivel = nivel && nivel.selectedOptions.length ? nivel.selectedOptions[0].textContent.trim() : '';
+        const lineas = [
+            `Hola, mi nombre es ${datos.get('nombre')}.`,
+            `Tel\u00e9fono: ${datos.get('telefono')}.`,
+            `Correo electr\u00f3nico: ${datos.get('email')}.`,
+            `Nivel educativo de inter\u00e9s: ${textoNivel}.`,
+            `Consulta: ${datos.get('mensaje') || `Solicitud de informaci\u00f3n sobre ${textoNivel}`}`,
+        ];
+        const url = `https://wa.me/593960172899?text=${encodeURIComponent(lineas.join('\n'))}`;
+        window.open(url, '_blank', 'noopener,noreferrer');
+    });
+})();
+</script>
 {% endblock %}

@@ -1,14 +1,23 @@
+from datetime import date
+import os
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.utils import timezone
+from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator
 from django.urls import reverse
-from .models import NoticiaComunicado, FotoGaleria, DocentePersonal, MensajeContacto, PerfilUsuario
+from django.contrib.staticfiles import finders
+from .models import (
+    NoticiaComunicado, FotoGaleria, DocentePersonal, MensajeContacto,
+    PerfilUsuario, CifrasInstitucionales, OfertaAcademica,
+)
 from .forms import (
     NoticiaComunicadoForm, FotoGaleriaForm, DocentePersonalForm, MensajeContactoForm,
-    UsuarioCrearForm, UsuarioEditarForm, PerfilPropioEditarForm, CambiarPasswordForm
+    UsuarioCrearForm, UsuarioEditarForm, PerfilPropioEditarForm, CambiarPasswordForm,
+    ConsultaSeguimientoForm, CifrasInstitucionalesForm,
 )
 
 def es_administrador(user):
@@ -70,21 +79,53 @@ def home(request):
         form_contacto = MensajeContactoForm()
 
     noticias = NoticiaComunicado.objects.filter(destacado=True)[:6]
+    aviso_importante = NoticiaComunicado.objects.filter(
+        destacado=True, tipo='urgente'
+    ).first()
     galeria = FotoGaleria.objects.filter(activa=True)[:8]
-    autoridades = DocentePersonal.objects.filter(jornada='autoridades', activo=True)
-    docentes_matutina = DocentePersonal.objects.filter(jornada='matutina', activo=True)
-    docentes_vespertina = DocentePersonal.objects.filter(jornada='vespertina', activo=True)
-    dece_personal = DocentePersonal.objects.filter(jornada='dece', activo=True)
+    personal_activo = list(DocentePersonal.objects.filter(activo=True))
+    cifras_institucionales = CifrasInstitucionales.objects.filter(pk=1).first()
+    total_estudiantes = getattr(cifras_institucionales, 'total_estudiantes', None)
+    hoy = timezone.localdate()
+    fecha_fundacion = date(1965, 9, 4)
+    anos_institucion = hoy.year - fecha_fundacion.year - (
+        (hoy.month, hoy.day) < (fecha_fundacion.month, fecha_fundacion.day)
+    )
+    autoridades = [persona for persona in personal_activo if persona.es_autoridad]
+    docentes_matutina = [
+        persona for persona in personal_activo if 'matutina' in persona.jornadas_asignadas
+    ]
+    docentes_vespertina = [
+        persona for persona in personal_activo if 'vespertina' in persona.jornadas_asignadas
+    ]
+    dece_personal = [persona for persona in personal_activo if persona.esta_en_dece]
+    ofertas_imagenes = {oferta.nivel: oferta for oferta in OfertaAcademica.objects.all()}
+    archivos_estaticos = ('about_campus', 'inicial', 'elemental', 'media', 'superior')
+    versiones_imagenes = {}
+    for nombre in archivos_estaticos:
+        ruta = finders.find(f'img/{nombre}.jpg')
+        if ruta:
+            stat = os.stat(ruta)
+            versiones_imagenes[nombre] = f'{stat.st_mtime_ns}-{stat.st_size}'
 
     context = {
         'titulo': 'Inicio | EEB Antonio Ante',
         'noticias': noticias,
+        'aviso_importante': aviso_importante,
         'galeria': galeria,
         'autoridades': autoridades,
         'docentes_matutina': docentes_matutina,
         'docentes_vespertina': docentes_vespertina,
         'dece_personal': dece_personal,
+        'total_estudiantes': total_estudiantes,
+        'tiene_total_estudiantes': total_estudiantes is not None,
+        'total_docentes_publico': sum(
+            1 for persona in personal_activo if 'docente' in persona.funciones_asignadas
+        ),
+        'anos_institucion': anos_institucion,
         'form_contacto': form_contacto,
+        'ofertas_imagenes': ofertas_imagenes,
+        'versiones_imagenes': versiones_imagenes,
     }
     return render(request, 'core/home.html', context)
 
@@ -232,12 +273,14 @@ def dashboard(request):
     total_noticias = noticias.count() if puede_noticias else 0
     total_fotos = FotoGaleria.objects.count() if puede_galeria else 0
     total_docentes = DocentePersonal.objects.count() if puede_personal else 0
-    total_mensajes = MensajeContacto.objects.filter(leido=False).count() if puede_consultas else 0
+    pendientes_consultas = MensajeContacto.objects.filter(leido=False) if puede_consultas else MensajeContacto.objects.none()
+    total_mensajes = pendientes_consultas.count()
+    consultas_vencidas = pendientes_consultas.filter(fecha_seguimiento__lte=timezone.now()).count()
     total_usuarios = User.objects.count() if es_admin else 0
 
     ultimas_noticias = noticias[:5] if puede_noticias else NoticiaComunicado.objects.none()
     ultimas_fotos = FotoGaleria.objects.all()[:4] if puede_galeria else FotoGaleria.objects.none()
-    ultimas_consultas = MensajeContacto.objects.all()[:5] if puede_consultas else MensajeContacto.objects.none()
+    ultimas_consultas = pendientes_consultas.order_by('prioridad', 'fecha_seguimiento')[:5]
 
     context = {
         'rol_panel': 'Administrador' if es_admin else dict(PerfilUsuario.ROLES_CHOICES).get(rol, 'Personal'),
@@ -250,12 +293,30 @@ def dashboard(request):
         'total_fotos': total_fotos,
         'total_docentes': total_docentes,
         'total_mensajes': total_mensajes,
+        'consultas_vencidas': consultas_vencidas,
         'total_usuarios': total_usuarios,
         'ultimas_noticias': ultimas_noticias,
         'ultimas_fotos': ultimas_fotos,
         'ultimas_consultas': ultimas_consultas,
     }
     return render(request, 'core/dashboard/index.html', context)
+
+
+@login_required
+@user_passes_test(puede_gestionar_personal)
+@verificar_primer_cambio_clave
+def cifras_editar(request):
+    """Permite a administración actualizar manualmente la matrícula pública."""
+    cifras, _ = CifrasInstitucionales.objects.get_or_create(pk=1)
+    if request.method == 'POST':
+        form = CifrasInstitucionalesForm(request.POST, instance=cifras)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'La cifra de estudiantes se actualizó correctamente.')
+            return redirect('core:cifras_editar')
+    else:
+        form = CifrasInstitucionalesForm(instance=cifras)
+    return render(request, 'core/dashboard/cifras_form.html', {'form': form})
 
 
 # --- Gestión de Noticias y Comunicados ---
@@ -418,33 +479,61 @@ def docente_delete(request, pk):
 @user_passes_test(puede_atender_consultas)
 @verificar_primer_cambio_clave
 def consultas_list(request):
-    estado = request.GET.get('estado', '').strip()
-    consultas = MensajeContacto.objects.all()
+    estado = request.GET.get('estado', 'pendiente').strip()
+    if estado not in ('pendiente', 'atendido'):
+        estado = 'pendiente'
+
+    consultas = MensajeContacto.objects.filter(leido=(estado == 'atendido'))
     if estado == 'pendiente':
-        consultas = consultas.filter(leido=False)
-    elif estado == 'atendido':
-        consultas = consultas.filter(leido=True)
+        consultas = consultas.order_by('prioridad', 'fecha_seguimiento', 'fecha_envio')
+        for consulta in consultas:
+            consulta.seguimiento_form = ConsultaSeguimientoForm(
+                instance=consulta, prefix=f'ticket-{consulta.pk}'
+            )
     else:
-        estado = ''
+        consultas = consultas.order_by('-fecha_envio')
+
+    pendientes = MensajeContacto.objects.filter(leido=False)
 
     context = {
         'consultas': consultas,
         'estado_activo': estado,
-        'total_pendientes': MensajeContacto.objects.filter(leido=False).count(),
+        'total_pendientes': pendientes.count(),
+        'total_vencidas': pendientes.filter(fecha_seguimiento__lte=timezone.now()).count(),
         'total_atendidas': MensajeContacto.objects.filter(leido=True).count(),
         'total_consultas': MensajeContacto.objects.count(),
+        'prioridad_choices': MensajeContacto.PRIORIDAD_CHOICES,
     }
     return render(request, 'core/dashboard/consultas_list.html', context)
 
 @login_required
 @user_passes_test(puede_atender_consultas)
 @verificar_primer_cambio_clave
+@require_POST
 def consulta_toggle(request, pk):
     consulta = get_object_or_404(MensajeContacto, pk=pk)
     consulta.leido = not consulta.leido
-    consulta.save()
-    messages.success(request, f'Estado de consulta de {consulta.nombre} actualizado.')
-    return redirect('core:consultas_list')
+    consulta.save(update_fields=['leido'])
+    if consulta.leido:
+        messages.success(request, f'El ticket #{consulta.pk} fue archivado como atendido.')
+    else:
+        messages.info(request, f'El ticket #{consulta.pk} volvió a la bandeja de pendientes.')
+    return redirect(f"{reverse('core:consultas_list')}?estado=pendiente")
+
+
+@login_required
+@user_passes_test(puede_atender_consultas)
+@verificar_primer_cambio_clave
+@require_POST
+def consulta_actualizar(request, pk):
+    consulta = get_object_or_404(MensajeContacto, pk=pk, leido=False)
+    form = ConsultaSeguimientoForm(request.POST, instance=consulta, prefix=f'ticket-{consulta.pk}')
+    if form.is_valid():
+        form.save()
+        messages.success(request, f'Seguimiento del ticket #{consulta.pk} actualizado.')
+    else:
+        messages.error(request, 'No se pudo guardar. Revisa la prioridad y la fecha del recordatorio.')
+    return redirect(f"{reverse('core:consultas_list')}?estado=pendiente")
 
 
 # ==============================================================================

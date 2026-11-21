@@ -20,6 +20,7 @@ urlpatterns = [
 
     # Portal Institucional / Dashboard Post-Login
     path('dashboard/', views.dashboard, name='dashboard'),
+    path('dashboard/cifras/', views.cifras_editar, name='cifras_editar'),
     path('dashboard/perfil/', views.perfil_editar, name='perfil_editar'),
     
     # Gestión de Noticias y Comunicados
@@ -42,6 +43,7 @@ urlpatterns = [
     # Consultas de Secretaría
     path('dashboard/consultas/', views.consultas_list, name='consultas_list'),
     path('dashboard/consultas/<int:pk>/atender/', views.consulta_toggle, name='consulta_toggle'),
+    path('dashboard/consultas/<int:pk>/seguimiento/', views.consulta_actualizar, name='consulta_actualizar'),
 
     # Gestión de Usuarios y Roles (Solo Administradores)
     path('dashboard/usuarios/', views.usuario_list, name='usuario_list'),

@@ -44,11 +44,11 @@
             <i class="bi bi-envelope-exclamation-fill"></i>
         </div>
         <div class="flex-grow-1">
-            <span class="dashboard-pending-label">Requiere atención</span>
+            <span class="dashboard-pending-label">{% if consultas_vencidas %}Recordatorio vencido{% else %}Requiere atención{% endif %}</span>
             <h4 id="pendingMessagesTitle" class="mb-1 fw-bold">
-                {{ total_mensajes }} mensaje{% if total_mensajes != 1 %}s{% endif %} pendiente{% if total_mensajes != 1 %}s{% endif %}
+                {% if consultas_vencidas %}{{ consultas_vencidas }} ticket{% if consultas_vencidas != 1 %}s{% endif %} requiere{% if consultas_vencidas != 1 %}n{% endif %} seguimiento{% else %}{{ total_mensajes }} consulta{% if total_mensajes != 1 %}s{% endif %} pendiente{% if total_mensajes != 1 %}s{% endif %}{% endif %}
             </h4>
-            <p class="mb-0 text-secondary">Familias esperan respuesta. Abre la bandeja para revisar y marcar los mensajes atendidos.</p>
+            <p class="mb-0 text-secondary">{% if consultas_vencidas %}La fecha de seguimiento de algunos tickets ya venció. Aparecen primero en la bandeja.{% else %}Las familias esperan respuesta. Abre la bandeja para revisar y atender sus tickets.{% endif %}</p>
         </div>
         <a href="{% url 'core:consultas_list' %}?estado=pendiente" class="btn btn-warning fw-bold dashboard-pending-action">
             Revisar pendientes <i class="bi bi-arrow-right ms-1"></i>
@@ -58,7 +58,7 @@
     <div class="dashboard-all-clear mb-4" role="status">
         <i class="bi bi-check-circle-fill me-2" aria-hidden="true"></i>
         No tienes mensajes pendientes de atención.
-        <a href="{% url 'core:consultas_list' %}" class="ms-2 fw-semibold">Abrir bandeja</a>
+        <a href="{% url 'core:consultas_list' %}?estado=pendiente" class="ms-2 fw-semibold">Abrir bandeja de pendientes</a>
     </div>
     {% endif %}
     {% endif %}
@@ -201,6 +201,15 @@
                 <small class="d-block mt-1 text-muted">Elegir usuario y permisos</small>
             </a>
         </div>
+        <div class="col-6 col-md-3">
+            <a href="{% url 'core:cifras_editar' %}" class="card border-0 shadow-sm rounded-3 p-3 text-center text-decoration-none d-block card-hover-lift h-100">
+                <div style="width:48px;height:48px;border-radius:12px;background:#fff7e6;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;">
+                    <i class="bi bi-bar-chart-line-fill fs-5" style="color:#b45309;"></i>
+                </div>
+                <div class="fw-semibold text-dark small">Actualizar matrícula</div>
+                <small class="d-block mt-1 text-muted">Cambiar el total de estudiantes de la portada</small>
+            </a>
+        </div>
         {% endif %}
         <div class="col-6 col-md-3">
             <a href="{% url 'core:perfil_editar' %}" class="card border-0 shadow-sm rounded-3 p-3 text-center text-decoration-none d-block card-hover-lift h-100">
@@ -292,21 +301,20 @@
         <div class="col-lg-5">
             <div class="card border-0 shadow-sm rounded-3">
                 <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center border-bottom">
-                    <h6 class="mb-0 fw-bold text-dark"><i class="bi bi-chat-dots me-2 text-primary"></i> Mensajes recientes de las familias</h6>
-                    <a href="{% url 'core:consultas_list' %}" class="small text-decoration-none text-primary">Ver todas</a>
+                    <h6 class="mb-0 fw-bold text-dark"><i class="bi bi-chat-dots me-2 text-primary"></i> Tickets pendientes</h6>
+                    <a href="{% url 'core:consultas_list' %}?estado=pendiente" class="small text-decoration-none text-primary">Abrir bandeja</a>
                 </div>
                 <ul class="list-group list-group-flush">
                     {% for c in ultimas_consultas %}
                     <li class="list-group-item p-3">
                         <div class="d-flex justify-content-between align-items-start gap-2">
                             <div class="flex-grow-1">
-                                <div class="fw-bold small text-dark">{{ c.nombre }}</div>
+                                <div class="fw-bold small text-dark">#{{ c.pk }} | {{ c.nombre }}</div>
                                 <div class="text-muted small">{{ c.mensaje|truncatechars:55 }}</div>
-                                <small class="text-muted" style="font-size:0.7rem;">{{ c.fecha_envio|date:"d/m/Y H:i" }} · {{ c.telefono }}</small>
+                                <small class="text-muted" style="font-size:0.7rem;">{{ c.fecha_envio|date:"d/m/Y H:i" }} | {{ c.telefono }}</small>
+                                <div class="small mt-1"><span class="badge {% if c.prioridad == 1 %}bg-danger{% elif c.prioridad == 2 %}bg-warning text-dark{% elif c.prioridad == 4 %}bg-secondary{% else %}bg-primary{% endif %}">{{ c.get_prioridad_display }}</span>{% if c.necesita_recordatorio %}<span class="badge bg-danger ms-1">Seguimiento vencido</span>{% else %}<span class="text-muted ms-1">Recordar {{ c.fecha_seguimiento|date:"d/m H:i" }}</span>{% endif %}</div>
                             </div>
-                            <span class="badge {% if c.leido %}bg-success-subtle text-success{% else %}bg-warning-subtle text-warning{% endif %} rounded-pill flex-shrink-0">
-                                {% if c.leido %}Atendido{% else %}Pendiente{% endif %}
-                            </span>
+                            <span class="badge bg-warning-subtle text-warning rounded-pill flex-shrink-0">Pendiente</span>
                         </div>
                     </li>
                     {% empty %}

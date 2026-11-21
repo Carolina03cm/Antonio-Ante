@@ -1,6 +1,9 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import NoticiaComunicado, FotoGaleria, DocentePersonal, MensajeContacto, PerfilUsuario
+from .models import (
+    NoticiaComunicado, FotoGaleria, DocentePersonal, MensajeContacto,
+    PerfilUsuario, CifrasInstitucionales, OfertaAcademica,
+)
 
 # Personalización del Panel Administrativo Oficial de Django
 admin.site.site_header = "EEB Antonio Ante • Administración"
@@ -12,6 +15,17 @@ class PerfilUsuarioAdmin(admin.ModelAdmin):
     list_display = ('user', 'nombres', 'apellidos', 'cedula', 'rol', 'debe_cambiar_password')
     list_filter = ('rol', 'debe_cambiar_password')
     search_fields = ('user__username', 'nombres', 'apellidos', 'cedula')
+
+@admin.register(CifrasInstitucionales)
+class CifrasInstitucionalesAdmin(admin.ModelAdmin):
+    list_display = ('total_estudiantes',)
+    fields = ('total_estudiantes',)
+
+    def has_add_permission(self, request):
+        return not CifrasInstitucionales.objects.filter(pk=1).exists()
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 @admin.register(NoticiaComunicado)
 class NoticiaComunicadoAdmin(admin.ModelAdmin):
@@ -69,3 +83,10 @@ class MensajeContactoAdmin(admin.ModelAdmin):
 
     def has_add_permission(self, request):
         return False
+
+@admin.register(OfertaAcademica)
+class OfertaAcademicaAdmin(admin.ModelAdmin):
+    list_display = ('nivel', 'actualizada')
+    list_editable = ()
+    fields = ('nivel', 'imagen', 'actualizada')
+    readonly_fields = ('actualizada',)

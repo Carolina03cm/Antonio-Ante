@@ -1,5 +1,11 @@
+from datetime import timedelta
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
+
+
+def fecha_seguimiento_predeterminada():
+    return timezone.now() + timedelta(days=1)
 
 class NoticiaComunicado(models.Model):
     """
@@ -68,12 +74,33 @@ class DocentePersonal(models.Model):
         ('vespertina', 'Jornada Vespertina'),
         ('dece', 'Departamento DECE'),
     ]
+    FUNCION_CHOICES = [
+        ('docente', 'Docente'),
+        ('tutor', 'Tutor/a de curso'),
+        ('autoridad', 'Autoridad institucional'),
+        ('rector', 'Rector/a'),
+        ('vicerrector', 'Vicerrector/a'),
+        ('director', 'Director/a'),
+        ('inspector', 'Inspector/a general'),
+        ('subinspector', 'Subinspector/a'),
+        ('secretaria', 'Secretario/a'),
+        ('coordinador', 'Coordinador/a'),
+        ('dece', 'Personal DECE'),
+        ('otro', 'Otro cargo'),
+    ]
+    FUNCIONES_AUTORIDAD = {
+        'autoridad', 'rector', 'vicerrector', 'director', 'inspector',
+        'subinspector', 'secretaria', 'coordinador'
+    }
 
     nombres = models.CharField('Nombres', max_length=100)
     apellidos = models.CharField('Apellidos', max_length=100)
-    cargo = models.CharField('Cargo o Rol', max_length=150, help_text='Ej: Docente Tutor 3° EGB, Psicólogo Educativo')
+    cargo = models.CharField('Detalle del cargo o curso', max_length=150, blank=True, help_text='Ej: Tutor de 4to EGB')
     jornada = models.CharField('Jornada / Área', max_length=20, choices=JORNADA_CHOICES, default='matutina')
     area = models.CharField('Especialidad o Asignatura', max_length=120, blank=True, help_text='Ej: Lengua y Literatura, Ciencias Naturales')
+    funciones = models.JSONField('Funciones y cargos', default=list, blank=True)
+    jornadas = models.JSONField('Jornadas asignadas', default=list, blank=True)
+    asignaturas = models.JSONField('Materias o asignaturas', default=list, blank=True)
     foto = models.ImageField('Fotografía del Docente', upload_to='docentes/', blank=True, null=True)
     orden = models.PositiveIntegerField('Orden de visualización', default=1)
     activo = models.BooleanField('Activo en nómina', default=True)
@@ -90,16 +117,103 @@ class DocentePersonal(models.Model):
     def nombre_completo(self):
         return f"{self.nombres} {self.apellidos}"
 
+    @property
+    def funciones_asignadas(self):
+        if self.funciones:
+            return self.funciones
+        cargo = (self.cargo or '').casefold()
+        funciones = []
+        if 'docent' in cargo or self.jornada in ('matutina', 'vespertina'):
+            funciones.append('docente')
+        if 'tutor' in cargo:
+            funciones.append('tutor')
+        if self.jornada == 'autoridades':
+            funciones.append('autoridad')
+        if self.jornada == 'dece' or 'dece' in cargo or 'psicolog' in cargo:
+            funciones.append('dece')
+        if 'vicerrector' in cargo:
+            funciones.append('vicerrector')
+        elif 'rector' in cargo:
+            funciones.append('rector')
+        if 'subinspector' in cargo:
+            funciones.append('subinspector')
+        elif 'inspector' in cargo:
+            funciones.append('inspector')
+        if 'secretar' in cargo:
+            funciones.append('secretaria')
+        if 'director' in cargo:
+            funciones.append('director')
+        if 'coordinador' in cargo:
+            funciones.append('coordinador')
+        return funciones or ['otro']
+
+    @property
+    def jornadas_asignadas(self):
+        return self.jornadas or [self.jornada]
+
+    @property
+    def funciones_display(self):
+        etiquetas = dict(self.FUNCION_CHOICES)
+        return [etiquetas.get(funcion, funcion) for funcion in self.funciones_asignadas]
+
+    @property
+    def jornadas_display(self):
+        etiquetas = dict(self.JORNADA_CHOICES)
+        return [etiquetas.get(jornada, jornada) for jornada in self.jornadas_asignadas]
+
+    @property
+    def asignaturas_display(self):
+        if self.asignaturas:
+            return self.asignaturas
+        return [materia.strip() for materia in self.area.replace(';', ',').split(',') if materia.strip()]
+
+    @property
+    def es_autoridad(self):
+        return self.jornada == 'autoridades' or any(
+            funcion in self.FUNCIONES_AUTORIDAD for funcion in self.funciones_asignadas
+        )
+
+    @property
+    def esta_en_dece(self):
+        return 'dece' in self.jornadas_asignadas or 'dece' in self.funciones_asignadas
+
 
 class MensajeContacto(models.Model):
     """
     Registro de consultas enviadas desde el formulario web de secretaría.
     """
+    PRIORIDAD_CHOICES = [
+        (1, 'Urgente'),
+        (2, 'Alta'),
+        (3, 'Normal'),
+        (4, 'Baja'),
+    ]
+    NIVEL_INTERES_CHOICES = [
+        ('inicial', 'Educación Inicial'),
+        ('1_egb', '1.º de EGB'),
+        ('2_egb', '2.º de EGB'),
+        ('3_egb', '3.º de EGB'),
+        ('4_egb', '4.º de EGB'),
+        ('5_egb', '5.º de EGB'),
+        ('6_egb', '6.º de EGB'),
+        ('7_egb', '7.º de EGB'),
+        ('8_egb', '8.º de EGB'),
+        ('9_egb', '9.º de EGB'),
+        ('10_egb', '10.º de EGB'),
+    ]
+
     nombre = models.CharField('Nombre del Representante', max_length=150)
     telefono = models.CharField('Teléfono / WhatsApp', max_length=25)
-    mensaje = models.TextField('Consulta o Trámite')
+    email = models.EmailField('Correo electrónico', blank=True)
+    nivel_interes = models.CharField('Nivel educativo de interés', max_length=10, blank=True, choices=NIVEL_INTERES_CHOICES)
+    mensaje = models.TextField('Consulta o Trámite', blank=True)
+    acepta_privacidad = models.BooleanField('Acepta el uso de datos para responder', default=False)
     fecha_envio = models.DateTimeField('Fecha de recepción', auto_now_add=True)
     leido = models.BooleanField('Atendido', default=False)
+    prioridad = models.PositiveSmallIntegerField('Prioridad', choices=PRIORIDAD_CHOICES, default=3)
+    fecha_seguimiento = models.DateTimeField(
+        'Recordatorio de seguimiento', default=fecha_seguimiento_predeterminada
+    )
 
     class Meta:
         verbose_name = 'Consulta de Secretaría'
@@ -108,6 +222,19 @@ class MensajeContacto(models.Model):
 
     def __str__(self):
         return f"Consulta de {self.nombre} ({self.telefono})"
+
+    @property
+    def necesita_recordatorio(self):
+        return not self.leido and self.fecha_seguimiento <= timezone.now()
+
+    @property
+    def telefono_whatsapp(self):
+        digitos = ''.join(caracter for caracter in self.telefono if caracter.isdigit())
+        if digitos.startswith('0'):
+            digitos = digitos[1:]
+        if not digitos.startswith('593'):
+            digitos = f'593{digitos}'
+        return digitos
 
 
 class PerfilUsuario(models.Model):
@@ -153,3 +280,42 @@ class PerfilUsuario(models.Model):
         ini_a = a[0] if a else (self.user.username[1] if len(self.user.username) > 1 else '')
         return f"{ini_n}{ini_a}".upper()
 
+
+class CifrasInstitucionales(models.Model):
+    """Dato de matrícula que se actualiza desde el administrador institucional."""
+    total_estudiantes = models.PositiveIntegerField(
+        'Total de estudiantes matriculados', blank=True, null=True,
+        help_text='Actualiza esta cifra cuando cambie la matrícula institucional.',
+    )
+
+    class Meta:
+        verbose_name = 'Cifra institucional'
+        verbose_name_plural = 'Cifras institucionales'
+
+    def save(self, *args, **kwargs):
+        self.pk = 1
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return 'Datos públicos de matrícula'
+
+
+class OfertaAcademica(models.Model):
+    """Fotografia editable para cada nivel de la oferta academica."""
+    NIVELES = [
+        ('inicial', 'Educacion Inicial'),
+        ('elemental', 'Basica Elemental'),
+        ('media', 'Basica Media'),
+        ('superior', 'Basica Superior'),
+    ]
+    nivel = models.CharField('Nivel', max_length=20, choices=NIVELES, unique=True)
+    imagen = models.ImageField('Fotografia', upload_to='oferta_academica/')
+    actualizada = models.DateTimeField('Ultima actualizacion', auto_now=True)
+
+    class Meta:
+        verbose_name = 'Fotografia de oferta academica'
+        verbose_name_plural = 'Fotografias de oferta academica'
+        ordering = ('nivel',)
+
+    def __str__(self):
+        return self.get_nivel_display()

@@ -259,6 +259,12 @@
                     <span>Usuarios y permisos</span>
                 </a>
             </li>
+            <li>
+                <a href="{% url 'core:cifras_editar' %}" class="sidebar-link {% if request.resolver_match.url_name == 'cifras_editar' %}active{% endif %}">
+                    <i class="bi bi-bar-chart-line"></i>
+                    <span>Cifras institucionales</span>
+                </a>
+            </li>
             {% endif %}
             <li>
                 <a href="{% url 'core:perfil_editar' %}" class="sidebar-link {% if 'perfil' in request.resolver_match.url_name %}active{% endif %}">

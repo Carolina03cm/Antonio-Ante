@@ -61,17 +61,18 @@
                                 </div>
                             {% endif %}
                             <div class="mt-2">
-                                <span class="badge {% if d.jornada == 'autoridades' %}bg-danger{% elif d.jornada == 'matutina' %}bg-primary{% elif d.jornada == 'vespertina' %}bg-warning text-dark{% else %}bg-success{% endif %} rounded-pill small">
-                                    {{ d.get_jornada_display }}
-                                </span>
+                                {% for jornada in d.jornadas_display %}
+                                <span class="badge {% if jornada == 'Autoridades Institucionales' %}bg-danger{% elif jornada == 'Jornada Matutina' %}bg-primary{% elif jornada == 'Jornada Vespertina' %}bg-warning text-dark{% else %}bg-success{% endif %} rounded-pill small me-1">{{ jornada }}</span>
+                                {% endfor %}
                             </div>
                         </div>
                         <div class="card-body text-center px-3 py-2">
                             <h6 class="fw-bold text-dark mb-0 small">{{ d.nombre_completo }}</h6>
+                            <div class="d-flex flex-wrap gap-1 justify-content-center my-1">
+                                {% for funcion in d.funciones_display %}<span class="badge bg-light text-primary border">{{ funcion }}</span>{% endfor %}
+                            </div>
                             <p class="text-muted mb-1" style="font-size:0.78rem;">{{ d.cargo }}</p>
-                            {% if d.area %}
-                            <p class="text-muted mb-0" style="font-size:0.72rem;"><i class="bi bi-bookmark me-1"></i>{{ d.area }}</p>
-                            {% endif %}
+                            {% if d.asignaturas_display %}<p class="text-muted mb-0" style="font-size:0.72rem;"><i class="bi bi-bookmark me-1"></i>{{ d.asignaturas_display|join:", " }}</p>{% endif %}
                             {% if not d.activo %}
                             <span class="badge bg-secondary-subtle text-secondary mt-1" style="font-size:0.68rem;">Inactivo</span>
                             {% endif %}
@@ -93,7 +94,7 @@
         <!-- Autoridades -->
         <div class="tab-pane fade" id="tab-aut" role="tabpanel">
             <div class="row g-3">
-                {% for d in docentes %}{% if d.jornada == 'autoridades' %}
+                {% for d in docentes %}{% if d.es_autoridad %}
                 <div class="col-sm-6 col-lg-4 col-xl-3">
                     <div class="card border-0 shadow-sm h-100 rounded-3 overflow-hidden border-top border-3 border-danger">
                         <div class="text-center pt-4 pb-2 px-3" style="background:linear-gradient(135deg,#fdf2f3,#fee2e2);">
@@ -103,8 +104,9 @@
                         </div>
                         <div class="card-body text-center px-3 py-2">
                             <h6 class="fw-bold text-dark mb-0 small">{{ d.nombre_completo }}</h6>
+                            <div class="d-flex flex-wrap gap-1 justify-content-center my-1">{% for funcion in d.funciones_display %}<span class="badge bg-light text-primary border">{{ funcion }}</span>{% endfor %}</div>
                             <p class="text-danger fw-semibold mb-1" style="font-size:0.8rem;">{{ d.cargo }}</p>
-                            {% if d.area %}<p class="text-muted mb-0" style="font-size:0.72rem;"><i class="bi bi-bookmark me-1"></i>{{ d.area }}</p>{% endif %}
+                            {% if d.asignaturas_display %}<p class="text-muted mb-0" style="font-size:0.72rem;"><i class="bi bi-bookmark me-1"></i>{{ d.asignaturas_display|join:", " }}</p>{% endif %}
                         </div>
                         <div class="card-footer bg-white border-top-0 d-flex gap-2 justify-content-center pb-3 pt-0">
                             <a href="{% url 'core:docente_edit' d.pk %}" class="btn btn-sm btn-outline-primary px-3"><i class="bi bi-pencil-square me-1"></i> Editar</a>
@@ -119,7 +121,7 @@
         <!-- Matutina -->
         <div class="tab-pane fade" id="tab-mat" role="tabpanel">
             <div class="row g-3">
-                {% for d in docentes %}{% if d.jornada == 'matutina' %}
+                {% for d in docentes %}{% if 'matutina' in d.jornadas_asignadas %}
                 <div class="col-sm-6 col-lg-4 col-xl-3">
                     <div class="card border-0 shadow-sm h-100 rounded-3 overflow-hidden">
                         <div class="text-center pt-4 pb-2 px-3" style="background:linear-gradient(135deg,#f8fafc,#eaf0fb);">
@@ -129,8 +131,9 @@
                         </div>
                         <div class="card-body text-center px-3 py-2">
                             <h6 class="fw-bold text-dark mb-0 small">{{ d.nombre_completo }}</h6>
+                            <div class="d-flex flex-wrap gap-1 justify-content-center my-1">{% for funcion in d.funciones_display %}<span class="badge bg-light text-primary border">{{ funcion }}</span>{% endfor %}</div>
                             <p class="text-muted mb-1" style="font-size:0.78rem;">{{ d.cargo }}</p>
-                            {% if d.area %}<p class="text-muted mb-0" style="font-size:0.72rem;"><i class="bi bi-bookmark me-1"></i>{{ d.area }}</p>{% endif %}
+                            {% if d.asignaturas_display %}<p class="text-muted mb-0" style="font-size:0.72rem;"><i class="bi bi-bookmark me-1"></i>{{ d.asignaturas_display|join:", " }}</p>{% endif %}
                         </div>
                         <div class="card-footer bg-white border-top-0 d-flex gap-2 justify-content-center pb-3 pt-0">
                             <a href="{% url 'core:docente_edit' d.pk %}" class="btn btn-sm btn-outline-primary px-3"><i class="bi bi-pencil-square me-1"></i> Editar</a>
@@ -145,7 +148,7 @@
         <!-- Vespertina -->
         <div class="tab-pane fade" id="tab-vesp" role="tabpanel">
             <div class="row g-3">
-                {% for d in docentes %}{% if d.jornada == 'vespertina' %}
+                {% for d in docentes %}{% if 'vespertina' in d.jornadas_asignadas %}
                 <div class="col-sm-6 col-lg-4 col-xl-3">
                     <div class="card border-0 shadow-sm h-100 rounded-3 overflow-hidden">
                         <div class="text-center pt-4 pb-2 px-3" style="background:linear-gradient(135deg,#fffbea,#fef3c7);">
@@ -155,8 +158,9 @@
                         </div>
                         <div class="card-body text-center px-3 py-2">
                             <h6 class="fw-bold text-dark mb-0 small">{{ d.nombre_completo }}</h6>
+                            <div class="d-flex flex-wrap gap-1 justify-content-center my-1">{% for funcion in d.funciones_display %}<span class="badge bg-light text-primary border">{{ funcion }}</span>{% endfor %}</div>
                             <p class="text-muted mb-1" style="font-size:0.78rem;">{{ d.cargo }}</p>
-                            {% if d.area %}<p class="text-muted mb-0" style="font-size:0.72rem;"><i class="bi bi-bookmark me-1"></i>{{ d.area }}</p>{% endif %}
+                            {% if d.asignaturas_display %}<p class="text-muted mb-0" style="font-size:0.72rem;"><i class="bi bi-bookmark me-1"></i>{{ d.asignaturas_display|join:", " }}</p>{% endif %}
                         </div>
                         <div class="card-footer bg-white border-top-0 d-flex gap-2 justify-content-center pb-3 pt-0">
                             <a href="{% url 'core:docente_edit' d.pk %}" class="btn btn-sm btn-outline-primary px-3"><i class="bi bi-pencil-square me-1"></i> Editar</a>
@@ -171,7 +175,7 @@
         <!-- DECE -->
         <div class="tab-pane fade" id="tab-dece" role="tabpanel">
             <div class="row g-3">
-                {% for d in docentes %}{% if d.jornada == 'dece' %}
+                {% for d in docentes %}{% if d.esta_en_dece %}
                 <div class="col-sm-6 col-lg-4 col-xl-3">
                     <div class="card border-0 shadow-sm h-100 rounded-3 overflow-hidden">
                         <div class="text-center pt-4 pb-2 px-3" style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);">
@@ -181,8 +185,9 @@
                         </div>
                         <div class="card-body text-center px-3 py-2">
                             <h6 class="fw-bold text-dark mb-0 small">{{ d.nombre_completo }}</h6>
+                            <div class="d-flex flex-wrap gap-1 justify-content-center my-1">{% for funcion in d.funciones_display %}<span class="badge bg-light text-primary border">{{ funcion }}</span>{% endfor %}</div>
                             <p class="text-muted mb-1" style="font-size:0.78rem;">{{ d.cargo }}</p>
-                            {% if d.area %}<p class="text-muted mb-0" style="font-size:0.72rem;"><i class="bi bi-bookmark me-1"></i>{{ d.area }}</p>{% endif %}
+                            {% if d.asignaturas_display %}<p class="text-muted mb-0" style="font-size:0.72rem;"><i class="bi bi-bookmark me-1"></i>{{ d.asignaturas_display|join:", " }}</p>{% endif %}
                         </div>
                         <div class="card-footer bg-white border-top-0 d-flex gap-2 justify-content-center pb-3 pt-0">
                             <a href="{% url 'core:docente_edit' d.pk %}" class="btn btn-sm btn-outline-primary px-3"><i class="bi bi-pencil-square me-1"></i> Editar</a>
