@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nueva consulta institucional</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f1f4f8;font-family:Arial,Helvetica,sans-serif;color:#243247;">
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color:#f1f4f8;padding:32px 12px;">
+        <tr>
+            <td align="center">
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width:640px;background:#ffffff;border-radius:12px;overflow:hidden;">
+                    <tr>
+                        <td style="height:6px;background:#d71926;font-size:0;line-height:0;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="background:#10264b;padding:24px 30px;">
+                            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                                <tr>
+                                    <td width="82" valign="middle">
+                                        <img src="cid:escudo-antonio-ante" width="68" height="68" alt="Escudo EEB Antonio Ante" style="display:block;width:68px;height:68px;object-fit:contain;border-radius:50%;background:#ffffff;padding:4px;">
+                                    </td>
+                                    <td valign="middle" style="padding-left:14px;">
+                                        <div style="font-size:12px;line-height:18px;font-weight:bold;letter-spacing:1.5px;color:#ffffff;">EEB ANTONIO ANTE</div>
+                                        <div style="padding-top:5px;font-size:13px;line-height:19px;color:#dbe5f3;">Secretaría y Atención Institucional</div>
+                                        <div style="padding-top:3px;font-size:12px;line-height:18px;color:#b8c7dd;">Recinto El Deseo · Yaguachi</div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:30px 32px 12px;">
+                            <div style="font-size:12px;line-height:18px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#d71926;">Nueva solicitud de información</div>
+                            <h1 style="margin:8px 0 10px;font-size:25px;line-height:32px;font-weight:700;color:#10264b;">Consulta recibida</h1>
+                            <p style="margin:0;font-size:15px;line-height:23px;color:#5b687a;">Se registró una nueva consulta en el sitio institucional. Los datos de la persona solicitante están a continuación.</p>
+                            <div style="margin-top:18px;display:inline-block;padding:7px 12px;border-radius:20px;background:#eaf0f8;color:#18396d;font-size:13px;font-weight:bold;">Ticket #{{ consulta.pk }}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:12px 32px 8px;">
+                            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="border:1px solid #e3e9f1;border-radius:8px;">
+                                <tr>
+                                    <td style="padding:13px 16px;border-bottom:1px solid #e3e9f1;width:34%;font-size:13px;font-weight:bold;color:#68778b;">Nombre</td>
+                                    <td style="padding:13px 16px;border-bottom:1px solid #e3e9f1;font-size:14px;font-weight:bold;color:#243247;">{{ consulta.nombre }}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:13px 16px;border-bottom:1px solid #e3e9f1;font-size:13px;font-weight:bold;color:#68778b;">Teléfono</td>
+                                    <td style="padding:13px 16px;border-bottom:1px solid #e3e9f1;font-size:14px;color:#243247;">{{ consulta.telefono }}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:13px 16px;border-bottom:1px solid #e3e9f1;font-size:13px;font-weight:bold;color:#68778b;">Correo</td>
+                                    <td style="padding:13px 16px;border-bottom:1px solid #e3e9f1;font-size:14px;color:#18396d;word-break:break-word;">{{ consulta.email }}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:13px 16px;font-size:13px;font-weight:bold;color:#68778b;">Nivel de interés</td>
+                                    <td style="padding:13px 16px;font-size:14px;color:#243247;">{{ consulta.get_nivel_interes_display }}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:18px 32px 8px;">
+                            <div style="margin-bottom:8px;font-size:13px;font-weight:bold;color:#18396d;">Mensaje</div>
+                            <div style="padding:16px;border-left:4px solid #d71926;border-radius:4px;background:#f6f8fb;font-size:14px;line-height:22px;color:#35445a;">{% if consulta.mensaje %}{{ consulta.mensaje|linebreaksbr }}{% else %}La persona solicitó información sobre {{ consulta.get_nivel_interes_display }}.{% endif %}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" style="padding:24px 32px 30px;">
+                            <a href="{{ panel_url }}" style="display:inline-block;padding:13px 22px;border-radius:6px;background:#18396d;color:#ffffff;text-decoration:none;font-size:14px;font-weight:bold;">Abrir bandeja de consultas</a>
+                            <p style="margin:13px 0 0;font-size:12px;line-height:18px;color:#758196;">La consulta también quedó guardada en el panel de gestión.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:17px 24px;background:#f6f8fb;border-top:1px solid #e7ecf2;text-align:center;font-size:11px;line-height:17px;color:#7a8798;">
+                            Mensaje automático del sitio institucional EEB Antonio Ante.<br>
+                            Para responder, utiliza la opción de respuesta de este correo.
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

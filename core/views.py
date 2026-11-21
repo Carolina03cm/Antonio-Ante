@@ -6,8 +6,10 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.conf import settings
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
 from smtplib import SMTPException
+from email.mime.image import MIMEImage
 from django.utils import timezone
 from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator
@@ -85,7 +87,7 @@ def home(request):
             ))
 
             if correo_configurado:
-                asunto = f"Nueva consulta institucional (ticket #{consulta.pk})"
+                asunto = f"Nueva consulta #{consulta.pk} | EEB Antonio Ante"
                 contenido = (
                     "Se recibi\u00f3 una nueva consulta en el sitio institucional.\n\n"
                     f"Ticket: #{consulta.pk}\n"
@@ -96,16 +98,36 @@ def home(request):
                     f"Consulta:\n{consulta.mensaje or 'Solicitud de informaci\u00f3n.'}\n\n"
                     "La consulta tambi\u00e9n est\u00e1 guardada en el panel de gesti\u00f3n."
                 )
-                
+
                 try:
-                    email = EmailMessage(
+                    html_contenido = render_to_string(
+                        "core/emails/consulta_notificacion.html",
+                        {
+                            "consulta": consulta,
+                            "panel_url": request.build_absolute_uri(
+                                f"{reverse('core:consultas_list')}?estado=pendiente"
+                            ),
+                        },
+                    )
+                    email = EmailMultiAlternatives(
                         subject=asunto,
                         body=contenido,
                         from_email=settings.DEFAULT_FROM_EMAIL,
                         to=[settings.CONTACT_EMAIL_TO],
                         reply_to=[consulta.email],
                     )
-
+                    email.attach_alternative(html_contenido, "text/html")
+                    logo_path = finders.find("img/logo_antonio_ante.jpg")
+                    if logo_path:
+                        with open(logo_path, "rb") as logo_file:
+                            logo = MIMEImage(logo_file.read())
+                        logo.add_header("Content-ID", "<escudo-antonio-ante>")
+                        logo.add_header(
+                            "Content-Disposition",
+                            "inline",
+                            filename="escudo-antonio-ante.jpg",
+                        )
+                        email.attach(logo)
                     email.send(fail_silently=False)
 
                 except (SMTPException, OSError, TimeoutError, ValueError) as exc:
