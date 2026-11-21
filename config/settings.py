@@ -25,7 +25,10 @@ def env_bool(name, default=False):
     return value.strip().lower() in ('true', '1', 't', 'yes', 'on')
 
 
-DEBUG = True
+DEBUG = env_bool(
+    'DEBUG',
+    default=not bool(os.getenv('VERCEL'))
+)
 
 # Hosts permitidos
 ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1'
@@ -98,18 +101,23 @@ WSGI_APPLICATION = 'config.wsgi.app'
 
 # Configuración de Base de Datos
 # Soporta tanto SQLite (desarrollo local rápido) como PostgreSQL (producción / staging)
-DB_ENGINE = os.getenv('DB_ENGINE', 'sqlite3').lower()
 
-if DB_ENGINE == 'postgresql':
+import dj_database_url
+
+if os.getenv('VERCEL'):
+    DATABASE_URL = os.getenv('DATABASE_URL')
+
+    if not DATABASE_URL:
+        raise ImproperlyConfigured(
+            'DATABASE_URL no está configurada en Vercel'
+        )
+
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv('DB_NAME', 'antonio_ante_db'),
-            'USER': os.getenv('DB_USER', 'postgres'),
-            'PASSWORD': os.getenv('DB_PASSWORD', ''),
-            'HOST': os.getenv('DB_HOST', 'localhost'),
-            'PORT': os.getenv('DB_PORT', '5432'),
-        }
+        'default': dj_database_url.parse(
+            DATABASE_URL,
+            conn_max_age=0,
+            ssl_require=True,
+        )
     }
 else:
     DATABASES = {
