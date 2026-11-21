@@ -408,3 +408,22 @@ LOGIN_URL = "core:login"
 LOGIN_REDIRECT_URL = "/admin/"
 
 LOGOUT_REDIRECT_URL = "core:home"
+
+# Correo SMTP para las consultas recibidas desde el formulario público.
+EMAIL_HOST = os.getenv("EMAIL_HOST", "smtp.gmail.com").strip()
+EMAIL_PORT = int(os.getenv("EMAIL_PORT", "587"))
+EMAIL_USE_TLS = env_bool("EMAIL_USE_TLS", default=True)
+EMAIL_USE_SSL = env_bool("EMAIL_USE_SSL", default=False)
+EMAIL_HOST_USER = os.getenv(
+    "EMAIL_HOST_USER",
+    "carolinacsm14@gmail.com",
+).strip()
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")
+DEFAULT_FROM_EMAIL = (
+    os.getenv("DEFAULT_FROM_EMAIL", "").strip()
+    or EMAIL_HOST_USER
+)
+CONTACT_EMAIL_TO = os.getenv(
+    "CONTACT_EMAIL_TO",
+    "carolinacsm14@gmail.com",
+).strip()

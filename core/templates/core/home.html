@@ -841,7 +841,7 @@
                     <div class="mb-4">
                         <span class="section-eyebrow">Estamos para ayudarte</span>
                         <h5 class="fw-bold mb-2" style="color: var(--color-navy);">Solicitud de información</h5>
-                        <p class="text-muted small mb-0">Completa tus datos y la Secretaría recibirá tu consulta. También podrás continuar por WhatsApp.</p>
+                        <p class="text-muted small mb-0">La consulta se enviar&aacute; al correo institucional y quedar&aacute; registrada en el panel de gesti&oacute;n.</p>
                     </div>
 
                     {% if form_contacto.errors %}
@@ -888,7 +888,7 @@
                             </div>
                             <div class="col-12">
                                 <button type="submit" class="hero-btn-red w-100 justify-content-center border-0 contact-submit-button">
-                                    <i class="bi bi-whatsapp me-2" aria-hidden="true"></i> Enviar solicitud de información
+                                    <i class="bi bi-envelope me-2" aria-hidden="true"></i> Enviar solicitud de informaci&oacute;n
                                 </button>
                                 <small class="text-muted d-block text-center mt-2">Los campos con * son obligatorios.</small>
                             </div>
@@ -1001,24 +1001,5 @@
     window.bootstrap.Modal.getOrCreateInstance(modalElement).show();
 })();
 
-(() => {
-    const form = document.getElementById('contactRequestForm');
-    if (!form) return;
-
-    form.addEventListener('submit', () => {
-        const datos = new FormData(form);
-        const nivel = form.querySelector('[name="nivel_interes"]');
-        const textoNivel = nivel && nivel.selectedOptions.length ? nivel.selectedOptions[0].textContent.trim() : '';
-        const lineas = [
-            `Hola, mi nombre es ${datos.get('nombre')}.`,
-            `Tel\u00e9fono: ${datos.get('telefono')}.`,
-            `Correo electr\u00f3nico: ${datos.get('email')}.`,
-            `Nivel educativo de inter\u00e9s: ${textoNivel}.`,
-            `Consulta: ${datos.get('mensaje') || `Solicitud de informaci\u00f3n sobre ${textoNivel}`}`,
-        ];
-        const url = `https://wa.me/593960172899?text=${encodeURIComponent(lineas.join('\n'))}`;
-        window.open(url, '_blank', 'noopener,noreferrer');
-    });
-})();
 </script>
 {% endblock %}

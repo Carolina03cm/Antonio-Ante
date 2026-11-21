@@ -5,6 +5,9 @@ from django.contrib.auth import logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.conf import settings
+from django.core.mail import send_mail
+from smtplib import SMTPException
 from django.utils import timezone
 from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator
@@ -72,8 +75,51 @@ def home(request):
     if request.method == 'POST':
         form_contacto = MensajeContactoForm(request.POST)
         if form_contacto.is_valid():
-            form_contacto.save()
-            messages.success(request, 'Su consulta ha sido registrada exitosamente en secretaría.')
+            consulta = form_contacto.save()
+            correo_configurado = all((
+                settings.CONTACT_EMAIL_TO,
+                settings.EMAIL_HOST,
+                settings.EMAIL_HOST_USER,
+                settings.EMAIL_HOST_PASSWORD,
+                settings.DEFAULT_FROM_EMAIL,
+            ))
+
+            if correo_configurado:
+                asunto = f"Nueva consulta institucional (ticket #{consulta.pk})"
+                contenido = (
+                    "Se recibi\u00f3 una nueva consulta en el sitio institucional.\n\n"
+                    f"Ticket: #{consulta.pk}\n"
+                    f"Nombre: {consulta.nombre}\n"
+                    f"Tel\u00e9fono: {consulta.telefono}\n"
+                    f"Correo: {consulta.email}\n"
+                    f"Nivel de inter\u00e9s: {consulta.get_nivel_interes_display()}\n\n"
+                    f"Consulta:\n{consulta.mensaje or 'Solicitud de informaci\u00f3n.'}\n\n"
+                    "La consulta tambi\u00e9n est\u00e1 guardada en el panel de gesti\u00f3n."
+                )
+                try:
+                    send_mail(
+                        subject=asunto,
+                        message=contenido,
+                        from_email=settings.DEFAULT_FROM_EMAIL,
+                        recipient_list=[settings.CONTACT_EMAIL_TO],
+                        reply_to=[consulta.email],
+                        fail_silently=False,
+                    )
+                except (SMTPException, OSError, TimeoutError, ValueError):
+                    messages.warning(
+                        request,
+                        'Su consulta qued\u00f3 guardada en el panel, pero no se pudo enviar el correo. La secretar\u00eda podr\u00e1 verla desde el panel de gesti\u00f3n.',
+                    )
+                else:
+                    messages.success(
+                        request,
+                        'Su consulta fue enviada al correo institucional y qued\u00f3 registrada en el panel de gesti\u00f3n.',
+                    )
+            else:
+                messages.warning(
+                    request,
+                    'Su consulta qued\u00f3 guardada en el panel de gesti\u00f3n. El env\u00edo al correo institucional a\u00fan no est\u00e1 configurado.',
+                )
             return redirect('core:home')
     else:
         form_contacto = MensajeContactoForm()
