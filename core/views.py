@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.conf import settings
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 from smtplib import SMTPException
 from django.utils import timezone
 from django.views.decorators.http import require_POST
@@ -96,24 +96,27 @@ def home(request):
                     f"Consulta:\n{consulta.mensaje or 'Solicitud de informaci\u00f3n.'}\n\n"
                     "La consulta tambi\u00e9n est\u00e1 guardada en el panel de gesti\u00f3n."
                 )
+                
                 try:
-                    send_mail(
+                    email = EmailMessage(
                         subject=asunto,
-                        message=contenido,
+                        body=contenido,
                         from_email=settings.DEFAULT_FROM_EMAIL,
-                        recipient_list=[settings.CONTACT_EMAIL_TO],
+                        to=[settings.CONTACT_EMAIL_TO],
                         reply_to=[consulta.email],
-                        fail_silently=False,
                     )
-                except (SMTPException, OSError, TimeoutError, ValueError):
+
+                    email.send(fail_silently=False)
+
+                except (SMTPException, OSError, TimeoutError, ValueError) as exc:
                     messages.warning(
                         request,
-                        'Su consulta qued\u00f3 guardada en el panel, pero no se pudo enviar el correo. La secretar\u00eda podr\u00e1 verla desde el panel de gesti\u00f3n.',
+                        'Su consulta quedó guardada en el panel, pero no se pudo enviar el correo. La secretaría podrá verla desde el panel de gestión.',
                     )
                 else:
                     messages.success(
                         request,
-                        'Su consulta fue enviada al correo institucional y qued\u00f3 registrada en el panel de gesti\u00f3n.',
+                        'Su consulta fue enviada al correo institucional y quedó registrada en el panel de gestión.',
                     )
             else:
                 messages.warning(
