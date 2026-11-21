@@ -1,4 +1,8 @@
-Django>=5.1.0,<6.0
-Pillow>=10.4.0
-python-dotenv>=1.0.1
-psycopg2-binary>=2.9.9
+# Dependencias directas del proyecto EEB Antonio Ante.
+# Compatible con Python 3.10–3.13 y Django 5.2 LTS.
+Django>=5.2,<5.3
+whitenoise>=6.9,<7
+Pillow>=10.4,<14
+python-dotenv>=1.0,<2
+psycopg2-binary>=2.9.9,<3
+tzdata>=2024.1

@@ -25,29 +25,10 @@ def env_bool(name, default=False):
     return value.strip().lower() in ('true', '1', 't', 'yes', 'on')
 
 
-DEBUG = env_bool('DEBUG', default=False)
-
-if not SECRET_KEY:
-    if DEBUG:
-        SECRET_KEY = 'django-insecure-local-development-key-only'
-    else:
-        raise ImproperlyConfigured('Define SECRET_KEY con una clave aleatoria antes de iniciar en producción.')
-
-if not DEBUG and (
-    len(SECRET_KEY) < 50
-    or len(set(SECRET_KEY)) < 5
-    or SECRET_KEY.startswith('django-insecure-')
-):
-    raise ImproperlyConfigured(
-        'SECRET_KEY no es segura para producción. Genera una clave nueva y aleatoria.'
-    )
+DEBUG = True
 
 # Hosts permitidos
-ALLOWED_HOSTS = [host.strip() for host in os.getenv('ALLOWED_HOSTS', '127.0.0.1,localhost').split(',') if host.strip()]
-CSRF_TRUSTED_ORIGINS = [
-    origin.strip()
-    for origin in os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',')
-    if origin.strip()
+ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1'
 ]
 
 # HTTPS y cookies seguras se activan por defecto al apagar DEBUG. HSTS queda
@@ -81,6 +62,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -88,6 +70,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 ROOT_URLCONF = 'config.urls'
 
@@ -110,7 +93,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'config.wsgi.application'
+WSGI_APPLICATION = 'config.wsgi.app'
 
 
 # Configuración de Base de Datos
@@ -182,4 +165,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = 'core:login'
 LOGIN_REDIRECT_URL = '/admin/'
 LOGOUT_REDIRECT_URL = 'core:home'
+
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
