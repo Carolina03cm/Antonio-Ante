@@ -1,1 +1,121 @@
-
+[
+{
+  "model": "auth.group",
+  "fields": {
+    "name": "Administradores",
+    "permissions": []
+  }
+},
+{
+  "model": "auth.group",
+  "fields": {
+    "name": "Docentes",
+    "permissions": []
+  }
+},
+{
+  "model": "auth.group",
+  "fields": {
+    "name": "DECE",
+    "permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$n3nsjA3BfNp1l0UEdO5Nmg$vEZHRet7qL2wBUpygOVNaUQnFWK9RRUKEDx1WXWaBRQ=",
+    "last_login": "2026-11-21T03:16:30.480Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin@antonioante.edu.ec",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-11-19T02:46:23.076Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.noticiacomunicado",
+  "pk": 10,
+  "fields": {
+    "titulo": "Inicio Académico 2027",
+    "tipo": "urgente",
+    "resumen": "Regreso a clases 2027",
+    "contenido": "Este inicio de jornada académica periodo 2027-2028",
+    "imagen": "noticias/Foto.jpg",
+    "destacado": true,
+    "fecha_publicacion": "2026-11-21T03:12:04.387Z",
+    "autor": [
+      "admin"
+    ]
+  }
+},
+{
+  "model": "core.docentepersonal",
+  "pk": 1,
+  "fields": {
+    "nombres": "María Lourdes",
+    "apellidos": "Lavayen Rivera",
+    "cargo": "Tutora de 10mo B",
+    "jornada": "autoridades",
+    "area": "Lengua y Literatura",
+    "funciones": [
+      "docente",
+      "tutor",
+      "rector"
+    ],
+    "jornadas": [
+      "autoridades",
+      "matutina"
+    ],
+    "asignaturas": [
+      "Lengua y Literatura"
+    ],
+    "foto": "",
+    "orden": 1,
+    "activo": true
+  }
+},
+{
+  "model": "core.mensajecontacto",
+  "pk": 1,
+  "fields": {
+    "nombre": "Carolina",
+    "telefono": "0939833971",
+    "email": "",
+    "nivel_interes": "",
+    "mensaje": "Detalles de matricula",
+    "acepta_privacidad": false,
+    "fecha_envio": "2026-11-21T02:44:21.653Z",
+    "leido": true,
+    "prioridad": 3,
+    "fecha_seguimiento": "2026-11-22T02:44:00Z"
+  }
+},
+{
+  "model": "core.perfilusuario",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "cedula": "",
+    "nombres": "Administrador",
+    "apellidos": "Institucional",
+    "rol": "administrador",
+    "foto": "",
+    "debe_cambiar_password": false,
+    "fecha_creacion": "2026-11-19T03:36:55.431Z"
+  }
+},
+{
+  "model": "core.cifrasinstitucionales",
+  "pk": 1,
+  "fields": {
+    "total_estudiantes": 367
+  }
+}
+]
