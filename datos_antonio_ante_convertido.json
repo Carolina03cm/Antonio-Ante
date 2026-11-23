@@ -1,1 +1,47 @@
-..
+# Plantilla para desarrollo local. No usar estos valores como configuración de producción.
+# Copia este archivo a .env antes de iniciar el proyecto.
+SECRET_KEY=
+DEBUG=True
+ALLOWED_HOSTS=localhost,127.0.0.1
+CSRF_TRUSTED_ORIGINS=
+
+# Base de datos local: SQLite (valor predeterminado).
+DB_ENGINE=sqlite3
+
+# Correo de las consultas del formulario (Gmail SMTP).
+# Usa una contraseña de aplicación de Google, no la contraseña normal.
+CONTACT_EMAIL_TO=carolinacsm14@gmail.com
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+EMAIL_USE_SSL=False
+EMAIL_HOST_USER=carolinacsm14@gmail.com
+EMAIL_HOST_PASSWORD=jsky smpt ktjm cfxq
+DEFAULT_FROM_EMAIL=carolinacsm14@gmail.com
+
+# Para producción, define además:
+# DEBUG=False
+# SECRET_KEY=<salida del comando get_random_secret_key de Django>
+# Genera la clave con:
+# .\.venv\Scripts\python.exe -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+# ALLOWED_HOSTS=tu-dominio.edu.ec,www.tu-dominio.edu.ec
+# CSRF_TRUSTED_ORIGINS=https://tu-dominio.edu.ec,https://www.tu-dominio.edu.ec
+# SECURE_SSL_REDIRECT=True
+# SESSION_COOKIE_SECURE=True
+# CSRF_COOKIE_SECURE=True
+# SECURE_HSTS_SECONDS=0
+# Activa HSTS solo después de verificar HTTPS en todo el dominio. Luego puedes
+# usar SECURE_HSTS_SECONDS=31536000; revisa subdominios antes de habilitarlos.
+# SECURE_HSTS_INCLUDE_SUBDOMAINS=False
+# SECURE_HSTS_PRELOAD=False
+# Si HTTPS termina en un proxy, activa esto solo si el proxy es de confianza y
+# reemplaza las cabeceras X-Forwarded-Proto recibidas desde Internet:
+# SECURE_PROXY_SSL_HEADER_ENABLED=False
+
+# PostgreSQL en producción (configura credenciales como variables privadas):
+# DB_ENGINE=postgresql
+# DB_NAME=antonio_ante_db
+# DB_USER=usuario_de_base
+# DB_PASSWORD=contraseña_segura
+# DB_HOST=localhost
+# DB_PORT=5432
